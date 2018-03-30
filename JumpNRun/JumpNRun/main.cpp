@@ -3,10 +3,8 @@
 
 int main()
 {
-	RenderWindow window(VideoMode(400, 400), "Jump and Run!");
-	RectangleShape shape;
-
-	
+	sf::RenderWindow window(VideoMode(400, 400), "Jump and Run!");
+	sf::RectangleShape shape(Vector2f(100.0f, 100.0f));
 	shape.setFillColor(sf::Color::Red);
 
 	while (window.isOpen())
