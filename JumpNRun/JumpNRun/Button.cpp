@@ -1,6 +1,6 @@
 #include "standardInclude.h"
 
-Button::Button(IntRect buttonRect, void (*buttonAction)())
+Button::Button(IntRect buttonRect, function<void(void)> buttonAction)
 	: buttonShape(), buttonAction(buttonAction)
 {
 	this->buttonShape.setPosition(buttonRect.left, buttonRect.top);

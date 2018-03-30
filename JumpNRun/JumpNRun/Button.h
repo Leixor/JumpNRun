@@ -3,13 +3,13 @@
 class Button
 {
 public:
-	Button(IntRect buttonRect, void(*buttonAction)());
+	Button(IntRect buttonRect, function<void(void)> buttonAction);
 	~Button();
 
 	void checkMouseButtonCollision(float mouseX, float mouseY);
 private:
 	RectangleShape buttonShape;
 
-	void (*buttonAction)();
+	function<void(void)> buttonAction;
 };
 
