@@ -18,8 +18,5 @@
     <ClCompile Include="main.cpp">
       <Filter>Headerdateien</Filter>
     </ClCompile>
-    <ClCompile Include="Test.cpp">
-      <Filter>Headerdateien</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
