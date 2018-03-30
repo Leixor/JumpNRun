@@ -5,7 +5,7 @@ int main()
 {
 	RenderWindow window(VideoMode(400, 400), "Jump and Run!");
 	RectangleShape shape(Vector2f(100.0f, 100.0f));
-	shape.setFillColor(sf::Color::Red);
+	shape.setFillColor(Color::Red);
 
 	while (window.isOpen())
 	{
