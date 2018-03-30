@@ -3,16 +3,16 @@
 
 int main()
 {
-	sf::RenderWindow window(VideoMode(400, 400), "Jump and Run!");
-	sf::RectangleShape shape(Vector2f(100.0f, 100.0f));
+	RenderWindow window(VideoMode(400, 400), "Jump and Run!");
+	RectangleShape shape(Vector2f(100.0f, 100.0f));
 	shape.setFillColor(sf::Color::Red);
 
 	while (window.isOpen())
 	{
-		sf::Event event;
+		Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			if (event.type == Event::Closed)
 				window.close();
 		}
 
