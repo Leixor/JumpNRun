@@ -1,2 +1,2 @@
 # JumpNRun
-Little Jump and Run
+Little Jump and Run made by Leixor and Zusendo
