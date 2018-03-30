@@ -16,6 +16,26 @@ int main()
 				window.close();
 		}
 
+		// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
+		/*double previous = std::chrono::system_clock::now();
+		double lag = 0.0;
+		while (true)
+		{
+			double current = getCurrentTime();
+			double elapsed = current - previous;
+			previous = current;
+			lag += elapsed;
+
+			processInput();
+
+			while (lag >= MS_PER_UPDATE)
+			{
+				update();
+				lag -= MS_PER_UPDATE;
+			}
+
+			render(lag / MS_PER_UPDATE);
+		}*/
 		window.clear();
 		window.draw(shape);
 		window.display();
