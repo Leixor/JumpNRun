@@ -11,8 +11,10 @@ TestSzene::~TestSzene()
 
 bool TestSzene::setupResources()
 {
-	toggleOverlay = new Button(IntRect(0, 0, 100, 100), "HI", [&] {this->toggleOverlayAction(); });
+	toggleOverlay = new Button(IntRect(0, 0, 100, 100), "Textures/button_play.png", [&] {this->toggleOverlayAction(); });
 
+	toggleOverlay->loadTextures();
+	toggleOverlay->unloadTextures();
 	return toggleOverlay->loadTextures();
 }
 

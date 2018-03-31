@@ -1,10 +1,10 @@
 #include "standardInclude.h"
 
 RectShape::RectShape(IntRect buttonRect, String texturePath)
+	: texturePath(texturePath)
 {
 	this->setPosition(buttonRect.left, buttonRect.top);
 	this->setSize(Vector2f(buttonRect.width, buttonRect.height));
-	this->setTexture(&this->rectTexture);
 }
 
 RectShape::~RectShape()
@@ -13,10 +13,15 @@ RectShape::~RectShape()
 
 void RectShape::unloadTextures()
 {
-	this->rectTexture.create(0, 0);
+	this->rectTexture.create(1,1);
 }
 
 bool RectShape::loadTextures()
 {
-	return this->rectTexture.loadFromFile(this->texturePath);
+	if (this->rectTexture.loadFromFile(this->texturePath))
+	{
+		this->setTexture(&this->rectTexture);
+		return true;
+	}
+	return false;
 }

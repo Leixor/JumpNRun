@@ -11,7 +11,7 @@ OverlayTestSzene::~OverlayTestSzene()
 
 bool OverlayTestSzene::setupResources()
 {
-	OverlayButton = new Button(IntRect(0, 0, 50, 100), "HI", [&] {this->overlayButtonAction(); });
+	OverlayButton = new Button(IntRect(0, 0, 50, 100), "Textures/button_play.png", [&] {this->overlayButtonAction(); });
 	return OverlayButton->loadTextures();
 }
 
