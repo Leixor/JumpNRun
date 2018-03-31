@@ -25,10 +25,9 @@ int main()
 	/*Scene *startMenu = new SceneStartMenu("Menu", sceneHandler);
 	sceneHandler->addScene(startMenu);
 	*/
-	Button<RectangleShape>* tmp = new Button<RectangleShape>(IntRect(100,100,100,100), [&] {printf("HI"); });
+	Button<Sprite>* tmp = new Button<Sprite>(IntRect(100,100,100,100), [&] {printf("HI"); });
 	tmp->loadTextures();
-	tmp->setFillColor(Color::Red);
-
+	tmp->setColor(Color::Red);
 
 	//tmp.setFillColor(Color::White);
 

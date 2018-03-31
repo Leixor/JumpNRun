@@ -3,8 +3,9 @@
 template <class Drawable> class DrawableShape : public Drawable
 {
 public:
-	DrawableShape(IntRect buttonRect, String texturePath = "");
-	DrawableShape(Vector2f position, int radius, int corners = 0, String texturePath = "");
+	DrawableShape(IntRect buttonRect);
+	DrawableShape(IntRect buttonRect, String texturePath);
+	DrawableShape(Vector2f position, int radius, int corners = 0);
 	~DrawableShape();
 	
 	void setTexturePath(String path);
@@ -12,20 +13,24 @@ public:
 	void unloadTextures();
 	bool loadTextures();
 private:
-	String texturePath;
+	String* texturePath;
 };
 
 template<class Drawable>
-inline DrawableShape<Drawable>::DrawableShape(IntRect buttonRect, String texturePath)
-	: texturePath(texturePath)
+inline DrawableShape<Drawable>::DrawableShape(IntRect buttonRect)
 {
-	this->setPosition(buttonRect.left, buttonRect.top);
+	this->setPosition(float(buttonRect.left), float(buttonRect.top));
 	this->setSize(Vector2f(buttonRect.width, buttonRect.height));
 }
 
 template<class Drawable>
-inline DrawableShape<Drawable>::DrawableShape(Vector2f position, int radius, int corners, String texturePath)
-	: texturePath(texturePath)
+inline DrawableShape<Drawable>::DrawableShape(IntRect buttonRect, String texturePath)
+	: Sprite(nullptr, buttonRect), texturePath(texturePath)
+{
+}
+
+template<class Drawable>
+inline DrawableShape<Drawable>::DrawableShape(Vector2f position, int radius, int corners = 0)
 {
 	this->setPosition(position.x, position.y);
 	this->setRadius(float(radius));
@@ -61,13 +66,13 @@ inline void DrawableShape<Drawable>::unloadTextures()
 template<class Drawable>
 inline bool DrawableShape<Drawable>::loadTextures()
 {
-	if (this->texturePath != "")
+	if (this->texturePath != nullptr)
 	{
 		Texture* tmpTexture = new Texture();
 
 		if (tmpTexture->loadFromFile(this->texturePath))
 		{
-			this->setTexture(tmpTexture);
+			this->setTexture(*tmpTexture);
 			return true;
 		}
 		return false;
