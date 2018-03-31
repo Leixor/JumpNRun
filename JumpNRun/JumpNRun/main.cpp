@@ -1,5 +1,6 @@
 #pragma once
 #include "standardInclude.h"
+#include "Scenes.h"
 
 #define MS_PER_UPDATE 16
 
@@ -22,8 +23,8 @@ int main()
 	SceneHandler *sceneHandler = new SceneHandler();
 
 
-	RectangleShape shape(Vector2f(100.0f, 100.0f));
-	shape.setFillColor(Color::Red);
+	/*RectangleShape shape(Vector2f(100.0f, 100.0f));
+	shape.setFillColor(Color::Red);*/
 
 
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
@@ -61,12 +62,12 @@ int main()
 				break;
 			}
 		}
-
+		sceneHandler->handleInput(window);
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)
 		{
 			//Ruft später die Aktualisierungsmethode auf
-			printf("Lag: %ld\nSystemTime: %ld\n", lag, getCurrentTime());
+			sceneHandler->update();
 			
 			//update();
 			lag -= MS_PER_UPDATE;
@@ -74,7 +75,7 @@ int main()
 
 		//Zeichnen der Objekte
 		window.clear();
-		window.draw(shape);
+		sceneHandler->render(window);
 		window.display();
 
 
@@ -101,11 +102,11 @@ int main()
 			render(lag / MS_PER_UPDATE);
 		}*/
 
-		sceneHandler->handleInput(window);
+		/*sceneHandler->handleInput(window);
 		sceneHandler->update();
 		window.clear();
 		sceneHandler->render(window);
-		window.display();
+		window.display();*/
 	}
 
 	return 0;
