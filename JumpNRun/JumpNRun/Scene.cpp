@@ -14,3 +14,8 @@ string Scene::getSceneName() const
 	return this->sceneName;
 }
 
+SceneHandler * Scene::getSceneHandler() const
+{
+	return this->sceneHandler;
+}
+

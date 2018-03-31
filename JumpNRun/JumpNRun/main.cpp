@@ -22,8 +22,8 @@ int main()
 	SceneHandler *sceneHandler = new SceneHandler();
 
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
-	Scene *test = new TestSzene("Test", sceneHandler);
-	sceneHandler->addScene(test);
+	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler);
+	sceneHandler->addScene(startMenu);
 
 
 	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
@@ -66,10 +66,8 @@ int main()
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)
 		{
-			//Ruft später die Aktualisierungsmethode auf
+			//Ruft die Aktualisierungsmethode auf
 			sceneHandler->update();
-			
-			//update();
 			lag -= MS_PER_UPDATE;
 		}
 

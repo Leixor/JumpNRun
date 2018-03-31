@@ -4,7 +4,7 @@ class SceneHandler;
 class Scene
 {
 public:
-	Scene(string Name, SceneHandler * sceneHandler);
+	Scene(string name, SceneHandler * sceneHandler);
 	~Scene();
 
 	// Mainfunktionaltität der Gameloop -> Möglichkeit keine handleInput Methode zu definieren (z. B. statische Overlays zum Anzeigen von Stats)
@@ -15,13 +15,13 @@ public:
 
 	// Scenespezifische Funktionen
 	string getSceneName() const;
+	SceneHandler* getSceneHandler() const;
 
 	// Scenespezifische Variablen
 	bool visible = true;
 
 private:
 	string sceneName;
-protected:
 	// Jede Szene bekommt den Scenehandler damit er es als Interface benutzen kann um die anderen Szenen anzusprechen
 	SceneHandler *  sceneHandler;
 };

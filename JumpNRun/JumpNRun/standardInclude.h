@@ -19,6 +19,5 @@ using namespace sf;
 #include "Scene.h"
 #include "SceneHandler.h"
 
-#include "OverlayTestSzene.h"
-#include "TestSzene.h"
+#include "SceneStartMenu.h"
 

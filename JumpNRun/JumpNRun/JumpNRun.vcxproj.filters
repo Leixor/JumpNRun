@@ -27,13 +27,10 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TestSzene.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="OverlayTestSzene.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="RectShape.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneStartMenu.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,13 +47,10 @@
     <ClInclude Include="Scene.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="TestSzene.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="OverlayTestSzene.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="RectShape.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneStartMenu.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
