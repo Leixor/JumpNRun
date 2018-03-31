@@ -1,7 +1,5 @@
 #pragma once
 
-#include "standardInclude.h"
-#include "Scene.h"
 class OverlayTestSzene : public Scene
 {
 public:
@@ -9,7 +7,7 @@ public:
 	~OverlayTestSzene();
 
 	bool setupResources();
-	void handleInput(RenderWindow& window);
+	void handleInput(RenderWindow& window, Event windowEvent);
 	void update();
 	void render(RenderWindow& window);
 

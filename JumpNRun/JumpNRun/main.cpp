@@ -1,10 +1,9 @@
 #pragma once
 #include "standardInclude.h"
-#include "Scenes.h"
 
 #define MS_PER_UPDATE 16
 
-long getCurrentTime()
+Int64 getCurrentTime()
 {
 	chrono::milliseconds ms = chrono::duration_cast<chrono::milliseconds>(
 		chrono::system_clock::now().time_since_epoch()
@@ -26,6 +25,7 @@ int main()
 	Scene *test = new TestSzene("Test", sceneHandler);
 	sceneHandler->addScene(test);
 
+
 	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
 	Button eine neue Szene selbstständig kreieren und zwar von der anderen Subklasse 
 	OverlayTestSzene (diese wird beim adden gleichzeitig nach oben in die Pipeline gestellt), wenn man jetzt auf den grünen 
@@ -40,28 +40,28 @@ int main()
 
 	// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
 	// render(lag / MS_PER_UPDATE);
-	long lag = 0;
-	long previous = getCurrentTime();
+	Int64 lag = 0;
+	Int64 previous = getCurrentTime();
 
 	while (window.isOpen())
 	{
-		long current = getCurrentTime();
-		long elapsed = current - previous;
+		Int64 current = getCurrentTime();
+		Int64 elapsed = current - previous;
 		previous = current;
 		lag += elapsed;
 
 		//Verarbeitung der Eingaben und Events
-		Event event;
-		while (window.pollEvent(event))
+		Event windowEvent;
+		while (window.pollEvent(windowEvent))
 		{
-			switch (event.type)
+			switch (windowEvent.type)
 			{
 			case Event::Closed:
 				window.close();
 				break;
 			}
+			sceneHandler->handleInput(window, windowEvent);
 		}
-		sceneHandler->handleInput(window);
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)

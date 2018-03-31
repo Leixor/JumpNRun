@@ -1,4 +1,4 @@
-#include "TestSzene.h"
+#include "standardInclude.h"
 
 TestSzene::TestSzene(std::string Name, SceneHandler * sceneHandler) : Scene(Name, sceneHandler)
 {
@@ -11,16 +11,16 @@ TestSzene::~TestSzene()
 
 bool TestSzene::setupResources()
 {
-	movePlayer = new Button(IntRect(0, 0, 100, 100), [&] {this->machShit();});
-	movePlayer->buttonShape.setFillColor(Color::Blue);
+	toggleOverlay = new Button(IntRect(0, 0, 100, 100), [&] {this->toggleOverlayAction();});
+	toggleOverlay->setFillColor(Color::Blue);
 
 	return true;
 }
 
-void TestSzene::handleInput(RenderWindow& window)
+void TestSzene::handleInput(RenderWindow& window, Event windowEvent)
 {
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-		movePlayer->checkMouseButtonCollision(window);
+	if (Mouse::isButtonPressed(Mouse::Left)) {
+		toggleOverlay->checkMouseButtonCollision(window);
 	}
 }
 
@@ -31,11 +31,11 @@ void TestSzene::update()
 
 void TestSzene::render(RenderWindow& window)
 {
-	window.draw(movePlayer->buttonShape);
+	window.draw(*toggleOverlay);
 }
 
-void TestSzene::machShit()
+void TestSzene::toggleOverlayAction()
 {
-	movePlayer->buttonShape.setFillColor(Color::Red);
+	toggleOverlay->setFillColor(Color::Red);
 	sceneHandler->addScene(new OverlayTestSzene("Overlay", sceneHandler), true);
 }

@@ -1,7 +1,5 @@
 #pragma once
-#include "standardInclude.h"
-#include "Scene.h"
-#include "Scenes.h"
+
 class TestSzene : public Scene
 {
 public:
@@ -9,14 +7,14 @@ public:
 	~TestSzene();
 
 	bool setupResources();
-	void handleInput(RenderWindow& window);
+	void handleInput(RenderWindow& window, Event windowEvent);
 	void update();
 	void render(RenderWindow& window);
 
 private:
 	// Paar Testresourcen
-	Button* movePlayer;
-	void machShit();
+	Button* toggleOverlay;
+	void toggleOverlayAction();
 	bool isPressed = false;
 };
 

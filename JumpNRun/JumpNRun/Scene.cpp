@@ -1,4 +1,4 @@
-#include "Scene.h"
+#include "standardInclude.h"
 
 Scene::Scene(std::string Name, SceneHandler * sceneHandler) : sceneName(Name), sceneHandler(sceneHandler)
 {

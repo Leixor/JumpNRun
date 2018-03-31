@@ -1,6 +1,5 @@
 #pragma once
-#include "standardInclude.h"
-class Scene;
+
 class SceneHandler
 {
 public:
@@ -8,7 +7,7 @@ public:
 	~SceneHandler();
 
 	// Mainfunktionalität der Gameloop
-	void handleInput(RenderWindow& window);
+	void handleInput(RenderWindow& window, Event windowEvent);
 	void update();
 	void render(RenderWindow& window);
 

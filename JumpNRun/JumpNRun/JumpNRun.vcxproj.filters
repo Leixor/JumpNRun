@@ -53,8 +53,5 @@
     <ClInclude Include="OverlayTestSzene.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Scenes.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

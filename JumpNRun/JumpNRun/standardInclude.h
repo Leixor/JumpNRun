@@ -15,7 +15,9 @@ using namespace std;
 using namespace sf;
 
 #include "Button.h"
-
 #include "Scene.h"
 #include "SceneHandler.h"
+
+#include "OverlayTestSzene.h"
+#include "TestSzene.h"
 
