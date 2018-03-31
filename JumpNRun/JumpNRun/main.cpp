@@ -6,7 +6,7 @@
 
 long getCurrentTime()
 {
-	chrono::milliseconds ms = chrono::duration_cast<chrono::milliseconds >(
+	chrono::milliseconds ms = chrono::duration_cast<chrono::milliseconds>(
 		chrono::system_clock::now().time_since_epoch()
 	);
 	return ms.count();
@@ -19,13 +19,8 @@ int main()
 	Es können noch weitere Parameter übergeben werden, die dafür verantwortlich sind, 
 	ob das Fenster keinen CloseKnopf hat, nicht größenveränderbar ist...
 	*/
-	RenderWindow window(VideoMode(400, 400), "Jump and Run!");
+	RenderWindow window(VideoMode(500, 400), "Jump and Run!");
 	SceneHandler *sceneHandler = new SceneHandler();
-
-
-	/*RectangleShape shape(Vector2f(100.0f, 100.0f));
-	shape.setFillColor(Color::Red);*/
-
 
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
 	Scene *test = new TestSzene("Test", sceneHandler);
@@ -41,6 +36,10 @@ int main()
 
 
 	//Parameter die für die verbesserte Spielschleife notwendig sind.
+
+
+	// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
+	// render(lag / MS_PER_UPDATE);
 	long lag = 0;
 	long previous = getCurrentTime();
 
@@ -63,6 +62,7 @@ int main()
 			}
 		}
 		sceneHandler->handleInput(window);
+
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)
 		{
@@ -76,37 +76,7 @@ int main()
 		//Zeichnen der Objekte
 		window.clear();
 		sceneHandler->render(window);
-		window.display();
-
-
-
-		// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
-		
-		/*double lag = 0.0;
-		double previous = std::chrono::system_clock::now();
-		while (true)
-		{
-			double current = getCurrentTime();
-			double elapsed = current - previous;
-			previous = current;
-			lag += elapsed;
-
-			processInput();
-
-			while (lag >= MS_PER_UPDATE)
-			{
-				update();
-				lag -= MS_PER_UPDATE;
-			}
-
-			render(lag / MS_PER_UPDATE);
-		}*/
-
-		/*sceneHandler->handleInput(window);
-		sceneHandler->update();
-		window.clear();
-		sceneHandler->render(window);
-		window.display();*/
+		window.display();	
 	}
 
 	return 0;

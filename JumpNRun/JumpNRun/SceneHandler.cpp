@@ -1,11 +1,8 @@
 #include "SceneHandler.h"
 
-
-
 SceneHandler::SceneHandler()
 {
 }
-
 
 SceneHandler::~SceneHandler()
 {
@@ -14,7 +11,7 @@ SceneHandler::~SceneHandler()
 // Die Wichtigkeitsreihenfolge für handleInput und update sieht wie folgt aus -> von 0 nach vScenes.size()
 void SceneHandler::handleInput(RenderWindow& window)
 {
-	for(int i = 0; i < vScenes.size(); i++) {
+	for(unsigned int i = 0; i < vScenes.size(); i++) {
 		if (vScenes[i]->visible) {
 			vScenes[i]->handleInput(window);
 		}
@@ -23,7 +20,7 @@ void SceneHandler::handleInput(RenderWindow& window)
 
 void SceneHandler::update()
 {
-	for (int i = 0; i < vScenes.size(); i++) {
+	for (unsigned int i = 0; i < vScenes.size(); i++) {
 		if (vScenes[i]->visible) {
 			vScenes[i]->update();
 		}
@@ -44,14 +41,14 @@ void SceneHandler::render(RenderWindow& window)
 void SceneHandler::addScene(Scene * scene, bool onTop)
 {
 	if (!sceneExists(scene->getSceneName())) {
-			vScenes.push_back(scene);
+		vScenes.push_back(scene);
 
-			// Falls onTop als True mitgegeben worden ist soll die neue Szene direkt ganz oben in der Pipeline stehen
-			if (onTop) {
-				string name = vScenes.back()->getSceneName();
-				setTopScene(name);
-			}
+		// Falls onTop als True mitgegeben worden ist soll die neue Szene direkt ganz oben in der Pipeline stehen
+		if (onTop) {
+			string name = vScenes.back()->getSceneName();
+			setTopScene(name);
 		}
+	}
 }
 
 // Löscht die Szene falls sie vorhanden ist
@@ -70,10 +67,8 @@ void SceneHandler::setTopScene(string sceneName)
 		if (vScenes[0] != vScenes[getSceneIndexByName(sceneName)]) {
 			int index = getSceneIndexByName(sceneName);
 
-			if (vScenes.begin() != vScenes.end() - index) {
-				for (int i = 0; i < vScenes.size() - index; i++) {
-					iter_swap(vScenes.begin() + i, vScenes.end() - index);
-				}
+			for (unsigned int i = 0; i < vScenes.size() - index; i++) {
+				iter_swap(vScenes.begin() + i, vScenes.end() - index);
 			}
 		}
 		
@@ -108,7 +103,6 @@ bool SceneHandler::sceneExists(string sceneName)
 	for (auto& scene : vScenes) {
 		if (scene->getSceneName() == sceneName) {
 			return true;
-			break;
 		}
 	}
 	return false;
@@ -123,5 +117,9 @@ Scene * SceneHandler::getSceneByName(string sceneName)
 			break;
 		}
 	}
+
+	return nullptr;
 }
+
+
 

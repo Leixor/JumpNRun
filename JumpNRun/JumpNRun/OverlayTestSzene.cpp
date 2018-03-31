@@ -1,8 +1,5 @@
 #include "OverlayTestSzene.h"
 
-
-
-
 OverlayTestSzene::OverlayTestSzene(std::string Name, SceneHandler * sceneHandler): Scene(Name, sceneHandler)
 {
 	setupResources();

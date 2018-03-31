@@ -4,7 +4,7 @@ class SceneHandler;
 class Scene
 {
 public:
-	Scene(std::string Name, SceneHandler * sceneHandler);
+	Scene(string Name, SceneHandler * sceneHandler);
 	~Scene();
 
 	// Mainfunktionaltität der Gameloop -> Möglichkeit keine handleInput Methode zu definieren (z. B. statische Overlays zum Anzeigen von Stats)
@@ -20,7 +20,7 @@ public:
 	bool visible = true;
 
 private:
-	std::string sceneName;
+	string sceneName;
 protected:
 	// Jede Szene bekommt den Scenehandler damit er es als Interface benutzen kann um die anderen Szenen anzusprechen
 	SceneHandler *  sceneHandler;

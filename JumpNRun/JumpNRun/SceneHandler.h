@@ -22,7 +22,6 @@ public:
 	int getSceneIndexByName(string sceneName);
 	bool sceneExists(string sceneName);
 	Scene* getSceneByName(string sceneName);
-	
 
 private:
 	vector<Scene*> vScenes;
