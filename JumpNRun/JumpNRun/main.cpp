@@ -22,9 +22,15 @@ int main()
 	SceneHandler *sceneHandler = new SceneHandler();
 
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
-	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler);
+	/*Scene *startMenu = new SceneStartMenu("Menu", sceneHandler);
 	sceneHandler->addScene(startMenu);
+	*/
+	Button<RectangleShape>* tmp = new Button<RectangleShape>(IntRect(100,100,100,100), [&] {printf("HI"); });
+	tmp->loadTextures();
+	tmp->setFillColor(Color::Red);
 
+
+	//tmp.setFillColor(Color::White);
 
 	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
 	Button eine neue Szene selbstständig kreieren und zwar von der anderen Subklasse 
@@ -59,8 +65,11 @@ int main()
 			case Event::Closed:
 				window.close();
 				break;
+			case Event::MouseButtonPressed:
+				tmp->checkMouseButtonCollision(window);
+				break;
 			}
-			sceneHandler->handleInput(window, windowEvent);
+			//sceneHandler->handleInput(window, windowEvent);
 		}
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
@@ -73,7 +82,8 @@ int main()
 
 		//Zeichnen der Objekte
 		window.clear();
-		sceneHandler->render(window);
+		//sceneHandler->render(window);
+		window.draw(*tmp);
 		window.display();	
 	}
 

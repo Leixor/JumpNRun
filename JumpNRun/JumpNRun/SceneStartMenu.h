@@ -12,7 +12,7 @@ public:
 	void render(RenderWindow& window);
 
 private:
-	map<String, Button> vButton;
+	//map<String, Button> vButton;
 
 	void buttonStartAction();
 };

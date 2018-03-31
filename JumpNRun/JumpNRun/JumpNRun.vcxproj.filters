@@ -18,16 +18,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="SceneHandler.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="RectShape.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="SceneStartMenu.cpp">
@@ -47,10 +41,10 @@
     <ClInclude Include="Scene.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="RectShape.h">
+    <ClInclude Include="SceneStartMenu.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="SceneStartMenu.h">
+    <ClInclude Include="DrawableShape.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
