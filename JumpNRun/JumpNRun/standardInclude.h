@@ -14,6 +14,7 @@
 using namespace std;
 using namespace sf;
 
+#include "RectShape.h"
 #include "Button.h"
 #include "Scene.h"
 #include "SceneHandler.h"

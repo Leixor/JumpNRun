@@ -13,7 +13,7 @@ public:
 
 private:
 	Button* OverlayButton;
-	void machShit();
+	void overlayButtonAction();
 	bool isPressed = false;
 };
 

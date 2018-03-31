@@ -11,18 +11,27 @@ OverlayTestSzene::~OverlayTestSzene()
 
 bool OverlayTestSzene::setupResources()
 {
-	OverlayButton = new Button(IntRect(0, 0, 50, 100), [&] {this->machShit(); });
-	OverlayButton->setFillColor(Color::Green);
-	return true;
+	OverlayButton = new Button(IntRect(0, 0, 50, 100), "HI", [&] {this->overlayButtonAction(); });
+	return OverlayButton->loadTextures();
 }
 
 void OverlayTestSzene::handleInput(RenderWindow & window, Event windowEvent)
 {
-	if (Mouse::isButtonPressed(Mouse::Left)) {
-		OverlayButton->checkMouseButtonCollision(window);
-	}
-	if (Keyboard::isKeyPressed(Keyboard::A)) {
-		sceneHandler->setSceneVisibility("Test", true);
+	switch(windowEvent.type)
+	{
+	case Event::MouseButtonPressed:
+		if (windowEvent.mouseButton.button == Mouse::Left)
+		{
+			OverlayButton->checkMouseButtonCollision(window);
+
+		}
+		break;
+	case Event::KeyPressed:
+		if (windowEvent.key.code == Keyboard::A)
+		{
+			sceneHandler->setSceneVisibility("Test", true);
+		}
+		break;
 	}
 }
 
@@ -35,7 +44,7 @@ void OverlayTestSzene::render(RenderWindow & window)
 	window.draw(*OverlayButton);
 }
 
-void OverlayTestSzene::machShit()
+void OverlayTestSzene::overlayButtonAction()
 {
 	int i = 0;
 	sceneHandler->setSceneVisibility("Test", false);

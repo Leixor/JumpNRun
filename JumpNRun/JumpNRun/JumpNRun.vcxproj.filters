@@ -33,6 +33,9 @@
     <ClCompile Include="OverlayTestSzene.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="RectShape.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="standardInclude.h">
@@ -51,6 +54,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="OverlayTestSzene.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="RectShape.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

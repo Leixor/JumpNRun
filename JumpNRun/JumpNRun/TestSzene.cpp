@@ -11,16 +11,21 @@ TestSzene::~TestSzene()
 
 bool TestSzene::setupResources()
 {
-	toggleOverlay = new Button(IntRect(0, 0, 100, 100), [&] {this->toggleOverlayAction();});
-	toggleOverlay->setFillColor(Color::Blue);
+	toggleOverlay = new Button(IntRect(0, 0, 100, 100), "HI", [&] {this->toggleOverlayAction(); });
 
-	return true;
+	return toggleOverlay->loadTextures();
 }
 
 void TestSzene::handleInput(RenderWindow& window, Event windowEvent)
 {
-	if (Mouse::isButtonPressed(Mouse::Left)) {
-		toggleOverlay->checkMouseButtonCollision(window);
+	switch (windowEvent.type)
+	{
+	case Event::MouseButtonPressed:
+		if (windowEvent.mouseButton.button == Mouse::Right)
+		{
+			toggleOverlay->checkMouseButtonCollision(window);
+		}
+		break;
 	}
 }
 
