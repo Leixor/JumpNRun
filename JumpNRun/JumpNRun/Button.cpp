@@ -12,9 +12,9 @@ Button::~Button()
 {
 }
 
-void Button::checkMouseButtonCollision(float mouseX, float mouseY)
+void Button::checkMouseButtonCollision(RenderWindow & window)
 {
-	if (this->buttonShape.getGlobalBounds().contains(Vector2f(mouseX, mouseY)))
+	auto mousePosition = Mouse::getPosition(window);
+	if (this->buttonShape.getGlobalBounds().contains(mousePosition.x, mousePosition.y))
 		this->buttonAction();
-	
 }

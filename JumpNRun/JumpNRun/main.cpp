@@ -1,18 +1,24 @@
 #pragma once
 #include "standardInclude.h"
-
+#include "Scenes.h"
 int main()
 {
 	RenderWindow window(VideoMode(400, 400), "Jump and Run!");
-	RectangleShape shape(Vector2f(100.0f, 100.0f));
-	shape.setFillColor(Color::Red);
+	SceneHandler *sceneHandler = new SceneHandler();
 
-	Button tmp(IntRect(0, 0, 400, 400), [&]
-	{
-		shape.setFillColor(Color::Yellow);
-	});
 
-	tmp.checkMouseButtonCollision(10, 10);
+	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
+	Scene *test = new TestSzene("Test", sceneHandler);
+	sceneHandler->addScene(test);
+
+	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
+	Button eine neue Szene selbstständig kreieren und zwar von der anderen Subklasse 
+	OverlayTestSzene (diese wird beim adden gleichzeitig nach oben in die Pipeline gestellt), wenn man jetzt auf den grünen 
+	Button von OverlayTestSzene klickt, macht man den roten Button  (und die ganze Szene) von TestSzene unsichtbar, mit einem "A" 
+	Keyboard klick macht man sie wieder sichtbar. 
+	Der ganze Testablauf diente nur zum probieren aller Funktionen des Scenehandlers
+	*/
+
 
 	while (window.isOpen())
 	{
@@ -47,8 +53,11 @@ int main()
 
 			render(lag / MS_PER_UPDATE);
 		}*/
+
+		sceneHandler->handleInput(window);
+		sceneHandler->update();
 		window.clear();
-		window.draw(shape);
+		sceneHandler->render(window);
 		window.display();
 	}
 
