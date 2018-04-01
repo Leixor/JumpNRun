@@ -1,13 +1,15 @@
 #pragma once
 
- class Button
+ class Button : public ObjectBase
 {
 public:
-	Button(function<void(void)> buttonAction, DrawableShape<Drawable>* buttonShape);
+	Button(function<void(void)> buttonAction, DrawableObject* buttonShape);
 	~Button();
 
-	void checkMouseButtonCollision(RenderWindow & window);
+	void handleInput(RenderWindow& window, Event windowEvent);
+
 private:
-	DrawableShape<Drawable>* buttonShape;
 	function<void(void)> buttonAction;
+
+	void checkMouseButtonCollision(RenderWindow & window);
 };

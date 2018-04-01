@@ -168,7 +168,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="DrawableShape.h" />
+    <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneHandler.h" />
     <ClInclude Include="SceneStartMenu.h" />

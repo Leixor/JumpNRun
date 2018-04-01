@@ -1,7 +1,7 @@
 #include "standardInclude.h"
 
-Button::Button(function<void(void)> buttonAction, DrawableShape<Drawable>* buttonShape)
-	: buttonShape(buttonShape), buttonAction(buttonAction)
+Button::Button(function<void(void)> buttonAction, DrawableObject * buttonShape)
+	:ObjectBase(buttonShape), buttonAction(buttonAction)
 {
 }
 
@@ -9,14 +9,14 @@ Button::~Button()
 {
 }
 
+void Button::handleInput(RenderWindow & window, Event windowEvent)
+{
+	this->checkMouseButtonCollision(window);
+}
+
 void Button::checkMouseButtonCollision(RenderWindow & window)
 {
-	auto mousePosition = Mouse::getPosition(window);
-
-	if (NewType* v = dynamic_cast<NewType*>(old)) {
-		// old was safely casted to NewType
-		v->doSomething();
-	}
-	if (this->buttonShape<RectangleShape>->getGlobalBounds().contains(float(mousePosition.x), float(mousePosition.y)))
+	auto mouse = Mouse::getPosition(window);
+	if (this->buttonShape->getGlobalBounds().contains(float(mouse.x), float(mouse.y)))
 		this->buttonAction();
 }

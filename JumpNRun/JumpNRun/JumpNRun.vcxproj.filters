@@ -47,7 +47,13 @@
     <ClInclude Include="SceneStartMenu.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="DrawableObject.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
     <ClInclude Include="DrawableShape.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectBase.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

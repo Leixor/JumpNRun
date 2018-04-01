@@ -25,12 +25,11 @@ int main()
 	/*Scene *startMenu = new SceneStartMenu("Menu", sceneHandler);
 	sceneHandler->addScene(startMenu);
 	*/
-	Button<Sprite>* tmp = new Button<Sprite>(IntRect(100,100,100,100), [&] {printf("HI"); });
-	tmp->loadTextures();
-	tmp->setColor(Color::Red);
-
-	//tmp.setFillColor(Color::White);
-
+	vector<ObjectBase*> tmp;
+	tmp.push_back(new Button([&] {printf("G"); }, new DrawableShape<CircleShape>()));
+	tmp.at(0)->buttonShape->setSize(Vector2f(100, 3));
+	tmp.at(0)->buttonShape->setPosition(Vector2f(100, 100));
+	tmp.at(0)->buttonShape->setFillColor(Color::Red);
 	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
 	Button eine neue Szene selbstständig kreieren und zwar von der anderen Subklasse 
 	OverlayTestSzene (diese wird beim adden gleichzeitig nach oben in die Pipeline gestellt), wenn man jetzt auf den grünen 
@@ -39,10 +38,7 @@ int main()
 	Der ganze Testablauf diente nur zum probieren aller Funktionen des Scenehandlers
 	*/
 
-
 	//Parameter die für die verbesserte Spielschleife notwendig sind.
-
-
 	// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
 	// render(lag / MS_PER_UPDATE);
 	Int64 lag = 0;
@@ -65,7 +61,8 @@ int main()
 				window.close();
 				break;
 			case Event::MouseButtonPressed:
-				tmp->checkMouseButtonCollision(window);
+				//tmp->checkMouseButtonCollision(window);
+				tmp.at(0)->handleInput(window, Event());
 				break;
 			}
 			//sceneHandler->handleInput(window, windowEvent);
@@ -82,7 +79,8 @@ int main()
 		//Zeichnen der Objekte
 		window.clear();
 		//sceneHandler->render(window);
-		window.draw(*tmp);
+		
+		tmp.at(0)->draw(window, RenderStates());
 		window.display();	
 	}
 
