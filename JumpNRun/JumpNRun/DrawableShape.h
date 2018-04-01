@@ -12,12 +12,19 @@ public:
 	//Für alle Typen vorhanden
 	void setSize(Vector2f size);
 	void setPosition(Vector2f pos);
-	void setRotation(float angle, bool additional = false);
+	void setScale(Vector2f sclae);
+	void setRotation(float angle);
 	void setFillColor(Color color);
+
+	void rotate(float offsetAngle);
+	void move(Vector2f offset);
+	void scale(Vector2f offset);
 
 	Vector2f getSize();
 	Vector2f getPosition();
+	Vector2f getScale();
 	FloatRect getGlobalBounds();
+	float getRotation();
 
 	//Existiert nur bei manchen Typen
 	void setOutlineColor(Color color);
@@ -53,12 +60,15 @@ inline void DrawableShape<DrawableType>::setPosition(Vector2f pos)
 }
 
 template<class DrawableType>
-inline void DrawableShape<DrawableType>::setRotation(float angle, bool additional)
+inline void DrawableShape<DrawableType>::setScale(Vector2f scale)
 {
-	if (additional)
-		this->DrawableType::setRotation(this->DrawableType::getRotation() + angle);
-	else
-		this->DrawableType::setRotation(angle);
+	this->DrawableType::setScale(scale);
+}
+
+template<class DrawableType>
+inline void DrawableShape<DrawableType>::setRotation(float angle)
+{
+	this->DrawableType::setRotation(angle);
 }
 
 template<class DrawableType>
@@ -68,9 +78,39 @@ inline Vector2f DrawableShape<DrawableType>::getPosition()
 }
 
 template<class DrawableType>
+inline Vector2f DrawableShape<DrawableType>::getScale()
+{
+	return this->DrawableType::getScale();
+}
+
+template<class DrawableType>
 inline FloatRect DrawableShape<DrawableType>::getGlobalBounds()
 {
 	return this->DrawableType::getGlobalBounds();
+}
+
+template<class DrawableType>
+inline float DrawableShape<DrawableType>::getRotation()
+{
+	return this->DrawableType::getRotation();
+}
+
+template<class DrawableType>
+inline void DrawableShape<DrawableType>::rotate(float offsetAngle)
+{
+	DrawableType::rotate(offsetAngle);
+}
+
+template<class DrawableType>
+inline void DrawableShape<DrawableType>::move(Vector2f offset)
+{
+	DrawableType::move(offset);
+}
+
+template<class DrawableType>
+inline void DrawableShape<DrawableType>::scale(Vector2f offset)
+{
+	this->DrawableType::scale(offset);
 }
 #pragma endregion
 
@@ -183,7 +223,7 @@ inline void DrawableShape<Sprite>::setSize(Vector2f size)
 	currentSizeX *= scale.x;
 	currentSizeY *= scale.y;
 
-	this->setScale(size.x / currentSizeX, size.y / currentSizeY);
+	this->Sprite::setScale(size.x / currentSizeX, size.y / currentSizeY);
 }
 
 template<>

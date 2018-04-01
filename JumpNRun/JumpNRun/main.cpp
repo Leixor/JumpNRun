@@ -26,10 +26,14 @@ int main()
 	sceneHandler->addScene(startMenu);
 	*/
 	vector<ObjectBase*> tmp;
-	tmp.push_back(new Button([&] {printf("G"); }, new DrawableShape<CircleShape>()));
-	tmp.at(0)->buttonShape->setSize(Vector2f(100, 3));
-	tmp.at(0)->buttonShape->setPosition(Vector2f(100, 100));
-	tmp.at(0)->buttonShape->setFillColor(Color::Red);
+	for (int i = 0; i < 100; i++)
+	{
+		tmp.push_back(new Button([&] { printf("hi"); }, new DrawableShape<CircleShape>()));
+		tmp.at(i)->buttonShape->setSize(Vector2f(5, 3));
+		tmp.at(i)->buttonShape->setPosition(Vector2f(0+ i* 10, 0+ i *10));
+		tmp.at(i)->buttonShape->setFillColor(Color::Red);
+	}
+
 	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
 	Button eine neue Szene selbstständig kreieren und zwar von der anderen Subklasse 
 	OverlayTestSzene (diese wird beim adden gleichzeitig nach oben in die Pipeline gestellt), wenn man jetzt auf den grünen 
@@ -60,27 +64,31 @@ int main()
 			case Event::Closed:
 				window.close();
 				break;
-			case Event::MouseButtonPressed:
-				//tmp->checkMouseButtonCollision(window);
-				tmp.at(0)->handleInput(window, Event());
-				break;
 			}
 			//sceneHandler->handleInput(window, windowEvent);
+			for (int i = 0; i < tmp.size(); i++)
+			{
+				tmp.at(i)->handleInput(window, windowEvent);
+			}
 		}
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)
 		{
 			//Ruft die Aktualisierungsmethode auf
-			sceneHandler->update();
+			//sceneHandler->update();
+			tmp.at(0)->update();
 			lag -= MS_PER_UPDATE;
 		}
 
 		//Zeichnen der Objekte
 		window.clear();
 		//sceneHandler->render(window);
-		
-		tmp.at(0)->draw(window, RenderStates());
+
+		for (int i = 0; i < tmp.size(); i++)
+		{
+			tmp.at(i)->draw(window, RenderStates());
+		}
 		window.display();	
 	}
 

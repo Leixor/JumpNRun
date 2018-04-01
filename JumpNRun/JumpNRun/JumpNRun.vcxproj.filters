@@ -30,6 +30,9 @@
     <ClCompile Include="Button.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="standardInclude.h">
@@ -54,6 +57,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="ObjectBase.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

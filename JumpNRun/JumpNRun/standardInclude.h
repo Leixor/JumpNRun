@@ -9,6 +9,7 @@
 
 #include <Windows.h>
 
+#include <thread>
 #include <chrono>
 
 using namespace std;
@@ -18,6 +19,7 @@ using namespace sf;
 #include "DrawableShape.h"
 #include "ObjectBase.h"
 #include "Scene.h"
+#include "Timer.h"
 #include "SceneHandler.h"
 
 #include "SceneStartMenu.h"
