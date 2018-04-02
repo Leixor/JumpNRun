@@ -18,21 +18,12 @@ int main()
 	Es können noch weitere Parameter übergeben werden, die dafür verantwortlich sind, 
 	ob das Fenster keinen CloseKnopf hat, nicht größenveränderbar ist...
 	*/
-	RenderWindow window(VideoMode(500, 400), "Jump and Run!");
+	RenderWindow window(VideoMode(1600, 900), "Snake"); //Style::Fullscreen);
 	SceneHandler *sceneHandler = new SceneHandler();
 
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
-	/*Scene *startMenu = new SceneStartMenu("Menu", sceneHandler);
+	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler, &window);
 	sceneHandler->addScene(startMenu);
-	*/
-	vector<ObjectBase*> tmp;
-	for (int i = 0; i < 100; i++)
-	{
-		tmp.push_back(new Button([&] { printf("hi"); }, new DrawableShape<CircleShape>()));
-		tmp.at(i)->buttonShape->setSize(Vector2f(5, 3));
-		tmp.at(i)->buttonShape->setPosition(Vector2f(0+ i* 10, 0+ i *10));
-		tmp.at(i)->buttonShape->setFillColor(Color::Red);
-	}
 
 	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
 	Button eine neue Szene selbstständig kreieren und zwar von der anderen Subklasse 
@@ -64,31 +55,26 @@ int main()
 			case Event::Closed:
 				window.close();
 				break;
+			case Event::KeyPressed:
+				if (windowEvent.key.code == Keyboard::Escape)
+					window.close();
+				break;
 			}
-			//sceneHandler->handleInput(window, windowEvent);
-			for (int i = 0; i < tmp.size(); i++)
-			{
-				tmp.at(i)->handleInput(window, windowEvent);
-			}
+			sceneHandler->handleInput(window, windowEvent);
 		}
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)
 		{
 			//Ruft die Aktualisierungsmethode auf
-			//sceneHandler->update();
-			tmp.at(0)->update();
+			sceneHandler->update();
+
 			lag -= MS_PER_UPDATE;
 		}
 
 		//Zeichnen der Objekte
 		window.clear();
-		//sceneHandler->render(window);
-
-		for (int i = 0; i < tmp.size(); i++)
-		{
-			tmp.at(i)->draw(window, RenderStates());
-		}
+		sceneHandler->render(window, RenderStates());
 		window.display();	
 	}
 

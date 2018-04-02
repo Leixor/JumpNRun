@@ -15,13 +15,18 @@
 using namespace std;
 using namespace sf;
 
+//Helferklassen
+#include "UnorderdMap.h"
+#include "Timer.h"
 #include "DrawableObject.h"
 #include "DrawableShape.h"
+
+//Grundbausteine der Subklassen
 #include "ObjectBase.h"
 #include "Scene.h"
-#include "Timer.h"
 #include "SceneHandler.h"
 
+//Subklassen
 #include "SceneStartMenu.h"
 #include "Button.h"
 

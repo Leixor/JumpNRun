@@ -177,6 +177,7 @@
     <ClInclude Include="SceneStartMenu.h" />
     <ClInclude Include="standardInclude.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="UnorderdMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

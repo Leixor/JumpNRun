@@ -9,7 +9,7 @@ public:
 	// Mainfunktionalität der Gameloop
 	void handleInput(RenderWindow& window, Event windowEvent);
 	void update();
-	void render(RenderWindow& window);
+	void render(RenderWindow& window, RenderStates shades);
 
 	// Verschiedene Helper um Interaktion zwischen Scenes zu erleichtern
 	void addScene(Scene * createScene, bool onTop = false);
