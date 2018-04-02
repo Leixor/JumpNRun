@@ -1,6 +1,8 @@
 #pragma once
 #include "standardInclude.h"
 
+// Merken : https://www.sfml-dev.org/tutorials/2.0/graphics-vertex-array.php
+
 #define MS_PER_UPDATE 16
 
 Int64 getCurrentTime()
@@ -28,12 +30,6 @@ int main()
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
 	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler, &window);
 	sceneHandler->addScene(startMenu);
-	Button& b = Button([&] {}, new DrawableShape<Sprite>());
-	ObjectBase& w = Button([&] {}, new DrawableShape<RectangleShape>());
-	auto t = typeid(b).name();
-	auto g = typeid(w).name();
-	string name = giveName(w);
-	cout << name;
 	
 	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
 	Button eine neue Szene selbstständig kreieren und zwar von der anderen Subklasse 

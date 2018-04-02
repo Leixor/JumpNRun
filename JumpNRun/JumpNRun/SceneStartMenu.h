@@ -14,5 +14,7 @@ private:
 	void buttonOptionAction();
 
 	Button* startButton;
+	Button* optionButton; 
+	Button* endButton;
 };
 

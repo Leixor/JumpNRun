@@ -14,12 +14,14 @@ public:
 	virtual void render(RenderWindow& window, RenderStates shades);
 
 	// Scenespezifische Funktionen
-	string getSceneName() const;
+	string getSceneName();
 	SceneHandler* getSceneHandler() const;
 
 	// Scenespezifische Variablen
 	bool visible = true;
 	template <typename returnType>
+
+
 	returnType addResource(string name, returnType toAdd) {
 		objects.push(name, toAdd);
 		return toAdd;

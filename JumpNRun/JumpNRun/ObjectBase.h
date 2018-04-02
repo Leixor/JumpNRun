@@ -5,7 +5,7 @@ class ObjectBase
 {
 public:
 	ObjectBase(DrawableObject* buttonShape)
-		: buttonShape(buttonShape)
+		: shape(buttonShape)
 	{}
 	~ObjectBase()
 	{}
@@ -16,9 +16,9 @@ public:
 	{}
 	virtual void draw(RenderWindow& window, RenderStates shades)
 	{
-		buttonShape->draw(window, shades);
+		shape->draw(window, shades);
 	}
 
-	DrawableObject* buttonShape;
+	DrawableObject* shape;
 };
 

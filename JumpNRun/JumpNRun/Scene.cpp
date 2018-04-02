@@ -33,7 +33,7 @@ void Scene::render(RenderWindow & window, RenderStates shades)
 		objects.get(i)->draw(window, shades);
 	}
 }
-string Scene::getSceneName() const
+string Scene::getSceneName()
 {
 	return this->sceneName;
 }
