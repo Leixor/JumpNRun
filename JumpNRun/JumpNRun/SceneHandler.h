@@ -15,7 +15,7 @@ public:
 	void addScene(Scene * createScene, bool onTop = false);
 	void deleteScene(string sceneName);
 	void setTopScene(string sceneName);
-	void setSceneVisibility(string sceneName, bool visibility);
+	void setSceneVisibility(string sceneName, int visibility);
 
 	// Helper Scenes mit anderen Scenes interagieren zu lassen
 	int getSceneIndexByName(string sceneName);

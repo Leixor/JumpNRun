@@ -12,7 +12,7 @@ SceneHandler::~SceneHandler()
 void SceneHandler::handleInput(RenderWindow& window, Event windowEvent)
 {
 	for(unsigned int i = 0; i < vScenes.size(); i++) {
-		if (vScenes[i]->visible) {
+		if (vScenes[i]->visible & INPUTABLE) {
 			vScenes[i]->handleInput(window, windowEvent);
 		}
 	}
@@ -21,7 +21,7 @@ void SceneHandler::handleInput(RenderWindow& window, Event windowEvent)
 void SceneHandler::update()
 {
 	for (unsigned int i = 0; i < vScenes.size(); i++) {
-		if (vScenes[i]->visible) {
+		if (vScenes[i]->visible & UPDATABLE) {
 			vScenes[i]->update();
 		}
 	}
@@ -31,7 +31,7 @@ void SceneHandler::update()
 void SceneHandler::render(RenderWindow& window, RenderStates shades)
 {
 	for (int i = vScenes.size() - 1; i >= 0; i--) {
-		if (vScenes[i]->visible) {
+		if (vScenes[i]->visible & VISIBLE) {
 			vScenes[i]->render(window, shades);
 		}
 	}
@@ -77,7 +77,7 @@ void SceneHandler::setTopScene(string sceneName)
 }
 
 // Jede Scene kann die visibility anderer Scenes setzen
-void SceneHandler::setSceneVisibility(string sceneName, bool visibility)
+void SceneHandler::setSceneVisibility(string sceneName, int visibility)
 {
 	int index = getSceneIndexByName(sceneName);
 

@@ -14,6 +14,13 @@
 
 using namespace std;
 using namespace sf;
+enum visibilityFlags {
+	VISIBLE = 1,
+	UPDATABLE = 2,
+	INPUTABLE = 4,
+	ALL = 7
+};
+
 
 //Helferklassen
 #include "UnorderdMap.h"

@@ -1,7 +1,7 @@
 #include "standardInclude.h"
 
-Scene::Scene(string Name, SceneHandler * sceneHandler, RenderWindow* window)
-	: sceneName(Name), sceneHandler(sceneHandler), window(window)
+Scene::Scene(string Name, SceneHandler * sceneHandler, RenderWindow* window, int visible)
+	: sceneName(Name), sceneHandler(sceneHandler), window(window), visible(visible)
 {
 
 }

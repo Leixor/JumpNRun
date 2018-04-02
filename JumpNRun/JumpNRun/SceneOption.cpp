@@ -44,7 +44,7 @@ void SceneOption::checkAction(bool checked, ObjectBase * sender)
 void SceneOption::otherAction()
 {
 	if (colorCheckbox->getState()) { 
-		this->getSceneHandler()->getSceneByName("SceneStartMenu")->visible = true;
-		this->getSceneHandler()->deleteScene(this->getSceneName());
+		this->getSceneHandler()->getSceneByName("Menu")->visible = ALL;
+		this->getSceneHandler()->deleteScene(this->sceneName);
 	}
 }
