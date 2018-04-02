@@ -38,11 +38,11 @@ void SceneHandler::render(RenderWindow& window, RenderStates shades)
 }
 
 // Addet nur eine Szene falls sie nicht genauso mit gleichem Namen vorhanden ist
-void SceneHandler::addScene(Scene * scene, bool onTop)
+void SceneHandler::addScene(Scene * createScene, bool onTop, int visible)
 {
-	if (!sceneExists(scene->getSceneName())) {
-		vScenes.push_back(scene);
-
+	if (!sceneExists(createScene->getSceneName())) {
+		vScenes.push_back(createScene);
+		vScenes.back()->visible = visible;
 		// Falls onTop als True mitgegeben worden ist soll die neue Szene direkt ganz oben in der Pipeline stehen
 		if (onTop) {
 			string name = vScenes.back()->getSceneName();

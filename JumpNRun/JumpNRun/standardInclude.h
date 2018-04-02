@@ -15,6 +15,7 @@
 using namespace std;
 using namespace sf;
 enum visibilityFlags {
+	NONE = 0,
 	VISIBLE = 1,
 	UPDATABLE = 2,
 	INPUTABLE = 4,

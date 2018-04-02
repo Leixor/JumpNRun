@@ -57,7 +57,7 @@ void SceneStartMenu::buttonStartAction()
 void SceneStartMenu::buttonOptionAction()
 {
 	this->getSceneHandler()->addScene(new SceneOption("Option", this->getSceneHandler()));
-	this->visible = false;
+	this->visible = NONE;
 }
 
 void SceneStartMenu::buttonEndAction()
