@@ -17,15 +17,14 @@ public:
 	string getSceneName();
 	SceneHandler* getSceneHandler() const;
 
-	// Scenespezifische Variablen
-	int visible;
 	template <typename returnType>
-
-
 	returnType addResource(string name, returnType toAdd) {
 		objects.push(name, toAdd);
 		return toAdd;
 	}
+
+	// Scenespezifische Variablen
+	int visible;
 
 protected:
 	//Alle Objekte die eine Szene beinhaltet, werden hier gespeichert

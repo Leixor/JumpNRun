@@ -29,6 +29,19 @@ public:
 		return objects.size();
 	}
 
+	unsigned int getIndex(Iterator iterator)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).iterator == iterator)
+			{
+				return i;
+			}
+		}
+
+		throw;
+	}
+
 	Content get(Iterator iterator)
 	{
 		for (unsigned int i = 0; i < objects.size(); i++)
@@ -38,6 +51,8 @@ public:
 				return objects.at(i).content;
 			}
 		}
+
+		throw;
 	}
 
 	Content get(int index)

@@ -1,6 +1,6 @@
 #include "standardInclude.h"
 
-Button::Button(function<void(void)> buttonAction, DrawableObject * buttonShape)
+Button::Button(function<void(void)> buttonAction, Drawable& buttonShape)
 	:ObjectBase(buttonShape), buttonAction(buttonAction)
 {
 }

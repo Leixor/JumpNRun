@@ -3,7 +3,7 @@
  class Button : public ObjectBase
 {
 public:
-	Button(function<void(void)> buttonAction, DrawableObject* buttonShape);
+	Button(function<void(void)> buttonAction, Drawable& buttonShape);
 	~Button();
 
 	virtual void handleInput(RenderWindow& window, Event windowEvent);

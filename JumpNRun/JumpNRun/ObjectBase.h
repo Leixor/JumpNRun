@@ -4,9 +4,15 @@
 class ObjectBase
 {
 public:
-	ObjectBase(DrawableObject* buttonShape)
-		: shape(buttonShape)
-	{}
+	ObjectBase(Drawable& buttonShape)
+	{
+		if(typeid(buttonShape).operator==(typeid(RectangleShape)))
+			shape = new DrawableShape<RectangleShape>();
+		else if(typeid(buttonShape).operator==(typeid(CircleShape)))
+			shape = new DrawableShape<CircleShape>();
+		else
+			shape = new DrawableShape<Sprite>();
+	}
 	~ObjectBase()
 	{}
 
