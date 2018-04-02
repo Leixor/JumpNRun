@@ -37,6 +37,14 @@ void SceneHandler::render(RenderWindow& window, RenderStates shades)
 	}
 }
 
+void SceneHandler::addScene(Scene * createScene, int visible)
+{
+	if (!sceneExists(createScene->getSceneName())) {
+		vScenes.push_back(createScene);
+		vScenes.back()->visible = visible;
+	}
+}
+
 // Addet nur eine Szene falls sie nicht genauso mit gleichem Namen vorhanden ist
 void SceneHandler::addScene(Scene * createScene, bool onTop, int visible)
 {

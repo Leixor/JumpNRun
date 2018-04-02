@@ -56,8 +56,8 @@ void SceneStartMenu::buttonStartAction()
 
 void SceneStartMenu::buttonOptionAction()
 {
-	this->getSceneHandler()->addScene(new SceneOption("Option", this->getSceneHandler()));
-	this->visible = NONE;
+	this->getSceneHandler()->addScene(new SceneOption("Option", this->getSceneHandler()), true);
+	this->visible = UPDATABLE;
 }
 
 void SceneStartMenu::buttonEndAction()
