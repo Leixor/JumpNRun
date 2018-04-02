@@ -27,6 +27,9 @@ using namespace sf;
 #include "SceneHandler.h"
 
 //Subklassen
+#include "SceneOption.h"
 #include "SceneStartMenu.h"
 #include "Button.h"
+#include "CheckBox.h"
+
 

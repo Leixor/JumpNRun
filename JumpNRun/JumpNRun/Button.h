@@ -6,9 +6,9 @@ public:
 	Button(function<void(void)> buttonAction, DrawableObject* buttonShape);
 	~Button();
 
-	void handleInput(RenderWindow& window, Event windowEvent);
+	virtual void handleInput(RenderWindow& window, Event windowEvent);
 
-private:
+protected:
 	function<void(void)> buttonAction;
 
 	void checkMouseButtonCollision(RenderWindow & window);

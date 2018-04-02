@@ -40,13 +40,16 @@ bool SceneStartMenu::setupResources()
 
 void SceneStartMenu::buttonStartAction()
 {
+
+}
+
+void SceneStartMenu::buttonOptionAction()
+{
+	this->getSceneHandler()->addScene(new SceneOption("Option", this->getSceneHandler()));
+	this->visible = false;
 }
 
 void SceneStartMenu::buttonEndAction()
 {
 	this->window->close();
-}
-
-void SceneStartMenu::buttonOptionAction()
-{
 }

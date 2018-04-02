@@ -33,6 +33,12 @@
     <ClCompile Include="Timer.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="SceneOption.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckBox.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="standardInclude.h">
@@ -63,6 +69,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="UnorderdMap.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneOption.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckBox.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

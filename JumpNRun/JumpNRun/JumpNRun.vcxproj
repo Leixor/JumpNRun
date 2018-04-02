@@ -159,21 +159,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="main.cpp">
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneHandler.cpp" />
+    <ClCompile Include="SceneOption.cpp" />
     <ClCompile Include="SceneStartMenu.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="CheckBox.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="DrawableShape.h" />
     <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneHandler.h" />
+    <ClInclude Include="SceneOption.h" />
     <ClInclude Include="SceneStartMenu.h" />
     <ClInclude Include="standardInclude.h" />
     <ClInclude Include="Timer.h" />
