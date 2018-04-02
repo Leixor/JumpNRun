@@ -12,6 +12,9 @@ SceneStartMenu::~SceneStartMenu()
 
 bool SceneStartMenu::setupResources()
 {
+	startButton = addResource<Button*>("Name", new Button([&] {buttonStartAction(); }, new DrawableShape<Sprite>()));
+	startButton->
+
 	this->objects.push("Background", new ObjectBase(new DrawableShape<RectangleShape>()));
 	this->objects.get("Background")->buttonShape->setPosition(Vector2f(0, 0));
 	this->objects.get("Background")->buttonShape->setSize(Vector2f(1600, 900));

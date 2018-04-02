@@ -12,5 +12,7 @@ private:
 	void buttonStartAction();
 	void buttonEndAction();
 	void buttonOptionAction();
+
+	Button* startButton;
 };
 

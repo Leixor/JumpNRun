@@ -10,6 +10,5 @@ public:
 
 protected:
 	function<void(void)> buttonAction;
-
 	void checkMouseButtonCollision(RenderWindow & window);
 };

@@ -19,6 +19,11 @@ public:
 
 	// Scenespezifische Variablen
 	bool visible = true;
+	template <typename returnType>
+	returnType addResource(string name, returnType toAdd) {
+		objects.push(name, toAdd);
+		return toAdd;
+	}
 
 protected:
 	//Alle Objekte die eine Szene beinhaltet, werden hier gespeichert

@@ -11,6 +11,10 @@ Int64 getCurrentTime()
 	return ms.count();
 }
 
+string giveName(ObjectBase& t) {
+	return typeid(t).name();
+}
+
 int main()
 {
 	/*
@@ -24,7 +28,13 @@ int main()
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
 	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler, &window);
 	sceneHandler->addScene(startMenu);
-
+	Button& b = Button([&] {}, new DrawableShape<Sprite>());
+	ObjectBase& w = Button([&] {}, new DrawableShape<RectangleShape>());
+	auto t = typeid(b).name();
+	auto g = typeid(w).name();
+	string name = giveName(w);
+	cout << name;
+	
 	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
 	Button eine neue Szene selbstständig kreieren und zwar von der anderen Subklasse 
 	OverlayTestSzene (diese wird beim adden gleichzeitig nach oben in die Pipeline gestellt), wenn man jetzt auf den grünen 
