@@ -12,9 +12,10 @@ Scene::~Scene()
 
 void Scene::handleInput(RenderWindow & window, Event windowEvent)
 {
-	for (unsigned int i = 0; i < this->objects.size(); i++)
+	for (int i = this->objects.size() - 1; i >= 0; i--)
 	{
-		objects.get(i)->handleInput(window, windowEvent);
+		if(objects.get(i)->handleInput(window, windowEvent))
+			break;
 	}
 }
 

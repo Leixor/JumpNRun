@@ -37,5 +37,6 @@ public:
 	virtual FloatRect getGlobalBounds() = 0;
 	virtual Vector2f getScale() = 0;
 	virtual float getRotation() = 0;
+	virtual float getOutlineThickness() = 0;
 };
 

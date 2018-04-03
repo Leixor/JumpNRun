@@ -57,7 +57,7 @@ namespace AlignHelper{
 			middletoAlign.y += toAlignBounds.height / 2;
 		}
 		toAlign.setPosition(middleanchor - middletoAlign);
-		int difftoAlign = toAlign.getLocalBounds().top - (toAlign.getCharacterSize() - toAlign.getLocalBounds().height);
+		float difftoAlign = toAlign.getLocalBounds().top - (toAlign.getCharacterSize() - toAlign.getLocalBounds().height);
 		toAlign.move(Vector2f(0, -(toAlign.getLocalBounds().top - difftoAlign/2)));
 	}
 
@@ -70,24 +70,29 @@ namespace AlignHelper{
 		Vector2f middleanchor = Vector2f(anchorBounds.left + anchorBounds.width / 2, anchorBounds.top + anchorBounds.height / 2);
 		Vector2f middletoAlign = Vector2f(toAlignBounds.width / 2, toAlignBounds.height / 2);
 
-		if (orientation & LEFT) {
+		if (orientation & LEFT) 
+		{
 			middleanchor.x -= anchorBounds.width / 2 + margin;
 			middletoAlign.x += toAlignBounds.width / 2;
 		}
 
-		if (orientation & RIGHT) {
+		if (orientation & RIGHT) 
+		{
 			middleanchor.x += anchorBounds.width / 2 + margin;
 			middletoAlign.x -= toAlignBounds.width / 2;
 		}
-		if (orientation & TOP) {
+		if (orientation & TOP) 
+		{
 			middleanchor.y -= anchorBounds.height / 2 + margin;
 			middletoAlign.y += toAlignBounds.height / 2;
 		}
-		if (orientation & BOTTOM) {
+		if (orientation & BOTTOM) 
+		{
 			middleanchor.y += anchorBounds.height / 2 + margin;
 			middletoAlign.y -= toAlignBounds.height / 2;
 		}
 		toAlign.setPosition(middleanchor - middletoAlign);
+		toAlign.move(Vector2f(toAlign.getOutlineThickness(), toAlign.getOutlineThickness()));
 	}
 }
 

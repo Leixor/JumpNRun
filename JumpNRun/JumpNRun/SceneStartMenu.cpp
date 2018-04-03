@@ -14,11 +14,7 @@ bool SceneStartMenu::setupResources()
 {
 	font = new Font();
 	this->font->loadFromFile("Textures/cool.ttf");
-	// Load it from a file
-	/*if (!font->loadFromFile("Textures/cool.ttf"))
-	{
-		printf("Couldnt load font");
-	}*/
+	
 	addResource<ObjectBase*>("Background", new ObjectBase(RectangleShape()));
 	this->objects.get("Background")->shape->setPosition(Vector2f(0, 0));
 	this->objects.get("Background")->shape->setSize(Vector2f(1600, 900));
@@ -59,9 +55,6 @@ bool SceneStartMenu::setupResources()
 	this->objects.get("SnakeCover")->shape->setSize(Vector2f(1000, 600));
 
 	alignTo(*this->objects.get("SnakeCover")->shape, *this->objects.get("Background")->shape, TOP, 100);
-
-	
-	cout << this->objects.get("Background")->shape->getOrigin().x;
 
 	return true;
 }

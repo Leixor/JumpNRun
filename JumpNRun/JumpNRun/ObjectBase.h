@@ -16,8 +16,10 @@ public:
 	~ObjectBase()
 	{}
 
-	virtual void handleInput(RenderWindow& window, Event windowEvent)
-	{}
+	virtual bool handleInput(RenderWindow& window, Event windowEvent)
+	{
+		return false;
+	}
 	virtual void update()
 	{}
 	virtual void draw(RenderWindow& window, RenderStates shades)

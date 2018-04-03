@@ -12,16 +12,24 @@ SceneOption::~SceneOption()
 
 bool SceneOption::setupResources()
 {
-	
-
 	addResource<ObjectBase*>("Background", new ObjectBase(RectangleShape()));
 	this->objects.get("Background")->shape->setPosition(Vector2f(0, 0));
 	this->objects.get("Background")->shape->setSize(Vector2f(1600, 900));
 	this->objects.get("Background")->shape->setFillColor(Color::Black);
-	
 
-
+	otherCheckbox = addResource<CheckBox*>("OtheBox", new CheckBox([&](bool checked, ObjectBase* type) {otherAction(); }, RectangleShape()));
+	otherCheckbox->shape->setSize(Vector2f(100, 100));
+	otherCheckbox->shape->setFillColor(Color::Red);
+	otherCheckbox->shape->setOutlineThickness(5);
+	otherCheckbox->shape->setOutlineColor(Color::Green);
 	
+	colorCheckbox = addResource<CheckBox*>("ColorBox", new CheckBox([&](bool checked, ObjectBase* sender) {checkAction(checked, sender); }, RectangleShape()));
+	colorCheckbox->shape->setSize(Vector2f(10, 10));
+	colorCheckbox->shape->setFillColor(Color::Red);
+	colorCheckbox->shape->setOutlineThickness(5);
+	colorCheckbox->shape->setOutlineColor(Color::Green);
+
+	alignTo(*colorCheckbox->shape, *otherCheckbox->shape, BOTTOM);
 
 	return true;
 }

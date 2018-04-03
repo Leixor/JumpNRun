@@ -6,9 +6,9 @@ public:
 	Button(function<void(void)> buttonAction, Drawable& buttonShape);
 	~Button();
 
-	virtual void handleInput(RenderWindow& window, Event windowEvent);
+	virtual bool handleInput(RenderWindow& window, Event windowEvent);
 
 protected:
 	function<void(void)> buttonAction;
-	void checkMouseButtonCollision(RenderWindow & window);
+	bool checkMouseButtonCollision(RenderWindow & window);
 };

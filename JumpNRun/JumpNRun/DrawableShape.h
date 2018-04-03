@@ -31,10 +31,11 @@ public:
 	//Existiert nur bei manchen Typen
 	void setOutlineColor(Color color);
 	void setOutlineThickness(float thickness);
-
 	void setTexture(String texturePath);
 	void setTextureRect(IntRect textureRect);
+
 	IntRect getTextureRect();
+	float getOutlineThickness();
 };
 
 #pragma region Gleiche Funktion für jeden Typ
@@ -210,6 +211,25 @@ inline void DrawableShape<CircleShape>::setFillColor(Color color)
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::setFillColor(Color color)
 {}
+
+template<>
+inline float DrawableShape<CircleShape>::getOutlineThickness()
+{
+	return CircleShape::getOutlineThickness();
+}
+
+template<>
+inline float DrawableShape<RectangleShape>::getOutlineThickness()
+{
+	return RectangleShape::getOutlineThickness();
+}
+
+template<class DrawableType>
+inline float DrawableShape<DrawableType>::getOutlineThickness()
+{
+	return 0.0f;
+}
+
 #pragma endregion
 
 #pragma region Funktionen die bei jedem Typ anderst ist

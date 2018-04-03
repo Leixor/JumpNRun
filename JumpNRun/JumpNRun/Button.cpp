@@ -9,20 +9,25 @@ Button::~Button()
 {
 }
 
-void Button::handleInput(RenderWindow & window, Event windowEvent)
+bool Button::handleInput(RenderWindow & window, Event windowEvent)
 {
 	switch (windowEvent.type)
 	{
 	case Event::MouseButtonPressed:
-		this->checkMouseButtonCollision(window);
+		return this->checkMouseButtonCollision(window);
 		break;
 	}
+	return false;
 }
 
-void Button::checkMouseButtonCollision(RenderWindow & window)
+bool Button::checkMouseButtonCollision(RenderWindow & window)
 {
 	auto mouse = Mouse::getPosition(window);
 	if (this->shape->getGlobalBounds().contains(float(mouse.x), float(mouse.y)))
+	{
 		this->buttonAction();
+		return true;
+	}
+	return false;
 }
 
