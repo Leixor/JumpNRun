@@ -7,6 +7,7 @@
 
 
 #include <SFML\Graphics.hpp>
+#include "AnimatedSprite.hpp"
 
 #include <Windows.h>
 

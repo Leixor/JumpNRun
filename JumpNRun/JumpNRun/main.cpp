@@ -13,9 +13,6 @@ Int64 getCurrentTime()
 	return ms.count();
 }
 
-string giveName(ObjectBase& t) {
-	return typeid(t).name();
-}
 
 int main()
 {
@@ -31,6 +28,14 @@ int main()
 	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler, &window);
 	sceneHandler->addScene(startMenu);
 	
+
+
+	sf::Font fant;
+	Font* font;
+	font = new Font();
+	font->loadFromFile("Textures/cool.ttf");
+	Text t("Hallo", *font);
+	t.setCharacterSize(40);
 	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
 	Button eine neue Szene selbstständig kreieren und zwar von der anderen Subklasse 
 	OverlayTestSzene (diese wird beim adden gleichzeitig nach oben in die Pipeline gestellt), wenn man jetzt auf den grünen 
@@ -39,11 +44,16 @@ int main()
 	Der ganze Testablauf diente nur zum probieren aller Funktionen des Scenehandlers
 	*/
 
+
+
+
 	//Parameter die für die verbesserte Spielschleife notwendig sind.
 	// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
 	// render(lag / MS_PER_UPDATE);
 	Int64 lag = 0;
 	Int64 previous = getCurrentTime();
+
+
 
 	while (window.isOpen())
 	{
@@ -68,6 +78,8 @@ int main()
 			}
 			sceneHandler->handleInput(window, windowEvent);
 		}
+		
+		
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)

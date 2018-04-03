@@ -4,9 +4,8 @@
 class DrawableObject
 {
 public:
-	DrawableObject(int visibility = VISIBLE)
+	DrawableObject()
 	{
-		this->visibility = visibility;
 	}
 	~DrawableObject()
 	{
@@ -38,16 +37,5 @@ public:
 	virtual FloatRect getGlobalBounds() = 0;
 	virtual Vector2f getScale() = 0;
 	virtual float getRotation() = 0;
-
-	void setVisibility(int visibility)
-	{
-		this->visibility = visibility;
-	}
-	int getVisibility()
-	{
-		return visibility;
-	}
-private:
-	int visibility;
 };
 

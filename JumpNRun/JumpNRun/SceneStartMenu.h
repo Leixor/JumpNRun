@@ -9,6 +9,9 @@ public:
 	bool setupResources();
 
 private:
+	Font* font;
+	Texture m_texture;
+
 	void buttonStartAction();
 	void buttonEndAction();
 	void buttonOptionAction();

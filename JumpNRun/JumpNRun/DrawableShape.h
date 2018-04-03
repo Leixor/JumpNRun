@@ -4,7 +4,7 @@
 template <class DrawableType> class DrawableShape: public DrawableType, public DrawableObject
 {
 public:
-	DrawableShape(int visibility = VISIBLE);
+	DrawableShape();
 	~DrawableShape();
 
 	void draw(RenderWindow& window, RenderStates shader);
@@ -39,8 +39,7 @@ public:
 
 #pragma region Gleiche Funktion für jeden Typ
 template<class DrawableType>
-inline DrawableShape<DrawableType>::DrawableShape(int visibility)
-	:DrawableObject(visibility)
+inline DrawableShape<DrawableType>::DrawableShape()
 {
 }
 
@@ -52,7 +51,6 @@ inline DrawableShape<DrawableType>::~DrawableShape()
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::draw(RenderWindow & window, RenderStates shader)
 {
-	if(this->DrawableObject::getVisibility() & VISIBLE)
 		window.draw(*this);
 }
 
