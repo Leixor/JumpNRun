@@ -12,6 +12,7 @@ public:
 	//Für alle Typen vorhanden
 	void setSize(Vector2f size);
 	void setPosition(Vector2f pos);
+	void setOrigin(Vector2f origin);
 	void setScale(Vector2f sclae);
 	void setRotation(float angle);
 	void setFillColor(Color color);
@@ -22,6 +23,7 @@ public:
 
 	Vector2f getSize();
 	Vector2f getPosition();
+	Vector2f getOrigin();
 	Vector2f getScale();
 	FloatRect getGlobalBounds();
 	float getRotation();
@@ -61,6 +63,12 @@ inline void DrawableShape<DrawableType>::setPosition(Vector2f pos)
 }
 
 template<class DrawableType>
+inline void DrawableShape<DrawableType>::setOrigin(Vector2f origin)
+{
+	this->DrawableType::setOrigin(origin);
+}
+
+template<class DrawableType>
 inline void DrawableShape<DrawableType>::setScale(Vector2f scale)
 {
 	this->DrawableType::setScale(scale);
@@ -76,6 +84,12 @@ template<class DrawableType>
 inline Vector2f DrawableShape<DrawableType>::getPosition()
 {
 	return this->DrawableType::getPosition();
+}
+
+template<class DrawableType>
+inline Vector2f DrawableShape<DrawableType>::getOrigin()
+{
+	return this->DrawableType::getOrigin();
 }
 
 template<class DrawableType>

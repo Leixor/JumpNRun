@@ -18,6 +18,7 @@ public:
 	virtual void setSize(Vector2f size) = 0;
 	virtual void setPosition(Vector2f pos) = 0;
 	virtual void setRotation(float angle) = 0;
+	virtual void setOrigin(Vector2f origin) = 0;
 	
 	virtual void setFillColor(Color color) = 0;
 	virtual void setTexture(String texturePath) = 0;
@@ -32,6 +33,7 @@ public:
 
 	virtual Vector2f getSize() = 0;
 	virtual Vector2f getPosition() = 0;
+	virtual Vector2f getOrigin() = 0;
 	virtual IntRect getTextureRect() = 0;
 	virtual FloatRect getGlobalBounds() = 0;
 	virtual Vector2f getScale() = 0;
