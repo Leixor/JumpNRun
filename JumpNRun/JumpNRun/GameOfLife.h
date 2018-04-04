@@ -13,7 +13,7 @@ public:
 
 	bool setupResources();
 	void update();
-	void handleInput(RenderWindow& window, vector<Event>& windowEvents);
+	void handleInputs(RenderWindow& window);
 	void render(RenderWindow& window, RenderStates shades);
 
 private:

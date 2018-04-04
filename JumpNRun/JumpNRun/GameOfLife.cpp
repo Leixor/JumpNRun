@@ -60,9 +60,9 @@ void GameOfLife::update()
 	}
 }
 
-void GameOfLife::handleInput(RenderWindow& window, vector<Event>& windowEvents)
+void GameOfLife::handleInputs(RenderWindow& window)
 {
-	Scene::handleInput(window, windowEvents);
+	Scene::handleInputs(window);
 
 	// Falls das Game noch im Setup ist soll an den Stellen wo der Spieler hinklickt eine Zelle zum Leben erweckt werden falls dort noch keine lebende ist
 	if (gameState & SETUPFIELD || gameState & PAUSED) {
@@ -96,6 +96,10 @@ void GameOfLife::handleInput(RenderWindow& window, vector<Event>& windowEvents)
 				gameField[i][j] = false;
 			}
 		}
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Key::O)) {
+		this->getSceneHandler()->setTopScene("SnakeGame");
+		this->visible = UPDATABLE;
 	}
 }
 
