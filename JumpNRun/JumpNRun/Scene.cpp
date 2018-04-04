@@ -23,7 +23,7 @@ void Scene::handleEvents(RenderWindow & window, Event windowEvent)
 	for (int i = this->objects.size() - 1; i >= 0; i--)
 	{
 		if(objects.get(i)->handleEvents(window, windowEvent))
-			break;
+				break;
 	}
 }
 

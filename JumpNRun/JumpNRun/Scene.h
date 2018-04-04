@@ -18,8 +18,6 @@ public:
 	string getSceneName();
 	SceneHandler* getSceneHandler() const;
 
-	
-
 	template <typename returnType>
 	returnType addResource(string name, returnType toAdd) {
 		objects.push(name, toAdd);
@@ -33,7 +31,6 @@ protected:
 	UnorderdMap<String, ObjectBase*> objects;
 	RenderWindow* window;
 	string sceneName;
-
 private:
 	
 	// Jede Szene bekommt den Scenehandler damit er es als Interface benutzen kann um die anderen Szenen anzusprechen

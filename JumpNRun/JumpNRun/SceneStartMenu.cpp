@@ -53,10 +53,11 @@ bool SceneStartMenu::setupResources()
 
 void SceneStartMenu::buttonStartAction()
 {
+	this->visible = UPDATABLE;
+
 	this->getSceneHandler()->addScene(new GameOfLife("GOL", this->getSceneHandler(), this->window), true);
-	this->visible = UPDATABLE;
-	this->getSceneHandler()->addScene(new SceneGame("SnakeGame", this->getSceneHandler(), Vector2u(20,20), 4), ALL);
-	this->visible = UPDATABLE;
+	this->getSceneHandler()->addScene(new SceneSnakeGame("SnakeGame", this->getSceneHandler(), Vector2u(20,20), 4), ALL);
+	this->getSceneHandler()->getSceneByName("SnakeGame")->visible = NONE;
 }
 
 void SceneStartMenu::buttonOptionAction()

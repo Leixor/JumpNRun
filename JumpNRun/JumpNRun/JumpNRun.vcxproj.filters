@@ -45,7 +45,7 @@
     <ClCompile Include="GameOfLife.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="SceneGame.cpp">
+    <ClCompile Include="SceneSnakeGame.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,10 +89,10 @@
     <ClInclude Include="AlignHelper.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="SceneGame.h">
+    <ClInclude Include="GameOfLife.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="GameOfLife.h">
+    <ClInclude Include="SceneSnakeGame.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

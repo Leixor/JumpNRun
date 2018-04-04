@@ -1,10 +1,10 @@
 #pragma once
 
-class SceneGame : public Scene
+class SceneSnakeGame : public Scene
 {
 public:
-	SceneGame(string name, SceneHandler * sceneHandler, Vector2u size, int partCount);
-	~SceneGame();
+	SceneSnakeGame(string name, SceneHandler * sceneHandler, Vector2u size, int partCount);
+	~SceneSnakeGame();
 
 	void handleEvents(RenderWindow & window, Event windowEvent);
 	void handleInputs(RenderWindow & window);
@@ -12,12 +12,15 @@ public:
 	void update();
 
 private:
-	Vector2u size;
+	Vector2u cellCount;
 	eOrientation snakeDirection;
 	eOrientation snakeDirectionNew;
 	bool gameFinished;
 	int partCount;
 
 	vector<ObjectBase*> snakeBody;
+	ObjectBase* snakeFood;
+
+	bool setupFood();
 };
 
