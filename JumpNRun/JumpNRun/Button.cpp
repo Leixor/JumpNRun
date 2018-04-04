@@ -9,7 +9,7 @@ Button::~Button()
 {
 }
 
-bool Button::handleInput(RenderWindow & window, Event windowEvent)
+bool Button::handleEvents(RenderWindow & window, Event windowEvent)
 {
 	switch (windowEvent.type)
 	{

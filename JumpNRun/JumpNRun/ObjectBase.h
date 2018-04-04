@@ -16,7 +16,9 @@ public:
 	~ObjectBase()
 	{}
 
-	virtual bool handleInput(RenderWindow& window, Event windowEvent)
+	virtual void handleInputs(RenderWindow& window)
+	{}
+	virtual bool handleEvents(RenderWindow& window, Event windowEvent)
 	{
 		return false;
 	}

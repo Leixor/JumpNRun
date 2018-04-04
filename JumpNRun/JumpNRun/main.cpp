@@ -3,7 +3,7 @@
 
 // Merken : https://www.sfml-dev.org/tutorials/2.0/graphics-vertex-array.php
 
-#define MS_PER_UPDATE 16
+#define MS_PER_UPDATE 160
 
 Int64 getCurrentTime()
 {
@@ -28,14 +28,6 @@ int main()
 	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler, &window);
 	sceneHandler->addScene(startMenu);
 	
-
-
-	sf::Font fant;
-	Font* font;
-	font = new Font();
-	font->loadFromFile("Textures/cool.ttf");
-	Text t("Hallo", *font);
-	t.setCharacterSize(40);
 	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
 	Button eine neue Szene selbstständig kreieren und zwar von der anderen Subklasse 
 	OverlayTestSzene (diese wird beim adden gleichzeitig nach oben in die Pipeline gestellt), wenn man jetzt auf den grünen 
@@ -53,7 +45,18 @@ int main()
 	Int64 lag = 0;
 	Int64 previous = getCurrentTime();
 
+	// Quick FPS Counter
+	int frameCount = 0;
+	int loop = 0;
 
+	Font* font = new Font();
+	font->loadFromFile("Textures/cool.ttf");
+
+	Text* FPS = new Text();
+	FPS->setFont(*font);
+	FPS->setString(to_string(frameCount));
+	FPS->setCharacterSize(50);
+	FPS->setFillColor(Color::Red);
 
 	while (window.isOpen())
 	{
@@ -76,10 +79,10 @@ int main()
 					window.close();
 				break;
 			}
-			sceneHandler->handleInput(window, windowEvent);
+			sceneHandler->handleEvents(window, windowEvent);
 		}
 		
-		
+		sceneHandler->handleInputs(window);
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)
@@ -87,12 +90,26 @@ int main()
 			//Ruft die Aktualisierungsmethode auf
 			sceneHandler->update();
 
+			//FPSCOUNTER
+			loop++;
+			if (loop == 1000 / MS_PER_UPDATE) {
+				loop = 0;
+				FPS->setString(to_string(frameCount));
+				frameCount = 0;
+			}
+
 			lag -= MS_PER_UPDATE;
 		}
 
 		//Zeichnen der Objekte
 		window.clear();
+
 		sceneHandler->render(window, RenderStates());
+
+		//FPSCOUNTER
+		window.draw(*FPS);
+		frameCount++;
+
 		window.display();	
 	}
 

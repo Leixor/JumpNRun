@@ -9,11 +9,20 @@ SceneHandler::~SceneHandler()
 }
 
 // Die Wichtigkeitsreihenfolge für handleInput und update sieht wie folgt aus -> von 0 nach vScenes.size()
-void SceneHandler::handleInput(RenderWindow& window, Event windowEvent)
+void SceneHandler::handleEvents(RenderWindow& window, Event windowEvent)
 {
 	for(unsigned int i = 0; i < vScenes.size(); i++) {
 		if (vScenes[i]->visible & INPUTABLE) {
-			vScenes[i]->handleInput(window, windowEvent);
+			vScenes[i]->handleEvents(window, windowEvent);
+		}
+	}
+}
+
+void SceneHandler::handleInputs(RenderWindow & window)
+{
+	for (unsigned int i = 0; i < vScenes.size(); i++) {
+		if (vScenes[i]->visible & INPUTABLE) {
+			vScenes[i]->handleInputs(window);
 		}
 	}
 }

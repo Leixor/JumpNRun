@@ -9,13 +9,12 @@ CheckBox::~CheckBox()
 {
 }
 
-bool CheckBox::handleInput(RenderWindow & window, Event windowEvent)
+bool CheckBox::handleEvents(RenderWindow & window, Event windowEvent)
 {
 	switch (windowEvent.type)
 	{
 	case Event::MouseButtonPressed:
-		return this->checkMouseButtonCollision(window);
-		break;
+		this->checkMouseButtonCollision(window);
 	}
 	return false;
 }
