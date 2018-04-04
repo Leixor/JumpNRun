@@ -1,6 +1,6 @@
 #include "standardInclude.h"
 
-Button::Button(function<void(void)> buttonAction, Drawable& buttonShape)
+Button::Button(function<void(void)> buttonAction, DrawableObject* buttonShape)
 	:ObjectBase(buttonShape), buttonAction(buttonAction)
 {
 }
@@ -9,15 +9,18 @@ Button::~Button()
 {
 }
 
-bool Button::handleInput(RenderWindow & window, Event windowEvent)
+bool Button::handleInput(RenderWindow& window, vector<Event>& windowEvent)
 {
-	switch (windowEvent.type)
-	{
-	case Event::MouseButtonPressed:
-		return this->checkMouseButtonCollision(window);
-		break;
+	for (int i = 0; i < windowEvent.size(); i++) {
+
+		switch (windowEvent[i].type)
+		{
+			case Event::MouseButtonPressed:
+				return this->checkMouseButtonCollision(window);
+				break;
+		}
+		return false;
 	}
-	return false;
 }
 
 bool Button::checkMouseButtonCollision(RenderWindow & window)

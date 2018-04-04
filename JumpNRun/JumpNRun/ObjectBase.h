@@ -13,10 +13,14 @@ public:
 		else
 			shape = new DrawableShape<Sprite>();
 	}
+	ObjectBase(DrawableObject* buttonShape) :shapeVisible(ALL), textVisible(NONE)
+	{
+		shape = buttonShape;
+	}
 	~ObjectBase()
 	{}
 
-	virtual bool handleInput(RenderWindow& window, Event windowEvent)
+	virtual bool handleInput(RenderWindow& window, vector<Event>& windowEvent)
 	{
 		return false;
 	}

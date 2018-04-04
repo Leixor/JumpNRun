@@ -161,6 +161,7 @@
     <ClCompile Include="AlignHelper.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CheckBox.cpp" />
+    <ClCompile Include="GameOfLife.cpp" />
     <ClCompile Include="main.cpp">
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
@@ -176,6 +177,7 @@
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="DrawableShape.h" />
+    <ClInclude Include="GameOfLife.h" />
     <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneHandler.h" />

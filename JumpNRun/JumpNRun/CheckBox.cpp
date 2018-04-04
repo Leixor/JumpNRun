@@ -1,6 +1,6 @@
 #include "standardInclude.h"
 
-CheckBox::CheckBox(function<void(bool checked, ObjectBase* type)> buttonAction, Drawable& buttonShape, bool checked)
+CheckBox::CheckBox(function<void(bool checked, ObjectBase* type)> buttonAction, DrawableObject* buttonShape, bool checked)
 	:ObjectBase(buttonShape), buttonAction(buttonAction)
 {
 }

@@ -51,6 +51,7 @@ using namespace AlignHelper;
 #include "CheckBox.h"
 #include "SceneOption.h"
 #include "SceneStartMenu.h"
+#include "GameOfLife.h"
 
 
 

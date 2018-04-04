@@ -3,10 +3,10 @@
  class Button : public ObjectBase
 {
 public:
-	Button(function<void(void)> buttonAction, Drawable& buttonShape);
+	Button(function<void(void)> buttonAction, DrawableObject* buttonShape);
 	~Button();
 
-	virtual bool handleInput(RenderWindow& window, Event windowEvent);
+	virtual bool handleInput(RenderWindow& window, vector<Event>& windowEvent);
 
 protected:
 	function<void(void)> buttonAction;

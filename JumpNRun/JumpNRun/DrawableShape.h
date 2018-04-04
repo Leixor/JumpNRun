@@ -1,10 +1,12 @@
 #pragma once
 #include "standardInclude.h"
 
-template <class DrawableType> class DrawableShape: public DrawableType, public DrawableObject
+template <class DrawableType> class DrawableShape : public DrawableObject
 {
 public:
 	DrawableShape();
+	DrawableShape(Vector2f size, Vector2f position);
+	DrawableShape(string textureName, Vector2f position = Vector2f(0, 0), Vector2f scale = Vector2f(1.0f, 1.0f), bool inSize = false);
 	~DrawableShape();
 
 	void draw(RenderWindow& window, RenderStates shader);
@@ -36,12 +38,35 @@ public:
 
 	IntRect getTextureRect();
 	float getOutlineThickness();
+
+	DrawableType* shape;
 };
 
 #pragma region Gleiche Funktion für jeden Typ
 template<class DrawableType>
-inline DrawableShape<DrawableType>::DrawableShape()
+inline DrawableShape<DrawableType>::DrawableShape() : shape(new DrawableType())
 {
+}
+
+template<class DrawableType>
+inline DrawableShape<DrawableType>::DrawableShape(Vector2f size, Vector2f position)
+{
+	shape = new DrawableType();
+	this->setSize(size);
+	this->setPosition(position);
+}
+
+inline DrawableShape<Sprite>::DrawableShape(string textureName, Vector2f position, Vector2f scale, bool inSize)
+{
+	shape = new Sprite();
+	this->setPosition(position);
+	this->setTexture(textureName);
+	if (!inSize) {
+		this->setScale(scale);
+	}
+	else {
+		this->setSize(scale);
+	}
 }
 
 template<class DrawableType>
@@ -52,79 +77,79 @@ inline DrawableShape<DrawableType>::~DrawableShape()
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::draw(RenderWindow & window, RenderStates shader)
 {
-		window.draw(*this);
+		window.draw(*shape);
 }
 
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::setPosition(Vector2f pos)
 {
-	this->DrawableType::setPosition(pos);
+	this->shape->setPosition(pos);
 }
 
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::setOrigin(Vector2f origin)
 {
-	this->DrawableType::setOrigin(origin);
+	this->shape->setOrigin(origin);
 }
 
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::setScale(Vector2f scale)
 {
-	this->DrawableType::setScale(scale);
+	this->shape->setScale(scale);
 }
 
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::setRotation(float angle)
 {
-	this->DrawableType::setRotation(angle);
+	this->shape->setRotation(angle);
 }
 
 template<class DrawableType>
 inline Vector2f DrawableShape<DrawableType>::getPosition()
 {
-	return this->DrawableType::getPosition();
+	return this->shape->getPosition();
 }
 
 template<class DrawableType>
 inline Vector2f DrawableShape<DrawableType>::getOrigin()
 {
-	return this->DrawableType::getOrigin();
+	return this->shape->getOrigin();
 }
 
 template<class DrawableType>
 inline Vector2f DrawableShape<DrawableType>::getScale()
 {
-	return this->DrawableType::getScale();
+	return this->shape->getScale();
 }
 
 template<class DrawableType>
 inline FloatRect DrawableShape<DrawableType>::getGlobalBounds()
 {
-	return this->DrawableType::getGlobalBounds();
+	return this->shape->getGlobalBounds();
 }
 
 template<class DrawableType>
 inline float DrawableShape<DrawableType>::getRotation()
 {
-	return this->DrawableType::getRotation();
+	return this->shape->getRotation();
 }
 
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::rotate(float offsetAngle)
 {
-	DrawableType::rotate(offsetAngle);
+	this->shape->rotate(offsetAngle);
 }
 
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::move(Vector2f offset)
 {
-	DrawableType::move(offset);
+	this->shape->move(offset);
 }
 
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::scale(Vector2f offset)
 {
-	this->DrawableType::scale(offset);
+	this->shape->scale(offset);
 }
 #pragma endregion
 
@@ -132,7 +157,7 @@ inline void DrawableShape<DrawableType>::scale(Vector2f offset)
 template<>
 inline IntRect DrawableShape<Sprite>::getTextureRect()
 {
-	return this->Sprite::getTextureRect();
+	return this->shape->getTextureRect();
 }
 
 template<class DrawableType>
@@ -147,7 +172,7 @@ inline void DrawableShape<Sprite>::setTexture(String texturePath)
 	Texture* loadHelper = new Texture();
 	loadHelper->loadFromFile(texturePath);
 
-	this->Sprite::setTexture(*loadHelper);
+	this->shape->setTexture(*loadHelper);
 }
 
 template<class DrawableType>
@@ -157,7 +182,7 @@ inline void DrawableShape<DrawableType>::setTexture(String texturePath)
 template<>
 inline void DrawableShape<Sprite>::setTextureRect(IntRect textureRect)
 {
-	this->Sprite::setTextureRect(textureRect);
+	this->shape->setTextureRect(textureRect);
 }
 
 template<class DrawableType>
@@ -167,13 +192,13 @@ inline void DrawableShape<DrawableType>::setTextureRect(IntRect textureRect)
 template<>
 inline void DrawableShape<RectangleShape>::setOutlineColor(Color color)
 {
-	this->RectangleShape::setOutlineColor(color);
+	this->shape->setOutlineColor(color);
 }
 
 template<>
 inline void DrawableShape<CircleShape>::setOutlineColor(Color color)
 {
-	this->CircleShape::setOutlineColor(color);
+	this->shape->setOutlineColor(color);
 }
 
 template<class DrawableType>
@@ -183,13 +208,13 @@ inline void DrawableShape<DrawableType>::setOutlineColor(Color color)
 template<>
 inline void DrawableShape<RectangleShape>::setOutlineThickness(float thickness)
 {
-	this->RectangleShape::setOutlineThickness(thickness);
+	this->shape->setOutlineThickness(thickness);
 }
 
 template<>
 inline void DrawableShape<CircleShape>::setOutlineThickness(float thickness)
 {
-	this->CircleShape::setOutlineThickness(thickness);
+	this->shape->setOutlineThickness(thickness);
 }
 
 template<class DrawableType>
@@ -199,13 +224,13 @@ inline void DrawableShape<DrawableType>::setOutlineThickness(float thickness)
 template<>
 inline void DrawableShape<RectangleShape>::setFillColor(Color color)
 {
-	this->RectangleShape::setFillColor(color);
+	this->shape->setFillColor(color);
 }
 
 template<>
 inline void DrawableShape<CircleShape>::setFillColor(Color color)
 {
-	this->CircleShape::setFillColor(color);
+	this->shape->setFillColor(color);
 }
 
 template<class DrawableType>
@@ -215,13 +240,13 @@ inline void DrawableShape<DrawableType>::setFillColor(Color color)
 template<>
 inline float DrawableShape<CircleShape>::getOutlineThickness()
 {
-	return CircleShape::getOutlineThickness();
+	return this->shape->getOutlineThickness();
 }
 
 template<>
 inline float DrawableShape<RectangleShape>::getOutlineThickness()
 {
-	return RectangleShape::getOutlineThickness();
+	return this->shape->getOutlineThickness();
 }
 
 template<class DrawableType>
@@ -236,47 +261,47 @@ inline float DrawableShape<DrawableType>::getOutlineThickness()
 template<>
 inline void DrawableShape<CircleShape>::setSize(Vector2f size)
 {
-	this->CircleShape::setRadius(size.x);
-	this->CircleShape::setPointCount(size_t(size.y));
+	this->shape->setRadius(size.x);
+	this->shape->setPointCount(size_t(size.y));
 }
 
 template<>
 inline void DrawableShape<RectangleShape>::setSize(Vector2f size)
 {
-	this->RectangleShape::setSize(size);
+	this->shape->setSize(size);
 }
 
 template<>
 inline void DrawableShape<Sprite>::setSize(Vector2f size)
 {
-	float currentSizeX = float(this->Sprite::getTexture()->getSize().x);
-	float currentSizeY = float(this->Sprite::getTexture()->getSize().x);
+	float currentSizeX = float(this->shape->getTexture()->getSize().x);
+	float currentSizeY = float(this->shape->getTexture()->getSize().x);
 	auto scale = this->getScale();
 
 	currentSizeX *= scale.x;
 	currentSizeY *= scale.y;
 
-	this->Sprite::setScale(size.x / currentSizeX, size.y / currentSizeY);
+	this->shape->setScale(size.x / currentSizeX, size.y / currentSizeY);
 }
 
 template<>
 inline Vector2f DrawableShape<CircleShape>::getSize()
 {
-	return Vector2f(float(CircleShape::getRadius()), float(CircleShape::getPointCount()));
+	return Vector2f(float(this->shape->getRadius()), float(this->shape->getPointCount()));
 }
 
 template<>
 inline Vector2f DrawableShape<RectangleShape>::getSize()
 {
-	return RectangleShape::getSize();
+	return this->shape->getSize();
 }
 
 template<>
 inline Vector2f DrawableShape<Sprite>::getSize()
 {
-	float currentSizeX = float(this->Sprite::getTexture()->getSize().x);
-	float currentSizeY = float(this->Sprite::getTexture()->getSize().x);
-	auto scale = this->getScale();
+	float currentSizeX = float(this->shape->getTexture()->getSize().x);
+	float currentSizeY = float(this->shape->getTexture()->getSize().x);
+	auto scale = this->shape->getScale();
 
 	currentSizeX *= scale.x;
 	currentSizeY *= scale.y;

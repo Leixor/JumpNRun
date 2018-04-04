@@ -3,7 +3,7 @@
 
 // Merken : https://www.sfml-dev.org/tutorials/2.0/graphics-vertex-array.php
 
-#define MS_PER_UPDATE 16
+#define MS_PER_UPDATE 100
 
 Int64 getCurrentTime()
 {
@@ -28,14 +28,10 @@ int main()
 	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler, &window);
 	sceneHandler->addScene(startMenu);
 	
+	
 
+	
 
-	sf::Font fant;
-	Font* font;
-	font = new Font();
-	font->loadFromFile("Textures/cool.ttf");
-	Text t("Hallo", *font);
-	t.setCharacterSize(40);
 	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
 	Button eine neue Szene selbstständig kreieren und zwar von der anderen Subklasse 
 	OverlayTestSzene (diese wird beim adden gleichzeitig nach oben in die Pipeline gestellt), wenn man jetzt auf den grünen 
@@ -53,10 +49,31 @@ int main()
 	Int64 lag = 0;
 	Int64 previous = getCurrentTime();
 
+	// Quick FPS Counter
+	int frameCount = 0;
+	int loop = 0;
 
+	Font* font = new Font();
+	font->loadFromFile("Textures/cool.ttf");
+	
+	Text* FPS = new Text();
+	FPS->setFont(*font);
+	FPS->setString(to_string(frameCount));
+	FPS->setCharacterSize(50);
+	FPS->setFillColor(Color::Red);
+
+	vector<RectangleShape> shapeTest;
+	// FramerateTest
+	for (int i = 0; i < 100; i++) {
+		for (int j = 0; j < 100; j++) {
+			shapeTest.push_back(RectangleShape(Vector2f(10, 10)));
+			shapeTest[i + j].setPosition(Vector2f(i * 10, j * 10));
+		}
+	}
 
 	while (window.isOpen())
 	{
+		vector<Event> windowEvents;
 		Int64 current = getCurrentTime();
 		Int64 elapsed = current - previous;
 		previous = current;
@@ -76,11 +93,10 @@ int main()
 					window.close();
 				break;
 			}
-			sceneHandler->handleInput(window, windowEvent);
+			windowEvents.push_back(windowEvent);
 		}
-		
-		
 
+		sceneHandler->handleInput(window, windowEvents);
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)
 		{
@@ -88,12 +104,21 @@ int main()
 			sceneHandler->update();
 
 			lag -= MS_PER_UPDATE;
+			loop++;
+			if (loop == 1000/ MS_PER_UPDATE) {
+				loop = 0;
+				FPS->setString(to_string(frameCount));
+				frameCount = 0;
+			}
 		}
 
 		//Zeichnen der Objekte
 		window.clear();
 		sceneHandler->render(window, RenderStates());
+		window.draw(*FPS);
+		frameCount++;
 		window.display();	
+		
 	}
 
 	return 0;
