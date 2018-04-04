@@ -55,11 +55,13 @@ void SceneStartMenu::buttonStartAction()
 {
 	this->getSceneHandler()->addScene(new GameOfLife("GOL", this->getSceneHandler(), this->window), true);
 	this->visible = UPDATABLE;
+	this->getSceneHandler()->addScene(new SceneGame("SnakeGame", this->getSceneHandler(), Vector2u(20,20), 4), ALL);
+	this->visible = UPDATABLE;
 }
 
 void SceneStartMenu::buttonOptionAction()
 {
-	this->getSceneHandler()->addScene(new SceneOption("Option", this->getSceneHandler()), true);
+	this->getSceneHandler()->addScene(new SceneOption("Option", this->getSceneHandler()), ALL);
 	this->visible = UPDATABLE;
 }
 

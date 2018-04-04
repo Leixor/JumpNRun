@@ -17,8 +17,7 @@
 using namespace std;
 using namespace sf;
 
-
-enum visibilityFlags {
+enum eVisibilityFlags {
 	NONE = 0,
 	VISIBLE = 1,
 	UPDATABLE = 2,
@@ -26,7 +25,7 @@ enum visibilityFlags {
 	ALL = 7
 };
 
-enum orientation {
+enum eOrientation {
 	MIDDLE = 0,
 	LEFT = 1,
 	RIGHT = 2,
@@ -41,6 +40,7 @@ enum orientation {
 #include "DrawableShape.h"
 #include "AlignHelper.h"
 using namespace AlignHelper;
+
 //Grundbausteine der Subklassen
 #include "ObjectBase.h"
 #include "Scene.h"
@@ -51,6 +51,7 @@ using namespace AlignHelper;
 #include "CheckBox.h"
 #include "SceneOption.h"
 #include "SceneStartMenu.h"
+#include "SceneGame.h"
 #include "GameOfLife.h"
 
 

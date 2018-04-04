@@ -20,7 +20,9 @@ public:
 	~ObjectBase()
 	{}
 
-	virtual bool handleInput(RenderWindow& window, vector<Event>& windowEvent)
+	virtual void handleInputs(RenderWindow& window)
+	{}
+	virtual bool handleEvents(RenderWindow& window, Event windowEvent)
 	{
 		return false;
 	}

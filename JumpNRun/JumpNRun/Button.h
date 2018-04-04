@@ -6,7 +6,7 @@ public:
 	Button(function<void(void)> buttonAction, DrawableObject* buttonShape);
 	~Button();
 
-	virtual bool handleInput(RenderWindow& window, vector<Event>& windowEvent);
+	virtual bool handleEvents(RenderWindow& window, Event windowEvent);
 
 protected:
 	function<void(void)> buttonAction;

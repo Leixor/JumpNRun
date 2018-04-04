@@ -9,18 +9,15 @@ Button::~Button()
 {
 }
 
-bool Button::handleInput(RenderWindow& window, vector<Event>& windowEvent)
+bool Button::handleEvents(RenderWindow & window, Event windowEvent)
 {
-	for (int i = 0; i < windowEvent.size(); i++) {
-
-		switch (windowEvent[i].type)
-		{
-			case Event::MouseButtonPressed:
-				return this->checkMouseButtonCollision(window);
-				break;
-		}
-		return false;
+	switch (windowEvent.type)
+	{
+	case Event::MouseButtonPressed:
+		return this->checkMouseButtonCollision(window);
+		break;
 	}
+	return false;
 }
 
 bool Button::checkMouseButtonCollision(RenderWindow & window)
