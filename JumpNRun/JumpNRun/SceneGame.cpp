@@ -8,7 +8,6 @@ SceneGame::SceneGame(string name, SceneHandler * sceneHandler, Vector2u size, in
 	:Scene(name, sceneHandler), size(size), partCount(partCount)
 {
 	this->setupResources();
-	this->updateCount = 0;
 	this->snakeDirection = LEFT;
 	this->snakeDirectionNew = LEFT;
 	this->gameFinished = false;
@@ -62,6 +61,8 @@ bool SceneGame::setupResources()
 		this->objects.get("Snake" + to_string(i))->shape->setOutlineColor(Color::White);
 	}
 
+	this->objects.get("Snake0")->shape->setOutlineColor(Color::Red);
+
 	return false;
 }
 
@@ -71,64 +72,59 @@ void SceneGame::update()
 	{
 		float partSizeX = float(PITCH) / float(size.x);
 		float partSizeY = float(PITCH) / float(size.y);
-
 		
-		
-		Vector2f oldPos = this->snakeBody.at(0)->shape->getPosition();
+		Vector2f nextPos;
 
+		//Berechne NeuePos
 		if (snakeDirectionNew == LEFT)
 		{
 			snakeDirection = LEFT;
 
-			Vector2f nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x - partSizeX, this->snakeBody.at(0)->shape->getPosition().y);
-			if (POSX > nextPos.x)
-				this->gameFinished = true;
-			else
-				this->snakeBody.at(0)->shape->setPosition(nextPos);
+			nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x - partSizeX, this->snakeBody.at(0)->shape->getPosition().y);
 		}
 		else if (snakeDirectionNew == RIGHT)
 		{
 			snakeDirection = RIGHT;
 
-			Vector2f nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x + partSizeX, this->snakeBody.at(0)->shape->getPosition().y);
-			if ((POSX + PITCH) <= nextPos.x)
-				this->gameFinished = true;
-			else
-				this->snakeBody.at(0)->shape->setPosition(nextPos);
+			nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x + partSizeX, this->snakeBody.at(0)->shape->getPosition().y);
 		}
 		else if (snakeDirectionNew == TOP)
 		{
 			snakeDirection = TOP;
 
-			Vector2f nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x, this->snakeBody.at(0)->shape->getPosition().y - partSizeY);
-			if (POSY > nextPos.y)
-				this->gameFinished = true;
-			else
-				this->snakeBody.at(0)->shape->setPosition(nextPos);
+			nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x, this->snakeBody.at(0)->shape->getPosition().y - partSizeY);
 		}
 		else if (snakeDirectionNew == BOTTOM)
 		{
 			snakeDirection = BOTTOM;
 
-			Vector2f nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x, this->snakeBody.at(0)->shape->getPosition().y + partSizeY);
-			if ((POSY + PITCH) <= nextPos.y)
-				this->gameFinished = true;
-			else
-				this->snakeBody.at(0)->shape->setPosition(nextPos);
+			nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x, this->snakeBody.at(0)->shape->getPosition().y + partSizeY);
 		}
 
-		if (!gameFinished)
+		//Collisionsabfragen
+		for (int i = this->snakeBody.size() - 2; i > 0; i--)
 		{
-			for (int i = this->snakeBody.size() - 1; i > 1; i--)
+			if (this->snakeBody.at(i)->shape->getPosition() == nextPos)
 			{
-				this->snakeBody.at(i)->shape->setPosition(this->snakeBody.at(i - 1)->shape->getPosition());
+				this->gameFinished = true;
+				return;
 			}
+		}
+		
+		if ((POSX > nextPos.x) || ((POSX + PITCH) <= nextPos.x) || ((POSY + PITCH) <= nextPos.y) || (POSY > nextPos.y))
+		{
+			this->gameFinished = true;
+			return;
+		}
+		
+		//Bewegung der Snake
+		
 
-			this->snakeBody.at(1)->shape->setPosition(oldPos);
+		for (int i = this->snakeBody.size() - 1; i > 0; i--)
+		{
+			this->snakeBody.at(i)->shape->setPosition(this->snakeBody.at(i - 1)->shape->getPosition());
 		}
 
-		this->updateCount = 0;
+		this->snakeBody.at(0)->shape->setPosition(nextPos);
 	}
-	else
-		this->updateCount++;
 }

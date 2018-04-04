@@ -17,7 +17,6 @@ private:
 	eOrientation snakeDirectionNew;
 	bool gameFinished;
 	int partCount;
-	int updateCount;
 
 	vector<ObjectBase*> snakeBody;
 };

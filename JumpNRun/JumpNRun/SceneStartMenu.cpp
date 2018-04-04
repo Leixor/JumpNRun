@@ -61,7 +61,7 @@ bool SceneStartMenu::setupResources()
 
 void SceneStartMenu::buttonStartAction()
 {
-	this->getSceneHandler()->addScene(new SceneGame("SnakeGame", this->getSceneHandler(), Vector2u(20,20), 3), ALL);
+	this->getSceneHandler()->addScene(new SceneGame("SnakeGame", this->getSceneHandler(), Vector2u(20,20), 4), ALL);
 	this->visible = UPDATABLE;
 }
 
