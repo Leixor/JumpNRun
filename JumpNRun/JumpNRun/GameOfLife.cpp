@@ -155,7 +155,7 @@ void GameOfLife::handleEvents(RenderWindow & window, Event windowEvent)
 	}
 }
 
-void GameOfLife::render(RenderWindow& window, RenderStates shades) {
+void GameOfLife::render(RenderWindow& window, RenderStates shades, float timeTillUpdate) {
 	
 	background->draw(window, shades);
 	// Das richtige Gamefield anzeigen

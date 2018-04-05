@@ -15,7 +15,7 @@ public:
 	void update();
 	void handleInputs(RenderWindow& window);
 	void handleEvents(RenderWindow & window, Event windowEvent);
-	void render(RenderWindow& window, RenderStates shades);
+	void render(RenderWindow& window, RenderStates shades, float timeTillUpdate);
 
 private:
 	Font * font;
