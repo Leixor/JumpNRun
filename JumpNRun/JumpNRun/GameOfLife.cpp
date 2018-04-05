@@ -14,6 +14,7 @@ GameOfLife::~GameOfLife()
 
 bool GameOfLife::setupResources()
 {
+	updateRate = 100;
 	// Standard Gamestate angeben
 	gameState = SETUPSIZE;
 
@@ -27,7 +28,7 @@ bool GameOfLife::setupResources()
 	cellSize = window->getSize().x / (float)gridSize;
 
 	// UI adden
-	background = new ShapeRectangle(1920, 1080, Color::White);
+	background = new ShapeRectangle(1600, 900, Color::White);
 	addResource("+size", new Button([&] {plusGridSize(); }, new ShapeSprite("Textures/plus.png", .1f)));
 	addResource("-size", new Button([&] {minusGridSize(); }, new ShapeSprite("Textures/minus.png", .1f)));
 	gridSizeText = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
@@ -36,7 +37,7 @@ bool GameOfLife::setupResources()
 	gridSizeText->setTextSize(40);
 	gridSizeText->objectText->setFillColor(Color::Black);
 	alignTo(*objects.get("-size")->shape, *background, BOTTOM | LEFT);
-	objects.get("-size")->shape->move(Vector2f(100, -100));
+	objects.get("-size")->shape->move(Vector2f(20, -20));
 	alignNextTo(*gridSizeText->objectText, *objects.get("-size")->shape, RIGHT);
 	alignNextTo(*objects.get("+size")->shape, *gridSizeText->objectText, RIGHT);
 
@@ -48,15 +49,19 @@ bool GameOfLife::setupResources()
 
 	alignNextTo(*generationText->objectText, *objects.get("+size")->shape, RIGHT, 100);
 
-	proto = new ShapeRectangle(Vector2f(cellSize, cellSize), CELLCOLOR);
+	rect = new ShapeRectangle(Vector2f(cellSize, cellSize), CELLCOLOR);
+	sprit = new ShapeSprite("Textures/plus.png", Vector2f(cellSize, cellSize));
+
+	proto = sprit;
 
 	return false;
 }
 
 void GameOfLife::update()
 {
-	Scene::update();
-	switch (gameState) {
+	if (updateCount >= updateRate / 10) {
+		Scene::update();
+		switch (gameState) {
 		case SETUPFIELD:
 			setupField();
 			break;
@@ -66,9 +71,11 @@ void GameOfLife::update()
 			break;
 		case PAUSED:
 			break;
+		}
+		generationText->setText("Generation: " + to_string(generation));
+		updateCount = 0;
 	}
-
-	generationText->setText("Generation: " + to_string(generation));
+	updateCount++;
 }
 
 void GameOfLife::handleInputs(RenderWindow& window)
@@ -112,6 +119,17 @@ void GameOfLife::handleInputs(RenderWindow& window)
 		gameState = SETUPSIZE;
 		gameField.clear();
 	}
+	if (Keyboard::isKeyPressed(Keyboard::Key::Right)) {
+		
+		proto = rect;
+		proto->setSize(Vector2f(cellSize, cellSize));
+	}
+	if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
+
+		proto = sprit;
+		proto->setSize(Vector2f(cellSize, cellSize));
+	}
+	
 	if (Keyboard::isKeyPressed(Keyboard::Key::O)) {
 		this->getSceneHandler()->setTopScene("SnakeGame");
 		this->getSceneHandler()->getSceneByName("SnakeGame")->visible = ALL;
@@ -120,7 +138,24 @@ void GameOfLife::handleInputs(RenderWindow& window)
 	}
 }
 
-void GameOfLife::render(RenderWindow& window, RenderStates shades, float timeTillUpdate) {
+void GameOfLife::handleEvents(RenderWindow & window, Event windowEvent)
+{
+	Scene::handleEvents(window, windowEvent);
+	if (windowEvent.type == Event::KeyPressed) {
+		if (Keyboard::isKeyPressed(Keyboard::Key::Up)) {
+
+			updateRate -= 10;
+			updateCount = 0;
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Key::Down)) {
+
+			updateRate += 10;
+			updateCount = 0;
+		}
+	}
+}
+
+void GameOfLife::render(RenderWindow& window, RenderStates shades) {
 	
 	background->draw(window, shades);
 	// Das richtige Gamefield anzeigen
@@ -145,7 +180,10 @@ void GameOfLife::plusGridSize()
 		gridSize++;
 		sizeText = to_string(gridSize) + " x " + to_string(gridSize);
 		gridSizeText->setText(sizeText);
-		cellSize = window->getSize().x / (float)gridSize;
+		cellSize = (float)window->getSize().x / (float)gridSize;
+		
+		cout << cellSize << "\n";
+		
 		proto->setSize(Vector2f(cellSize, cellSize));
 	}
 }
@@ -155,9 +193,14 @@ void GameOfLife::minusGridSize()
 	if (gameState & SETUPSIZE)
 	{
 		gridSize--;
+
 		sizeText = to_string(gridSize) + " x " + to_string(gridSize);
 		gridSizeText->setText(sizeText);
-		cellSize = window->getSize().x / (float)gridSize;
+
+		cellSize = (float)window->getSize().x / (float)gridSize;
+
+		cout << cellSize << "\n";
+
 		proto->setSize(Vector2f(cellSize, cellSize));
 	}
 }

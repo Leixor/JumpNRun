@@ -14,7 +14,8 @@ public:
 	bool setupResources();
 	void update();
 	void handleInputs(RenderWindow& window);
-	void render(RenderWindow& window, RenderStates shades, float timeTillUpdate);
+	void handleEvents(RenderWindow & window, Event windowEvent);
+	void render(RenderWindow& window, RenderStates shades);
 
 private:
 	Font * font;
@@ -24,10 +25,13 @@ private:
 	float cellSize;
 	string sizeText;
 	ObjectBase* gridSizeText;
-	ShapeRectangle* proto;
+
+	DrawableObject* proto;
+	ShapeRectangle* rect;
+	ShapeSprite* sprit;
 
 	ObjectBase* generationText;
-	ShapeRectangle* background;
+	DrawableObject* background;
 	int generation;
 
 	void plusGridSize();
@@ -37,5 +41,9 @@ private:
 	void determineState();
 
 	int gameState;
+
+
+	int updateCount;
+	int updateRate;
 };
 
