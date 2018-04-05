@@ -8,12 +8,9 @@
 SceneSnakeGame::SceneSnakeGame(string name, SceneHandler * sceneHandler, Vector2u size, int partCount)
 	:Scene(name, sceneHandler), cellCount(size), partCount(partCount)
 {
+	font = new Font();
+	this->font->loadFromFile("Textures/cool.ttf");
 	this->setupResources();
-	this->snakeDirection = LEFT;
-	this->snakeDirectionNew = LEFT;
-	this->gameFinished = false;
-	
-	this->setupFood();
 }
 
 SceneSnakeGame::~SceneSnakeGame()
@@ -40,6 +37,12 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 	else if (Keyboard::isKeyPressed(Keyboard::S) && this->snakeDirection != TOP)
 		this->snakeDirectionNew = BOTTOM;
 
+	if (Keyboard::isKeyPressed(Keyboard::R))
+	{
+		this->setupResources();
+		this->objects.get("Finished")->textVisible = NONE;
+	}
+
 	if (Keyboard::isKeyPressed(Keyboard::I))
 	{
 		this->visible = NONE;
@@ -56,9 +59,11 @@ void SceneSnakeGame::render(RenderWindow & window, RenderStates shades, float ti
 
 bool SceneSnakeGame::setupResources()
 {
+	this->objects.clear();
+	this->snakeBody.clear();
+
 	addObject("Background", new ShapeRectangle(FloatRect(POSX, POSY, PITCH, PITCH), Color::Black, float(PITCH)/float(50), Color::White));
-
-
+	
 	float partSizeX = float(PITCH) / float(cellCount.x);
 	float partSizeY = float(PITCH) / float(cellCount.y);
 
@@ -73,8 +78,6 @@ bool SceneSnakeGame::setupResources()
 	this->snakeFood = addObject("Food", new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Black, THICKNESS, Color::Cyan));
 
 	// Scorecounter Setup
-	font = new Font();
-	this->font->loadFromFile("Textures/cool.ttf");
 	score = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
 	score->shapeVisible = NONE;
 	score->addText("Score: " + to_string(scoreCount), *font);
@@ -82,6 +85,20 @@ bool SceneSnakeGame::setupResources()
 	score->objectText->setFillColor(Color::White);
 
 	alignNextTo(*score->objectText, *objects.get("Background")->shape, RIGHT, 100);
+
+	// Nachricht wenn du gestorben bist
+	addObject("Finished", new ShapeRectangle(FloatRect(POSX + PITCH / 2 - 40, POSY + PITCH / 2 - 40, 40, 40)));
+	this->objects.get("Finished")->addText("Press R to Restart", *font);
+	alignTo(*objects.get("Finished")->objectText, *objects.get("Background")->shape);
+	this->objects.get("Finished")->textVisible = NONE;
+
+	// Werte setzen
+	this->snakeDirection = LEFT;
+	this->snakeDirectionNew = LEFT;
+	this->gameFinished = false;
+	this->scoreCount = 0;
+
+	this->setupFood();
 
 	return false;
 }
@@ -126,6 +143,7 @@ void SceneSnakeGame::update()
 			if (this->snakeBody.at(i)->shape->getPosition() == nextPos)
 			{
 				this->gameFinished = true;
+				this->objects.get("Finished")->textVisible = ALL;
 				return;
 			}
 		}
@@ -133,6 +151,7 @@ void SceneSnakeGame::update()
 		if ((POSX > nextPos.x) || ((POSX + PITCH) <= nextPos.x) || ((POSY + PITCH) <= nextPos.y) || (POSY > nextPos.y))
 		{
 			this->gameFinished = true;
+			this->objects.get("Finished")->textVisible = ALL;
 			return;
 		}
 

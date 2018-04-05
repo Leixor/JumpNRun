@@ -29,6 +29,11 @@ public:
 		return objects.size();
 	}
 
+	void clear()
+	{
+		objects.clear();
+	}
+
 	unsigned int getIndex(Iterator iterator)
 	{
 		for (unsigned int i = 0; i < objects.size(); i++)
