@@ -55,8 +55,8 @@ int main()
 	Text* FPS = new Text();
 	FPS->setFont(*font);
 	FPS->setString(to_string(frameCount));
-	FPS->setCharacterSize(50);
-	FPS->setFillColor(Color::Red);
+	FPS->setCharacterSize(20);
+	FPS->setFillColor(Color::Cyan);
 
 	while (window.isOpen())
 	{
@@ -100,12 +100,6 @@ int main()
 			}
 
 			lag -= MS_PER_UPDATE;
-			loop++;
-			if (loop == 1000/ MS_PER_UPDATE) {
-				loop = 0;
-				FPS->setString(to_string(frameCount));
-				frameCount = 0;
-			}
 		}
 
 		//Zeichnen der Objekte

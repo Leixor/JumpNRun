@@ -4,15 +4,14 @@
 #include <mutex>
 #include <stdio.h>
 #include <tchar.h>
-
+#include <thread>
+#include <chrono>
+#include <random>
 
 #include <SFML\Graphics.hpp>
 #include "AnimatedSprite.hpp"
 
 #include <Windows.h>
-
-#include <thread>
-#include <chrono>
 
 using namespace std;
 using namespace sf;
@@ -54,7 +53,7 @@ using namespace AlignHelper;
 #include "CheckBox.h"
 #include "SceneOption.h"
 #include "SceneStartMenu.h"
-#include "SceneGame.h"
+#include "SceneSnakeGame.h"
 #include "GameOfLife.h"
 
 

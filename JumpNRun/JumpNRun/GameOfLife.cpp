@@ -70,7 +70,7 @@ void GameOfLife::handleInputs(RenderWindow& window)
 				for (int j = 0; j < gridSize; j++) {
 					Cell.left = cellSize * i;
 					Cell.top = cellSize * j;
-					if (Cell.contains(Vector2f(mousePos.x, mousePos.y)) && !gameField[i][j]) {
+					if (Cell.contains(Vector2f(float(mousePos.x), float(mousePos.y))) && !gameField[i][j]) {
 						gameField[j][i] = true;
 					}
 				}
@@ -96,7 +96,9 @@ void GameOfLife::handleInputs(RenderWindow& window)
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::O)) {
 		this->getSceneHandler()->setTopScene("SnakeGame");
+		this->getSceneHandler()->getSceneByName("SnakeGame")->visible = ALL;
 		this->visible = UPDATABLE;
+		
 	}
 }
 

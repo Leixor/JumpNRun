@@ -166,7 +166,7 @@
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneGame.cpp" />
+    <ClCompile Include="SceneSnakeGame.cpp" />
     <ClCompile Include="SceneHandler.cpp" />
     <ClCompile Include="SceneOption.cpp" />
     <ClCompile Include="SceneStartMenu.cpp" />
@@ -184,7 +184,7 @@
     <ClInclude Include="GameOfLife.h" />
     <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneGame.h" />
+    <ClInclude Include="SceneSnakeGame.h" />
     <ClInclude Include="SceneHandler.h" />
     <ClInclude Include="SceneOption.h" />
     <ClInclude Include="SceneStartMenu.h" />
