@@ -27,16 +27,13 @@ bool GameOfLife::setupResources()
 	cellSize = window->getSize().x / (float)gridSize;
 
 	// UI adden
-	addResource<ObjectBase*>("Background", new Button([&] {plusGridSize(); }, new DrawableShape<RectangleShape>(Vector2f(1600,900), Vector2f(0,0))));
-	objects.get("Background")->shape->setFillColor(Color::Black);
-	addResource<Button*>("+size", new Button([&] {plusGridSize(); }, new DrawableShape<Sprite>("Textures/plus.png")));
-	addResource<Button*>("-size", new Button([&] {minusGridSize(); }, new DrawableShape<Sprite>("Textures/minus.png")));
-	gridSizeText = addResource<ObjectBase*>("GridSizeText", new ObjectBase(new DrawableShape<RectangleShape>(Vector2f(200, 100), Vector2f(0, 0))));
+	addObject("Background", new ShapeRectangle(1600, 900, Color::Black));
+	addResource("+size", new Button([&] {plusGridSize(); }, new ShapeSprite("Textures/plus.png")));
+	addResource("-size", new Button([&] {minusGridSize(); }, new ShapeSprite("Textures/minus.png")));
+	gridSizeText = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
 	gridSizeText->shapeVisible = NONE;
 	gridSizeText->addText(sizeText, *font);
 	gridSizeText->setTextSize(40);
-	objects.get("-size")->shape->scale(Vector2f(.2f, .2f));
-	objects.get("+size")->shape->scale(Vector2f(.2f, .2f));
 	alignTo(*objects.get("-size")->shape, *objects.get("Background")->shape, BOTTOM | LEFT);
 	objects.get("-size")->shape->move(Vector2f(100, -100));
 	alignNextTo(*gridSizeText->objectText, *objects.get("-size")->shape, RIGHT);

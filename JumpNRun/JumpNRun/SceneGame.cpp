@@ -62,7 +62,7 @@ bool SceneGame::setupResources()
 	}
 
 	this->objects.get("Snake0")->shape->setOutlineColor(Color::Red);
-
+	
 	return false;
 }
 

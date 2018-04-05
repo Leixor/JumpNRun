@@ -15,18 +15,17 @@ bool SceneStartMenu::setupResources()
 	font = new Font();
 	this->font->loadFromFile("Textures/cool.ttf");
 	
-	addResource<ObjectBase*>("Background", new ObjectBase(new DrawableShape<RectangleShape>(Vector2f(1600,900), Vector2f(0,0))));
-	this->objects.get("Background")->shape->setFillColor(Color::Black);
+	addObject("Background", new ShapeRectangle(1600, 900, Color::Black));
 
-	startButton = addResource<Button*>("Button_Start", new Button([&] {buttonStartAction();},new DrawableShape<Sprite>("Textures/blueButton.png", Vector2f(0,0), Vector2f(1.5f, 1.5f))));
+	startButton = addResource<Button*>("Button_Start", new Button([&] {buttonStartAction();}, new ShapeSprite("Textures/blueButton.png", 1.5f)));
 	this->objects.get("Button_Start")->addText("Start", *this->font);
 	this->objects.get("Button_Start")->setTextSize(50);
 	
-	optionButton = addResource<Button*>("Button_Option", new Button([&] {buttonOptionAction(); }, new DrawableShape<Sprite>("Textures/blueButton.png", Vector2f(0, 0), Vector2f(1.5f, 1.5f))));
+	optionButton = addResource<Button*>("Button_Option", new Button([&] {buttonOptionAction(); }, new ShapeSprite("Textures/blueButton.png", 1.5f)));
 	this->objects.get("Button_Option")->addText("Optionen", *this->font);
 	this->objects.get("Button_Option")->setTextSize(50);
 
-	endButton = addResource<Button*>("Button_End", new Button([&] {buttonEndAction(); }, new DrawableShape<Sprite>("Textures/blueButton.png", Vector2f(0, 0), Vector2f(1.5f, 1.5f))));
+	endButton = addResource<Button*>("Button_End", new Button([&] {buttonEndAction(); }, new ShapeSprite("Textures/blueButton.png", 1.5f)));
 	this->objects.get("Button_End")->addText("Beenden", *this->font);
 	this->objects.get("Button_End")->setTextSize(50);
 	

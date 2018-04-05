@@ -170,6 +170,9 @@
     <ClCompile Include="SceneHandler.cpp" />
     <ClCompile Include="SceneOption.cpp" />
     <ClCompile Include="SceneStartMenu.cpp" />
+    <ClCompile Include="ShapeCircle.cpp" />
+    <ClCompile Include="ShapeRectangle.cpp" />
+    <ClCompile Include="ShapeSprite.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +188,9 @@
     <ClInclude Include="SceneHandler.h" />
     <ClInclude Include="SceneOption.h" />
     <ClInclude Include="SceneStartMenu.h" />
+    <ClInclude Include="ShapeCircle.h" />
+    <ClInclude Include="ShapeRectangle.h" />
+    <ClInclude Include="ShapeSprite.h" />
     <ClInclude Include="standardInclude.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UnorderdMap.h" />

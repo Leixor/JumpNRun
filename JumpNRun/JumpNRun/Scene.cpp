@@ -52,3 +52,12 @@ SceneHandler * Scene::getSceneHandler() const
 	return this->sceneHandler;
 }
 
+ObjectBase* Scene::addObject(string name, DrawableObject * toAdd)
+{
+	ObjectBase* tmp = new ObjectBase(toAdd);
+	objects.push(name, tmp);
+	return tmp;
+}
+
+
+

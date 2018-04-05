@@ -25,6 +25,10 @@ public:
 		objects.push(name, toAdd);
 		return toAdd;
 	}
+
+	ObjectBase* addObject(string name, DrawableObject* toAdd);
+
+
 	// Scenespezifische Variablen
 	int visible;
 

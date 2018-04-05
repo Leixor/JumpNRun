@@ -4,15 +4,7 @@
 class ObjectBase
 {
 public:
-	ObjectBase(Drawable& buttonShape) :shapeVisible(ALL), textVisible(NONE)
-	{
-		if(typeid(buttonShape).operator==(typeid(RectangleShape)))
-			shape = new DrawableShape<RectangleShape>();
-		else if(typeid(buttonShape).operator==(typeid(CircleShape)))
-			shape = new DrawableShape<CircleShape>();
-		else
-			shape = new DrawableShape<Sprite>();
-	}
+	
 	ObjectBase(DrawableObject* buttonShape) :shapeVisible(ALL), textVisible(NONE)
 	{
 		shape = buttonShape;

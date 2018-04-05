@@ -3,7 +3,7 @@
 
 // Merken : https://www.sfml-dev.org/tutorials/2.0/graphics-vertex-array.php
 
-#define MS_PER_UPDATE 160
+#define MS_PER_UPDATE 50
 
 Int64 getCurrentTime()
 {

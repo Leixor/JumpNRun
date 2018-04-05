@@ -5,8 +5,6 @@ template <class DrawableType> class DrawableShape : public DrawableObject
 {
 public:
 	DrawableShape();
-	DrawableShape(Vector2f size, Vector2f position);
-	DrawableShape(string textureName, Vector2f position = Vector2f(0, 0), Vector2f scale = Vector2f(1.0f, 1.0f), bool inSize = false);
 	~DrawableShape();
 
 	void draw(RenderWindow& window, RenderStates shader);
@@ -46,27 +44,6 @@ public:
 template<class DrawableType>
 inline DrawableShape<DrawableType>::DrawableShape() : shape(new DrawableType())
 {
-}
-
-template<class DrawableType>
-inline DrawableShape<DrawableType>::DrawableShape(Vector2f size, Vector2f position)
-{
-	shape = new DrawableType();
-	this->setSize(size);
-	this->setPosition(position);
-}
-
-inline DrawableShape<Sprite>::DrawableShape(string textureName, Vector2f position, Vector2f scale, bool inSize)
-{
-	shape = new Sprite();
-	this->setPosition(position);
-	this->setTexture(textureName);
-	if (!inSize) {
-		this->setScale(scale);
-	}
-	else {
-		this->setSize(scale);
-	}
 }
 
 template<class DrawableType>

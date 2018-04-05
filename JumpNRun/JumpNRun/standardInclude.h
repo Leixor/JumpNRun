@@ -38,6 +38,9 @@ enum eOrientation {
 #include "Timer.h"
 #include "DrawableObject.h"
 #include "DrawableShape.h"
+#include "ShapeRectangle.h"
+#include "ShapeCircle.h"
+#include "ShapeSprite.h"
 #include "AlignHelper.h"
 using namespace AlignHelper;
 
