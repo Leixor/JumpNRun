@@ -2,12 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Scene.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneHandler.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="SceneOption.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
@@ -21,13 +15,13 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ShapeRectangle.cpp">
-      <Filter>DrawableShapes</Filter>
+      <Filter>Objects\DrawableShapes</Filter>
     </ClCompile>
     <ClCompile Include="ShapeSprite.cpp">
-      <Filter>DrawableShapes</Filter>
+      <Filter>Objects\DrawableShapes</Filter>
     </ClCompile>
     <ClCompile Include="ShapeCircle.cpp">
-      <Filter>DrawableShapes</Filter>
+      <Filter>Objects\DrawableShapes</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>Objects</Filter>
@@ -41,14 +35,14 @@
     <ClCompile Include="Timer.cpp">
       <Filter>ExtraClasses</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scenes\SceneStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneHandler.cpp">
+      <Filter>Scenes\SceneStuff</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Scene.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneHandler.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="SceneOption.h">
       <Filter>Scenes</Filter>
     </ClInclude>
@@ -62,19 +56,19 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ShapeCircle.h">
-      <Filter>DrawableShapes</Filter>
+      <Filter>Objects\DrawableShapes</Filter>
     </ClInclude>
     <ClInclude Include="ShapeRectangle.h">
-      <Filter>DrawableShapes</Filter>
+      <Filter>Objects\DrawableShapes</Filter>
     </ClInclude>
     <ClInclude Include="ShapeSprite.h">
-      <Filter>DrawableShapes</Filter>
+      <Filter>Objects\DrawableShapes</Filter>
     </ClInclude>
     <ClInclude Include="DrawableShape.h">
-      <Filter>DrawableShapes</Filter>
+      <Filter>Objects\DrawableShapes</Filter>
     </ClInclude>
     <ClInclude Include="DrawableObject.h">
-      <Filter>DrawableShapes</Filter>
+      <Filter>Objects\DrawableShapes</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Objects</Filter>
@@ -97,11 +91,14 @@
     <ClInclude Include="Timer.h">
       <Filter>ExtraClasses</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scenes\SceneStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneHandler.h">
+      <Filter>Scenes\SceneStuff</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="DrawableShapes">
-      <UniqueIdentifier>{608dd723-48d7-4260-b258-0ba364c44c20}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{71b0a76c-a4c3-40fe-a063-ad707663a9fb}</UniqueIdentifier>
     </Filter>
@@ -110,6 +107,12 @@
     </Filter>
     <Filter Include="ExtraClasses">
       <UniqueIdentifier>{922f778e-bbc3-4c1e-80a4-29cc780dab98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\DrawableShapes">
+      <UniqueIdentifier>{608dd723-48d7-4260-b258-0ba364c44c20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\SceneStuff">
+      <UniqueIdentifier>{aabd034f-4d77-433d-8c10-9957bcdd317c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

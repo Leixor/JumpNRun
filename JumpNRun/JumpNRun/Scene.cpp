@@ -3,7 +3,9 @@
 Scene::Scene(string Name, SceneHandler * sceneHandler, RenderWindow* window, int visible)
 	: sceneName(Name), sceneHandler(sceneHandler), window(window), visible(visible)
 {
-
+	updateSync = false; 
+	updateCount = 1;
+	updateRate = 10;
 }
 
 Scene::~Scene()
@@ -29,9 +31,19 @@ void Scene::handleEvents(RenderWindow & window, Event windowEvent)
 
 void Scene::update()
 {
-	for (unsigned int i = 0; i < this->objects.size(); i++)
+	if (updateCount >= updateRate / MS_PER_UPDATE)
 	{
-		objects.get(i)->update();
+		for (unsigned int i = 0; i < this->objects.size(); i++)
+		{
+			objects.get(i)->update();
+		}
+		updateCount = 1;
+		updateSync = true;
+	}
+	else
+	{
+		updateCount++;
+		updateSync = false;
 	}
 }
 

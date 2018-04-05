@@ -1,5 +1,4 @@
 #pragma once
-
 #include <iostream>
 #include <mutex>
 #include <stdio.h>
@@ -55,6 +54,10 @@ using namespace AlignHelper;
 #include "SceneStartMenu.h"
 #include "SceneSnakeGame.h"
 #include "GameOfLife.h"
+
+#define MS_PER_UPDATE 10
+#define WINDOW_SIZE_X 1600
+#define WINDOW_SIZE_Y 900
 
 
 

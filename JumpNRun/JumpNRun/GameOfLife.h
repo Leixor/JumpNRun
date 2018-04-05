@@ -41,9 +41,5 @@ private:
 	void determineState();
 
 	int gameState;
-
-
-	int updateCount;
-	int updateRate;
 };
 

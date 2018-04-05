@@ -3,8 +3,6 @@
 
 // Merken : https://www.sfml-dev.org/tutorials/2.0/graphics-vertex-array.php
 
-#define MS_PER_UPDATE 10
-
 Int64 getCurrentTime()
 {
 	chrono::milliseconds ms = chrono::duration_cast<chrono::milliseconds>(
@@ -21,7 +19,7 @@ int main()
 	Es können noch weitere Parameter übergeben werden, die dafür verantwortlich sind, 
 	ob das Fenster keinen CloseKnopf hat, nicht größenveränderbar ist...
 	*/
-	RenderWindow window(VideoMode(1600, 900), "Snake");// , Style::Fullscreen);
+	RenderWindow window(VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "Snake");// , Style::Fullscreen);
 	SceneHandler *sceneHandler = new SceneHandler();
 
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden

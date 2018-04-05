@@ -97,6 +97,7 @@ bool SceneSnakeGame::setupResources()
 	this->snakeDirectionNew = LEFT;
 	this->gameFinished = false;
 	this->scoreCount = 0;
+	this->updateRate = 150;
 
 	this->setupFood();
 
@@ -105,75 +106,81 @@ bool SceneSnakeGame::setupResources()
 
 void SceneSnakeGame::update()
 {
-	if (!gameFinished)
+	Scene::update();
+
+	if (this->getUpdateSync())
 	{
-		float partSizeX = float(PITCH) / float(cellCount.x);
-		float partSizeY = float(PITCH) / float(cellCount.y);
-
-		Vector2f nextPos;
-		//Berechne NeuePos
-		if (snakeDirectionNew == LEFT)
+		if (!gameFinished)
 		{
-			snakeDirection = LEFT;
+			float partSizeX = float(PITCH) / float(cellCount.x);
+			float partSizeY = float(PITCH) / float(cellCount.y);
 
-			nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x - partSizeX, this->snakeBody.at(0)->shape->getPosition().y);
-		}
-		else if (snakeDirectionNew == RIGHT)
-		{
-			snakeDirection = RIGHT;
+			Vector2f nextPos;
+			//Berechne NeuePos
+			if (snakeDirectionNew == LEFT)
+			{
+				snakeDirection = LEFT;
 
-			nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x + partSizeX, this->snakeBody.at(0)->shape->getPosition().y);
-		}
-		else if (snakeDirectionNew == TOP)
-		{
-			snakeDirection = TOP;
+				nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x - partSizeX, this->snakeBody.at(0)->shape->getPosition().y);
+			}
+			else if (snakeDirectionNew == RIGHT)
+			{
+				snakeDirection = RIGHT;
 
-			nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x, this->snakeBody.at(0)->shape->getPosition().y - partSizeY);
-		}
-		else if (snakeDirectionNew == BOTTOM)
-		{
-			snakeDirection = BOTTOM;
+				nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x + partSizeX, this->snakeBody.at(0)->shape->getPosition().y);
+			}
+			else if (snakeDirectionNew == TOP)
+			{
+				snakeDirection = TOP;
 
-			nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x, this->snakeBody.at(0)->shape->getPosition().y + partSizeY);
-		}
+				nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x, this->snakeBody.at(0)->shape->getPosition().y - partSizeY);
+			}
+			else if (snakeDirectionNew == BOTTOM)
+			{
+				snakeDirection = BOTTOM;
 
-		//Collisionsabfragen
-		for (int i = this->snakeBody.size() - 2; i > 0; i--)
-		{
-			if (this->snakeBody.at(i)->shape->getPosition() == nextPos)
+				nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x, this->snakeBody.at(0)->shape->getPosition().y + partSizeY);
+			}
+
+			//Collisionsabfragen
+			for (int i = this->snakeBody.size() - 2; i > 0; i--)
+			{
+				if (this->snakeBody.at(i)->shape->getPosition() == nextPos)
+				{
+					this->gameFinished = true;
+					this->objects.get("Finished")->textVisible = ALL;
+					return;
+				}
+			}
+
+			if ((POSX > nextPos.x) || ((POSX + PITCH) <= nextPos.x) || ((POSY + PITCH) <= nextPos.y) || (POSY > nextPos.y))
 			{
 				this->gameFinished = true;
 				this->objects.get("Finished")->textVisible = ALL;
 				return;
 			}
-		}
 
-		if ((POSX > nextPos.x) || ((POSX + PITCH) <= nextPos.x) || ((POSY + PITCH) <= nextPos.y) || (POSY > nextPos.y))
-		{
-			this->gameFinished = true;
-			this->objects.get("Finished")->textVisible = ALL;
-			return;
-		}
+			//Bewegung der Snake
+			for (int i = this->snakeBody.size() - 1; i > 0; i--)
+			{
+				this->snakeBody.at(i)->shape->setPosition(this->snakeBody.at(i - 1)->shape->getPosition());
+			}
+			this->snakeBody.at(0)->shape->setPosition(nextPos);
 
-		//Bewegung der Snake
-		for (int i = this->snakeBody.size() - 1; i > 0; i--)
-		{
-			this->snakeBody.at(i)->shape->setPosition(this->snakeBody.at(i - 1)->shape->getPosition());
-		}
-		this->snakeBody.at(0)->shape->setPosition(nextPos);
+			//Snakewachstum und Essensspawning
+			Vector2f lastSnakePartPos = this->snakeBody.at(this->snakeBody.size() - 1)->shape->getPosition();
+			Vector2f foodPos = this->snakeFood->shape->getPosition();
+			if (foodPos.x == nextPos.x && foodPos.y == nextPos.y)
+			{
+				this->setupFood();
+				this->snakeBody.push_back(addObject("Snake" + to_string(this->snakeBody.size()), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Black, THICKNESS, Color::White)));
+				this->objects.get("Snake" + to_string(this->snakeBody.size() - 1))->shape->setPosition(lastSnakePartPos);
 
-		//Snakewachstum und Essensspawning
-		Vector2f lastSnakePartPos = this->snakeBody.at(this->snakeBody.size() - 1)->shape->getPosition();
-		Vector2f foodPos = this->snakeFood->shape->getPosition();
-		if (foodPos.x == nextPos.x && foodPos.y == nextPos.y)
-		{
-			this->setupFood();
-			this->snakeBody.push_back(addObject("Snake" + to_string(this->snakeBody.size()), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Black, THICKNESS, Color::White)));
-			this->objects.get("Snake" + to_string(this->snakeBody.size() - 1))->shape->setPosition(lastSnakePartPos);
-
-			// Erhöhe Scorecount
-			scoreCount++;
-			score->setText("Score: " + to_string(scoreCount));
+				// Erhöhe Scorecount
+				scoreCount++;
+				score->setText("Score: " + to_string(scoreCount));
+				updateRate -= 2;
+			}
 		}
 	}
 }

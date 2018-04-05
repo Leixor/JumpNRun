@@ -35,9 +35,17 @@ protected:
 	UnorderdMap<String, ObjectBase*> objects;
 	RenderWindow* window;
 	string sceneName;
+
+	unsigned int updateRate;
+	bool getUpdateSync()
+	{
+		return updateSync;
+	}
 private:
 	
 	// Jede Szene bekommt den Scenehandler damit er es als Interface benutzen kann um die anderen Szenen anzusprechen
 	SceneHandler*  sceneHandler;
+	unsigned int updateCount;
+	bool updateSync;
 };
 

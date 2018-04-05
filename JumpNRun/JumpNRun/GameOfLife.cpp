@@ -7,7 +7,6 @@ GameOfLife::GameOfLife(string name, SceneHandler * sceneHandler, RenderWindow* w
 	this->setupResources();
 }
 
-
 GameOfLife::~GameOfLife()
 {
 }
@@ -59,8 +58,9 @@ bool GameOfLife::setupResources()
 
 void GameOfLife::update()
 {
-	if (updateCount >= updateRate / 10) {
-		Scene::update();
+	Scene::update();
+
+	if (this->getUpdateSync()) {
 		switch (gameState) {
 		case SETUPFIELD:
 			setupField();
@@ -73,9 +73,7 @@ void GameOfLife::update()
 			break;
 		}
 		generationText->setText("Generation: " + to_string(generation));
-		updateCount = 0;
 	}
-	updateCount++;
 }
 
 void GameOfLife::handleInputs(RenderWindow& window)
@@ -145,12 +143,10 @@ void GameOfLife::handleEvents(RenderWindow & window, Event windowEvent)
 		if (Keyboard::isKeyPressed(Keyboard::Key::Up)) {
 
 			updateRate -= 10;
-			updateCount = 0;
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Key::Down)) {
 
 			updateRate += 10;
-			updateCount = 0;
 		}
 	}
 }
