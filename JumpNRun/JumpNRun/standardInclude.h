@@ -55,7 +55,7 @@ using namespace AlignHelper;
 #include "SceneSnakeGame.h"
 #include "GameOfLife.h"
 
-#define MS_PER_UPDATE 5
+#define MS_PER_UPDATE 50
 #define WINDOW_SIZE_X 1600
 #define WINDOW_SIZE_Y 900
 

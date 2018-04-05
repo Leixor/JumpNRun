@@ -60,8 +60,10 @@ void GameOfLife::update()
 {
 	Scene::update();
 
-	if (this->getUpdateSync()) {
-		switch (gameState) {
+	if (this->getUpdateSync()) 
+	{
+		switch (gameState) 
+		{
 		case SETUPFIELD:
 			setupField();
 			break;
@@ -81,58 +83,70 @@ void GameOfLife::handleInputs(RenderWindow& window)
 	Scene::handleInputs(window);
 
 	// Falls das Game noch im Setup ist soll an den Stellen wo der Spieler hinklickt eine Zelle zum Leben erweckt werden falls dort noch keine lebende ist
-	if (gameState & SETUPFIELD || gameState & PAUSED) {
-		if (Mouse::isButtonPressed(Mouse::Left)) {
+	if (gameState & SETUPFIELD || gameState & PAUSED) 
+	{
+		if (Mouse::isButtonPressed(Mouse::Left)) 
+		{
 			Vector2i mousePos = Mouse::getPosition(window);
 			FloatRect Cell(0,0, cellSize, cellSize);
-			for (int i = 0; i < gridSize / (16 / 9); i++) {
-				for (int j = 0; j < gridSize; j++) {
+			for (int i = 0; i < gridSize / (16 / 9); i++) 
+			{
+				for (int j = 0; j < gridSize; j++) 
+				{
 					Cell.left = cellSize * i;
 					Cell.top = cellSize * j;
-					if (Cell.contains(Vector2f(float(mousePos.x), float(mousePos.y)))/* && !gameField[i][j]*/) {
+					if (Cell.contains(Vector2f(float(mousePos.x), float(mousePos.y)))/* && !gameField[i][j]*/) 
+					{
 						gameField[j][i] = true;
 					}
 				}
 			}
 		}
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::C)) {
+	if (Keyboard::isKeyPressed(Keyboard::Key::C)) 
+	{
 		gameState = SETUPFIELD;
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::A)) {
+	if (Keyboard::isKeyPressed(Keyboard::Key::A)) 
+	{
 		setupField();
 		gameState = INGAME;
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::P)) {
+	if (Keyboard::isKeyPressed(Keyboard::Key::P)) 
+	{
 		gameState = PAUSED;
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::R)) {
+	if (Keyboard::isKeyPressed(Keyboard::Key::R)) 
+	{
 		gameField.clear();
 		generation = 0;
 		gameState = SETUPFIELD;
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::Key::N)) {
+	if (Keyboard::isKeyPressed(Keyboard::Key::N)) 
+	{
 		generation = 0;
 		gameState = SETUPSIZE;
 		gameField.clear();
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::Right)) {
+	if (Keyboard::isKeyPressed(Keyboard::Key::Right)) 
+	{
 		
 		proto = rect;
 		proto->setSize(Vector2f(cellSize, cellSize));
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::Left)) {
+	if (Keyboard::isKeyPressed(Keyboard::Key::Left)) 
+	{
 
 		proto = sprit;
 		proto->setSize(Vector2f(cellSize, cellSize));
 	}
 	
-	if (Keyboard::isKeyPressed(Keyboard::Key::O)) {
+	if (Keyboard::isKeyPressed(Keyboard::Key::O)) 
+	{
 		this->getSceneHandler()->setTopScene("SnakeGame");
 		this->getSceneHandler()->getSceneByName("SnakeGame")->visible = ALL;
 		this->visible = NONE;
-		
 	}
 }
 
