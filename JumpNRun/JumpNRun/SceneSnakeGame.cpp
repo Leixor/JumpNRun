@@ -27,9 +27,6 @@ void SceneSnakeGame::handleEvents(RenderWindow & window, Event windowEvent)
 		if (objects.get(i)->handleEvents(window, windowEvent))
 			break;
 	}
-	if (windowEvent.type == Event::KeyPressed)
-		if (Keyboard::isKeyPressed(Keyboard::E))
-			this->visible = VISIBLE;
 }
 
 void SceneSnakeGame::handleInputs(RenderWindow & window)
@@ -68,7 +65,6 @@ bool SceneSnakeGame::setupResources()
 	this->objects.get("Snake0")->shape->setOutlineColor(Color::Red);
 
 	this->snakeFood = addObject("Food", new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Black, THICKNESS, Color::Cyan));
-
 
 	// Scorecounter Setup
 	font = new Font();
