@@ -27,9 +27,6 @@ void SceneSnakeGame::handleEvents(RenderWindow & window, Event windowEvent)
 		if (objects.get(i)->handleEvents(window, windowEvent))
 			break;
 	}
-	if (windowEvent.type == Event::KeyPressed)
-		if (Keyboard::isKeyPressed(Keyboard::E))
-			this->visible = VISIBLE;
 }
 
 void SceneSnakeGame::handleInputs(RenderWindow & window)
@@ -51,6 +48,12 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 	}
 }
 
+void SceneSnakeGame::render(RenderWindow & window, RenderStates shades, float timeTillUpdate)
+{
+
+	Scene::render(window, shades, timeTillUpdate);
+}
+
 bool SceneSnakeGame::setupResources()
 {
 	addObject("Background", new ShapeRectangle(FloatRect(POSX, POSY, PITCH, PITCH), Color::Black, float(PITCH)/float(50), Color::White));
@@ -68,7 +71,6 @@ bool SceneSnakeGame::setupResources()
 	this->objects.get("Snake0")->shape->setOutlineColor(Color::Red);
 
 	this->snakeFood = addObject("Food", new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Black, THICKNESS, Color::Cyan));
-
 
 	// Scorecounter Setup
 	font = new Font();

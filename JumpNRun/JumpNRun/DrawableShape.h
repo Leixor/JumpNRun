@@ -253,14 +253,6 @@ inline void DrawableShape<Sprite>::setSize(Vector2f size)
 {
 	float currentSizeX = float(this->shape->getTexture()->getSize().x);
 	float currentSizeY = float(this->shape->getTexture()->getSize().y);
-	auto scale = this->getScale();
-
-	printf("paramSize %f, %f \n currentSize vom Sprite: %f, %f \n setSize %f \n scale %f %f \n \n", size.x, size.y, currentSizeX, currentSizeY, size.x / currentSizeX, scale.x, scale.y);
-
-	/*currentSizeX *= scale.x;
-	currentSizeY *= scale.y;*/
-
-	
 
 	this->shape->setScale(size.x / currentSizeX, size.y / currentSizeY);
 }

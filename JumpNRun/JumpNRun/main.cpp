@@ -28,17 +28,6 @@ int main()
 	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler, &window);
 	sceneHandler->addScene(startMenu);
 	
-	/* Folgender Testablauf wurde gemacht, die Testszene tut beim klicken auf den Roten 
-	Button eine neue Szene selbstständig kreieren und zwar von der anderen Subklasse 
-	OverlayTestSzene (diese wird beim adden gleichzeitig nach oben in die Pipeline gestellt), wenn man jetzt auf den grünen 
-	Button von OverlayTestSzene klickt, macht man den roten Button  (und die ganze Szene) von TestSzene unsichtbar, mit einem "A" 
-	Keyboard klick macht man sie wieder sichtbar. 
-	Der ganze Testablauf diente nur zum probieren aller Funktionen des Scenehandlers
-	*/
-
-
-
-
 	//Parameter die für die verbesserte Spielschleife notwendig sind.
 	// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
 	// render(lag / MS_PER_UPDATE);
@@ -105,7 +94,7 @@ int main()
 		//Zeichnen der Objekte
 		window.clear();
 
-		sceneHandler->render(window, RenderStates());
+		sceneHandler->render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 
 		//FPSCOUNTER
 		window.draw(*FPS);

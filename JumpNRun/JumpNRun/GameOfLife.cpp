@@ -170,7 +170,7 @@ void GameOfLife::render(RenderWindow& window, RenderStates shades) {
 			}
 		}
 	}
-	Scene::render(window, shades);
+	Scene::render(window, shades, timeTillUpdate);
 }
 
 void GameOfLife::plusGridSize()

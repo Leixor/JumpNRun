@@ -1,39 +1,115 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AlignHelper.cpp" />
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="CheckBox.cpp" />
-    <ClCompile Include="GameOfLife.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="SceneGame.cpp" />
-    <ClCompile Include="SceneHandler.cpp" />
-    <ClCompile Include="SceneOption.cpp" />
-    <ClCompile Include="SceneStartMenu.cpp" />
-    <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="ShapeRectangle.cpp" />
-    <ClCompile Include="ShapeCircle.cpp" />
-    <ClCompile Include="ShapeSprite.cpp" />
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneHandler.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneOption.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneSnakeGame.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneStartMenu.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOfLife.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeRectangle.cpp">
+      <Filter>DrawableShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeSprite.cpp">
+      <Filter>DrawableShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeCircle.cpp">
+      <Filter>DrawableShapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckBox.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="AlignHelper.cpp">
+      <Filter>ExtraClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>ExtraClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AlignHelper.h" />
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="CheckBox.h" />
-    <ClInclude Include="DrawableObject.h" />
-    <ClInclude Include="DrawableShape.h" />
-    <ClInclude Include="GameOfLife.h" />
-    <ClInclude Include="ObjectBase.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="SceneGame.h" />
-    <ClInclude Include="SceneHandler.h" />
-    <ClInclude Include="SceneOption.h" />
-    <ClInclude Include="SceneStartMenu.h" />
-    <ClInclude Include="standardInclude.h" />
-    <ClInclude Include="Timer.h" />
-    <ClInclude Include="UnorderdMap.h" />
-    <ClInclude Include="ShapeRectangle.h" />
-    <ClInclude Include="ShapeCircle.h" />
-    <ClInclude Include="ShapeSprite.h" />
+    <ClInclude Include="Scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneHandler.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneOption.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneSnakeGame.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneStartMenu.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOfLife.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeCircle.h">
+      <Filter>DrawableShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeRectangle.h">
+      <Filter>DrawableShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeSprite.h">
+      <Filter>DrawableShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableShape.h">
+      <Filter>DrawableShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableObject.h">
+      <Filter>DrawableShapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckBox.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectBase.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="AlignHelper.h">
+      <Filter>ExtraClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="standardInclude.h">
+      <Filter>ExtraClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="UnorderdMap.h">
+      <Filter>ExtraClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>ExtraClasses</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="DrawableShapes">
+      <UniqueIdentifier>{608dd723-48d7-4260-b258-0ba364c44c20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{71b0a76c-a4c3-40fe-a063-ad707663a9fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{99819d6b-6e2b-48ad-9f14-b5f6c0f47e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExtraClasses">
+      <UniqueIdentifier>{922f778e-bbc3-4c1e-80a4-29cc780dab98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
