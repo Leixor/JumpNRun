@@ -53,8 +53,8 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 
 void SceneSnakeGame::render(RenderWindow & window, RenderStates shades, float timeTillUpdate)
 {
-
 	Scene::render(window, shades, timeTillUpdate);
+	this->objects.get("Finished")->draw(window, shades);
 }
 
 bool SceneSnakeGame::setupResources()

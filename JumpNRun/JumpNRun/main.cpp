@@ -11,7 +11,6 @@ Int64 getCurrentTime()
 	return ms.count();
 }
 
-
 int main()
 {
 	/*
