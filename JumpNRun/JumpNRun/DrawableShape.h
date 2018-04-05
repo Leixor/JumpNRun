@@ -252,11 +252,7 @@ template<>
 inline void DrawableShape<Sprite>::setSize(Vector2f size)
 {
 	float currentSizeX = float(this->shape->getTexture()->getSize().x);
-	float currentSizeY = float(this->shape->getTexture()->getSize().x);
-	auto scale = this->getScale();
-
-	currentSizeX *= scale.x;
-	currentSizeY *= scale.y;
+	float currentSizeY = float(this->shape->getTexture()->getSize().y);
 
 	this->shape->setScale(size.x / currentSizeX, size.y / currentSizeY);
 }

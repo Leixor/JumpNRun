@@ -120,7 +120,7 @@ void GameOfLife::handleInputs(RenderWindow& window)
 	}
 }
 
-void GameOfLife::render(RenderWindow& window, RenderStates shades) {
+void GameOfLife::render(RenderWindow& window, RenderStates shades, float timeTillUpdate) {
 	
 	background->draw(window, shades);
 	// Das richtige Gamefield anzeigen
@@ -135,7 +135,7 @@ void GameOfLife::render(RenderWindow& window, RenderStates shades) {
 			}
 		}
 	}
-	Scene::render(window, shades);
+	Scene::render(window, shades, timeTillUpdate);
 }
 
 void GameOfLife::plusGridSize()

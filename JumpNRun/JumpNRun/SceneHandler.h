@@ -10,7 +10,7 @@ public:
 	void handleEvents(RenderWindow& window, Event windowEvent);
 	void handleInputs(RenderWindow& window);
 	void update();
-	void render(RenderWindow& window, RenderStates shades);
+	void render(RenderWindow& window, RenderStates shades, float timeTillUpdate);
 
 	// Verschiedene Helper um Interaktion zwischen Scenes zu erleichtern
 	void addScene(Scene * createScene, int visible = ALL);

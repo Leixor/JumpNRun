@@ -12,7 +12,7 @@ public:
 	virtual void handleInputs(RenderWindow& window);
 	virtual void handleEvents(RenderWindow& window, Event windowEvent);
 	virtual void update();
-	virtual void render(RenderWindow& window, RenderStates shades);
+	virtual void render(RenderWindow& window, RenderStates shades, float timeTillUpdate);
 
 	// Scenespezifische Funktionen
 	string getSceneName();

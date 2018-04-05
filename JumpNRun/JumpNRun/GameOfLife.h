@@ -14,7 +14,7 @@ public:
 	bool setupResources();
 	void update();
 	void handleInputs(RenderWindow& window);
-	void render(RenderWindow& window, RenderStates shades);
+	void render(RenderWindow& window, RenderStates shades, float timeTillUpdate);
 
 private:
 	Font * font;

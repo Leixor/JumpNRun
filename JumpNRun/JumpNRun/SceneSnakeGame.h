@@ -8,6 +8,7 @@ public:
 
 	void handleEvents(RenderWindow & window, Event windowEvent);
 	void handleInputs(RenderWindow & window);
+	void render(RenderWindow& window, RenderStates shades, float timeTillUpdate);
 	bool setupResources();
 	void update();
 

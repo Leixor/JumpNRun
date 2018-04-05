@@ -48,6 +48,12 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 	}
 }
 
+void SceneSnakeGame::render(RenderWindow & window, RenderStates shades, float timeTillUpdate)
+{
+
+	Scene::render(window, shades, timeTillUpdate);
+}
+
 bool SceneSnakeGame::setupResources()
 {
 	addObject("Background", new ShapeRectangle(FloatRect(POSX, POSY, PITCH, PITCH), Color::Black, float(PITCH)/float(50), Color::White));

@@ -37,11 +37,11 @@ void SceneHandler::update()
 }
 
 // Beim Rendern muss jedoch darauf geachtet werden das das wichtigste (also index [0]) als letztes gerendert wird damit es ganz oben sichtbar ist, deswegen eine umgekehrte for Schleife
-void SceneHandler::render(RenderWindow& window, RenderStates shades)
+void SceneHandler::render(RenderWindow& window, RenderStates shades, float timeTillUpdate)
 {
 	for (int i = vScenes.size() - 1; i >= 0; i--) {
 		if (vScenes[i]->visible & VISIBLE) {
-			vScenes[i]->render(window, shades);
+			vScenes[i]->render(window, shades, timeTillUpdate);
 		}
 	}
 }

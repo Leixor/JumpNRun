@@ -21,7 +21,7 @@ int main()
 	Es können noch weitere Parameter übergeben werden, die dafür verantwortlich sind, 
 	ob das Fenster keinen CloseKnopf hat, nicht größenveränderbar ist...
 	*/
-	RenderWindow window(VideoMode(1920, 1080), "Snake", Style::Fullscreen);
+	RenderWindow window(VideoMode(1920, 1080), "Snake");
 	SceneHandler *sceneHandler = new SceneHandler();
 
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
@@ -94,7 +94,7 @@ int main()
 		//Zeichnen der Objekte
 		window.clear();
 
-		sceneHandler->render(window, RenderStates());
+		sceneHandler->render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 
 		//FPSCOUNTER
 		window.draw(*FPS);

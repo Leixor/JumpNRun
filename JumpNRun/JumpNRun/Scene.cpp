@@ -35,7 +35,7 @@ void Scene::update()
 	}
 }
 
-void Scene::render(RenderWindow & window, RenderStates shades)
+void Scene::render(RenderWindow & window, RenderStates shades, float timeTillUpdate)
 {
 	for (unsigned int i = 0; i < this->objects.size(); i++)
 	{
