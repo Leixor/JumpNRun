@@ -1,8 +1,8 @@
 #include "standardInclude.h"
 
 #define PITCH 600
-#define POSX 100
-#define POSY 100
+#define POSX 20
+#define POSY 20
 #define THICKNESS float(PITCH) / float(300)
 
 SceneSnakeGame::SceneSnakeGame(string name, SceneHandler * sceneHandler, Vector2u size, int partCount)
@@ -46,33 +46,22 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 
 bool SceneSnakeGame::setupResources()
 {
-	addResource<ObjectBase*>("Background", new ObjectBase(RectangleShape()));
-	this->objects.get("Background")->shape->setPosition(Vector2f(POSX, POSY));
-	this->objects.get("Background")->shape->setSize(Vector2f(PITCH, PITCH));
-	this->objects.get("Background")->shape->setFillColor(Color::Black);
-	this->objects.get("Background")->shape->setOutlineThickness(float(PITCH) / float(50));
-	this->objects.get("Background")->shape->setOutlineColor(Color::White);
+	addObject("Background", new ShapeRectangle(FloatRect(POSX, POSY, PITCH, PITCH), Color::Black, float(PITCH)/float(50), Color::White));
+
 
 	float partSizeX = float(PITCH) / float(cellCount.x);
 	float partSizeY = float(PITCH) / float(cellCount.y);
 
 	for (int i = 0; i < this->partCount; i++)
 	{
-		this->snakeBody.push_back(addResource<ObjectBase*>("Snake" + to_string(i), new ObjectBase(RectangleShape())));
+		this->snakeBody.push_back(addObject("Snake" + to_string(i), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Black, THICKNESS, Color::White)));
 		this->objects.get("Snake" + to_string(i))->shape->setPosition(Vector2f((POSX + THICKNESS) + (cellCount.x / 2) * partSizeX + partSizeX * i, ((POSY + THICKNESS) + partSizeY * (cellCount.x / 2))));
-		this->objects.get("Snake" + to_string(i))->shape->setSize(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)));
-		this->objects.get("Snake" + to_string(i))->shape->setFillColor(Color::Black);
-		this->objects.get("Snake" + to_string(i))->shape->setOutlineThickness(THICKNESS);
-		this->objects.get("Snake" + to_string(i))->shape->setOutlineColor(Color::White);
 	}
 
 	this->objects.get("Snake0")->shape->setOutlineColor(Color::Red);
 
-	this->snakeFood = addResource<ObjectBase*>("Food", new ObjectBase(RectangleShape()));
-	this->objects.get("Food")->shape->setSize(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)));
-	this->objects.get("Food")->shape->setFillColor(Color::Black);
-	this->objects.get("Food")->shape->setOutlineThickness(THICKNESS);
-	this->objects.get("Food")->shape->setOutlineColor(Color::Cyan);
+	this->snakeFood = addObject("Food", new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Black, THICKNESS, Color::Cyan));
+
 
 	return false;
 }
@@ -140,12 +129,8 @@ void SceneSnakeGame::update()
 		if (foodPos.x == nextPos.x && foodPos.y == nextPos.y)
 		{
 			this->setupFood();
-			this->snakeBody.push_back(addResource<ObjectBase*>("Snake" + to_string(this->snakeBody.size()), new ObjectBase(RectangleShape())));
+			this->snakeBody.push_back(addObject("Snake" + to_string(this->snakeBody.size()), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Black, THICKNESS, Color::White)));
 			this->objects.get("Snake" + to_string(this->snakeBody.size() - 1))->shape->setPosition(lastSnakePartPos);
-			this->objects.get("Snake" + to_string(this->snakeBody.size() - 1))->shape->setSize(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)));
-			this->objects.get("Snake" + to_string(this->snakeBody.size() - 1))->shape->setFillColor(Color::Black);
-			this->objects.get("Snake" + to_string(this->snakeBody.size() - 1))->shape->setOutlineThickness(THICKNESS);
-			this->objects.get("Snake" + to_string(this->snakeBody.size() - 1))->shape->setOutlineColor(Color::White);
 		}
 	}
 }

@@ -1,6 +1,6 @@
 #include "standardInclude.h"
 
-
+#define CELLCOLOR Color::Cyan
 
 GameOfLife::GameOfLife(string name, SceneHandler * sceneHandler, RenderWindow* window): Scene(name, sceneHandler, window)
 {
@@ -28,8 +28,8 @@ bool GameOfLife::setupResources()
 
 	// UI adden
 	addObject("Background", new ShapeRectangle(1600, 900, Color::Black));
-	addResource("+size", new Button([&] {plusGridSize(); }, new ShapeSprite("Textures/plus.png")));
-	addResource("-size", new Button([&] {minusGridSize(); }, new ShapeSprite("Textures/minus.png")));
+	addResource("+size", new Button([&] {plusGridSize(); }, new ShapeSprite("Textures/plus.png", .1f)));
+	addResource("-size", new Button([&] {minusGridSize(); }, new ShapeSprite("Textures/minus.png", .1f)));
 	gridSizeText = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
 	gridSizeText->shapeVisible = NONE;
 	gridSizeText->addText(sizeText, *font);
@@ -38,6 +38,15 @@ bool GameOfLife::setupResources()
 	objects.get("-size")->shape->move(Vector2f(100, -100));
 	alignNextTo(*gridSizeText->objectText, *objects.get("-size")->shape, RIGHT);
 	alignNextTo(*objects.get("+size")->shape, *gridSizeText->objectText, RIGHT);
+
+	generationText = addObject("generationText", new ShapeRectangle(Vector2f(200, 100)));
+	generationText->shapeVisible = NONE;
+	generationText->addText(to_string(generation), *font);
+	generationText->setTextSize(40);
+
+	alignNextTo(*generationText->objectText, *objects.get("+size")->shape, RIGHT, 100);
+
+	proto = new ShapeRectangle(Vector2f(cellSize, cellSize), CELLCOLOR);
 
 	return false;
 }
@@ -51,10 +60,13 @@ void GameOfLife::update()
 			break;
 		case INGAME:
 			runGameSimulation();
+			generation++;
 			break;
 		case PAUSED:
 			break;
 	}
+
+	generationText->setText(to_string(generation));
 }
 
 void GameOfLife::handleInputs(RenderWindow& window)
@@ -81,18 +93,22 @@ void GameOfLife::handleInputs(RenderWindow& window)
 		gameState = SETUPFIELD;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::A)) {
+		setupField();
 		gameState = INGAME;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::P)) {
 		gameState = PAUSED;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::R)) {
-		for (int i = 0; i < gridSize / (16 / 9); i++) {
-			gameField.push_back(vector<bool>());
-			for (int j = 0; j < gridSize; j++) {
-				gameField[i][j] = false;
-			}
-		}
+		gameField.clear();
+		generation = 0;
+		gameState = SETUPFIELD;
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::Key::N)) {
+		generation = 0;
+		gameState = SETUPSIZE;
+		gameField.clear();
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::O)) {
 		this->getSceneHandler()->setTopScene("SnakeGame");
@@ -108,12 +124,11 @@ void GameOfLife::render(RenderWindow& window, RenderStates shades) {
 	// Das richtige Gamefield anzeigen
 	if (gameField.size() != 0)
 	{
-		RectangleShape proto(Vector2f(cellSize, cellSize));
 		for (int i = 0; i < gridSize / (16 / 9); i++) {
 			for (int j = 0; j < gridSize; j++) {
 				if (this->gameField[i][j] == true) {
-					proto.setPosition(j*cellSize, i*cellSize);
-					window.draw(proto);
+					this->proto->setPosition(Vector2f(j*cellSize, i*cellSize));
+					this->proto->draw(window, shades);
 				}
 			}
 		}
@@ -129,8 +144,8 @@ void GameOfLife::plusGridSize()
 		sizeText = to_string(gridSize) + " x " + to_string(gridSize);
 		gridSizeText->setText(sizeText);
 		cellSize = window->getSize().x / (float)gridSize;
+		proto->setSize(Vector2f(cellSize, cellSize));
 	}
-
 }
 
 void GameOfLife::minusGridSize()
@@ -141,6 +156,7 @@ void GameOfLife::minusGridSize()
 		sizeText = to_string(gridSize) + " x " + to_string(gridSize);
 		gridSizeText->setText(sizeText);
 		cellSize = window->getSize().x / (float)gridSize;
+		proto->setSize(Vector2f(cellSize, cellSize));
 	}
 }
 

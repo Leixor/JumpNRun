@@ -24,6 +24,10 @@ private:
 	float cellSize;
 	string sizeText;
 	ObjectBase* gridSizeText;
+	ShapeRectangle* proto;
+
+	ObjectBase* generationText;
+	int generation;
 
 	void plusGridSize();
 	void minusGridSize();
