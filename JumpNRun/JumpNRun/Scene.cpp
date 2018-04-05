@@ -3,9 +3,9 @@
 Scene::Scene(string Name, SceneHandler * sceneHandler, RenderWindow* window, int visible)
 	: sceneName(Name), sceneHandler(sceneHandler), window(window), visible(visible)
 {
-	updateSync = false; 
-	updateCount = 1;
-	updateRate = 10;
+	this->updateSync = false; 
+	this->updateCount = 1;
+	this->updateRate = 10;
 }
 
 Scene::~Scene()
@@ -54,6 +54,7 @@ void Scene::render(RenderWindow & window, RenderStates shades, float timeTillUpd
 		objects.get(i)->draw(window, shades);
 	}
 }
+
 string Scene::getSceneName()
 {
 	return this->sceneName;

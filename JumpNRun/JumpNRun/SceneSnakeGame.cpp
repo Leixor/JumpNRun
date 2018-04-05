@@ -1,8 +1,8 @@
 #include "standardInclude.h"
 
 #define PITCH 600
-#define POSX 20
-#define POSY 20
+#define POSX 50
+#define POSY 50
 #define THICKNESS float(PITCH) / float(300)
 
 SceneSnakeGame::SceneSnakeGame(string name, SceneHandler * sceneHandler, Vector2u size, int partCount)

@@ -86,6 +86,7 @@ int main()
 			}
 
 			lag -= MS_PER_UPDATE;
+
 		}
 
 		//Zeichnen der Objekte

@@ -11,9 +11,6 @@
     <ClCompile Include="SceneStartMenu.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="GameOfLife.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="ShapeRectangle.cpp">
       <Filter>Objects\DrawableShapes</Filter>
     </ClCompile>
@@ -41,6 +38,9 @@
     <ClCompile Include="SceneHandler.cpp">
       <Filter>Scenes\SceneStuff</Filter>
     </ClCompile>
+    <ClCompile Include="SceneGOL.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -50,9 +50,6 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="SceneStartMenu.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOfLife.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ShapeCircle.h">
@@ -96,6 +93,9 @@
     </ClInclude>
     <ClInclude Include="SceneHandler.h">
       <Filter>Scenes\SceneStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGOL.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

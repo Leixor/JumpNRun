@@ -54,7 +54,7 @@ void SceneStartMenu::buttonStartAction()
 {
 	this->visible = UPDATABLE;
 
-	this->getSceneHandler()->addScene(new GameOfLife("GOL", this->getSceneHandler(), this->window), true);
+	this->getSceneHandler()->addScene(new SceneGOL("GOL", this->getSceneHandler(), this->window), true);
 	this->getSceneHandler()->addScene(new SceneSnakeGame("SnakeGame", this->getSceneHandler(), Vector2u(20,20), 4), ALL);
 	this->getSceneHandler()->getSceneByName("SnakeGame")->visible = NONE;
 }

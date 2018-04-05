@@ -1,15 +1,18 @@
 #pragma once
-enum GameState {
-	SETUPSIZE  = 1,
+
+enum eGameState 
+{
+	SETUPSIZE = 1,
 	SETUPFIELD = 2,
 	INGAME = 4,
 	PAUSED = 8
 };
-class GameOfLife : public Scene
+
+class SceneGOL : public Scene
 {
 public:
-	GameOfLife(string name, SceneHandler * sceneHandler, RenderWindow* window);
-	~GameOfLife();
+	SceneGOL(string name, SceneHandler * sceneHandler, RenderWindow* window);
+	~SceneGOL();
 
 	bool setupResources();
 	void update();
@@ -19,27 +22,24 @@ public:
 
 private:
 	Font * font;
-	vector<vector<bool>> gameField;
+	eGameState gameState;
+	vector<vector<char>> gameField;
 
-	int gridSize;
-	float cellSize;
 	string sizeText;
+	ObjectBase* generationText;
 	ObjectBase* gridSizeText;
-
+	DrawableObject* background;
 	DrawableObject* proto;
 	ShapeRectangle* rect;
 	ShapeSprite* sprit;
 
-	ObjectBase* generationText;
-	DrawableObject* background;
+	int gridSize;
+	float cellSize;
 	int generation;
 
 	void plusGridSize();
 	void minusGridSize();
 	void setupField();
 	void runGameSimulation();
-	void determineState();
-
-	int gameState;
 };
 

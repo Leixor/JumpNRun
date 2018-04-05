@@ -1,17 +1,15 @@
 #include "standardInclude.h"
 
-#define CELLCOLOR Color::Cyan
-
-GameOfLife::GameOfLife(string name, SceneHandler * sceneHandler, RenderWindow* window): Scene(name, sceneHandler, window)
+SceneGOL::SceneGOL(string name, SceneHandler * sceneHandler, RenderWindow* window) : Scene(name, sceneHandler, window)
 {
 	this->setupResources();
 }
 
-GameOfLife::~GameOfLife()
+SceneGOL::~SceneGOL()
 {
 }
 
-bool GameOfLife::setupResources()
+bool SceneGOL::setupResources()
 {
 	updateRate = 100;
 	// Standard Gamestate angeben
@@ -48,7 +46,7 @@ bool GameOfLife::setupResources()
 
 	alignNextTo(*generationText->objectText, *objects.get("+size")->shape, RIGHT, 100);
 
-	rect = new ShapeRectangle(Vector2f(cellSize, cellSize), CELLCOLOR);
+	rect = new ShapeRectangle(Vector2f(cellSize, cellSize), Color::Cyan);
 	sprit = new ShapeSprite("Textures/plus.png", Vector2f(cellSize, cellSize));
 
 	proto = sprit;
@@ -56,16 +54,15 @@ bool GameOfLife::setupResources()
 	return false;
 }
 
-void GameOfLife::update()
+void SceneGOL::update()
 {
 	Scene::update();
 
-	if (this->getUpdateSync()) 
+	if (this->getUpdateSync())
 	{
-		switch (gameState) 
+		switch (gameState)
 		{
 		case SETUPFIELD:
-			setupField();
 			break;
 		case INGAME:
 			runGameSimulation();
@@ -78,24 +75,24 @@ void GameOfLife::update()
 	}
 }
 
-void GameOfLife::handleInputs(RenderWindow& window)
+void SceneGOL::handleInputs(RenderWindow & window)
 {
 	Scene::handleInputs(window);
 
-	// Falls das Game noch im Setup ist soll an den Stellen wo der Spieler hinklickt eine Zelle zum Leben erweckt werden falls dort noch keine lebende ist
-	if (gameState & SETUPFIELD || gameState & PAUSED) 
+	//Falls das Game noch im Setup ist soll an den Stellen wo der Spieler hinklickt eine Zelle zum Leben erweckt werden falls dort noch keine lebende ist
+	if (gameState & SETUPFIELD || gameState & PAUSED)
 	{
-		if (Mouse::isButtonPressed(Mouse::Left)) 
+		if (Mouse::isButtonPressed(Mouse::Left))
 		{
 			Vector2i mousePos = Mouse::getPosition(window);
-			FloatRect Cell(0,0, cellSize, cellSize);
-			for (int i = 0; i < gridSize / (16 / 9); i++) 
+			FloatRect Cell(0, 0, cellSize, cellSize);
+			for (int i = 0; i < gridSize / (16 / 9); i++)
 			{
-				for (int j = 0; j < gridSize; j++) 
+				for (int j = 0; j < gridSize; j++)
 				{
 					Cell.left = cellSize * i;
 					Cell.top = cellSize * j;
-					if (Cell.contains(Vector2f(float(mousePos.x), float(mousePos.y)))/* && !gameField[i][j]*/) 
+					if (Cell.contains(Vector2f(float(mousePos.x), float(mousePos.y))))
 					{
 						gameField[j][i] = true;
 					}
@@ -103,46 +100,52 @@ void GameOfLife::handleInputs(RenderWindow& window)
 			}
 		}
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::C)) 
+	if (Keyboard::isKeyPressed(Keyboard::Key::C))
 	{
-		gameState = SETUPFIELD;
+		if (gameState & SETUPSIZE)
+		{
+			setupField();
+			gameState = SETUPFIELD;	
+		}
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::A)) 
+	if (Keyboard::isKeyPressed(Keyboard::Key::A))
 	{
-		setupField();
-		gameState = INGAME;
+		if (gameState & SETUPFIELD || gameState & PAUSED)
+		{
+			gameState = INGAME;
+		}
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::P)) 
+	if (Keyboard::isKeyPressed(Keyboard::Key::P))
 	{
-		gameState = PAUSED;
+		if (gameState & INGAME)
+		{
+			gameState = PAUSED;
+		}
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::R)) 
+	if (Keyboard::isKeyPressed(Keyboard::Key::R))
 	{
 		gameField.clear();
-		generation = 0;
+		generation = 0; 
+		setupField();
 		gameState = SETUPFIELD;
 	}
-
-	if (Keyboard::isKeyPressed(Keyboard::Key::N)) 
+	if (Keyboard::isKeyPressed(Keyboard::Key::N))
 	{
 		generation = 0;
 		gameState = SETUPSIZE;
 		gameField.clear();
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::Right)) 
+	if (Keyboard::isKeyPressed(Keyboard::Key::Right))
 	{
-		
 		proto = rect;
 		proto->setSize(Vector2f(cellSize, cellSize));
 	}
-	if (Keyboard::isKeyPressed(Keyboard::Key::Left)) 
+	if (Keyboard::isKeyPressed(Keyboard::Key::Left))
 	{
-
 		proto = sprit;
 		proto->setSize(Vector2f(cellSize, cellSize));
 	}
-	
-	if (Keyboard::isKeyPressed(Keyboard::Key::O)) 
+	if (Keyboard::isKeyPressed(Keyboard::Key::O))
 	{
 		this->getSceneHandler()->setTopScene("SnakeGame");
 		this->getSceneHandler()->getSceneByName("SnakeGame")->visible = ALL;
@@ -150,40 +153,40 @@ void GameOfLife::handleInputs(RenderWindow& window)
 	}
 }
 
-void GameOfLife::handleEvents(RenderWindow & window, Event windowEvent)
+void SceneGOL::handleEvents(RenderWindow & window, Event windowEvent)
 {
 	Scene::handleEvents(window, windowEvent);
-	if (windowEvent.type == Event::KeyPressed) {
-		if (Keyboard::isKeyPressed(Keyboard::Key::Up)) {
-
+	if (windowEvent.type == Event::KeyPressed) 
+	{
+		if (Keyboard::isKeyPressed(Keyboard::Key::Up)) 
 			updateRate -= 10;
-		}
-		if (Keyboard::isKeyPressed(Keyboard::Key::Down)) {
-
+		if (Keyboard::isKeyPressed(Keyboard::Key::Down)) 
 			updateRate += 10;
-		}
 	}
 }
 
-void GameOfLife::render(RenderWindow& window, RenderStates shades, float timeTillUpdate) {
-	
+void SceneGOL::render(RenderWindow & window, RenderStates shades, float timeTillUpdate)
+{
 	background->draw(window, shades);
 	// Das richtige Gamefield anzeigen
 	if (gameField.size() != 0)
 	{
-		for (int i = 0; i < gridSize / (16 / 9); i++) {
+		for (int i = 0; i < gridSize / (16 / 9); i++) 
+		{
 			for (int j = 0; j < gridSize; j++) {
-				if (this->gameField[i][j] == true) {
+				if (this->gameField[i][j] == 1) 
+				{
 					this->proto->setPosition(Vector2f(j*cellSize, i*cellSize));
 					this->proto->draw(window, shades);
 				}
 			}
 		}
 	}
+
 	Scene::render(window, shades, timeTillUpdate);
 }
 
-void GameOfLife::plusGridSize()
+void SceneGOL::plusGridSize()
 {
 	if (gameState & SETUPSIZE)
 	{
@@ -191,14 +194,12 @@ void GameOfLife::plusGridSize()
 		sizeText = to_string(gridSize) + " x " + to_string(gridSize);
 		gridSizeText->setText(sizeText);
 		cellSize = (float)window->getSize().x / (float)gridSize;
-		
-		cout << cellSize << "\n";
-		
+
 		proto->setSize(Vector2f(cellSize, cellSize));
 	}
 }
 
-void GameOfLife::minusGridSize()
+void SceneGOL::minusGridSize()
 {
 	if (gameState & SETUPSIZE)
 	{
@@ -209,42 +210,39 @@ void GameOfLife::minusGridSize()
 
 		cellSize = (float)window->getSize().x / (float)gridSize;
 
-		cout << cellSize << "\n";
-
 		proto->setSize(Vector2f(cellSize, cellSize));
 	}
 }
 
-void GameOfLife::setupField()
+void SceneGOL::setupField()
 {
-	// GameField tot populieren
-	for (int i = 0; i < gridSize / (16 / 9); i++) {
-		gameField.push_back(vector<bool>());
-		for (int j = 0; j < gridSize; j++) {
+	gameField.clear();
+
+	for (int i = 0; i < gridSize / (16 / 9); i++) 
+	{
+		gameField.push_back(vector<char>());
+		for (int j = 0; j < gridSize; j++) 
+		{
 			gameField[i].push_back(false);
 		}
 	}
 }
 
-void GameOfLife::runGameSimulation()
+void SceneGOL::runGameSimulation()
 {
-	this->determineState();
-}
-
-void GameOfLife::determineState() {
-	vector<vector<bool>> oldGen;
+	vector<vector<char>> oldGen;
 	oldGen = gameField;
 
-	for (int a = 0; a < gridSize-1; a++)
+	for (int a = 0; a < gridSize - 1; a++)
 	{
-		for (int b = 0; b < gridSize-1; b++)
+		for (int b = 0; b < gridSize - 1; b++)
 		{
 			int alive = 0;
 			for (int c = -1; c < 2; c++)
 			{
 				for (int d = -1; d < 2; d++)
 				{
-					if(!((a == 0 && c == -1) || (b == 0 && d == -1)))
+					if (!((a == 0 && c == -1) || (b == 0 && d == -1)))
 					{
 						if (oldGen[a + c][b + d])
 						{
