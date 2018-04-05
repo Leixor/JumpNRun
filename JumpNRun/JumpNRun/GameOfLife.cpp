@@ -115,7 +115,7 @@ void GameOfLife::handleInputs(RenderWindow& window)
 	if (Keyboard::isKeyPressed(Keyboard::Key::O)) {
 		this->getSceneHandler()->setTopScene("SnakeGame");
 		this->getSceneHandler()->getSceneByName("SnakeGame")->visible = ALL;
-		this->visible = UPDATABLE;
+		this->visible = NONE;
 		
 	}
 }

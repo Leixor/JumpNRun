@@ -83,7 +83,6 @@ void SceneHandler::setTopScene(string sceneName)
 	if (sceneExists(sceneName)) {
 		if (vScenes[0] != vScenes[getSceneIndexByName(sceneName)]) {
 			int index = getSceneIndexByName(sceneName);
-
 			for (unsigned int i = 0; i < vScenes.size() - index; i++) {
 				iter_swap(vScenes.begin() + i, vScenes.end() - index);
 			}

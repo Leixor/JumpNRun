@@ -42,6 +42,13 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 		this->snakeDirectionNew = TOP;
 	else if (Keyboard::isKeyPressed(Keyboard::S) && this->snakeDirection != TOP)
 		this->snakeDirectionNew = BOTTOM;
+
+	if (Keyboard::isKeyPressed(Keyboard::I))
+	{
+		this->visible = NONE;
+		this->getSceneHandler()->setTopScene("GOL");
+		this->getSceneHandler()->getSceneByName("GOL")->visible = ALL;
+	}
 }
 
 bool SceneSnakeGame::setupResources()
