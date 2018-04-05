@@ -15,7 +15,7 @@ bool SceneStartMenu::setupResources()
 	font = new Font();
 	this->font->loadFromFile("Textures/cool.ttf");
 	
-	addObject("Background", new ShapeRectangle(1600, 900, Color::Black));
+	addObject("Background", new ShapeRectangle(1920, 1080, Color::Black));
 
 	startButton = addResource<Button*>("Button_Start", new Button([&] {buttonStartAction();}, new ShapeSprite("Textures/blueButton.png", 1.5f)));
 	this->objects.get("Button_Start")->addText("Start", *this->font);
@@ -31,9 +31,9 @@ bool SceneStartMenu::setupResources()
 	
 
 
-	alignTo(*startButton->shape, *this->objects.get("Background")->shape, LEFT, 300);
-	startButton->shape->move(Vector2f(0, 100));
-	alignNextTo(*optionButton->shape, *startButton->shape, RIGHT, 50);
+	alignTo(*optionButton->shape, *this->objects.get("Background")->shape);
+	optionButton->shape->move(Vector2f(0, 100));
+	alignNextTo(*startButton->shape, *optionButton->shape, LEFT, 50);
 	alignNextTo(*endButton->shape, *optionButton->shape, RIGHT, 50);
 	alignTo(*this->objects.get("Button_Start")->objectText, *this->objects.get("Button_Start")->shape);
 	alignTo(*this->objects.get("Button_Option")->objectText, *this->objects.get("Button_Option")->shape);

@@ -27,6 +27,7 @@ private:
 	ShapeRectangle* proto;
 
 	ObjectBase* generationText;
+	ShapeRectangle* background;
 	int generation;
 
 	void plusGridSize();

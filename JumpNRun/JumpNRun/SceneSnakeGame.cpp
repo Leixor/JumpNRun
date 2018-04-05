@@ -63,6 +63,17 @@ bool SceneSnakeGame::setupResources()
 	this->snakeFood = addObject("Food", new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Black, THICKNESS, Color::Cyan));
 
 
+	// Scorecounter Setup
+	font = new Font();
+	this->font->loadFromFile("Textures/cool.ttf");
+	score = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
+	score->shapeVisible = NONE;
+	score->addText("Score: " + to_string(scoreCount), *font);
+	score->setTextSize(40);
+	score->objectText->setFillColor(Color::White);
+
+	alignNextTo(*score->objectText, *objects.get("Background")->shape, RIGHT, 100);
+
 	return false;
 }
 
@@ -131,6 +142,10 @@ void SceneSnakeGame::update()
 			this->setupFood();
 			this->snakeBody.push_back(addObject("Snake" + to_string(this->snakeBody.size()), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Black, THICKNESS, Color::White)));
 			this->objects.get("Snake" + to_string(this->snakeBody.size() - 1))->shape->setPosition(lastSnakePartPos);
+
+			// Erhöhe Scorecount
+			scoreCount++;
+			score->setText("Score: " + to_string(scoreCount));
 		}
 	}
 }

@@ -27,22 +27,24 @@ bool GameOfLife::setupResources()
 	cellSize = window->getSize().x / (float)gridSize;
 
 	// UI adden
-	addObject("Background", new ShapeRectangle(1600, 900, Color::Black));
+	background = new ShapeRectangle(1920, 1080, Color::White);
 	addResource("+size", new Button([&] {plusGridSize(); }, new ShapeSprite("Textures/plus.png", .1f)));
 	addResource("-size", new Button([&] {minusGridSize(); }, new ShapeSprite("Textures/minus.png", .1f)));
 	gridSizeText = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
 	gridSizeText->shapeVisible = NONE;
 	gridSizeText->addText(sizeText, *font);
 	gridSizeText->setTextSize(40);
-	alignTo(*objects.get("-size")->shape, *objects.get("Background")->shape, BOTTOM | LEFT);
+	gridSizeText->objectText->setFillColor(Color::Black);
+	alignTo(*objects.get("-size")->shape, *background, BOTTOM | LEFT);
 	objects.get("-size")->shape->move(Vector2f(100, -100));
 	alignNextTo(*gridSizeText->objectText, *objects.get("-size")->shape, RIGHT);
 	alignNextTo(*objects.get("+size")->shape, *gridSizeText->objectText, RIGHT);
 
 	generationText = addObject("generationText", new ShapeRectangle(Vector2f(200, 100)));
 	generationText->shapeVisible = NONE;
-	generationText->addText(to_string(generation), *font);
+	generationText->addText("Generation: " + to_string(generation), *font);
 	generationText->setTextSize(40);
+	generationText->objectText->setFillColor(Color::Black);
 
 	alignNextTo(*generationText->objectText, *objects.get("+size")->shape, RIGHT, 100);
 
@@ -66,7 +68,7 @@ void GameOfLife::update()
 			break;
 	}
 
-	generationText->setText(to_string(generation));
+	generationText->setText("Generation: " + to_string(generation));
 }
 
 void GameOfLife::handleInputs(RenderWindow& window)
@@ -82,7 +84,7 @@ void GameOfLife::handleInputs(RenderWindow& window)
 				for (int j = 0; j < gridSize; j++) {
 					Cell.left = cellSize * i;
 					Cell.top = cellSize * j;
-					if (Cell.contains(Vector2f(float(mousePos.x), float(mousePos.y))) && !gameField[i][j]) {
+					if (Cell.contains(Vector2f(float(mousePos.x), float(mousePos.y)))/* && !gameField[i][j]*/) {
 						gameField[j][i] = true;
 					}
 				}
@@ -119,8 +121,8 @@ void GameOfLife::handleInputs(RenderWindow& window)
 }
 
 void GameOfLife::render(RenderWindow& window, RenderStates shades) {
-	Scene::render(window, shades);
-
+	
+	background->draw(window, shades);
 	// Das richtige Gamefield anzeigen
 	if (gameField.size() != 0)
 	{
@@ -133,7 +135,7 @@ void GameOfLife::render(RenderWindow& window, RenderStates shades) {
 			}
 		}
 	}
-	
+	Scene::render(window, shades);
 }
 
 void GameOfLife::plusGridSize()

@@ -21,6 +21,10 @@ private:
 	vector<ObjectBase*> snakeBody;
 	ObjectBase* snakeFood;
 
+	Font* font;
+	ObjectBase* score;
+	int scoreCount;
+
 	bool setupFood();
 };
 
