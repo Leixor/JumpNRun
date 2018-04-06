@@ -41,6 +41,15 @@
     <ClCompile Include="SceneGOL.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="SavefileHelper.cpp">
+      <Filter>ExtraClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigHelper.cpp">
+      <Filter>ExtraClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalVariables.cpp">
+      <Filter>ExtraClasses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -79,9 +88,6 @@
     <ClInclude Include="AlignHelper.h">
       <Filter>ExtraClasses</Filter>
     </ClInclude>
-    <ClInclude Include="standardInclude.h">
-      <Filter>ExtraClasses</Filter>
-    </ClInclude>
     <ClInclude Include="UnorderdMap.h">
       <Filter>ExtraClasses</Filter>
     </ClInclude>
@@ -96,6 +102,18 @@
     </ClInclude>
     <ClInclude Include="SceneGOL.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SavefileHelper.h">
+      <Filter>ExtraClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigHelper.h">
+      <Filter>ExtraClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalVariables.h">
+      <Filter>ExtraClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardInclude.h">
+      <Filter>ExtraClasses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

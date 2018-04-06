@@ -12,10 +12,13 @@ SceneStartMenu::~SceneStartMenu()
 
 bool SceneStartMenu::setupResources()
 {
+	conf = new ConfigHelper("test.txt");
 	font = new Font();
 	this->font->loadFromFile("Textures/cool.ttf");
 	
-	addObject("Background", new ShapeRectangle(1920, 1080, Color::Black));
+
+	string bgColor = conf->get("Menu","BackgroundColor");
+	addObject("Background", new ShapeRectangle(windowDef::get().windowSizeX, windowDef::get().windowSizeY, Color::Color(stoul(bgColor, nullptr, 16))));
 
 	startButton = addResource<Button*>("Button_Start", new Button([&] {buttonStartAction();}, new ShapeSprite("Textures/blueButton.png", 1.5f)));
 	this->objects.get("Button_Start")->addText("Start", *this->font);
@@ -45,7 +48,7 @@ bool SceneStartMenu::setupResources()
 	this->objects.get("SnakeCover")->shape->setPosition(Vector2f(300, 100));
 	this->objects.get("SnakeCover")->shape->setSize(Vector2f(1000, 600));
 
-	alignTo(*this->objects.get("SnakeCover")->shape, *this->objects.get("Background")->shape, TOP, 100);
+	alignTo(*this->objects.get("SnakeCover")->shape, *this->objects.get("Background")->shape, TOP, -50);
 
 	return true;
 }

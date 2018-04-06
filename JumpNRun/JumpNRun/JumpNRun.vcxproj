@@ -161,9 +161,12 @@
     <ClCompile Include="AlignHelper.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CheckBox.cpp" />
+    <ClCompile Include="ConfigHelper.cpp" />
+    <ClCompile Include="GlobalVariables.cpp" />
     <ClCompile Include="main.cpp">
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="SavefileHelper.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneGOL.cpp" />
     <ClCompile Include="SceneSnakeGame.cpp" />
@@ -179,9 +182,12 @@
     <ClInclude Include="AlignHelper.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CheckBox.h" />
+    <ClInclude Include="ConfigHelper.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="DrawableShape.h" />
+    <ClInclude Include="GlobalVariables.h" />
     <ClInclude Include="ObjectBase.h" />
+    <ClInclude Include="SavefileHelper.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneGOL.h" />
     <ClInclude Include="SceneSnakeGame.h" />
@@ -191,7 +197,7 @@
     <ClInclude Include="ShapeCircle.h" />
     <ClInclude Include="ShapeRectangle.h" />
     <ClInclude Include="ShapeSprite.h" />
-    <ClInclude Include="standardInclude.h" />
+    <ClInclude Include="StandardInclude.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UnorderdMap.h" />
   </ItemGroup>

@@ -11,7 +11,12 @@ SceneGOL::~SceneGOL()
 
 bool SceneGOL::setupResources()
 {
-	updateRate = 100;
+	// Lese die Config ein
+	conf = new ConfigHelper("test.txt");
+
+	// Setze updateRate
+	updateRate = stoi(conf->get("GOL", "UpdateRate"));
+
 	// Standard Gamestate angeben
 	gameState = SETUPSIZE;
 
@@ -20,12 +25,13 @@ bool SceneGOL::setupResources()
 	this->font->loadFromFile("Textures/cool.ttf");
 
 	// StandardgridSize definieren
-	gridSize = 100;
+	gridSize = stoi(conf->get("GOL", "GridSize"));
 	sizeText = to_string(gridSize) + " x " + to_string(gridSize);
 	cellSize = window->getSize().x / (float)gridSize;
 
 	// UI adden
-	background = new ShapeRectangle(1600, 900, Color::White);
+
+	background = new ShapeRectangle(windowDef::get().windowSizeX, windowDef::get().windowSizeY, Color::Color(stoul(conf->get("GOL", "BackgroundColor"),nullptr,16)));
 	addResource("+size", new Button([&] {plusGridSize(); }, new ShapeSprite("Textures/plus.png", .1f)));
 	addResource("-size", new Button([&] {minusGridSize(); }, new ShapeSprite("Textures/minus.png", .1f)));
 	gridSizeText = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
@@ -44,9 +50,16 @@ bool SceneGOL::setupResources()
 	generationText->setTextSize(40);
 	generationText->objectText->setFillColor(Color::Black);
 
-	alignNextTo(*generationText->objectText, *objects.get("+size")->shape, RIGHT, 100);
+	gpsText = addObject("generationText", new ShapeRectangle(Vector2f(200, 100)));
+	gpsText->shapeVisible = NONE;
+	gpsText->addText("Generation/Sekunde: " + to_string(1000/updateRate), *font);
+	gpsText->setTextSize(40);
+	gpsText->objectText->setFillColor(Color::Black);
 
-	rect = new ShapeRectangle(Vector2f(cellSize, cellSize), Color::Cyan);
+	alignNextTo(*generationText->objectText, *objects.get("+size")->shape, RIGHT, 100);
+	alignNextTo(*gpsText->objectText, *generationText->objectText, RIGHT, 50);
+
+	rect = new ShapeRectangle(Vector2f(cellSize, cellSize), Color::Color(stoul(conf->get("GOL", "CellColor"), nullptr, 16)));
 	sprit = new ShapeSprite("Textures/plus.png", Vector2f(cellSize, cellSize));
 
 	proto = sprit;
@@ -72,6 +85,7 @@ void SceneGOL::update()
 			break;
 		}
 		generationText->setText("Generation: " + to_string(generation));
+		alignNextTo(*gpsText->objectText, *generationText->objectText, RIGHT, 50);
 	}
 }
 
@@ -159,9 +173,18 @@ void SceneGOL::handleEvents(RenderWindow & window, Event windowEvent)
 	if (windowEvent.type == Event::KeyPressed) 
 	{
 		if (Keyboard::isKeyPressed(Keyboard::Key::Up)) 
-			updateRate -= 10;
+		{
+			if(updateRate > 10)
+				updateRate -= 10;
+			gpsText->setText("Generation/Sekunde: " + to_string(1000 / updateRate));
+		}
+			
 		if (Keyboard::isKeyPressed(Keyboard::Key::Down)) 
+		{
 			updateRate += 10;
+			gpsText->setText("Generation/Sekunde: " + to_string(1000 / updateRate));
+		}
+			
 	}
 }
 
@@ -190,7 +213,11 @@ void SceneGOL::plusGridSize()
 {
 	if (gameState & SETUPSIZE)
 	{
-		gridSize++;
+		if (!Keyboard::isKeyPressed(Keyboard::Key::LControl))
+			gridSize++;
+		else
+			gridSize += 10;
+
 		sizeText = to_string(gridSize) + " x " + to_string(gridSize);
 		gridSizeText->setText(sizeText);
 		cellSize = (float)window->getSize().x / (float)gridSize;
@@ -203,7 +230,10 @@ void SceneGOL::minusGridSize()
 {
 	if (gameState & SETUPSIZE)
 	{
-		gridSize--;
+		if (!Keyboard::isKeyPressed(Keyboard::Key::LControl))
+			gridSize--;
+		else
+			gridSize -= 10;
 
 		sizeText = to_string(gridSize) + " x " + to_string(gridSize);
 		gridSizeText->setText(sizeText);

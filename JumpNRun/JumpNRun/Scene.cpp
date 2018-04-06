@@ -55,6 +55,10 @@ void Scene::render(RenderWindow & window, RenderStates shades, float timeTillUpd
 	}
 }
 
+void Scene::confVarUpdate()
+{
+}
+
 string Scene::getSceneName()
 {
 	return this->sceneName;

@@ -13,12 +13,24 @@ Int64 getCurrentTime()
 
 int main()
 {
+	ConfigHelper conf("test.txt");
+	conf.write("GOL", "BackgroundColor", "fff01fff");
+	windowDef::get().windowSizeX = stoi(conf.get("Window", "WindowSizeX"));
+	windowDef::get().windowSizeY = stoi(conf.get("Window", "WindowSizeY"));
+	windowDef::get().windowStyle = stoi(conf.get("Window", "WindowStyle"));
+
+	SavefileHelper s = SavefileHelper();
+
+	s.encryptDecrypt("\x3&.q<\"$q,&?%");
+	conf.write("GOL", "BackgroundColor", "fffe8fff");
+
+
 	/*
 	Das Renderwindow ist für das zeichnen der verschiedenen Formen benutzt. 
 	Es können noch weitere Parameter übergeben werden, die dafür verantwortlich sind, 
 	ob das Fenster keinen CloseKnopf hat, nicht größenveränderbar ist...
 	*/
-	RenderWindow window(VideoMode(WINDOW_SIZE_X, WINDOW_SIZE_Y), "Snake");// , Style::Fullscreen);
+	RenderWindow window(VideoMode(windowDef::get().windowSizeX, windowDef::get().windowSizeY), "Snake", windowDef::get().windowStyle);// , Style::Fullscreen);
 	SceneHandler *sceneHandler = new SceneHandler();
 
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden

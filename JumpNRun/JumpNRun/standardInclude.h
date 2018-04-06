@@ -32,6 +32,9 @@ enum eOrientation {
 };
 
 //Helferklassen
+#include "globalVariables.h"
+#include "ConfigHelper.h"
+#include "SavefileHelper.h"
 #include "UnorderdMap.h"
 #include "Timer.h"
 #include "DrawableObject.h"
@@ -55,9 +58,10 @@ using namespace AlignHelper;
 #include "SceneSnakeGame.h"
 #include "SceneGOL.h"
 
+
 #define MS_PER_UPDATE 10
-#define WINDOW_SIZE_X 1600
-#define WINDOW_SIZE_Y 900
+
+
 
 
 

@@ -1,0 +1,26 @@
+[Window
+WindowSizeX: 1600
+WindowSizeY: 900
+WindowStyle: 7
+#
+[Menu
+BackgroundColor: 8bb0adff
+#
+[GOL
+BackgroundColor:fffe8fff
+CellColor: FF00FF55
+UpdateRate: 100
+GridSize: 85
+#
+[Snake
+HeadColor:872716ff
+HeadOColor:872716ff
+FoodColor:0000ffff
+FoodOColor:0000ffff
+BodyColor:ffffffff
+BodyOColor:ffffffff
+MOVE-UP:22
+MOVE-DOWN:18
+MOVE-RIGHT:3
+MOVE-LEFT:0
+#

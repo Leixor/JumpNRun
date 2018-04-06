@@ -47,6 +47,11 @@ public:
 		throw;
 	}
 
+	void set(int iterator, Content content)
+	{
+		objects.at(iterator).content = content;
+	}
+
 	Content get(Iterator iterator)
 	{
 		for (unsigned int i = 0; i < objects.size(); i++)
@@ -56,12 +61,16 @@ public:
 				return objects.at(i).content;
 			}
 		}
-
 		throw;
 	}
 
 	Content get(int index)
 	{
 		return objects.at(index).content;
+	}
+
+	Iterator getIterator(int index)
+	{
+		return objects.at(index).iterator;
 	}
 };

@@ -27,5 +27,10 @@ private:
 	int scoreCount;
 
 	bool setupFood();
+
+	int moveDown;
+	int moveUp;
+	int moveRight;
+	int moveLeft;
 };
 

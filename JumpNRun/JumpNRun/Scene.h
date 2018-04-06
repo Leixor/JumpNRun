@@ -13,6 +13,7 @@ public:
 	virtual void handleEvents(RenderWindow& window, Event windowEvent);
 	virtual void update();
 	virtual void render(RenderWindow& window, RenderStates shades, float timeTillUpdate);
+	virtual void confVarUpdate();
 
 	// Scenespezifische Funktionen
 	string getSceneName();
@@ -35,6 +36,7 @@ protected:
 	UnorderdMap<String, ObjectBase*> objects;
 	RenderWindow* window;
 	string sceneName;
+	ConfigHelper* conf;
 
 	unsigned int updateRate;
 	bool getUpdateSync()

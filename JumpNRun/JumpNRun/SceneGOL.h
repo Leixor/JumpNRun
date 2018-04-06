@@ -28,6 +28,7 @@ private:
 	string sizeText;
 	ObjectBase* generationText;
 	ObjectBase* gridSizeText;
+	ObjectBase* gpsText;
 	DrawableObject* background;
 	DrawableObject* proto;
 	ShapeRectangle* rect;
