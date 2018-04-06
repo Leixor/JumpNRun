@@ -31,7 +31,7 @@ bool SceneGOL::setupResources()
 
 	// UI adden
 
-	background = new ShapeRectangle(windowDef::get().windowSizeX, windowDef::get().windowSizeY, Color::Color(stoul(conf->get("GOL", "BackgroundColor"),nullptr,16)));
+	background = new ShapeRectangle(float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY), Color::Color(stoul(conf->get("GOL", "BackgroundColor"),nullptr,16)));
 	addResource("+size", new Button([&] {plusGridSize(); }, new ShapeSprite("Textures/plus.png", .1f)));
 	addResource("-size", new Button([&] {minusGridSize(); }, new ShapeSprite("Textures/minus.png", .1f)));
 	gridSizeText = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
@@ -92,7 +92,7 @@ void SceneGOL::update()
 void SceneGOL::handleInputs(RenderWindow & window)
 {
 	Scene::handleInputs(window);
-
+	
 	//Falls das Game noch im Setup ist soll an den Stellen wo der Spieler hinklickt eine Zelle zum Leben erweckt werden falls dort noch keine lebende ist
 	if (gameState & SETUPFIELD || gameState & PAUSED)
 	{
@@ -184,7 +184,6 @@ void SceneGOL::handleEvents(RenderWindow & window, Event windowEvent)
 			updateRate += 10;
 			gpsText->setText("Generation/Sekunde: " + to_string(1000 / updateRate));
 		}
-			
 	}
 }
 

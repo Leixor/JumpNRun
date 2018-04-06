@@ -32,7 +32,7 @@ enum eOrientation {
 };
 
 //Helferklassen
-#include "globalVariables.h"
+#include "GlobalVariables.h"
 #include "ConfigHelper.h"
 #include "SavefileHelper.h"
 #include "UnorderdMap.h"

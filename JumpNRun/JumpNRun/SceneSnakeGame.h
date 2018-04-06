@@ -9,6 +9,7 @@ public:
 	void handleEvents(RenderWindow & window, Event windowEvent);
 	void handleInputs(RenderWindow & window);
 	void render(RenderWindow& window, RenderStates shades, float timeTillUpdate);
+	void confVarUpdate();
 	bool setupResources();
 	void update();
 
@@ -28,9 +29,9 @@ private:
 
 	bool setupFood();
 
-	int moveDown;
-	int moveUp;
-	int moveRight;
-	int moveLeft;
+	Keyboard::Key moveDown;
+	Keyboard::Key moveUp;
+	Keyboard::Key moveRight;
+	Keyboard::Key moveLeft;
 };
 

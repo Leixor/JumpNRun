@@ -19,8 +19,8 @@ FoodColor:0000ffff
 FoodOColor:0000ffff
 BodyColor:ffffffff
 BodyOColor:ffffffff
-MOVE-UP:22
-MOVE-DOWN:18
-MOVE-RIGHT:3
-MOVE-LEFT:0
+MOVE-UP:W
+MOVE-DOWN:S
+MOVE-RIGHT:D
+MOVE-LEFT:A
 #
