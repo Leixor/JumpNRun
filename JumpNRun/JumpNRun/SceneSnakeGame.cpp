@@ -11,6 +11,7 @@ SceneSnakeGame::SceneSnakeGame(string name, SceneHandler * sceneHandler, Vector2
 	font = new Font();
 	this->font->loadFromFile("Textures/cool.ttf");
 	this->setupResources();
+	this->confVarUpdate();
 }
 
 SceneSnakeGame::~SceneSnakeGame()

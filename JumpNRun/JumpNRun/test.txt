@@ -1,6 +1,6 @@
 [Window
 WindowSizeX: 1600
-WindowSizeY: 900
+WindowSizeY: 800
 WindowStyle: 7
 #
 [Menu
