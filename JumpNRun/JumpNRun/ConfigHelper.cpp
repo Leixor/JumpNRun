@@ -65,13 +65,13 @@ void ConfigHelper::write(string container, string variableName, string variableV
 	bool writeSuccess = false;
 
 	// Erstmal checken ob der Container exestiert
-	for (int i = 0; i < this->cfgTable.size(); i++)
+	for (unsigned int i = 0; i < this->cfgTable.size(); i++)
 	{
 		// Falls er da reinkommt exestiert der Container schonmal
 		if (this->cfgTable.getIterator(i) == container)
 		{
 			// Checken ob die Variable schon exestiert
-			for (int j = 0; j < this->cfgTable.get(i)->size(); j++)
+			for (unsigned int j = 0; j < this->cfgTable.get(i)->size(); j++)
 			{
 				// Falls er da reinkommt exestiert die Variable schon
 				if (this->cfgTable.get(i)->getIterator(j) == variableName)
@@ -101,13 +101,13 @@ void ConfigHelper::write(string container, string variableName, string variableV
 
 	ofstream myfile(this->textFileName);
 
-	for (int i = 0; i < this->cfgTable.size(); i++)
+	for (unsigned int i = 0; i < this->cfgTable.size(); i++)
 	{
 		myfile << sectionBegin;
 		// Erstmal Containersektion reinschreiben
 		myfile << this->cfgTable.getIterator(i) << "\n";
 
-		for (int j = 0; j < this->cfgTable.get(i)->size(); j++)
+		for (unsigned int j = 0; j < this->cfgTable.get(i)->size(); j++)
 		{
 			// Container füllen
 			myfile << this->cfgTable.get(i)->getIterator(j) << ":" << this->cfgTable.get(i)->get(j) << "\n";
@@ -116,8 +116,6 @@ void ConfigHelper::write(string container, string variableName, string variableV
 	}
 	myfile.close();
 }
-
-
 
 std::string ConfigHelper::RemoveChars(const std::string& source, const std::string& chars)
 {

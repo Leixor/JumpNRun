@@ -11,6 +11,7 @@ SceneSnakeGame::SceneSnakeGame(string name, SceneHandler * sceneHandler, Vector2
 	font = new Font();
 	this->font->loadFromFile("Textures/cool.ttf");
 	this->setupResources();
+	this->confVarUpdate();
 }
 
 SceneSnakeGame::~SceneSnakeGame()
@@ -28,13 +29,13 @@ void SceneSnakeGame::handleEvents(RenderWindow & window, Event windowEvent)
 
 void SceneSnakeGame::handleInputs(RenderWindow & window)
 {
-	if (Keyboard::isKeyPressed(Keyboard::A) && this->snakeDirection != RIGHT)
+	if (Keyboard::isKeyPressed(moveLeft) && this->snakeDirection != RIGHT)
 		this->snakeDirectionNew = LEFT;
-	else if (Keyboard::isKeyPressed(Keyboard::D) && this->snakeDirection != LEFT)
+	else if (Keyboard::isKeyPressed(moveRight) && this->snakeDirection != LEFT)
 		this->snakeDirectionNew = RIGHT;
-	else if (Keyboard::isKeyPressed(Keyboard::W) && this->snakeDirection != BOTTOM)
+	else if (Keyboard::isKeyPressed(moveUp) && this->snakeDirection != BOTTOM)
 		this->snakeDirectionNew = TOP;
-	else if (Keyboard::isKeyPressed(Keyboard::S) && this->snakeDirection != TOP)
+	else if (Keyboard::isKeyPressed(moveDown) && this->snakeDirection != TOP)
 		this->snakeDirectionNew = BOTTOM;
 
 	if (Keyboard::isKeyPressed(Keyboard::R))
@@ -57,19 +58,22 @@ void SceneSnakeGame::render(RenderWindow & window, RenderStates shades, float ti
 	this->objects.get("Finished")->draw(window, shades);
 }
 
+void SceneSnakeGame::confVarUpdate()
+{
+	conf->readComplete();
+	// Setup Keys
+	moveUp = keyDef::get().keyCode.get(conf->get("Snake", "MOVE-UP"));
+	moveDown = keyDef::get().keyCode.get(conf->get("Snake", "MOVE-DOWN"));
+	moveRight = keyDef::get().keyCode.get(conf->get("Snake", "MOVE-RIGHT"));
+	moveLeft = keyDef::get().keyCode.get(conf->get("Snake", "MOVE-LEFT"));
+}
+
 bool SceneSnakeGame::setupResources()
 {
-	
-	conf = new ConfigHelper("test.txt");
-	
-	// Setup Keys
-	moveUp = stoi(conf->get("Snake", "MOVE-UP"));
-	moveDown = stoi(conf->get("Snake", "MOVE-DOWN"));
-	moveRight = stoi(conf->get("Snake", "MOVE-RIGHT"));
-	moveLeft = stoi(conf->get("Snake", "MOVE-LEFT"));
-
 	this->objects.clear();
 	this->snakeBody.clear();
+
+	this->conf = new ConfigHelper("test.txt");
 
 	addObject("Background", new ShapeRectangle(FloatRect(POSX, POSY, PITCH, PITCH), Color::Black, float(PITCH)/float(50), Color::White));
 	

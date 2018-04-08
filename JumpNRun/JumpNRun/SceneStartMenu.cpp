@@ -18,7 +18,7 @@ bool SceneStartMenu::setupResources()
 	
 
 	string bgColor = conf->get("Menu","BackgroundColor");
-	addObject("Background", new ShapeRectangle(windowDef::get().windowSizeX, windowDef::get().windowSizeY, Color::Color(stoul(bgColor, nullptr, 16))));
+	addObject("Background", new ShapeRectangle(float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY), Color::Color(stoul(bgColor, nullptr, 16))));
 
 	startButton = addResource<Button*>("Button_Start", new Button([&] {buttonStartAction();}, new ShapeSprite("Textures/blueButton.png", 1.5f)));
 	this->objects.get("Button_Start")->addText("Start", *this->font);

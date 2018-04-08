@@ -51,7 +51,7 @@ public:
 	{
 		objects.at(iterator).content = content;
 	}
-
+	
 	Content get(Iterator iterator)
 	{
 		for (unsigned int i = 0; i < objects.size(); i++)
@@ -72,5 +72,17 @@ public:
 	Iterator getIterator(int index)
 	{
 		return objects.at(index).iterator;
+	}
+
+	Iterator getIterator(Content content)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).content == content)
+			{
+				return objects.at(i).iterator;
+			}
+		}
+		throw;
 	}
 };

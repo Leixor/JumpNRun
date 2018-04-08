@@ -1,4 +1,8 @@
 #pragma once
+
+#define _USE_MATH_DEFINES
+#define MS_PER_UPDATE 100
+
 #include <iostream>
 #include <mutex>
 #include <stdio.h>
@@ -6,9 +10,9 @@
 #include <thread>
 #include <chrono>
 #include <random>
+#include <math.h>
 
 #include <SFML\Graphics.hpp>
-#include "AnimatedSprite.hpp"
 
 #include <Windows.h>
 
@@ -31,26 +35,35 @@ enum eOrientation {
 	BOTTOM = 8
 };
 
-//Helferklassen
-#include "globalVariables.h"
-#include "ConfigHelper.h"
-#include "SavefileHelper.h"
+//ExtraClasses
+#include "GlobalVariables.h"
 #include "UnorderdMap.h"
 #include "Timer.h"
+
+//DrawableShapes
 #include "DrawableObject.h"
 #include "DrawableShape.h"
 #include "ShapeRectangle.h"
 #include "ShapeCircle.h"
 #include "ShapeSprite.h"
+
+//Helferklassen
+#include "ConfigHelper.h"
+#include "SavefileHelper.h"
 #include "AlignHelper.h"
 using namespace AlignHelper;
 
-//Grundbausteine der Subklassen
+//Animation
+#include "Animation.h"
+#include "AnimationHandler.h"
+
+//Objects
 #include "ObjectBase.h"
+
+//Scene
 #include "Scene.h"
 #include "SceneHandler.h"
 
-//Subklassen
 #include "Button.h"
 #include "CheckBox.h"
 #include "SceneOption.h"
@@ -58,8 +71,6 @@ using namespace AlignHelper;
 #include "SceneSnakeGame.h"
 #include "SceneGOL.h"
 
-
-#define MS_PER_UPDATE 10
 
 
 
