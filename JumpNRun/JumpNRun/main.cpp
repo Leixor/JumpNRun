@@ -11,6 +11,10 @@ Int64 getCurrentTime()
 	return ms.count();
 }
 
+
+
+
+
 int main()
 {
 	ConfigHelper conf("test.txt");
@@ -56,6 +60,21 @@ int main()
 	FPS->setCharacterSize(20);
 	FPS->setFillColor(Color::Cyan);
 
+	ShapeRectangle bg(windowDef::get().windowSizeX, windowDef::get().windowSizeY, Color::Red);
+	ShapeRectangle rect(Vector2f(600, 300));
+	rect.setFillColor(Color::White);
+	alignTo(rect, bg);
+
+	ShapeRectangle porigin(Vector2f(2, 2));
+	porigin.setFillColor(Color::Blue);
+
+	rect.rotate(40, Vector2f(300,150));
+	// tests
+	
+
+	
+	
+
 	while (window.isOpen())
 	{
 		vector<Event> windowEvents;
@@ -76,6 +95,10 @@ int main()
 			case Event::KeyPressed:
 				if (windowEvent.key.code == Keyboard::Escape)
 					window.close();
+				if (windowEvent.key.code == Keyboard::U)
+					rect.rotate(-40);
+				if (windowEvent.key.code == Keyboard::K)
+					rect.rotate(40,Vector2f(300, 150));
 				break;
 			}
 			sceneHandler->handleEvents(window, windowEvent);
@@ -88,7 +111,6 @@ int main()
 		{
 			//Ruft die Aktualisierungsmethode auf
 			sceneHandler->update();
-
 			//FPSCOUNTER
 			loop++;
 			if (loop == 1000 / MS_PER_UPDATE) {
@@ -100,16 +122,16 @@ int main()
 			lag -= MS_PER_UPDATE;
 
 		}
-
+	
 		//Zeichnen der Objekte
 		window.clear();
 
-		sceneHandler->render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
-
+		//sceneHandler->render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
+		bg.draw(window, RenderStates());
+		rect.draw(window, RenderStates());
 		//FPSCOUNTER
 		window.draw(*FPS);
 		frameCount++;
-
 		window.display();	
 	}
 

@@ -26,7 +26,7 @@ public:
 	virtual void setOutlineThickness(float thickness) = 0; 
 	virtual void setScale(Vector2f scale) = 0;
 
-	virtual void rotate(float offsetAngle) = 0;
+	virtual void rotate(float offsetAngle, Vector2f origin) = 0;
 	virtual void move(Vector2f offset) = 0;
 	virtual void scale(Vector2f offset) = 0;
 

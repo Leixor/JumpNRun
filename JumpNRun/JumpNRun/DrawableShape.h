@@ -17,7 +17,7 @@ public:
 	void setRotation(float angle);
 	void setFillColor(Color color);
 
-	void rotate(float offsetAngle);
+	void rotate(float offsetAngle, Vector2f origin = Vector2f(0,0));
 	void move(Vector2f offset);
 	void scale(Vector2f offset);
 
@@ -54,7 +54,7 @@ inline DrawableShape<DrawableType>::~DrawableShape()
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::draw(RenderWindow & window, RenderStates shader)
 {
-		window.draw(*shape);
+		window.draw(*shape, shader);
 }
 
 template<class DrawableType>
@@ -112,9 +112,32 @@ inline float DrawableShape<DrawableType>::getRotation()
 }
 
 template<class DrawableType>
-inline void DrawableShape<DrawableType>::rotate(float offsetAngle)
+inline void DrawableShape<DrawableType>::rotate(float offsetAngle, Vector2f origin)
 {
+	// Die Originalposition der linken oberen Ecke herausfinden
+	sf::Transform w;
+	float rotation = this->shape->getRotation();
+	w.rotate(rotation);
+	w.rotate(-rotation, origin);
+	Vector2f originalGlobalPos = w.transformPoint(this->getPosition());
+
+	// Zwischenspeichern wo die linke obere Ecke jetzt gerade ist
+	Vector2f oldPos = this->getPosition();
+
+	// Die globale Position des Origins herausfinden
+	Vector2f globalOrigin = originalGlobalPos + origin;
+
+	// Setze den Shape an den gewünschten Origin und drehe es um die gewünschten Grad
+	this->setOrigin(origin);
+	this->setPosition(globalOrigin);
 	this->shape->rotate(offsetAngle);
+
+	// Linke obere Ecke wieder ans Origin setzen ohne das Rechteck zu verschieben
+	sf::Transform t;
+	t.rotate(offsetAngle, globalOrigin);
+	Vector2f newPos = t.transformPoint(oldPos);
+	this->setOrigin(Vector2f(0, 0));
+	this->setPosition(newPos);
 }
 
 template<class DrawableType>
