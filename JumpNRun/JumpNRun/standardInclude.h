@@ -68,6 +68,7 @@ using namespace AlignHelper;
 #include "CheckBox.h"
 #include "SceneOption.h"
 #include "SceneStartMenu.h"
+#include "SceneGameSelection.h"
 #include "SceneSnakeGame.h"
 #include "SceneGOL.h"
 

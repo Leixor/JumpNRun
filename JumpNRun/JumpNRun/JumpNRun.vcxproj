@@ -168,6 +168,7 @@
     </ClCompile>
     <ClCompile Include="SavefileHelper.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneGameSelection.cpp" />
     <ClCompile Include="SceneGOL.cpp" />
     <ClCompile Include="SceneSnakeGame.cpp" />
     <ClCompile Include="SceneHandler.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="SavefileHelper.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneGameSelection.h" />
     <ClInclude Include="SceneGOL.h" />
     <ClInclude Include="SceneSnakeGame.h" />
     <ClInclude Include="SceneHandler.h" />

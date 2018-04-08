@@ -46,16 +46,15 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 
 	if (Keyboard::isKeyPressed(Keyboard::I))
 	{
-		this->visible = NONE;
+		this->setVisibility(NONE);
 		this->getSceneHandler()->setTopScene("GOL");
-		this->getSceneHandler()->getSceneByName("GOL")->visible = ALL;
+		this->getSceneHandler()->getSceneByName("GOL")->setVisibility(ALL);
 	}
 }
 
 void SceneSnakeGame::render(RenderWindow & window, RenderStates shades, float timeTillUpdate)
 {
 	Scene::render(window, shades, timeTillUpdate);
-	this->objects.get("Finished")->draw(window, shades);
 }
 
 void SceneSnakeGame::confVarUpdate()

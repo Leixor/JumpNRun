@@ -11,23 +11,12 @@ Int64 getCurrentTime()
 	return ms.count();
 }
 
-
-
-
-
 int main()
 {
-	ConfigHelper conf("test.txt");
-	conf.write("GOL", "BackgroundColor", "fff01fff");
+	ConfigHelper conf("Test.txt");
 	windowDef::get().windowSizeX = stoi(conf.get("Window", "WindowSizeX"));
 	windowDef::get().windowSizeY = stoi(conf.get("Window", "WindowSizeY"));
 	windowDef::get().windowStyle = stoi(conf.get("Window", "WindowStyle"));
-
-	SavefileHelper s = SavefileHelper();
-
-	s.encryptDecrypt("\x3&.q<\"$q,&?%");
-	conf.write("GOL", "BackgroundColor", "fffe8fff");
-
 
 	/*
 	Das Renderwindow ist für das zeichnen der verschiedenen Formen benutzt. 
@@ -58,26 +47,10 @@ int main()
 	FPS->setFont(*font);
 	FPS->setString(to_string(frameCount));
 	FPS->setCharacterSize(20);
-	FPS->setFillColor(Color::Cyan);
-
-	ShapeRectangle bg(windowDef::get().windowSizeX, windowDef::get().windowSizeY, Color::Red);
-	ShapeRectangle rect(Vector2f(600, 300));
-	rect.setFillColor(Color::White);
-	alignTo(rect, bg);
-
-	ShapeRectangle porigin(Vector2f(2, 2));
-	porigin.setFillColor(Color::Blue);
-
-	rect.rotate(40, Vector2f(300,150));
-	// tests
-	
-
-	
-	
+	FPS->setFillColor(Color::Cyan);	
 
 	while (window.isOpen())
 	{
-		vector<Event> windowEvents;
 		Int64 current = getCurrentTime();
 		Int64 elapsed = current - previous;
 		previous = current;
@@ -95,11 +68,6 @@ int main()
 			case Event::KeyPressed:
 				if (windowEvent.key.code == Keyboard::Escape)
 					window.close();
-				if (windowEvent.key.code == Keyboard::U)
-					rect.rotate(-40);
-				if (windowEvent.key.code == Keyboard::K)
-					rect.rotate(40,Vector2f(300, 150));
-				break;
 			}
 			sceneHandler->handleEvents(window, windowEvent);
 		}
@@ -125,10 +93,7 @@ int main()
 	
 		//Zeichnen der Objekte
 		window.clear();
-
-		//sceneHandler->render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
-		bg.draw(window, RenderStates());
-		rect.draw(window, RenderStates());
+		sceneHandler->render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 		//FPSCOUNTER
 		window.draw(*FPS);
 		frameCount++;
