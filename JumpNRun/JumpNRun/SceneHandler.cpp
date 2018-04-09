@@ -53,7 +53,8 @@ void SceneHandler::render(RenderWindow& window, RenderStates shades, float timeT
 
 void SceneHandler::addScene(Scene * createScene, int visible)
 {
-	if (!sceneExists(createScene->getSceneName())) {
+	if (!sceneExists(createScene->getSceneName())) 
+	{
 		vScenes.push_back(createScene);
 		vScenes.back()->setVisibility(visible);
 	}
@@ -86,9 +87,11 @@ void SceneHandler::deleteScene(string sceneName)
 void SceneHandler::setTopScene(string sceneName)
 {
 	if (sceneExists(sceneName)) {
-		if (vScenes[0] != vScenes[getSceneIndexByName(sceneName)]) {
+		if (vScenes[0] != vScenes[getSceneIndexByName(sceneName)]) 
+		{
 			int index = getSceneIndexByName(sceneName);
-			for (unsigned int i = 0; i < vScenes.size() - index; i++) {
+			for (unsigned int i = 0; i < vScenes.size() - index; i++) 
+			{
 				iter_swap(vScenes.begin() + i, vScenes.end() - index);
 			}
 		}
@@ -103,6 +106,24 @@ void SceneHandler::setSceneVisibility(string sceneName, int visibility)
 	int index = getSceneIndexByName(sceneName);
 
 	vScenes[index]->setVisibility(visibility);
+}
+
+void SceneHandler::setScenePriority(string name, int priority)
+{
+	if (priority >= int(this->vScenes.size() - 1))
+		throw;
+
+	int index = getSceneIndexByName(name);
+	if (index > priority)
+		for (int i = priority; i < index; i++)
+		{
+			iter_swap(vScenes.begin() + i, vScenes.begin() + index);
+		}
+	else if (index < priority)
+		for (int i = priority; i > index; i--)
+		{
+			iter_swap(vScenes.begin() + i, vScenes.begin() + index);
+		}
 }
 
 // Returnt den Index der jeweiligen Szene nach Namen, vorher sollte überprüft werden ob die Scene überhaupt exestiert von dem man den Index haben will mithilfe der unteren Funktion

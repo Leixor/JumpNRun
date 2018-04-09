@@ -40,19 +40,24 @@ public:
 	}
 
 	template <typename returnType>
-	returnType addResource(string name, returnType toAdd) {
-		objects.push(name, toAdd);
+	returnType addResource(string name, returnType toAdd, int priority = -1)
+	{
+		this->objects.push(name, toAdd);
+		if(priority != -1)
+			this->setObjectPriority(name,priority);
 		return toAdd;
 	}
-	ObjectBase* addObject(string name, DrawableObject* toAdd);
+	ObjectBase* addObject(string name, DrawableObject* toAdd, int priority = -1);
 protected:
 	//Alle Objekte die eine Szene beinhaltet, werden hier gespeichert
-	UnorderdMap<String, ObjectBase*> objects;
+	UnorderdMap<string, ObjectBase*> objects;
 	RenderWindow* window;
 	string sceneName;
 	ConfigHelper* conf;
-
 	unsigned int updateRate;
+
+	void setObjectPriority(string name, int priority);
+	int getObjectPriority(string name);	
 	bool getUpdateSync()
 	{
 		return updateSync;

@@ -13,12 +13,12 @@ UpdateRate: 100
 GridSize: 85
 #
 [Snake
-HeadColor:872716ff
-HeadOColor:872716ff
-FoodColor:0000ffff
-FoodOColor:0000ffff
-BodyColor:ffffffff
-BodyOColor:ffffffff
+HeadColor:000000ff
+HeadOColor:22f2f2ff
+FoodColor:000000ff
+FoodOColor:f0f00fff
+BodyColor:000000ff
+BodyOColor:ff00ffff
 MOVE-UP:W
 MOVE-DOWN:S
 MOVE-RIGHT:D

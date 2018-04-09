@@ -81,8 +81,8 @@ void Scene::setSceneViewPort(FloatRect & viewPort)
 void Scene::setScenePosition(Vector2f & position)
 {
 	FloatRect current = view.getViewport();
-	current.top = position.x;
-	current.left = position.y;
+	current.left = position.x;
+	current.top = position.y;
 	view.setViewport(current);
 }
 
@@ -96,11 +96,36 @@ SceneHandler * Scene::getSceneHandler() const
 	return this->sceneHandler;
 }
 
-ObjectBase* Scene::addObject(string name, DrawableObject * toAdd)
+ObjectBase* Scene::addObject(string name, DrawableObject * toAdd, int priority)
 {
 	ObjectBase* tmp = new ObjectBase(toAdd);
-	objects.push(name, tmp);
+	this->objects.push(name, tmp);
+	if (priority != -1)
+		this->setObjectPriority(name, priority);
 	return tmp;
+}
+
+void Scene::setObjectPriority(string name, int priority)
+{
+	if (priority >= int(this->objects.size() - 1))
+		throw;
+	
+	int index = this->getObjectPriority(name);
+	if(index > priority)
+		for (int i = priority; i < index; i++)
+		{
+			this->objects.iterswap(i, index);
+		}
+	else if(index < priority)
+		for (int i = priority; i > index; i--)
+		{
+			this->objects.iterswap(i, index);
+		}
+}
+
+int Scene::getObjectPriority(string name)
+{
+	return objects.getIndex(name);
 }
 
 

@@ -12,6 +12,18 @@ struct MapContent
 	{}
 };
 
+template<typename Iterator, typename Content, typename Spec>
+struct MapContent3V
+{
+	Iterator iterator;
+	Content content;
+	Spec spec;
+
+	MapContent3V(Iterator iterator, Content content, Spec spec)
+		:iterator(iterator), content(content), spec(spec)
+	{}
+};
+
 template<typename Iterator, typename Content> 
 struct UnorderdMap 
 {
@@ -34,7 +46,7 @@ public:
 		objects.clear();
 	}
 
-	unsigned int getIndex(Iterator iterator)
+	int getIndex(Iterator iterator)
 	{
 		for (unsigned int i = 0; i < objects.size(); i++)
 		{
@@ -47,9 +59,26 @@ public:
 		throw;
 	}
 
-	void set(int iterator, Content content)
+	void iterswap(int begin, int end)
 	{
-		objects.at(iterator).content = content;
+		iter_swap(objects.begin() + begin, objects.begin() + end);
+	}
+
+	void set(int index, Content content)
+	{
+		objects.at(index).content = content;
+	}
+
+	void set(Iterator iterator, Content content)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).iterator == iterator)
+			{
+				objects.at(i).content = content;
+			}
+		}
+		throw;
 	}
 	
 	Content get(Iterator iterator)
@@ -81,6 +110,151 @@ public:
 			if (objects.at(i).content == content)
 			{
 				return objects.at(i).iterator;
+			}
+		}
+		throw;
+	}
+};
+
+template<typename Iterator, typename Content, typename Spec>
+struct UnorderdMap3V
+{
+private:
+	vector<MapContent3V<Iterator, Content, Spec>> objects;
+
+public:
+	void push(Iterator iterator, Content content, Spec spec)
+	{
+		objects.push_back(MapContent3V<Iterator, Content, Spec>(iterator, content, spec));
+	}
+
+	unsigned int size()
+	{
+		return objects.size();
+	}
+
+	void clear()
+	{
+		objects.clear();
+	}
+
+	unsigned int getIndex(Iterator iterator)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).iterator == iterator)
+			{
+				return i;
+			}
+		}
+
+		throw;
+	}
+
+	void set(int iterator, Content content)
+	{
+		objects.at(iterator).content = content;
+	}
+
+	void set(Iterator iterator, Content content)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).iterator == iterator)
+			{
+				objects.at(i).content = content;
+			}
+		}
+		throw;
+	}
+
+	void setSpec(int index, Spec content)
+	{
+		objects.at(index).spec = spec;
+	}
+
+	void setSpec(Iterator iterator, Spec spec)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).iterator == iterator)
+			{
+				objects.at(i).spec = spec;
+			}
+		}
+		throw;
+	}
+
+	void setSpec(Content content, Spec spec)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).content == content)
+			{
+				objects.at(i).spec = spec;
+			}
+		}
+		throw;
+	}
+
+	Content get(Iterator iterator)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).iterator == iterator)
+			{
+				return objects.at(i).content;
+			}
+		}
+		throw;
+	}
+
+	Content get(int index)
+	{
+		return objects.at(index).content;
+	}
+
+	Iterator getIterator(int index)
+	{
+		return objects.at(index).iterator;
+	}
+
+	Iterator getIterator(Content content)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).content == content)
+			{
+				return objects.at(i).iterator;
+			}
+		}
+		throw;
+	}
+
+	Spec getSpec(int index)
+	{
+		return objects.at(index).spec;
+	}
+
+	Spec getSpec(Iterator iterator)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).iterator == iterator)
+			{
+				return objects.at(i).spec;
+			}
+		}
+		throw;
+	}
+
+	Spec getSpec(Content content)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).content == content)
+			{
+				return objects.at(i).spec;
 			}
 		}
 		throw;

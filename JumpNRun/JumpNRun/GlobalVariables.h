@@ -6,8 +6,8 @@ class windowDef
 public:
 	static windowDef& get(); //provide static member function to access the unique instance.
 
-	int windowSizeX;
-	int windowSizeY;
+	float windowSizeX;
+	float windowSizeY;
 	int windowStyle;
 
 private:

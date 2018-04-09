@@ -186,7 +186,7 @@ void SceneSnakeGame::update()
 			if (foodPos.x == nextPos.x && foodPos.y == nextPos.y)
 			{
 				this->setupFood();
-				this->snakeBody.push_back(addObject("Snake" + to_string(this->snakeBody.size()), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Color(stoul(conf->get("Snake", "BodyColor"), nullptr, 16)), THICKNESS, Color::Color(stoul(conf->get("Snake", "BodyOColor"), nullptr, 16)))));
+				this->snakeBody.push_back(addObject("Snake" + to_string(this->snakeBody.size()), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Color(stoul(conf->get("Snake", "BodyColor"), nullptr, 16)), THICKNESS, Color::Color(stoul(conf->get("Snake", "BodyOColor"), nullptr, 16))),1));
 				this->objects.get("Snake" + to_string(this->snakeBody.size() - 1))->shape->setPosition(lastSnakePartPos);
 
 				// Erhöhe Scorecount

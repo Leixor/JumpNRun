@@ -10,6 +10,16 @@ SceneStartMenu::~SceneStartMenu()
 {
 }
 
+void SceneStartMenu::handleEvents(RenderWindow & window, Event windowEvent)
+{
+	Scene::handleEvents(window, windowEvent);
+	if (windowEvent.type == Event::MouseButtonReleased && this->getSceneHandler()->sceneExists("GameSelection"))
+	{
+		this->setVisibility(UPDATABLE);
+		this->getSceneHandler()->getSceneByName("GameSelection")->setVisibility(ALL);
+	}
+}
+
 bool SceneStartMenu::setupResources()
 {
 	conf = new ConfigHelper("test.txt");
@@ -39,7 +49,7 @@ bool SceneStartMenu::setupResources()
 	alignTo(*this->objects.get("Button_Option")->objectText, *this->objects.get("Button_Option")->shape);
 	alignTo(*this->objects.get("Button_End")->objectText, *this->objects.get("Button_End")->shape);
 
-	this->objects.push("SnakeCover", new ObjectBase(new DrawableShape<Sprite>()));
+	addResource("SnakeCover", new ObjectBase(new DrawableShape<Sprite>()));
 	this->objects.get("SnakeCover")->shape->setTexture("Textures/Cover_Snake.png");
 	this->objects.get("SnakeCover")->shape->setPosition(Vector2f(300, 100));
 	this->objects.get("SnakeCover")->shape->setSize(Vector2f(1000, 600));
@@ -51,9 +61,8 @@ bool SceneStartMenu::setupResources()
 
 void SceneStartMenu::buttonStartAction()
 {
-	this->setVisibility(UPDATABLE);
-
-	this->getSceneHandler()->addScene(new SceneGameSelection("GameSelection", this->getSceneHandler()));
+	this->setVisibility(INPUTABLE);
+	this->getSceneHandler()->addScene(new SceneGameSelection("GameSelection", this->getSceneHandler(), window), VISIBLE);
 }
 
 void SceneStartMenu::buttonOptionAction()

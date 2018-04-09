@@ -18,6 +18,7 @@ public:
 	void deleteScene(string sceneName);
 	void setTopScene(string sceneName);
 	void setSceneVisibility(string sceneName, int visibility);
+	void setScenePriority(string name, int priority);
 
 	// Helper Scenes mit anderen Scenes interagieren zu lassen
 	int getSceneIndexByName(string sceneName);
