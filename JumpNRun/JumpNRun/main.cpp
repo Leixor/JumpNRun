@@ -12,6 +12,73 @@ Int64 getCurrentTime()
 }
 
 
+void scali(ShapeRectangle& rect, Vector2f origin,  Vector2f scale = Vector2f(1.05f, 1.05f))
+{
+	// Die Originalposition der linken oberen Ecke herausfinden
+	Transform w;
+	float rotation = rect.getRotation();
+	Vector2f wcale = rect.getScale();
+	Vector2f iScale = Vector2f(1.0f / wcale.x, 1.0f / wcale.y);
+	w.rotate(rotation);
+	w.scale(wcale);
+	w.rotate(-rotation, origin);
+	w.scale(iScale, origin);
+	Vector2f originalGlobalPos = w.transformPoint(rect.getPosition());
+
+
+	// Zwischenspeichern wo die linke obere Ecke jetzt gerade ist
+	Vector2f oldPos = rect.getPosition();
+
+	// Die globale Position des Origins herausfinden
+	Vector2f globalOrigin = originalGlobalPos + origin;
+
+	// Setze den Shape an den gewünschten Origin und drehe es um die gewünschten Grad
+	rect.setOrigin(origin);
+	rect.setPosition(globalOrigin);
+	rect.shape->scale(scale);
+
+	/* Linke obere Ecke wieder ans Origin setzen ohne das Rechteck zu verschieben*/
+	sf::Transform t; 
+	wcale = rect.getScale();
+	t.rotate(rotation, globalOrigin);
+	t.scale(wcale, globalOrigin);
+	//t.rotate(rotation, origin);
+	Vector2f newPos = t.transformPoint(originalGlobalPos);
+	rect.setOrigin(Vector2f(0, 0));
+	rect.setPosition(newPos);
+}
+void rotati(ShapeRectangle& rect, Vector2f origin, float offsetAngle = 10.f)
+{
+	// Die Originalposition der linken oberen Ecke herausfinden
+	Transform w;
+	float rotation = rect.getRotation();
+	Vector2f scale = rect.getScale();
+	Vector2f iScale = Vector2f(1.0f / scale.x, 1.0f / scale.y);
+	w.rotate(rotation);
+	w.scale(scale);
+	w.rotate(-rotation, origin);
+	w.scale(iScale, origin);
+	Vector2f originalGlobalPos = w.transformPoint(rect.getPosition());
+
+	// Zwischenspeichern wo die linke obere Ecke jetzt gerade ist
+	Vector2f oldPos = rect.getPosition();
+
+	// Die globale Position des Origins herausfinden
+	Vector2f globalOrigin = originalGlobalPos + origin;
+
+	// Setze den Shape an den gewünschten Origin und drehe es um die gewünschten Grad
+	rect.setOrigin(origin);
+	rect.setPosition(globalOrigin);
+	rect.shape->rotate(offsetAngle);
+
+	// Linke obere Ecke wieder ans Origin setzen ohne das Rechteck zu verschieben
+	sf::Transform t;
+	t.rotate(offsetAngle, globalOrigin);
+	Vector2f newPos = t.transformPoint(oldPos);
+	rect.setOrigin(Vector2f(0, 0));
+	rect.setPosition(newPos);
+}
+
 
 
 
@@ -68,7 +135,8 @@ int main()
 	ShapeRectangle porigin(Vector2f(2, 2));
 	porigin.setFillColor(Color::Blue);
 
-	rect.rotate(40, Vector2f(300,150));
+	//rotati(rect, Vector2f(300, 150));
+	//scali(rect, Vector2f(300,150));
 	// tests
 	
 
@@ -94,11 +162,7 @@ int main()
 				break;
 			case Event::KeyPressed:
 				if (windowEvent.key.code == Keyboard::Escape)
-					window.close();
-				if (windowEvent.key.code == Keyboard::U)
-					rect.rotate(-40);
-				if (windowEvent.key.code == Keyboard::K)
-					rect.rotate(40,Vector2f(300, 150));
+					window.close();	
 				break;
 			}
 			sceneHandler->handleEvents(window, windowEvent);

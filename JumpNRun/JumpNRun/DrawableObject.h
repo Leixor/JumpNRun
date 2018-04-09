@@ -16,7 +16,8 @@ public:
 
 	virtual void setSize(Vector2f size) = 0;
 	virtual void setPosition(Vector2f pos) = 0;
-	virtual void setRotation(float angle) = 0;
+	virtual void setRotation(float angle, Vector2f origin) = 0;
+	virtual void setScale(Vector2f scale, Vector2f origin) = 0;
 	virtual void setOrigin(Vector2f origin) = 0;
 	
 	virtual void setFillColor(Color color) = 0;
@@ -24,11 +25,11 @@ public:
 	virtual void setTextureRect(IntRect textureRect) = 0;
 	virtual void setOutlineColor(Color color) = 0;
 	virtual void setOutlineThickness(float thickness) = 0; 
-	virtual void setScale(Vector2f scale) = 0;
+
 
 	virtual void rotate(float offsetAngle, Vector2f origin) = 0;
 	virtual void move(Vector2f offset) = 0;
-	virtual void scale(Vector2f offset) = 0;
+	virtual void scale(Vector2f offset, Vector2f origin) = 0;
 
 	virtual Vector2f getSize() = 0;
 	virtual Vector2f getPosition() = 0;
