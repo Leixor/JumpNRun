@@ -1,7 +1,6 @@
 #pragma once
 #include "standardInclude.h"
 
-// Merken : https://www.sfml-dev.org/tutorials/2.0/graphics-vertex-array.php
 
 Int64 getCurrentTime()
 {

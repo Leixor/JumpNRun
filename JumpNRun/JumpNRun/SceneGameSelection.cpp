@@ -21,9 +21,10 @@ bool SceneGameSelection::setupResources()
 
 	this->getSceneHandler()->addScene(new SceneSnakeGame("SnakeGame", this->getSceneHandler(), Vector2u(15, 15), 6));
 	this->getSceneHandler()->setTopScene("SnakeGame");
-	this->getSceneHandler()->getSceneByName("SnakeGame")->setVisibility(VISIBLE);
+	this->getSceneHandler()->getSceneByName("SnakeGame")->setVisibility(ALL);
 	this->getSceneHandler()->getSceneByName("SnakeGame")->setView(View(FloatRect(50, 50, 600, 600)));
-	this->getSceneHandler()->getSceneByName("SnakeGame")->setSceneScaling(Vector2f(1, 0.5));
+	this->getSceneHandler()->getSceneByName("SnakeGame")->setScenePosition(Vector2f(0.5f,0.5f));
+	this->getSceneHandler()->getSceneByName("SnakeGame")->setSceneScaling(Vector2f(0.2, 0.4));
 
 	return false;
 }

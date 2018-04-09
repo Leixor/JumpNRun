@@ -48,6 +48,7 @@ void SceneHandler::render(RenderWindow& window, RenderStates shades, float timeT
 			vScenes[i]->render(window, shades, timeTillUpdate);
 		}
 	}
+	window.setView(View(FloatRect(0, 0, windowDef::get().windowSizeX, windowDef::get().windowSizeY)));
 }
 
 void SceneHandler::addScene(Scene * createScene, int visible)
