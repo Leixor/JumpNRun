@@ -1,7 +1,7 @@
 #include "standardInclude.h"
 
-Scene::Scene(string Name, SceneHandler * sceneHandler, RenderWindow* window, int visible)
-	: sceneName(Name), sceneHandler(sceneHandler), window(window), visible(visible)
+Scene::Scene(string Name, SceneHandler * sceneHandler, RenderWindow* window, View& view)
+	: sceneName(Name), sceneHandler(sceneHandler), window(window),  view(view)
 {
 	this->updateSync = false; 
 	this->updateCount = 1;
@@ -49,6 +49,7 @@ void Scene::update()
 
 void Scene::render(RenderWindow & window, RenderStates shades, float timeTillUpdate)
 {
+	window.setView(view);
 	for (unsigned int i = 0; i < this->objects.size(); i++)
 	{
 		objects.get(i)->draw(window, shades);
@@ -57,6 +58,32 @@ void Scene::render(RenderWindow & window, RenderStates shades, float timeTillUpd
 
 void Scene::confVarUpdate()
 {
+}
+
+void Scene::setSceneScaling(Vector2f & scaling)
+{
+	FloatRect current = view.getViewport();
+	current.width = scaling.x;
+	current.height = scaling.y;
+	view.setViewport(current);
+}
+
+void Scene::setSceneViewPort(FloatRect & viewPort)
+{
+	FloatRect current;
+	current.width = viewPort.width;
+	current.height = viewPort.height;
+	current.top = viewPort.top;
+	current.left = viewPort.left;
+	view.setViewport(current);
+}
+
+void Scene::setScenePosition(Vector2f & position)
+{
+	FloatRect current = view.getViewport();
+	current.top = position.x;
+	current.left = position.y;
+	view.setViewport(current);
 }
 
 string Scene::getSceneName()

@@ -25,7 +25,7 @@ public:
 		if(shapeVisible & VISIBLE)
 			shape->draw(window, shades);
 		if(textVisible & VISIBLE)
-			window.draw(*objectText);
+			window.draw(*objectText, shades);
 	}
 	
 		
@@ -49,7 +49,5 @@ public:
 	int shapeVisible;
 	int textVisible;
 	Text* objectText;
-	
-
 };
 

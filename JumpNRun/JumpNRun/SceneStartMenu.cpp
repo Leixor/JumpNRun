@@ -16,7 +16,6 @@ bool SceneStartMenu::setupResources()
 	font = new Font();
 	this->font->loadFromFile("Textures/cool.ttf");
 	
-
 	string bgColor = conf->get("Menu","BackgroundColor");
 	addObject("Background", new ShapeRectangle(float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY), Color::Color(stoul(bgColor, nullptr, 16))));
 
@@ -32,8 +31,6 @@ bool SceneStartMenu::setupResources()
 	this->objects.get("Button_End")->addText("Beenden", *this->font);
 	this->objects.get("Button_End")->setTextSize(50);
 	
-
-
 	alignTo(*optionButton->shape, *this->objects.get("Background")->shape);
 	optionButton->shape->move(Vector2f(0, 100));
 	alignNextTo(*startButton->shape, *optionButton->shape, LEFT, 50);
@@ -41,7 +38,6 @@ bool SceneStartMenu::setupResources()
 	alignTo(*this->objects.get("Button_Start")->objectText, *this->objects.get("Button_Start")->shape);
 	alignTo(*this->objects.get("Button_Option")->objectText, *this->objects.get("Button_Option")->shape);
 	alignTo(*this->objects.get("Button_End")->objectText, *this->objects.get("Button_End")->shape);
-
 
 	this->objects.push("SnakeCover", new ObjectBase(new DrawableShape<Sprite>()));
 	this->objects.get("SnakeCover")->shape->setTexture("Textures/Cover_Snake.png");
@@ -55,17 +51,15 @@ bool SceneStartMenu::setupResources()
 
 void SceneStartMenu::buttonStartAction()
 {
-	this->visible = UPDATABLE;
+	this->setVisibility(UPDATABLE);
 
-	this->getSceneHandler()->addScene(new SceneGOL("GOL", this->getSceneHandler(), this->window), true);
-	this->getSceneHandler()->addScene(new SceneSnakeGame("SnakeGame", this->getSceneHandler(), Vector2u(20,20), 4), ALL);
-	this->getSceneHandler()->getSceneByName("SnakeGame")->visible = NONE;
+	this->getSceneHandler()->addScene(new SceneGameSelection("GameSelection", this->getSceneHandler()));
 }
 
 void SceneStartMenu::buttonOptionAction()
 {
 	this->getSceneHandler()->addScene(new SceneOption("Option", this->getSceneHandler()), ALL);
-	this->visible = UPDATABLE;
+	this->setVisibility(UPDATABLE);
 }
 
 void SceneStartMenu::buttonEndAction()

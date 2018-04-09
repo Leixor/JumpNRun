@@ -12,7 +12,7 @@ SceneHandler::~SceneHandler()
 void SceneHandler::handleEvents(RenderWindow& window, Event windowEvent)
 {
 	for(unsigned int i = 0; i < vScenes.size(); i++) {
-		if (vScenes[i]->visible & INPUTABLE) {
+		if (vScenes[i]->getVisibility() & INPUTABLE) {
 			vScenes[i]->handleEvents(window, windowEvent);
 		}
 	}
@@ -21,7 +21,7 @@ void SceneHandler::handleEvents(RenderWindow& window, Event windowEvent)
 void SceneHandler::handleInputs(RenderWindow & window)
 {
 	for (unsigned int i = 0; i < vScenes.size(); i++) {
-		if (vScenes[i]->visible & INPUTABLE) {
+		if (vScenes[i]->getVisibility() & INPUTABLE) {
 			vScenes[i]->handleInputs(window);
 		}
 	}
@@ -29,8 +29,10 @@ void SceneHandler::handleInputs(RenderWindow & window)
 
 void SceneHandler::update()
 {
-	for (unsigned int i = 0; i < vScenes.size(); i++) {
-		if (vScenes[i]->visible & UPDATABLE) {
+	for (unsigned int i = 0; i < vScenes.size(); i++) 
+	{
+		if (vScenes[i]->getVisibility() & UPDATABLE) 
+		{
 			vScenes[i]->update();
 		}
 	}
@@ -39,8 +41,10 @@ void SceneHandler::update()
 // Beim Rendern muss jedoch darauf geachtet werden das das wichtigste (also index [0]) als letztes gerendert wird damit es ganz oben sichtbar ist, deswegen eine umgekehrte for Schleife
 void SceneHandler::render(RenderWindow& window, RenderStates shades, float timeTillUpdate)
 {
-	for (int i = vScenes.size() - 1; i >= 0; i--) {
-		if (vScenes[i]->visible & VISIBLE) {
+	for (int i = vScenes.size() - 1; i >= 0; i--) 
+	{
+		if (vScenes[i]->getVisibility() & VISIBLE) 
+		{
 			vScenes[i]->render(window, shades, timeTillUpdate);
 		}
 	}
@@ -50,7 +54,7 @@ void SceneHandler::addScene(Scene * createScene, int visible)
 {
 	if (!sceneExists(createScene->getSceneName())) {
 		vScenes.push_back(createScene);
-		vScenes.back()->visible = visible;
+		vScenes.back()->setVisibility(visible);
 	}
 }
 
@@ -59,7 +63,7 @@ void SceneHandler::addScene(Scene * createScene, bool onTop, int visible)
 {
 	if (!sceneExists(createScene->getSceneName())) {
 		vScenes.push_back(createScene);
-		vScenes.back()->visible = visible;
+		vScenes.back()->setVisibility(visible);
 		// Falls onTop als True mitgegeben worden ist soll die neue Szene direkt ganz oben in der Pipeline stehen
 		if (onTop) {
 			string name = vScenes.back()->getSceneName();
@@ -97,7 +101,7 @@ void SceneHandler::setSceneVisibility(string sceneName, int visibility)
 {
 	int index = getSceneIndexByName(sceneName);
 
-	vScenes[index]->visible = visibility;
+	vScenes[index]->setVisibility(visibility);
 }
 
 // Returnt den Index der jeweiligen Szene nach Namen, vorher sollte überprüft werden ob die Scene überhaupt exestiert von dem man den Index haben will mithilfe der unteren Funktion
