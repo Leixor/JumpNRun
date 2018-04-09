@@ -53,6 +53,8 @@
     <ClCompile Include="AlignHelper.cpp">
       <Filter>HelperClasses</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -121,6 +123,8 @@
     <ClInclude Include="AlignHelper.h">
       <Filter>HelperClasses</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AnimationHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">

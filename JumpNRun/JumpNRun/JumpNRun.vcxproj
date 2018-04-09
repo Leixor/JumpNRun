@@ -159,6 +159,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AlignHelper.cpp" />
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationHandler.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="ConfigHelper.cpp" />
@@ -181,6 +183,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlignHelper.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="AnimationHandler.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="ConfigHelper.h" />
