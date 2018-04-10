@@ -10,9 +10,9 @@ public:
 	// Mainfunktionaltität der Gameloop -> Möglichkeit keine handleInput Methode zu definieren (z. B. statische Overlays zum Anzeigen von Stats)
 	virtual bool setupResources() = 0;
 	virtual void handleInputs(RenderWindow& window);
-	virtual void handleEvents(RenderWindow& window, Event windowEvent);
+	virtual void handleEvents(RenderWindow& window, Event& windowEvent);
 	virtual void update();
-	virtual void render(RenderWindow& window, RenderStates shades, float timeTillUpdate);
+	virtual void render(RenderWindow& window, RenderStates& shades, float timeTillUpdate);
 	virtual void confVarUpdate();
 
 	// Scenespezifische Funktionen

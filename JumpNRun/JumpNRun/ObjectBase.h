@@ -14,13 +14,13 @@ public:
 
 	virtual void handleInputs(RenderWindow& window)
 	{}
-	virtual bool handleEvents(RenderWindow& window, Event windowEvent)
+	virtual bool handleEvents(RenderWindow& window, Event& windowEvent)
 	{
 		return false;
 	}
 	virtual void update()
 	{}
-	virtual void draw(RenderWindow& window, RenderStates shades)
+	virtual void draw(RenderWindow& window, RenderStates& shades)
 	{
 		if(shapeVisible & VISIBLE)
 			shape->draw(window, shades);

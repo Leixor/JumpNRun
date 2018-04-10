@@ -7,10 +7,10 @@ public:
 	~SceneHandler();
 
 	// Mainfunktionalität der Gameloop
-	void handleEvents(RenderWindow& window, Event windowEvent);
+	void handleEvents(RenderWindow& window, Event& windowEvent);
 	void handleInputs(RenderWindow& window);
 	void update();
-	void render(RenderWindow& window, RenderStates shades, float timeTillUpdate);
+	void render(RenderWindow& window, RenderStates& shades, float timeTillUpdate);
 
 	// Verschiedene Helper um Interaktion zwischen Scenes zu erleichtern
 	void addScene(Scene * createScene, int visible = ALL);

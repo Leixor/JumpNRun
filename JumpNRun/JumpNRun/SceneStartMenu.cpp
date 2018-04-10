@@ -10,7 +10,7 @@ SceneStartMenu::~SceneStartMenu()
 {
 }
 
-void SceneStartMenu::handleEvents(RenderWindow & window, Event windowEvent)
+void SceneStartMenu::handleEvents(RenderWindow & window, Event& windowEvent)
 {
 	Scene::handleEvents(window, windowEvent);
 	if (windowEvent.type == Event::MouseButtonReleased && this->getSceneHandler()->sceneExists("GameSelection"))

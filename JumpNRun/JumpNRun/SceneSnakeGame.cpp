@@ -18,7 +18,7 @@ SceneSnakeGame::~SceneSnakeGame()
 {
 }
 
-void SceneSnakeGame::handleEvents(RenderWindow & window, Event windowEvent)
+void SceneSnakeGame::handleEvents(RenderWindow & window, Event& windowEvent)
 {
 	for (int i = this->objects.size() - 1; i >= 0; i--)
 	{
@@ -52,7 +52,7 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 	}
 }
 
-void SceneSnakeGame::render(RenderWindow & window, RenderStates shades, float timeTillUpdate)
+void SceneSnakeGame::render(RenderWindow & window, RenderStates& shades, float timeTillUpdate)
 {
 	Scene::render(window, shades, timeTillUpdate);
 }

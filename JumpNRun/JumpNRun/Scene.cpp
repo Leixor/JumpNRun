@@ -20,7 +20,7 @@ void Scene::handleInputs(RenderWindow & window)
 	}
 }
 
-void Scene::handleEvents(RenderWindow & window, Event windowEvent)
+void Scene::handleEvents(RenderWindow & window, Event& windowEvent)
 {
 	for (int i = this->objects.size() - 1; i >= 0; i--)
 	{
@@ -47,7 +47,7 @@ void Scene::update()
 	}
 }
 
-void Scene::render(RenderWindow & window, RenderStates shades, float timeTillUpdate)
+void Scene::render(RenderWindow & window, RenderStates& shades, float timeTillUpdate)
 {
 	window.setView(view);
 	for (unsigned int i = 0; i < this->objects.size(); i++)

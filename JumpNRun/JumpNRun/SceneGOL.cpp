@@ -167,7 +167,7 @@ void SceneGOL::handleInputs(RenderWindow & window)
 	}
 }
 
-void SceneGOL::handleEvents(RenderWindow & window, Event windowEvent)
+void SceneGOL::handleEvents(RenderWindow & window, Event& windowEvent)
 {
 	Scene::handleEvents(window, windowEvent);
 	if (windowEvent.type == Event::KeyPressed) 
@@ -187,7 +187,7 @@ void SceneGOL::handleEvents(RenderWindow & window, Event windowEvent)
 	}
 }
 
-void SceneGOL::render(RenderWindow & window, RenderStates shades, float timeTillUpdate)
+void SceneGOL::render(RenderWindow & window, RenderStates& shades, float timeTillUpdate)
 {
 	background->draw(window, shades);
 	// Das richtige Gamefield anzeigen

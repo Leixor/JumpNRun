@@ -7,7 +7,7 @@ public:
 	~SceneStartMenu();
 
 	bool setupResources();
-	void handleEvents(RenderWindow & window, Event windowEvent);
+	void handleEvents(RenderWindow & window, Event& windowEvent);
 
 private:
 	Font* font;
