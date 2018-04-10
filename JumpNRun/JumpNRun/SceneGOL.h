@@ -11,7 +11,7 @@ enum eGameState
 class SceneGOL : public Scene
 {
 public:
-	SceneGOL(string name, SceneHandler * sceneHandler, RenderWindow* window);
+	SceneGOL(string name, SceneHandler& sceneHandler, RenderWindow* window);
 	~SceneGOL();
 
 	bool setupResources();

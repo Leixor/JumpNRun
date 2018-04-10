@@ -1,6 +1,6 @@
 #include "standardInclude.h"
 
-Scene::Scene(string Name, SceneHandler * sceneHandler, RenderWindow* window, View& view)
+Scene::Scene(string Name, SceneHandler& sceneHandler, RenderWindow* window, View& view)
 	: sceneName(Name), sceneHandler(sceneHandler), window(window),  view(view)
 {
 	this->updateSync = false; 
@@ -91,7 +91,7 @@ string Scene::getSceneName()
 	return this->sceneName;
 }
 
-SceneHandler * Scene::getSceneHandler() const
+SceneHandler& Scene::getSceneHandler() const
 {
 	return this->sceneHandler;
 }

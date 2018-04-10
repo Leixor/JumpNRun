@@ -1,6 +1,6 @@
 #include "standardInclude.h"
 
-SceneStartMenu::SceneStartMenu(string name, SceneHandler * sceneHandler, RenderWindow* window)
+SceneStartMenu::SceneStartMenu(string name, SceneHandler& sceneHandler, RenderWindow* window)
 	: Scene(name, sceneHandler, window)
 {
 	this->setupResources();
@@ -13,10 +13,10 @@ SceneStartMenu::~SceneStartMenu()
 void SceneStartMenu::handleEvents(RenderWindow & window, Event& windowEvent)
 {
 	Scene::handleEvents(window, windowEvent);
-	if (windowEvent.type == Event::MouseButtonReleased && this->getSceneHandler()->sceneExists("GameSelection"))
+	if (windowEvent.type == Event::MouseButtonReleased && this->getSceneHandler().sceneExists("GameSelection"))
 	{
 		this->setVisibility(UPDATABLE);
-		this->getSceneHandler()->getSceneByName("GameSelection")->setVisibility(ALL);
+		this->getSceneHandler().getSceneByName("GameSelection")->setVisibility(ALL);
 	}
 }
 
@@ -62,12 +62,12 @@ bool SceneStartMenu::setupResources()
 void SceneStartMenu::buttonStartAction()
 {
 	this->setVisibility(INPUTABLE);
-	this->getSceneHandler()->addScene(new SceneGameSelection("GameSelection", this->getSceneHandler(), window), VISIBLE);
+	this->getSceneHandler().addScene(new SceneGameSelection("GameSelection", this->getSceneHandler(), window), VISIBLE);
 }
 
 void SceneStartMenu::buttonOptionAction()
 {
-	this->getSceneHandler()->addScene(new SceneOption("Option", this->getSceneHandler()), ALL);
+	this->getSceneHandler().addScene(new SceneOption("Option", this->getSceneHandler()), ALL);
 	this->setVisibility(UPDATABLE);
 }
 

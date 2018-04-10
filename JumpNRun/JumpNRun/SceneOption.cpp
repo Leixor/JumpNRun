@@ -1,6 +1,6 @@
 #include "standardInclude.h"
 
-SceneOption::SceneOption(string name, SceneHandler * sceneHandler)
+SceneOption::SceneOption(string name, SceneHandler& sceneHandler)
 	:Scene(name, sceneHandler)
 {
 	setupResources();

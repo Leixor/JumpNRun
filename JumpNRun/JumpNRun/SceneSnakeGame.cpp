@@ -5,7 +5,7 @@
 #define POSY 50
 #define THICKNESS float(PITCH) / float(300)
 
-SceneSnakeGame::SceneSnakeGame(string name, SceneHandler * sceneHandler, Vector2u size, int partCount)
+SceneSnakeGame::SceneSnakeGame(string name, SceneHandler& sceneHandler, Vector2u size, int partCount)
 	:Scene(name, sceneHandler), cellCount(size), partCount(partCount)
 {
 	font = new Font();
@@ -47,8 +47,8 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 	if (Keyboard::isKeyPressed(Keyboard::I))
 	{
 		this->setVisibility(NONE);
-		this->getSceneHandler()->setTopScene("GOL");
-		this->getSceneHandler()->getSceneByName("GOL")->setVisibility(ALL);
+		this->getSceneHandler().setTopScene("GOL");
+		this->getSceneHandler().getSceneByName("GOL")->setVisibility(ALL);
 	}
 }
 

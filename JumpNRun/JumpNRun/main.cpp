@@ -23,11 +23,11 @@ int main()
 	ob das Fenster keinen CloseKnopf hat, nicht größenveränderbar ist...
 	*/
 	RenderWindow window(VideoMode(int(windowDef::get().windowSizeX), int(windowDef::get().windowSizeY)), "Snake", windowDef::get().windowStyle);// , Style::Fullscreen);
-	SceneHandler *sceneHandler = new SceneHandler();
+	SceneHandler &sceneHandler = SceneHandler();
 
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
 	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler, &window);
-	sceneHandler->addScene(startMenu);
+	sceneHandler.addScene(startMenu);
 	
 	//Parameter die für die verbesserte Spielschleife notwendig sind.
 	// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
@@ -68,16 +68,16 @@ int main()
 				if (windowEvent.key.code == Keyboard::Escape)
 					window.close();
 			}
-			sceneHandler->handleEvents(window, windowEvent);
+			sceneHandler.handleEvents(window, windowEvent);
 		}
 		
-		sceneHandler->handleInputs(window);
+		sceneHandler.handleInputs(window);
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)
 		{
 			//Ruft die Aktualisierungsmethode auf
-			sceneHandler->update();
+			sceneHandler.update();
 			//FPSCOUNTER
 			loop++;
 			if (loop == 1000 / MS_PER_UPDATE) {
@@ -92,7 +92,7 @@ int main()
 	
 		//Zeichnen der Objekte
 		window.clear();
-		sceneHandler->render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
+		sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 		//FPSCOUNTER
 		window.draw(*FPS);
 		frameCount++;

@@ -3,7 +3,7 @@
 class SceneStartMenu : public Scene
 {
 public:
-	SceneStartMenu(string name, SceneHandler * sceneHandler, RenderWindow* window);
+	SceneStartMenu(string name, SceneHandler& sceneHandler, RenderWindow* window);
 	~SceneStartMenu();
 
 	bool setupResources();
