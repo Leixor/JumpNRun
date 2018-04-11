@@ -18,7 +18,7 @@ bool SceneGOL::setupResources()
 	updateRate = stoi(conf->get("GOL", "UpdateRate"));
 
 	// Standard Gamestate angeben
-	gameState = SETUPSIZE;
+	gameState = GOLSETUPSIZE;
 
 	// Font laden
 	font = new Font();
@@ -75,13 +75,13 @@ void SceneGOL::update()
 	{
 		switch (gameState)
 		{
-		case SETUPFIELD:
+		case eGOLStates::GOLSETUPFIELD:
 			break;
-		case INGAME:
+		case eGOLStates::GOLINGAME:
 			runGameSimulation();
 			generation++;
 			break;
-		case PAUSED:
+		case eGOLStates::GOLPAUSED:
 			break;
 		}
 		generationText->setText("Generation: " + to_string(generation));
@@ -94,7 +94,7 @@ void SceneGOL::handleInputs(RenderWindow & window)
 	Scene::handleInputs(window);
 	
 	//Falls das Game noch im Setup ist soll an den Stellen wo der Spieler hinklickt eine Zelle zum Leben erweckt werden falls dort noch keine lebende ist
-	if (gameState & SETUPFIELD || gameState & PAUSED)
+	if (gameState & GOLSETUPFIELD || gameState & GOLPAUSED)
 	{
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
@@ -116,24 +116,24 @@ void SceneGOL::handleInputs(RenderWindow & window)
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::C))
 	{
-		if (gameState & SETUPSIZE)
+		if (gameState & GOLSETUPSIZE)
 		{
 			setupField();
-			gameState = SETUPFIELD;	
+			gameState = GOLSETUPFIELD;	
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::A))
 	{
-		if (gameState & SETUPFIELD || gameState & PAUSED)
+		if (gameState & GOLSETUPFIELD || gameState & GOLPAUSED)
 		{
-			gameState = INGAME;
+			gameState = GOLINGAME;
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::P))
 	{
-		if (gameState & INGAME)
+		if (gameState & GOLINGAME)
 		{
-			gameState = PAUSED;
+			gameState = GOLPAUSED;
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::R))
@@ -141,12 +141,12 @@ void SceneGOL::handleInputs(RenderWindow & window)
 		gameField.clear();
 		generation = 0; 
 		setupField();
-		gameState = SETUPFIELD;
+		gameState = GOLSETUPFIELD;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::N))
 	{
 		generation = 0;
-		gameState = SETUPSIZE;
+		gameState = GOLSETUPSIZE;
 		gameField.clear();
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::Right))
@@ -210,7 +210,7 @@ void SceneGOL::render(RenderWindow & window, RenderStates& shades, float timeTil
 
 void SceneGOL::plusGridSize()
 {
-	if (gameState & SETUPSIZE)
+	if (gameState & GOLSETUPSIZE)
 	{
 		if (!Keyboard::isKeyPressed(Keyboard::Key::LControl))
 			gridSize++;
@@ -227,7 +227,7 @@ void SceneGOL::plusGridSize()
 
 void SceneGOL::minusGridSize()
 {
-	if (gameState & SETUPSIZE)
+	if (gameState & GOLSETUPSIZE)
 	{
 		if (!Keyboard::isKeyPressed(Keyboard::Key::LControl))
 			gridSize--;

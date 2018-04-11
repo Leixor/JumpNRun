@@ -1,11 +1,11 @@
 #pragma once
 
-enum eGameState 
+enum eGOLStates 
 {
-	SETUPSIZE = 1,
-	SETUPFIELD = 2,
-	INGAME = 4,
-	PAUSED = 8
+	GOLSETUPSIZE = 1,
+	GOLSETUPFIELD = 2,
+	GOLINGAME = 4,
+	GOLPAUSED = 8
 };
 
 class SceneGOL : public Scene
@@ -22,7 +22,7 @@ public:
 
 private:
 	Font * font;
-	eGameState gameState;
+	eGOLStates gameState;
 	vector<vector<char>> gameField;
 
 	string sizeText;
