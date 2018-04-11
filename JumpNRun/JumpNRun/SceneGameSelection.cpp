@@ -28,7 +28,7 @@ void SceneGameSelection::golStart()
 
 bool SceneGameSelection::setupResources()
 {
-	conf = new ConfigHelper("Test.txt");
+	configHelper = new ConfigHelper("Test.txt");
 
 	addObject("BackGround", new ShapeRectangle(FloatRect(0.0f, 0.0f, windowDef::get().windowSizeX, windowDef::get().windowSizeY), Color(200,200,200,255)));
 

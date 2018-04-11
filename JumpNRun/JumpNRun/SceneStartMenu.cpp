@@ -22,11 +22,11 @@ void SceneStartMenu::handleEvents(RenderWindow & window, Event& windowEvent)
 
 bool SceneStartMenu::setupResources()
 {
-	conf = new ConfigHelper("test.txt");
+	configHelper = new ConfigHelper("test.txt");
 	font = new Font();
 	this->font->loadFromFile("Textures/cool.ttf");
 	
-	string bgColor = conf->get("Menu","BackgroundColor");
+	string bgColor = configHelper->get("Menu","BackgroundColor");
 	addObject("Background", new ShapeRectangle(float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY), Color::Color(stoul(bgColor, nullptr, 16))));
 
 	startButton = addResource<Button*>("Button_Start", new Button([&] {buttonStartAction();}, new ShapeSprite("Textures/blueButton.png", 1.5f)));

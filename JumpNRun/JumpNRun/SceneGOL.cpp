@@ -12,10 +12,10 @@ SceneGOL::~SceneGOL()
 bool SceneGOL::setupResources()
 {
 	// Lese die Config ein
-	conf = new ConfigHelper("test.txt");
+	configHelper = new ConfigHelper("test.txt");
 
 	// Setze updateRate
-	updateRate = stoi(conf->get("GOL", "UpdateRate"));
+	updateRate = stoi(configHelper->get("GOL", "UpdateRate"));
 
 	// Standard Gamestate angeben
 	gameState = GOLSETUPSIZE;
@@ -25,13 +25,13 @@ bool SceneGOL::setupResources()
 	this->font->loadFromFile("Textures/cool.ttf");
 
 	// StandardgridSize definieren
-	gridSize = stoi(conf->get("GOL", "GridSize"));
+	gridSize = stoi(configHelper->get("GOL", "GridSize"));
 	sizeText = to_string(gridSize) + " x " + to_string(gridSize);
 	cellSize = window->getSize().x / (float)gridSize;
 
 	// UI adden
 
-	background = new ShapeRectangle(float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY), Color::Color(stoul(conf->get("GOL", "BackgroundColor"),nullptr,16)));
+	background = new ShapeRectangle(float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY), Color::Color(stoul(configHelper->get("GOL", "BackgroundColor"),nullptr,16)));
 	addResource("+size", new Button([&] {plusGridSize(); }, new ShapeSprite("Textures/plus.png", .1f)));
 	addResource("-size", new Button([&] {minusGridSize(); }, new ShapeSprite("Textures/minus.png", .1f)));
 	gridSizeText = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
@@ -59,7 +59,7 @@ bool SceneGOL::setupResources()
 	alignNextTo(*generationText->objectText, *objects.get("+size")->shape, RIGHT, 100);
 	alignNextTo(*gpsText->objectText, *generationText->objectText, RIGHT, 50);
 
-	rect = new ShapeRectangle(Vector2f(cellSize, cellSize), Color::Color(stoul(conf->get("GOL", "CellColor"), nullptr, 16)));
+	rect = new ShapeRectangle(Vector2f(cellSize, cellSize), Color::Color(stoul(configHelper->get("GOL", "CellColor"), nullptr, 16)));
 	sprit = new ShapeSprite("Textures/plus.png", Vector2f(cellSize, cellSize));
 
 	proto = sprit;

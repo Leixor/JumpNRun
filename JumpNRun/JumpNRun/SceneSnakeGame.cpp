@@ -38,7 +38,15 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 	else if (Keyboard::isKeyPressed(moveDown) && this->snakeDirection != TOP)
 		this->snakeDirectionNew = BOTTOM;
 
-	if (Keyboard::isKeyPressed(Keyboard::R))
+	if (Keyboard::isKeyPressed(Keyboard::P))
+	{
+		if (this->gameState == SNAKERUNNING)
+			this->gameState = SNAKEPAUSED;
+		else if (this->gameState == SNAKEPAUSED)
+			this->gameState = SNAKERUNNING;
+	}
+
+	if (Keyboard::isKeyPressed(Keyboard::R) && this->gameState != SNAKEFINISHED)
 	{
 		this->gameState = eSnakeState::SNAKESETUP;
 	}
@@ -58,17 +66,17 @@ void SceneSnakeGame::render(RenderWindow & window, RenderStates& shades, float t
 
 void SceneSnakeGame::confVarUpdate()
 {
-	conf->readComplete();
+	configHelper->readComplete();
 	// Setup Keys
-	moveUp = keyDef::get().keyCode.get(conf->get("Snake", "MOVE-UP"));
-	moveDown = keyDef::get().keyCode.get(conf->get("Snake", "MOVE-DOWN"));
-	moveRight = keyDef::get().keyCode.get(conf->get("Snake", "MOVE-RIGHT"));
-	moveLeft = keyDef::get().keyCode.get(conf->get("Snake", "MOVE-LEFT"));
+	moveUp = keyDef::get().keyCode.get(configHelper->get("Snake", "MOVE-UP"));
+	moveDown = keyDef::get().keyCode.get(configHelper->get("Snake", "MOVE-DOWN"));
+	moveRight = keyDef::get().keyCode.get(configHelper->get("Snake", "MOVE-RIGHT"));
+	moveLeft = keyDef::get().keyCode.get(configHelper->get("Snake", "MOVE-LEFT"));
 }
 
 bool SceneSnakeGame::setupResources()
 {
-	this->conf = new ConfigHelper("test.txt");
+	this->configHelper = new ConfigHelper("test.txt");
 	this->createScene();
 
 	return false;
@@ -145,14 +153,14 @@ void SceneSnakeGame::createScene()
 
 	for (int i = 0; i < this->partCount; i++)
 	{
-		this->snakeBody.push_back(addObject("Snake" + to_string(i), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Color(stoul(conf->get("Snake", "BodyColor"), nullptr, 16)), THICKNESS, Color::Color(stoul(conf->get("Snake", "BodyOColor"), nullptr, 16)))));
+		this->snakeBody.push_back(addObject("Snake" + to_string(i), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Color(stoul(configHelper->get("Snake", "BodyColor"), nullptr, 16)), THICKNESS, Color::Color(stoul(configHelper->get("Snake", "BodyOColor"), nullptr, 16)))));
 		this->objects.get("Snake" + to_string(i))->shape->setPosition(Vector2f((POSX + THICKNESS) + (cellCount.x / 2) * partSizeX + partSizeX * i, ((POSY + THICKNESS) + partSizeY * (cellCount.x / 2))));
 	}
 
-	this->objects.get("Snake0")->shape->setFillColor(Color::Color(stoul(conf->get("Snake", "HeadColor"), nullptr, 16)));
-	this->objects.get("Snake0")->shape->setOutlineColor(Color::Color(stoul(conf->get("Snake", "HeadOColor"), nullptr, 16)));
+	this->objects.get("Snake0")->shape->setFillColor(Color::Color(stoul(configHelper->get("Snake", "HeadColor"), nullptr, 16)));
+	this->objects.get("Snake0")->shape->setOutlineColor(Color::Color(stoul(configHelper->get("Snake", "HeadOColor"), nullptr, 16)));
 
-	this->snakeFood = addObject("Food", new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Color(stoul(conf->get("Snake", "FoodColor"), nullptr, 16)), THICKNESS, Color::Color(stoul(conf->get("Snake", "FoodOColor"), nullptr, 16))));
+	this->snakeFood = addObject("Food", new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Color(stoul(configHelper->get("Snake", "FoodColor"), nullptr, 16)), THICKNESS, Color::Color(stoul(configHelper->get("Snake", "FoodOColor"), nullptr, 16))));
 
 	// Scorecounter Setup
 	score = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
@@ -246,7 +254,7 @@ void SceneSnakeGame::running()
 	if (foodPos.x == nextPos.x && foodPos.y == nextPos.y)
 	{
 		this->setupFood();
-		this->snakeBody.push_back(addObject("Snake" + to_string(this->snakeBody.size()), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Color(stoul(conf->get("Snake", "BodyColor"), nullptr, 16)), THICKNESS, Color::Color(stoul(conf->get("Snake", "BodyOColor"), nullptr, 16))), 1));
+		this->snakeBody.push_back(addObject("Snake" + to_string(this->snakeBody.size()), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Color(stoul(configHelper->get("Snake", "BodyColor"), nullptr, 16)), THICKNESS, Color::Color(stoul(configHelper->get("Snake", "BodyOColor"), nullptr, 16))), 1));
 		this->objects.get("Snake" + to_string(this->snakeBody.size() - 1))->shape->setPosition(lastSnakePartPos);
 
 		// Erhöhe Scorecount

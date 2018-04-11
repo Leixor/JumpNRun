@@ -53,7 +53,7 @@ protected:
 	UnorderdMap<string, ObjectBase*> objects;
 	RenderWindow* window;
 	string sceneName;
-	ConfigHelper* conf;
+	ConfigHelper* configHelper;
 	unsigned int updateRate;
 
 	void setObjectPriority(string name, int priority);
