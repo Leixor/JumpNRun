@@ -9,7 +9,7 @@ SceneHandler::~SceneHandler()
 }
 
 // Die Wichtigkeitsreihenfolge für handleInput und update sieht wie folgt aus -> von 0 nach vScenes.size()
-void SceneHandler::handleEvents(RenderWindow& window, Event windowEvent)
+void SceneHandler::handleEvents(RenderWindow& window, Event& windowEvent)
 {
 	for(unsigned int i = 0; i < vScenes.size(); i++) {
 		if (vScenes[i]->getVisibility() & INPUTABLE) {
@@ -39,7 +39,7 @@ void SceneHandler::update()
 }
 
 // Beim Rendern muss jedoch darauf geachtet werden das das wichtigste (also index [0]) als letztes gerendert wird damit es ganz oben sichtbar ist, deswegen eine umgekehrte for Schleife
-void SceneHandler::render(RenderWindow& window, RenderStates shades, float timeTillUpdate)
+void SceneHandler::render(RenderWindow& window, RenderStates& shades, float timeTillUpdate)
 {
 	for (int i = vScenes.size() - 1; i >= 0; i--) 
 	{

@@ -3,11 +3,11 @@
 class SceneStartMenu : public Scene
 {
 public:
-	SceneStartMenu(string name, SceneHandler * sceneHandler, RenderWindow* window);
+	SceneStartMenu(string name, SceneHandler& sceneHandler, RenderWindow* window);
 	~SceneStartMenu();
 
 	bool setupResources();
-	void handleEvents(RenderWindow & window, Event windowEvent);
+	void handleEvents(RenderWindow & window, Event& windowEvent);
 
 private:
 	Font* font;

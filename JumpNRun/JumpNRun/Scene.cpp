@@ -1,6 +1,6 @@
 #include "standardInclude.h"
 
-Scene::Scene(string Name, SceneHandler * sceneHandler, RenderWindow* window, View& view)
+Scene::Scene(string Name, SceneHandler& sceneHandler, RenderWindow* window, View& view)
 	: sceneName(Name), sceneHandler(sceneHandler), window(window),  view(view)
 {
 	this->updateSync = false; 
@@ -20,7 +20,7 @@ void Scene::handleInputs(RenderWindow & window)
 	}
 }
 
-void Scene::handleEvents(RenderWindow & window, Event windowEvent)
+void Scene::handleEvents(RenderWindow & window, Event& windowEvent)
 {
 	for (int i = this->objects.size() - 1; i >= 0; i--)
 	{
@@ -48,7 +48,7 @@ void Scene::update()
 	aniHandler.update();
 }
 
-void Scene::render(RenderWindow & window, RenderStates shades, float timeTillUpdate)
+void Scene::render(RenderWindow & window, RenderStates& shades, float timeTillUpdate)
 {
 	window.setView(view);
 	for (unsigned int i = 0; i < this->objects.size(); i++)
@@ -92,7 +92,7 @@ string Scene::getSceneName()
 	return this->sceneName;
 }
 
-SceneHandler * Scene::getSceneHandler() const
+SceneHandler& Scene::getSceneHandler() const
 {
 	return this->sceneHandler;
 }

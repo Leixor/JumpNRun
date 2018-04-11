@@ -1,6 +1,6 @@
 #include "standardInclude.h"
 
-SceneStartMenu::SceneStartMenu(string name, SceneHandler * sceneHandler, RenderWindow* window)
+SceneStartMenu::SceneStartMenu(string name, SceneHandler& sceneHandler, RenderWindow* window)
 	: Scene(name, sceneHandler, window)
 {
 	this->setupResources();
@@ -10,23 +10,23 @@ SceneStartMenu::~SceneStartMenu()
 {
 }
 
-void SceneStartMenu::handleEvents(RenderWindow & window, Event windowEvent)
+void SceneStartMenu::handleEvents(RenderWindow & window, Event& windowEvent)
 {
 	Scene::handleEvents(window, windowEvent);
-	if (windowEvent.type == Event::MouseButtonReleased && this->getSceneHandler()->sceneExists("GameSelection"))
+	if (windowEvent.type == Event::MouseButtonReleased && this->getSceneHandler().sceneExists("GameSelection"))
 	{
 		this->setVisibility(UPDATABLE);
-		this->getSceneHandler()->getSceneByName("GameSelection")->setVisibility(ALL);
+		this->getSceneHandler().getSceneByName("GameSelection")->setVisibility(ALL);
 	}
 }
 
 bool SceneStartMenu::setupResources()
 {
-	conf = new ConfigHelper("test.txt");
+	configHelper = new ConfigHelper("test.txt");
 	font = new Font();
 	this->font->loadFromFile("Textures/cool.ttf");
 	
-	string bgColor = conf->get("Menu","BackgroundColor");
+	string bgColor = configHelper->get("Menu","BackgroundColor");
 	addObject("Background", new ShapeRectangle(float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY), Color::Color(stoul(bgColor, nullptr, 16))));
 
 	startButton = addResource<Button*>("Button_Start", new Button([&] {buttonStartAction();}, new ShapeSprite("Textures/blueButton.png", 1.5f)));
@@ -61,17 +61,13 @@ bool SceneStartMenu::setupResources()
 
 void SceneStartMenu::buttonStartAction()
 {
-	/*this->setVisibility(INPUTABLE);
-	this->getSceneHandler()->addScene(new SceneGameSelection("GameSelection", this->getSceneHandler(), window), VISIBLE);*/
-	myAni = new  Animation(startButton->shape, &aniHandler, 100, "cro");
-	myAni->setScale(Vector2f(0.2f, 0.2f) , Vector2f(95.f, 24.5f));
-	myAni->addRotation(360, Vector2f(95.f, 24.5f));
-	myAni->run();
+	this->setVisibility(INPUTABLE);
+	this->getSceneHandler().addScene(new SceneGameSelection("GameSelection", this->getSceneHandler(), window), VISIBLE);
 }
 
 void SceneStartMenu::buttonOptionAction()
 {
-	this->getSceneHandler()->addScene(new SceneOption("Option", this->getSceneHandler()), ALL);
+	this->getSceneHandler().addScene(new SceneOption("Option", this->getSceneHandler()), ALL);
 	this->setVisibility(UPDATABLE);
 }
 

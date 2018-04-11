@@ -4,15 +4,15 @@ class SceneHandler;
 class Scene
 {
 public:
-	Scene(string name, SceneHandler * sceneHandler, RenderWindow* window = nullptr, View& view = View(FloatRect(0,0, float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY))));
+	Scene(string name, SceneHandler& sceneHandler, RenderWindow* window = nullptr, View& view = View(FloatRect(0,0, float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY))));
 	~Scene();
 
 	// Mainfunktionaltität der Gameloop -> Möglichkeit keine handleInput Methode zu definieren (z. B. statische Overlays zum Anzeigen von Stats)
 	virtual bool setupResources() = 0;
 	virtual void handleInputs(RenderWindow& window);
-	virtual void handleEvents(RenderWindow& window, Event windowEvent);
+	virtual void handleEvents(RenderWindow& window, Event& windowEvent);
 	virtual void update();
-	virtual void render(RenderWindow& window, RenderStates shades, float timeTillUpdate);
+	virtual void render(RenderWindow& window, RenderStates& shades, float timeTillUpdate);
 	virtual void confVarUpdate();
 
 	// Scenespezifische Funktionen
@@ -29,7 +29,7 @@ public:
 	void setScenePosition(Vector2f& position);
 
 	string getSceneName();
-	SceneHandler* getSceneHandler() const;
+	SceneHandler& getSceneHandler() const;
 	int getVisibility()
 	{
 		return this->visible;
@@ -53,7 +53,7 @@ protected:
 	UnorderdMap<string, ObjectBase*> objects;
 	RenderWindow* window;
 	string sceneName;
-	ConfigHelper* conf;
+	ConfigHelper* configHelper;
 	unsigned int updateRate;
 
 	void setObjectPriority(string name, int priority);
@@ -65,7 +65,7 @@ protected:
 	AnimationHandler aniHandler;
 private:
 	// Jede Szene bekommt den Scenehandler damit er es als Interface benutzen kann um die anderen Szenen anzusprechen
-	SceneHandler*  sceneHandler;
+	SceneHandler&  sceneHandler;
 	// Die Frequenz in Millisec wie oft die Szene aktualisieren soll
 	unsigned int updateCount;
 	// Gibt an ob die Szene in diesem Updatecall aktualisieren soll

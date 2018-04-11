@@ -1,6 +1,6 @@
 #include "standardInclude.h"
 
-SceneGOL::SceneGOL(string name, SceneHandler * sceneHandler, RenderWindow* window) : Scene(name, sceneHandler, window)
+SceneGOL::SceneGOL(string name, SceneHandler& sceneHandler, RenderWindow* window) : Scene(name, sceneHandler, window)
 {
 	this->setupResources();
 }
@@ -12,26 +12,26 @@ SceneGOL::~SceneGOL()
 bool SceneGOL::setupResources()
 {
 	// Lese die Config ein
-	conf = new ConfigHelper("test.txt");
+	configHelper = new ConfigHelper("test.txt");
 
 	// Setze updateRate
-	updateRate = stoi(conf->get("GOL", "UpdateRate"));
+	updateRate = stoi(configHelper->get("GOL", "UpdateRate"));
 
 	// Standard Gamestate angeben
-	gameState = SETUPSIZE;
+	gameState = GOLSETUPSIZE;
 
 	// Font laden
 	font = new Font();
 	this->font->loadFromFile("Textures/cool.ttf");
 
 	// StandardgridSize definieren
-	gridSize = stoi(conf->get("GOL", "GridSize"));
+	gridSize = stoi(configHelper->get("GOL", "GridSize"));
 	sizeText = to_string(gridSize) + " x " + to_string(gridSize);
 	cellSize = window->getSize().x / (float)gridSize;
 
 	// UI adden
 
-	background = new ShapeRectangle(float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY), Color::Color(stoul(conf->get("GOL", "BackgroundColor"),nullptr,16)));
+	background = new ShapeRectangle(float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY), Color::Color(stoul(configHelper->get("GOL", "BackgroundColor"),nullptr,16)));
 	addResource("+size", new Button([&] {plusGridSize(); }, new ShapeSprite("Textures/plus.png", .1f)));
 	addResource("-size", new Button([&] {minusGridSize(); }, new ShapeSprite("Textures/minus.png", .1f)));
 	gridSizeText = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
@@ -59,7 +59,7 @@ bool SceneGOL::setupResources()
 	alignNextTo(*generationText->objectText, *objects.get("+size")->shape, RIGHT, 100);
 	alignNextTo(*gpsText->objectText, *generationText->objectText, RIGHT, 50);
 
-	rect = new ShapeRectangle(Vector2f(cellSize, cellSize), Color::Color(stoul(conf->get("GOL", "CellColor"), nullptr, 16)));
+	rect = new ShapeRectangle(Vector2f(cellSize, cellSize), Color::Color(stoul(configHelper->get("GOL", "CellColor"), nullptr, 16)));
 	sprit = new ShapeSprite("Textures/plus.png", Vector2f(cellSize, cellSize));
 
 	proto = sprit;
@@ -75,13 +75,13 @@ void SceneGOL::update()
 	{
 		switch (gameState)
 		{
-		case SETUPFIELD:
+		case eGOLStates::GOLSETUPFIELD:
 			break;
-		case INGAME:
+		case eGOLStates::GOLINGAME:
 			runGameSimulation();
 			generation++;
 			break;
-		case PAUSED:
+		case eGOLStates::GOLPAUSED:
 			break;
 		}
 		generationText->setText("Generation: " + to_string(generation));
@@ -94,7 +94,7 @@ void SceneGOL::handleInputs(RenderWindow & window)
 	Scene::handleInputs(window);
 	
 	//Falls das Game noch im Setup ist soll an den Stellen wo der Spieler hinklickt eine Zelle zum Leben erweckt werden falls dort noch keine lebende ist
-	if (gameState & SETUPFIELD || gameState & PAUSED)
+	if (gameState & GOLSETUPFIELD || gameState & GOLPAUSED)
 	{
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
@@ -116,24 +116,24 @@ void SceneGOL::handleInputs(RenderWindow & window)
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::C))
 	{
-		if (gameState & SETUPSIZE)
+		if (gameState & GOLSETUPSIZE)
 		{
 			setupField();
-			gameState = SETUPFIELD;	
+			gameState = GOLSETUPFIELD;	
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::A))
 	{
-		if (gameState & SETUPFIELD || gameState & PAUSED)
+		if (gameState & GOLSETUPFIELD || gameState & GOLPAUSED)
 		{
-			gameState = INGAME;
+			gameState = GOLINGAME;
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::P))
 	{
-		if (gameState & INGAME)
+		if (gameState & GOLINGAME)
 		{
-			gameState = PAUSED;
+			gameState = GOLPAUSED;
 		}
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::R))
@@ -141,12 +141,12 @@ void SceneGOL::handleInputs(RenderWindow & window)
 		gameField.clear();
 		generation = 0; 
 		setupField();
-		gameState = SETUPFIELD;
+		gameState = GOLSETUPFIELD;
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::N))
 	{
 		generation = 0;
-		gameState = SETUPSIZE;
+		gameState = GOLSETUPSIZE;
 		gameField.clear();
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::Right))
@@ -161,13 +161,13 @@ void SceneGOL::handleInputs(RenderWindow & window)
 	}
 	if (Keyboard::isKeyPressed(Keyboard::Key::O))
 	{
-		this->getSceneHandler()->setTopScene("SnakeGame");
-		this->getSceneHandler()->getSceneByName("SnakeGame")->setVisibility(ALL);
+		this->getSceneHandler().setTopScene("SnakeGame");
+		this->getSceneHandler().getSceneByName("SnakeGame")->setVisibility(ALL);
 		this->setVisibility(NONE);
 	}
 }
 
-void SceneGOL::handleEvents(RenderWindow & window, Event windowEvent)
+void SceneGOL::handleEvents(RenderWindow & window, Event& windowEvent)
 {
 	Scene::handleEvents(window, windowEvent);
 	if (windowEvent.type == Event::KeyPressed) 
@@ -187,7 +187,7 @@ void SceneGOL::handleEvents(RenderWindow & window, Event windowEvent)
 	}
 }
 
-void SceneGOL::render(RenderWindow & window, RenderStates shades, float timeTillUpdate)
+void SceneGOL::render(RenderWindow & window, RenderStates& shades, float timeTillUpdate)
 {
 	background->draw(window, shades);
 	// Das richtige Gamefield anzeigen
@@ -210,7 +210,7 @@ void SceneGOL::render(RenderWindow & window, RenderStates shades, float timeTill
 
 void SceneGOL::plusGridSize()
 {
-	if (gameState & SETUPSIZE)
+	if (gameState & GOLSETUPSIZE)
 	{
 		if (!Keyboard::isKeyPressed(Keyboard::Key::LControl))
 			gridSize++;
@@ -227,7 +227,7 @@ void SceneGOL::plusGridSize()
 
 void SceneGOL::minusGridSize()
 {
-	if (gameState & SETUPSIZE)
+	if (gameState & GOLSETUPSIZE)
 	{
 		if (!Keyboard::isKeyPressed(Keyboard::Key::LControl))
 			gridSize--;
