@@ -61,8 +61,12 @@ bool SceneStartMenu::setupResources()
 
 void SceneStartMenu::buttonStartAction()
 {
-	this->setVisibility(INPUTABLE);
-	this->getSceneHandler()->addScene(new SceneGameSelection("GameSelection", this->getSceneHandler(), window), VISIBLE);
+	/*this->setVisibility(INPUTABLE);
+	this->getSceneHandler()->addScene(new SceneGameSelection("GameSelection", this->getSceneHandler(), window), VISIBLE);*/
+	myAni = new  Animation(startButton->shape, &aniHandler, 100, "cro");
+	myAni->setScale(Vector2f(0.2f, 0.2f) , Vector2f(95.f, 24.5f));
+	myAni->addRotation(360, Vector2f(95.f, 24.5f));
+	myAni->run();
 }
 
 void SceneStartMenu::buttonOptionAction()
@@ -73,5 +77,6 @@ void SceneStartMenu::buttonOptionAction()
 
 void SceneStartMenu::buttonEndAction()
 {
-	this->window->close();
+	/*this->window->close();*/
+	myAni->run();
 }

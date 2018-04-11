@@ -17,11 +17,19 @@ void AnimationHandler::update()
 	}
 }
 
-void AnimationHandler::rotate(DrawableObject* object, string name, float angle, int millisec)
+void AnimationHandler::run(string name)
+{
+		animations.get(name)->run();
+}
+
+void AnimationHandler::addRotate(DrawableObject* object, string name, float angle, unsigned int millisec)
 {
 	float updateCount = float(millisec / MS_PER_UPDATE);
+	float subAngle = float(angle / updateCount);
 
 	/*this->animations.push(name, new Animation([&]() {
-		object->rotate()
-	}));*/
+		object->rotate(subAngle, Vector2f(0,0));
+	}, millisec));*/
 }
+
+

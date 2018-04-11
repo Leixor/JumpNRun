@@ -1,5 +1,7 @@
 #pragma once
 
+
+
 class AnimationHandler
 {
 public:
@@ -7,9 +9,15 @@ public:
 	~AnimationHandler();
 
 	void update();
+	void run(string name);
+	void addRotate(DrawableObject* object, string name, float angle, unsigned int millisec);
 
-	void rotate(DrawableObject* object, string name, float angle, int millisec);
 
+	void addAni(Animation* animation, string name)
+	{
+		this->animations.push(name, animation);
+	}
+	
 private:
 	UnorderdMap<string, Animation*> animations;
 };
