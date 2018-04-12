@@ -62,6 +62,7 @@ protected:
 	{
 		return updateSync;
 	}
+	AnimationHandler aniHandler;
 private:
 	// Jede Szene bekommt den Scenehandler damit er es als Interface benutzen kann um die anderen Szenen anzusprechen
 	SceneHandler&  sceneHandler;

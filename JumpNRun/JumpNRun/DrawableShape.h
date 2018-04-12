@@ -108,7 +108,7 @@ inline void DrawableShape<DrawableType>::setScale(Vector2f scale, Vector2f origi
 
 	this->shape->setScale(scale);
 
-	// Wenn der origin die linke obere Ecke ist sollen die ganzen Berechnungen ausgelassen werden
+	/* Wenn der origin die linke obere Ecke ist sollen die ganzen Berechnungen ausgelassen werden*/
 	if (origin != Vector2f(0, 0))
 	{
 		/* Linke obere Ecke wieder ans Origin setzen ohne das Rechteck zu verschieben*/
@@ -295,7 +295,7 @@ inline void DrawableShape<DrawableType>::scale(Vector2f offset, Vector2f origin)
 
 	this->shape->scale(offset);
 
-	// Wenn der origin die linke obere Ecke ist sollen die ganzen Berechnungen ausgelassen werden
+	/* Wenn der origin die linke obere Ecke ist sollen die ganzen Berechnungen ausgelassen werden*/
 	if (origin != Vector2f(0, 0))
 	{
 		/* Linke obere Ecke wieder ans Origin setzen ohne das Rechteck zu verschieben*/

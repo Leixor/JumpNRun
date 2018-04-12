@@ -1,7 +1,7 @@
 #pragma once
 
 #define _USE_MATH_DEFINES
-#define MS_PER_UPDATE 100
+#define MS_PER_UPDATE 10
 
 #include <iostream>
 #include <mutex>
@@ -33,6 +33,12 @@ enum eOrientation {
 	RIGHT = 2,
 	TOP = 4,
 	BOTTOM = 8
+};
+
+enum aniType {
+	ROTATE = 1,
+	SCALE = 2,
+	MOVE = 4
 };
 
 //ExtraClasses

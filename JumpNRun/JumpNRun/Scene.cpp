@@ -45,6 +45,7 @@ void Scene::update()
 		updateCount++;
 		updateSync = false;
 	}
+	aniHandler.update();
 }
 
 void Scene::render(RenderWindow & window, RenderStates& shades, float timeTillUpdate)

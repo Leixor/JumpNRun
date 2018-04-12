@@ -20,5 +20,7 @@ private:
 	Button* startButton;
 	Button* optionButton; 
 	Button* endButton;
+	Animation* myAni;
+	Animation* myAniReverse;
 };
 
