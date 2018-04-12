@@ -55,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationHandler.cpp" />
+    <ClCompile Include="Slider.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -125,6 +128,9 @@
     </ClInclude>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationHandler.h" />
+    <ClInclude Include="Slider.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">

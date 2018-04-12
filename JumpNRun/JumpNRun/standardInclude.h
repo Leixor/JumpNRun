@@ -65,6 +65,7 @@ using namespace AlignHelper;
 #include "SceneHandler.h"
 
 #include "Button.h"
+#include "Slider.h"
 #include "CheckBox.h"
 #include "SceneOption.h"
 #include "SceneStartMenu.h"

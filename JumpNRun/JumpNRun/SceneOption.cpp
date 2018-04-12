@@ -12,40 +12,32 @@ SceneOption::~SceneOption()
 
 bool SceneOption::setupResources()
 {
-	addResource<ObjectBase*>("Background", new ObjectBase(new DrawableShape<RectangleShape>()));
-	this->objects.get("Background")->shape->setPosition(Vector2f(0, 0));
-	this->objects.get("Background")->shape->setSize(Vector2f(1600, 900));
-	this->objects.get("Background")->shape->setFillColor(Color::Black);
+	this->configHelper = new ConfigHelper("test.txt");
+	this->color = Color(100, 100, 100);
 
-	otherCheckbox = addResource<CheckBox*>("OtheBox", new CheckBox([&](bool checked, ObjectBase* type) {otherAction(); }, new DrawableShape<RectangleShape>()));
-	otherCheckbox->shape->setSize(Vector2f(100, 100));
-	otherCheckbox->shape->setFillColor(Color::Red);
-	otherCheckbox->shape->setOutlineThickness(5);
-	otherCheckbox->shape->setOutlineColor(Color::Green);
-	
-	colorCheckbox = addResource<CheckBox*>("ColorBox", new CheckBox([&](bool checked, ObjectBase* sender) {checkAction(checked, sender); }, new DrawableShape<RectangleShape>()));
-	colorCheckbox->shape->setSize(Vector2f(10, 10));
-	colorCheckbox->shape->setFillColor(Color::Red);
-	colorCheckbox->shape->setOutlineThickness(5);
-	colorCheckbox->shape->setOutlineColor(Color::Green);
+	addObject("Background", new ShapeRectangle(windowDef::get().windowSizeX, windowDef::get().windowSizeY, Color(0,200,220,255)));
 
-	alignTo(*colorCheckbox->shape, *otherCheckbox->shape, BOTTOM);
+	addObject("ColorShow", new ShapeRectangle(FloatRect(550,100,500,500), color));
+
+	addResource("Red", new Slider([&](float red) {this->color.r = Uint8(red * 255); }, new ShapeRectangle(170, 60, Color(color.r, 0, 0))));
+	addResource("Green", new Slider([&](float green) {this->color.g = Uint8(green * 255); }, new ShapeRectangle(170, 60, Color(0, color.g, 0))));
+	addResource("Blue", new Slider([&](float blue) {this->color.b = Uint8(blue * 255); }, new ShapeRectangle(170, 60, Color(0, 0, color.b))));
+
+	alignTo(*this->objects.get("Red")->shape, *this->objects.get("ColorShow")->shape, BOTTOM | LEFT, -110);
+	alignTo(*this->objects.get("Green")->shape, *this->objects.get("ColorShow")->shape, BOTTOM, -110);
+	alignTo(*this->objects.get("Blue")->shape, *this->objects.get("ColorShow")->shape, BOTTOM | RIGHT, -110);
 
 	return true;
 }
 
-void SceneOption::checkAction(bool checked, ObjectBase * sender)
+void SceneOption::update()
 {
-	if(colorCheckbox->getState())
-		sender->shape->setFillColor(Color::White);
-	else
-		sender->shape->setFillColor(Color::Blue);
-}
-
-void SceneOption::otherAction()
-{
-	if (otherCheckbox->getState())
-		otherCheckbox->shape->setFillColor(Color::White);
-	else
-		otherCheckbox->shape->setFillColor(Color::Blue);
+	Scene::update();
+	if (this->getUpdateSync())
+	{
+		this->objects.get("Red")->shape->setFillColor(Color(color.r, 0, 0));
+		this->objects.get("Green")->shape->setFillColor(Color(0, color.g, 0));
+		this->objects.get("Blue")->shape->setFillColor(Color(0, 0, color.b));
+		addObject("ColorShow", new ShapeRectangle(FloatRect(550, 100, 500, 500), color));
+	}
 }

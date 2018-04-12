@@ -7,12 +7,9 @@ public:
 	~SceneOption();
 
 	bool setupResources();
+	void update();
 
 private:
-	CheckBox* colorCheckbox;
-	CheckBox* otherCheckbox;
-
-	void checkAction(bool checked, ObjectBase* sender);
-	void otherAction();
+	Color color;
 };
 
