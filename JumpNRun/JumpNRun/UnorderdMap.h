@@ -46,6 +46,23 @@ public:
 		objects.clear();
 	}
 
+	void remove(Iterator iterator)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).iterator == iterator)
+			{
+				this->objects.erase(this->objects.begin() + i);
+			}
+		}
+		throw;
+	}
+
+	void remove(int index)
+	{
+		this->objects.erase(this->objects.begin() + i);
+	}
+
 	int getIndex(Iterator iterator)
 	{
 		for (unsigned int i = 0; i < objects.size(); i++)
@@ -138,6 +155,23 @@ public:
 		objects.clear();
 	}
 
+	void remove(Iterator iterator)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).iterator == iterator)
+			{
+				this->objects.erase(this->objects.begin() + i);
+			}
+		}
+		throw;
+	}
+
+	void remove(int index)
+	{
+		this->objects.erase(this->objects.begin() + i);
+	}
+
 	unsigned int getIndex(Iterator iterator)
 	{
 		for (unsigned int i = 0; i < objects.size(); i++)
@@ -151,12 +185,17 @@ public:
 		throw;
 	}
 
-	void set(int iterator, Content content)
+	Iterator getIterator(int index)
+	{
+		return objects.at(index).iterator;
+	}
+
+	void setContent(int iterator, Content content)
 	{
 		objects.at(iterator).content = content;
 	}
 
-	void set(Iterator iterator, Content content)
+	void setContent(Iterator iterator, Content content)
 	{
 		for (unsigned int i = 0; i < objects.size(); i++)
 		{
@@ -185,19 +224,7 @@ public:
 		throw;
 	}
 
-	void setSpec(Content content, Spec spec)
-	{
-		for (unsigned int i = 0; i < objects.size(); i++)
-		{
-			if (objects.at(i).content == content)
-			{
-				objects.at(i).spec = spec;
-			}
-		}
-		throw;
-	}
-
-	Content get(Iterator iterator)
+	Content getContent(Iterator iterator)
 	{
 		for (unsigned int i = 0; i < objects.size(); i++)
 		{
@@ -209,26 +236,9 @@ public:
 		throw;
 	}
 
-	Content get(int index)
+	Content getContent(int index)
 	{
 		return objects.at(index).content;
-	}
-
-	Iterator getIterator(int index)
-	{
-		return objects.at(index).iterator;
-	}
-
-	Iterator getIterator(Content content)
-	{
-		for (unsigned int i = 0; i < objects.size(); i++)
-		{
-			if (objects.at(i).content == content)
-			{
-				return objects.at(i).iterator;
-			}
-		}
-		throw;
 	}
 
 	Spec getSpec(int index)
@@ -241,18 +251,6 @@ public:
 		for (unsigned int i = 0; i < objects.size(); i++)
 		{
 			if (objects.at(i).iterator == iterator)
-			{
-				return objects.at(i).spec;
-			}
-		}
-		throw;
-	}
-
-	Spec getSpec(Content content)
-	{
-		for (unsigned int i = 0; i < objects.size(); i++)
-		{
-			if (objects.at(i).content == content)
 			{
 				return objects.at(i).spec;
 			}

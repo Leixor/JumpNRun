@@ -164,6 +164,7 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="ConfigHelper.cpp" />
+    <ClCompile Include="DropdownList.cpp" />
     <ClCompile Include="GlobalVariables.cpp" />
     <ClCompile Include="main.cpp">
       <DeploymentContent>true</DeploymentContent>
@@ -180,7 +181,6 @@
     <ClCompile Include="ShapeRectangle.cpp" />
     <ClCompile Include="ShapeSprite.cpp" />
     <ClCompile Include="Slider.cpp" />
-    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlignHelper.h" />
@@ -191,6 +191,7 @@
     <ClInclude Include="ConfigHelper.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="DrawableShape.h" />
+    <ClInclude Include="DropdownList.h" />
     <ClInclude Include="GlobalVariables.h" />
     <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="SavefileHelper.h" />
@@ -206,7 +207,6 @@
     <ClInclude Include="ShapeSprite.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="StandardInclude.h" />
-    <ClInclude Include="Timer.h" />
     <ClInclude Include="UnorderdMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

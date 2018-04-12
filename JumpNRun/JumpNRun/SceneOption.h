@@ -8,8 +8,9 @@ public:
 
 	bool setupResources();
 	void update();
-
 private:
-	Color color;
+	string colorOrigin;
+	Font* fonts;
+	DropdownList* snakeOption;
 };
 
