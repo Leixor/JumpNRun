@@ -91,7 +91,6 @@ void SceneSnakeGame::update()
 		switch (this->gameState)
 		{
 		case eSnakeState::SNAKEPAUSED:
-			return;
 			break;
 		case eSnakeState::SNAKERUNNING:
 			this->running();

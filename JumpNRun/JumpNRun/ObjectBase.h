@@ -35,6 +35,7 @@ public:
 		this->objectText->setFont(font);
 		this->objectText->setString(text);
 		textVisible = VISIBLE;
+		alignTo(*this->objectText, *this->shape);
 	}
 	virtual void setText(string text) {
 		this->objectText->setString(text);

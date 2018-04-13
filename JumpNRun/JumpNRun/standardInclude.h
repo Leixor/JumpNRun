@@ -4,6 +4,7 @@
 #define MS_PER_UPDATE 10
 
 #include <iostream>
+#include <sstream>
 #include <mutex>
 #include <stdio.h>
 #include <tchar.h>
@@ -51,7 +52,6 @@ struct BezierHandles
 //ExtraClasses
 #include "GlobalVariables.h"
 #include "UnorderdMap.h"
-#include "Timer.h"
 
 //DrawableShapes
 #include "DrawableObject.h"
@@ -82,6 +82,7 @@ using namespace AlignHelper;
 
 #include "Button.h"
 #include "Slider.h"
+#include "DropdownList.h"
 #include "CheckBox.h"
 #include "SceneOption.h"
 #include "SceneStartMenu.h"

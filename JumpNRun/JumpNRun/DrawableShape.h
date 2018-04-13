@@ -27,6 +27,7 @@ public:
 	Vector2f getScale();
 	FloatRect getGlobalBounds();
 	float getRotation();
+	Color getFillColor();
 
 	//Existiert nur bei manchen Typen
 	void setOutlineColor(Color color);
@@ -198,6 +199,18 @@ template<class DrawableType>
 inline float DrawableShape<DrawableType>::getRotation()
 {
 	return this->shape->getRotation();
+}
+
+template<>
+inline Color DrawableShape<Sprite>::getFillColor()
+{
+	return Color();
+}
+
+template<class DrawableType>
+inline Color DrawableShape<DrawableType>::getFillColor()
+{
+	return this->shape->getFillColor();
 }
 
 template<class DrawableType>

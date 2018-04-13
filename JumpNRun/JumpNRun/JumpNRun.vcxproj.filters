@@ -26,9 +26,6 @@
     <ClCompile Include="CheckBox.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>ExtraClasses</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Scenes\SceneStuff</Filter>
     </ClCompile>
@@ -53,9 +50,16 @@
     <ClCompile Include="AlignHelper.cpp">
       <Filter>HelperClasses</Filter>
     </ClCompile>
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="AnimationHandler.cpp" />
     <ClCompile Include="Slider.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationHandler.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="DropdownList.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="aniRotate.cpp" />
@@ -97,9 +101,6 @@
     <ClInclude Include="UnorderdMap.h">
       <Filter>ExtraClasses</Filter>
     </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>ExtraClasses</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Scenes\SceneStuff</Filter>
     </ClInclude>
@@ -127,9 +128,16 @@
     <ClInclude Include="AlignHelper.h">
       <Filter>HelperClasses</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="AnimationHandler.h" />
     <ClInclude Include="Slider.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationHandler.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="DropdownList.h">
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="subAnimation.h" />
@@ -153,6 +161,9 @@
     </Filter>
     <Filter Include="HelperClasses">
       <UniqueIdentifier>{67c69018-8878-4b9e-bd27-35b3e6d05dc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{8e0ee1f5-dac6-423b-83c0-ec61ee379457}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

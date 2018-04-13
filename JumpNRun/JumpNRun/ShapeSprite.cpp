@@ -1,7 +1,5 @@
 #include "standardInclude.h"
 
-
-
 ShapeSprite::ShapeSprite(string textureName, float scale, Vector2f pos)
 {
 	this->setTexture(textureName);
