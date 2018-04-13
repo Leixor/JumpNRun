@@ -161,6 +161,7 @@
     <ClCompile Include="AlignHelper.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationHandler.cpp" />
+    <ClCompile Include="aniRotate.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="ConfigHelper.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="AlignHelper.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationHandler.h" />
+    <ClInclude Include="aniRotate.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="ConfigHelper.h" />
@@ -206,6 +208,7 @@
     <ClInclude Include="ShapeSprite.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="StandardInclude.h" />
+    <ClInclude Include="subAnimation.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UnorderdMap.h" />
   </ItemGroup>

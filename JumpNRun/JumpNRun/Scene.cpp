@@ -45,7 +45,7 @@ void Scene::update()
 		updateCount++;
 		updateSync = false;
 	}
-	aniHandler.update();
+	/*aniHandler.update();*/
 }
 
 void Scene::render(RenderWindow & window, RenderStates& shades, float timeTillUpdate)
@@ -128,6 +128,3 @@ int Scene::getObjectPriority(string name)
 {
 	return objects.getIndex(name);
 }
-
-
-

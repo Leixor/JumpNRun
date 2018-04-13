@@ -74,5 +74,5 @@ void SceneStartMenu::buttonOptionAction()
 void SceneStartMenu::buttonEndAction()
 {
 	/*this->window->close();*/
-	myAni->run();
+	/*myAni->run();*/
 }

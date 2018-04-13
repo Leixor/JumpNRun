@@ -41,6 +41,13 @@ enum aniType {
 	MOVE = 4
 };
 
+struct BezierHandles
+{
+	Vector2f handleOne;
+	Vector2f handleTwo;
+	BezierHandles(float x1, float y1, float x2, float y2) : handleOne(x1, y2), handleTwo(x2, y2) {}
+};
+
 //ExtraClasses
 #include "GlobalVariables.h"
 #include "UnorderdMap.h"
@@ -59,10 +66,13 @@ enum aniType {
 #include "AlignHelper.h"
 using namespace AlignHelper;
 
+
+
 //Animation
+#include "subAnimation.h"
 #include "Animation.h"
 #include "AnimationHandler.h"
-
+#include "aniRotate.h"
 //Objects
 #include "ObjectBase.h"
 

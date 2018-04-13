@@ -58,6 +58,7 @@
     <ClCompile Include="Slider.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="aniRotate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -131,6 +132,8 @@
     <ClInclude Include="Slider.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="subAnimation.h" />
+    <ClInclude Include="aniRotate.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">
