@@ -12,6 +12,8 @@ Int64 getCurrentTime()
 
 int main()
 {
+	b2World* world;
+
 	ConfigHelper conf("Test.txt");
 	windowDef::get().windowSizeX = float(stoi(conf.get("Window", "WindowSizeX")));
 	windowDef::get().windowSizeY = float(stoi(conf.get("Window", "WindowSizeY")));

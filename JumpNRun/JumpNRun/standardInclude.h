@@ -14,6 +14,7 @@
 #include <math.h>
 
 #include <SFML\Graphics.hpp>
+#include <Box2D.h>
 
 #include <Windows.h>
 
