@@ -6,8 +6,8 @@ public:
 	// Time duration in millisec
 	subAnimation(unsigned int duration, BezierHandles handles = BezierHandles(0.1f,0.1f,0.9f,0.9f)) : duration(duration) 
 	{
-		updateCount = duration / MS_PER_UPDATE;
-		factors = getBezierFactors(handles.handleOne, handles.handleTwo, updateCount);
+		updateCount = float(duration) / MS_PER_UPDATE;
+		factors = getBezierFactors(handles.handleOne, handles.handleTwo, unsigned int(updateCount));
 		median = getMedian(factors);
 	}
 	~subAnimation() {}
@@ -71,7 +71,7 @@ protected:
 		}
 		else
 		{
-			for (int i = 0; i < size; i++)
+			for (size_t i = 0; i < size; i++)
 			{
 				total += scores[i];
 			}

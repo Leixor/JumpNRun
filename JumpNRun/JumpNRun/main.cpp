@@ -10,35 +10,8 @@ Int64 getCurrentTime()
 	return ms.count();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 int main()
 {
-	
-
-
-
-
-	
-
-
-
-
-
-
-
 	ConfigHelper conf("Test.txt");
 	windowDef::get().windowSizeX = float(stoi(conf.get("Window", "WindowSizeX")));
 	windowDef::get().windowSizeY = float(stoi(conf.get("Window", "WindowSizeY")));
