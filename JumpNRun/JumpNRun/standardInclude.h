@@ -21,6 +21,14 @@
 using namespace std;
 using namespace sf;
 
+enum eKeyFrameAction
+{
+	ANISTART = 1,
+	ANIRESUME = 2,
+	ANIPAUSE = 4,
+	ANIRESTART = 8
+};
+
 enum eVisibilityFlags {
 	NONE = 0,
 	VISIBLE = 1,
@@ -67,13 +75,13 @@ struct BezierHandles
 #include "AlignHelper.h"
 using namespace AlignHelper;
 
-
-
 //Animation
+#include "KeyFrame.h"
 #include "subAnimation.h"
 #include "Animation.h"
 #include "AnimationHandler.h"
 #include "aniRotate.h"
+
 //Objects
 #include "ObjectBase.h"
 

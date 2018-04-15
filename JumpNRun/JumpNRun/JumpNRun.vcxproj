@@ -160,7 +160,6 @@
   <ItemGroup>
     <ClCompile Include="AlignHelper.cpp" />
     <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="AnimationHandler.cpp" />
     <ClCompile Include="aniRotate.cpp" />
     <ClCompile Include="Box2DWorld.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -197,6 +196,7 @@
     <ClInclude Include="DrawableShape.h" />
     <ClInclude Include="DropdownList.h" />
     <ClInclude Include="GlobalVariables.h" />
+    <ClInclude Include="KeyFrame.h" />
     <ClInclude Include="ObjectBase.h" />
     <ClInclude Include="SavefileHelper.h" />
     <ClInclude Include="Scene.h" />

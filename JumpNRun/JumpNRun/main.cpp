@@ -17,7 +17,7 @@ int main()
 	windowDef::get().windowStyle = stoi(conf.get("Window", "WindowStyle"));
 
 
-	//Test Box2D
+	/*//Test Box2D
 	b2Vec2 gravity(0, -10.0f);
 	b2World world(gravity);
 
@@ -73,6 +73,18 @@ int main()
 	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler, &window);
 	sceneHandler.addScene(startMenu);
 	
+	AnimationHandler handler;
+	Animation animation;
+	ObjectBase block(new ShapeRectangle(FloatRect(100.0f, 100.0f, 200.0f, 100.0f), Color::White));
+
+	animation.addSubAnimation("rotate", new aniRotate(2000, 360, Vector2f(100, 50)));
+	animation.addObject(&block);
+
+	handler.addAnimation("rotate", &animation);
+
+	handler.run("rotate");
+	
+
 	//Parameter die für die verbesserte Spielschleife notwendig sind.
 	// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
 	// render(lag / MS_PER_UPDATE);
@@ -122,9 +134,10 @@ int main()
 		{
 			//Ruft die Aktualisierungsmethode auf
 			sceneHandler.update(); 
-			world.Step(timeStep, velocityIterations, positionIterations);
-			float positionY = 450.0f - body->GetPosition().y * 10.0f - 10.0f;
-			box.setPosition(Vector2f(780.0f, positionY));
+			//world.Step(timeStep, velocityIterations, positionIterations);
+			//float positionY = 450.0f - body->GetPosition().y * 10.0f - 10.0f;
+			//box.setPosition(Vector2f(780.0f, positionY));
+			handler.update();
 
 			//FPSCOUNTER
 			loop++;
@@ -139,10 +152,11 @@ int main()
 	
 		//Zeichnen der Objekte
 		window.clear();
-		sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
+		//sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 		//FPSCOUNTER
-		window.draw(*ground.shape);
-		window.draw(*box.shape);
+		//window.draw(*ground.shape);
+		//window.draw(*box.shape);
+		block.draw(window, RenderStates());
 		window.draw(*FPS);
 		frameCount++;
 		window.display();	

@@ -1,9 +1,12 @@
 #pragma once
 #include "StandardInclude.h"
+class ObjectBase;
 class subAnimation
 {
 public:
 	// Time duration in millisec
+	subAnimation()
+	{}
 	subAnimation(unsigned int duration, BezierHandles handles = BezierHandles(0.1f,0.1f,0.9f,0.9f)) : duration(duration) 
 	{
 		updateCount = float(duration) / MS_PER_UPDATE;
@@ -12,23 +15,54 @@ public:
 	}
 	~subAnimation() {}
 
-	virtual unsigned int getTime()
+	virtual void update(ObjectBase* object) = 0;
+
+	void start(bool loop = false)
+	{
+		if (!this->running)
+		{
+			this->running = true;
+			this->loop = loop;
+			this->timeCount = 0;
+		}
+	}
+	void restart()
+	{
+		this->timeCount = 0;
+		this->running = true;
+	}
+	void pause()
+	{
+		if (this->running)
+			this->running = false;
+	}
+	void resume()
+	{
+		if (!this->running)
+			this->running = true;
+	}
+
+	bool isRunning()
+	{
+		return this->running;
+	}
+	unsigned int getTime()
 	{
 		return timeCount * MS_PER_UPDATE;
 	}
-
-	virtual void update() = 0;
-	
-
-
 protected: 
-
+	//Anzahl der Updates die eine Animation braucht, bis sie fertig ist
 	float updateCount;
+	//Der aktuelle Schritt der Animation
 	unsigned int timeCount;
+	//Die Länge der kompletten Animation in MS
 	unsigned int duration;
+
+	bool running;
+	bool loop;
+
 	vector<float> factors;
 	float median;
-	bool loop;
 
 
 	virtual void setupAnimation() {}
@@ -54,9 +88,6 @@ protected:
 		}
 		return factors;
 	}
-
-
-
 	float getMedian(vector<float> scores)
 	{
 		size_t size = scores.size();

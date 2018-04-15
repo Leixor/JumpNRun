@@ -1,25 +1,26 @@
 #pragma once
 class AnimationHandler;
-class Animation
+class ObjectBase;
+
+class Animation : public subAnimation
 {
 public:
-	Animation(AnimationHandler* sceneHandler, string name);
-	~Animation();
+	Animation() {}
+	~Animation() {}
 
-	void run(bool loop = false);
-	void stop();
 	void update();
-	void reset();
-
-	bool isRunning()
+	void update(ObjectBase* object)
 	{
-		return this->running;
+		this->update();
 	}
-
 	
-	void addAniToObject(DrawableObject* object);
-	bool running;
+	void addSubAnimation(string name, subAnimation* animation, unsigned int time = 0);
+	void addKeyFrame(string name, eKeyFrameAction action, unsigned int time);
+	void removeKeyFrame(unsigned int time);
+	void addObject(ObjectBase* object);
+	void removeObject(ObjectBase* object);
 private:
-	AnimationHandler* handler;
-	
+	vector<KeyFrame*> keyFrames;
+	vector<ObjectBase*> objects;
+	UnorderdMap<string, subAnimation*> subAnimations;
 };
