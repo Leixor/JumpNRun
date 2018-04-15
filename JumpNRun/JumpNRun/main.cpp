@@ -77,7 +77,9 @@ int main()
 	Animation animation;
 	ObjectBase block(new ShapeRectangle(FloatRect(100.0f, 100.0f, 200.0f, 100.0f), Color::White));
 
-	animation.addSubAnimation("rotate", new aniRotate(2000, 360, Vector2f(100, 50)));
+	animation.addSubAnimation("rotate1", new aniRotate(2000, 360, Vector2f(100, 50)));
+	animation.addSubAnimation("rotate2", new aniRotate(500, -360, Vector2f(100, 50)), 500);
+	animation.addSubAnimation("rotate3", new aniRotate(1000, 720, Vector2f(100, 50)), 3000);
 	animation.addObject(&block);
 
 	handler.addAnimation("rotate", &animation);

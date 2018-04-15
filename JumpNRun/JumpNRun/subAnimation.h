@@ -6,12 +6,15 @@ class subAnimation
 public:
 	// Time duration in millisec
 	subAnimation()
-	{}
+	{
+		this->timeCount = 0;
+	}
 	subAnimation(unsigned int duration, BezierHandles handles = BezierHandles(0.1f,0.1f,0.9f,0.9f)) : duration(duration) 
 	{
-		updateCount = float(duration) / MS_PER_UPDATE;
-		factors = getBezierFactors(handles.handleOne, handles.handleTwo, unsigned int(updateCount));
-		median = getMedian(factors);
+		this->updateCount = float(duration) / MS_PER_UPDATE;
+		this->factors = getBezierFactors(handles.handleOne, handles.handleTwo, unsigned int(updateCount));
+		this->median = getMedian(factors);
+		this->timeCount = 0;
 	}
 	~subAnimation() {}
 

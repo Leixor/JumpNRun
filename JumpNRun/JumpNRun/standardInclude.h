@@ -55,7 +55,7 @@ struct BezierHandles
 {
 	Vector2f handleOne;
 	Vector2f handleTwo;
-	BezierHandles(float x1, float y1, float x2, float y2) : handleOne(x1, y2), handleTwo(x2, y2) {}
+	BezierHandles(float x1, float y1, float x2, float y2) : handleOne(x1, y1), handleTwo(x2, y2) {}
 };
 
 //ExtraClasses

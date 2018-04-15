@@ -61,16 +61,16 @@ void Animation::addKeyFrame(string name, eKeyFrameAction action, unsigned int ti
 	switch (action)
 	{
 	case ANISTART:
-		frame->addAction([&] { this->subAnimations.get(name)->start(); });
+		frame->addAction(name, [&](string name){ this->subAnimations.get(name)->start(); });
 		break;
 	case ANIPAUSE:
-		frame->addAction([&] {this->subAnimations.get(name)->pause(); });
+		frame->addAction(name, [&](string name) {this->subAnimations.get(name)->pause(); });
 		break;
 	case ANIRESTART:
-		frame->addAction([&] {this->subAnimations.get(name)->restart(); });
+		frame->addAction(name, [&](string name) {this->subAnimations.get(name)->restart(); });
 		break; 
 	case ANIRESUME:
-		frame->addAction([&] {this->subAnimations.get(name)->resume(); });
+		frame->addAction(name, [&](string name) {this->subAnimations.get(name)->resume(); });
 		break;
 	}
 

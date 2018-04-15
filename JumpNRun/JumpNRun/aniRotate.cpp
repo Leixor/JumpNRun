@@ -12,7 +12,7 @@ aniRotate::~aniRotate()
 
 void aniRotate::update(ObjectBase* object)
 {
-	if (this->getTime() <= this->duration)
+	if (this->getTime() < this->duration)
 	{
 		object->shape->rotate(this->subAngle * this->factors.at(this->timeCount), this->origin);
 		this->timeCount++;
