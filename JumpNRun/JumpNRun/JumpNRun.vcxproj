@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClCompile Include="AlignHelper.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationHandler.cpp" />
     <ClCompile Include="aniRotate.cpp" />
     <ClCompile Include="Box2DWorld.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="ShapeRectangle.cpp" />
     <ClCompile Include="ShapeSprite.cpp" />
     <ClCompile Include="Slider.cpp" />
+    <ClCompile Include="SubAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlignHelper.h" />
@@ -211,7 +213,7 @@
     <ClInclude Include="ShapeSprite.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="StandardInclude.h" />
-    <ClInclude Include="subAnimation.h" />
+    <ClInclude Include="SubAnimation.h" />
     <ClInclude Include="UnorderdMap.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

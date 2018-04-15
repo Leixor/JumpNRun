@@ -1,7 +1,7 @@
 #pragma once
 #include "StandardInclude.h"
 
-class subAnimation;
+class SubAnimation;
 class KeyFrame
 {
 public:

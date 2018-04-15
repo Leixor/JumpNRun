@@ -65,6 +65,8 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Animation\AnimationBase</Filter>
     </ClCompile>
+    <ClCompile Include="AnimationHandler.cpp" />
+    <ClCompile Include="SubAnimation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -142,9 +144,6 @@
     <ClInclude Include="aniRotate.h">
       <Filter>Animation</Filter>
     </ClInclude>
-    <ClInclude Include="subAnimation.h">
-      <Filter>Animation\AnimationBase</Filter>
-    </ClInclude>
     <ClInclude Include="AnimationHandler.h">
       <Filter>Animation\AnimationBase</Filter>
     </ClInclude>
@@ -154,6 +153,7 @@
     <ClInclude Include="KeyFrame.h">
       <Filter>Animation\AnimationBase</Filter>
     </ClInclude>
+    <ClInclude Include="SubAnimation.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">

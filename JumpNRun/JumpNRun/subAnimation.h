@@ -1,59 +1,24 @@
 #pragma once
 #include "StandardInclude.h"
 class ObjectBase;
-class subAnimation
+class SubAnimation
 {
 public:
 	// Time duration in millisec
-	subAnimation()
-	{
-		this->timeCount = 0;
-	}
-	subAnimation(unsigned int duration, BezierHandles handles = BezierHandles(0.1f,0.1f,0.9f,0.9f)) : duration(duration) 
-	{
-		this->updateCount = float(duration) / MS_PER_UPDATE;
-		this->factors = getBezierFactors(handles.handleOne, handles.handleTwo, unsigned int(updateCount));
-		this->median = getMedian(factors);
-		this->timeCount = 0;
-	}
-	~subAnimation() {}
+	SubAnimation();
+	SubAnimation(unsigned int duration, BezierHandles handles = BezierHandles(0.1f, 0.1f, 0.9f, 0.9f));
+	~SubAnimation();
 
 	virtual void update(ObjectBase* object) = 0;
 
-	void start(bool loop = false)
-	{
-		if (!this->running)
-		{
-			this->running = true;
-			this->loop = loop;
-			this->timeCount = 0;
-		}
-	}
-	void restart()
-	{
-		this->timeCount = 0;
-		this->running = true;
-	}
-	void pause()
-	{
-		if (this->running)
-			this->running = false;
-	}
-	void resume()
-	{
-		if (!this->running)
-			this->running = true;
-	}
+	void start(bool loop = false);
+	void restart();
+	void pause();
+	void resume();
 
-	bool isRunning()
-	{
-		return this->running;
-	}
-	unsigned int getTime()
-	{
-		return timeCount * MS_PER_UPDATE;
-	}
-protected: 
+	bool isRunning();
+	unsigned int getTime();
+protected:
 	//Anzahl der Updates die eine Animation braucht, bis sie fertig ist
 	float updateCount;
 	//Der aktuelle Schritt der Animation

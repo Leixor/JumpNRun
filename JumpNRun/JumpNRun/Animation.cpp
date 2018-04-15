@@ -37,7 +37,7 @@ void Animation::update()
 	this->timeCount++;
 }
 
-void Animation::addSubAnimation(string name, subAnimation* animation, unsigned int time)
+void Animation::addSubAnimation(string name, SubAnimation* animation, unsigned int time)
 {
 	this->subAnimations.push(name, animation);
 	this->addKeyFrame(name, ANISTART, time);

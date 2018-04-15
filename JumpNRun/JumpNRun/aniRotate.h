@@ -1,6 +1,6 @@
 #pragma once
 
-class aniRotate : public subAnimation
+class aniRotate : public SubAnimation
 {
 public:
 	aniRotate(unsigned int duration, float angle, Vector2f origin, BezierHandles handles = BezierHandles(0.1f,0.1f,0.9f,0.9f));
