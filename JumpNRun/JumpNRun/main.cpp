@@ -1,7 +1,6 @@
 #pragma once
 #include "standardInclude.h"
 
-
 Int64 getCurrentTime()
 {
 	chrono::milliseconds ms = chrono::duration_cast<chrono::milliseconds>(
@@ -19,7 +18,7 @@ int main()
 
 
 	//Test Box2D
-	b2Vec2 gravity(0.0f, -10.0f);
+	b2Vec2 gravity(0, -10.0f);
 	b2World world(gravity);
 
 	//Setup Static Body
@@ -124,8 +123,6 @@ int main()
 			//Ruft die Aktualisierungsmethode auf
 			sceneHandler.update(); 
 			world.Step(timeStep, velocityIterations, positionIterations);
-
-			world.Step(timeStep, velocityIterations, positionIterations);
 			float positionY = 450.0f - body->GetPosition().y * 10.0f - 10.0f;
 			box.setPosition(Vector2f(780.0f, positionY));
 
@@ -142,7 +139,7 @@ int main()
 	
 		//Zeichnen der Objekte
 		window.clear();
-		//sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
+		sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 		//FPSCOUNTER
 		window.draw(*ground.shape);
 		window.draw(*box.shape);
