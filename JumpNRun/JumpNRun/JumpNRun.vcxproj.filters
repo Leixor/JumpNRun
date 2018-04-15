@@ -62,7 +62,12 @@
     <ClCompile Include="DropdownList.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="aniRotate.cpp" />
+    <ClCompile Include="Box2DWorld.cpp">
+      <Filter>Box2D</Filter>
+    </ClCompile>
+    <ClCompile Include="aniRotate.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -140,8 +145,15 @@
     <ClInclude Include="DropdownList.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="subAnimation.h" />
-    <ClInclude Include="aniRotate.h" />
+    <ClInclude Include="Box2DWorld.h">
+      <Filter>Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="aniRotate.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="subAnimation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">
@@ -164,6 +176,9 @@
     </Filter>
     <Filter Include="Animation">
       <UniqueIdentifier>{8e0ee1f5-dac6-423b-83c0-ec61ee379457}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Box2D">
+      <UniqueIdentifier>{86037484-286f-4c8a-954b-eb69622dd3de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
