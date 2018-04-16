@@ -1,4 +1,4 @@
-#include "standardInclude.h"
+#include "SceneGOL.h"
 
 SceneGOL::SceneGOL(string name, SceneHandler& sceneHandler, RenderWindow* window) : Scene(name, sceneHandler, window)
 {

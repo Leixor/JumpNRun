@@ -1,6 +1,4 @@
-#include "standardInclude.h"
-
-
+#include "ShapeRectangle.h"
 
 ShapeRectangle::ShapeRectangle(float width, float height, Color fillColor, float outlineThickness, Color outlineColor)
 {

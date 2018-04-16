@@ -1,4 +1,10 @@
 #pragma once
+#include "Scene.h"
+#include "Button.h"
+#include "ShapeRectangle.h"
+#include "ShapeSprite.h"
+#include "SceneGameSelection.h"
+#include "SceneOption.h"
 
 class SceneStartMenu : public Scene
 {

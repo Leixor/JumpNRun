@@ -1,4 +1,8 @@
 #pragma once
+#include "Scene.h"
+#include "ShapeSprite.h"
+#include "ShapeRectangle.h"
+#include "Button.h"
 
 enum eGOLStates 
 {

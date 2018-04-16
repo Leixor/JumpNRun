@@ -1,6 +1,4 @@
-#include "standardInclude.h"
-
-
+#include "ShapeCircle.h"
 
 ShapeCircle::ShapeCircle(float radius, Color fillColor, float outlineThickness, Color outlineColor)
 {

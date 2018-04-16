@@ -1,4 +1,4 @@
-#include "standardInclude.h"
+#include "Button.h"
 
 Button::Button(function<void(void)> buttonAction, DrawableObject* buttonShape)
 	:ObjectBase(buttonShape), buttonAction(buttonAction)

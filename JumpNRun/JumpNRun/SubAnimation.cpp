@@ -1,4 +1,4 @@
-#include "StandardInclude.h"
+#include "SubAnimation.h"
 
 SubAnimation::SubAnimation()
 {
@@ -44,6 +44,11 @@ void SubAnimation::resume()
 {
 	if (!this->running)
 		this->running = true;
+}
+
+void SubAnimation::increaseTimeAnimation()
+{
+	this->timeCount++;
 }
 
 bool SubAnimation::isRunning()

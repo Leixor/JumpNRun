@@ -1,10 +1,12 @@
 #pragma once
-#include "standardInclude.h"
+#include "AlignHelper.h"
 
-namespace AlignHelper{
+namespace AlignHelper
+{
 
 	// Align das Objekt innerhalb von dem Anchorobjekt an der gegeben Stelle
-	void alignTo(DrawableObject& toAlign, DrawableObject& anchor, int orientation, int margin) {
+	void alignTo(DrawableObject& toAlign, DrawableObject& anchor, int orientation, int margin) 
+	{
 		FloatRect anchorBounds = anchor.getGlobalBounds();
 		FloatRect toAlignBounds = toAlign.getGlobalBounds();
 

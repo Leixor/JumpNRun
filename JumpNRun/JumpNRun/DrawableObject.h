@@ -1,5 +1,6 @@
 #pragma once
-#include "standardInclude.h"
+#include "StandardInclude.h"
+
 
 class DrawableObject
 {
@@ -21,7 +22,7 @@ public:
 	virtual void setOrigin(Vector2f origin) = 0;
 	
 	virtual void setFillColor(Color color) = 0;
-	virtual void setTexture(String texturePath) = 0;
+	virtual void setTexture(string texturePath) = 0;
 	virtual void setTextureRect(IntRect textureRect) = 0;
 	virtual void setOutlineColor(Color color) = 0;
 	virtual void setOutlineThickness(float thickness) = 0; 

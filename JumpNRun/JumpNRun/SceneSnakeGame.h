@@ -1,4 +1,7 @@
 #pragma once
+#include "Scene.h"
+#include "ShapeRectangle.h"
+#include "StandardInclude.h"
 
 enum eSnakeState
 {

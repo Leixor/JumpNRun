@@ -1,5 +1,16 @@
 #pragma once
-#include "standardInclude.h"
+#include "DrawableObject.h"
+#include "AlignHelper.h"
+
+using namespace AlignHelper;
+
+enum eVisibilityFlags {
+	NONE = 0,
+	VISIBLE = 1,
+	UPDATABLE = 2,
+	INPUTABLE = 4,
+	ALL = 7
+};
 
 class ObjectBase
 {

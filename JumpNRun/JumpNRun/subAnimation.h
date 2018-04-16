@@ -1,6 +1,16 @@
 #pragma once
 #include "StandardInclude.h"
-class ObjectBase;
+#include "ObjectBase.h"
+#include "GlobalVariables.h"
+
+
+struct BezierHandles
+{
+	Vector2f handleOne;
+	Vector2f handleTwo;
+	BezierHandles(float x1, float y1, float x2, float y2) : handleOne(x1, y1), handleTwo(x2, y2) {}
+};
+
 class SubAnimation
 {
 public:
@@ -15,6 +25,7 @@ public:
 	void restart();
 	void pause();
 	void resume();
+	void increaseTimeAnimation();
 
 	bool isRunning();
 	unsigned int getTime();
@@ -25,16 +36,14 @@ protected:
 	unsigned int timeCount;
 	//Die Länge der kompletten Animation in MS
 	unsigned int duration;
-
+	//Bestimmen die Eigenschaften der Subanimation 
 	bool running;
 	bool loop;
-
+	//Wichtig für die BezierRechnung
 	vector<float> factors;
 	float median;
 
-
 	virtual void setupAnimation() {}
-
 	// Private Helferfunktionen
 	vector<float> getBezierFactors(Vector2f P1, Vector2f P2, unsigned int steps)
 	{

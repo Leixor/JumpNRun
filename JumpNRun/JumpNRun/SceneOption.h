@@ -1,4 +1,8 @@
 #pragma once
+#include "Scene.h"
+#include "DropdownList.h"
+#include "ShapeRectangle.h"
+#include "Slider.h"
 
 class SceneOption : public Scene
 {

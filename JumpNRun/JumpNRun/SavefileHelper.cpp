@@ -1,11 +1,4 @@
-#include "standardInclude.h"
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <sstream>
-
-
-
+#include "SavefileHelper.h"
 
 SavefileHelper::SavefileHelper()
 {

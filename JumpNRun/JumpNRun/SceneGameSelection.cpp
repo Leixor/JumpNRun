@@ -1,4 +1,4 @@
-#include "StandardInclude.h"
+#include "SceneGameSelection.h"
 
 SceneGameSelection::SceneGameSelection(string name, SceneHandler& sceneHandler, RenderWindow* window)
 	:Scene(name, sceneHandler, window)

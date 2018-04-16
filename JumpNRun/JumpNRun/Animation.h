@@ -1,6 +1,20 @@
 #pragma once
-class AnimationHandler;
-class ObjectBase;
+#include "SubAnimation.h"
+#include "KeyFrame.h"
+
+enum aniType {
+	ROTATE = 1,
+	SCALE = 2,
+	MOVE = 4
+};
+
+enum eKeyFrameAction
+{
+	ANISTART = 1,
+	ANIRESUME = 2,
+	ANIPAUSE = 4,
+	ANIRESTART = 8
+};
 
 class Animation : public SubAnimation
 {

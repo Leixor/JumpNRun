@@ -1,11 +1,4 @@
-#include "standardInclude.h"
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <sstream>
-using namespace std; 
-
-
+#include "ConfigHelper.h"
 
 ConfigHelper::ConfigHelper(string toReadFrom, char pSectionBegin, char pSectionEnd) : textFileName(toReadFrom), sectionBegin(pSectionBegin), sectionEnd(pSectionEnd)
 {

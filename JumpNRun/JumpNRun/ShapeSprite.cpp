@@ -1,4 +1,4 @@
-#include "standardInclude.h"
+#include "ShapeSprite.h"
 
 ShapeSprite::ShapeSprite(string textureName, float scale, Vector2f pos)
 {

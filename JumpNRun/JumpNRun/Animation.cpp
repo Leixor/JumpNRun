@@ -1,4 +1,4 @@
-#include "StandardInclude.h"
+#include "Animation.h"
 
 void Animation::update()
 {
@@ -24,6 +24,7 @@ void Animation::update()
 				this->subAnimations.get(i)->update(this->objects.at(j));
 			}
 
+			this->subAnimations.get(i)->increaseTimeAnimation();
 			noAnimationRunning = false;
 		}
 	}

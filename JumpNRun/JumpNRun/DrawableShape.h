@@ -1,5 +1,5 @@
 #pragma once
-#include "standardInclude.h"
+#include "DrawableObject.h"
 
 template <class DrawableType> class DrawableShape : public DrawableObject
 {
@@ -32,7 +32,7 @@ public:
 	//Existiert nur bei manchen Typen
 	void setOutlineColor(Color color);
 	void setOutlineThickness(float thickness);
-	void setTexture(String texturePath);
+	void setTexture(string texturePath);
 	void setTextureRect(IntRect textureRect);
 
 	IntRect getTextureRect();
@@ -336,7 +336,7 @@ inline IntRect DrawableShape<DrawableType>::getTextureRect()
 }
 
 template<>
-inline void DrawableShape<Sprite>::setTexture(String texturePath)
+inline void DrawableShape<Sprite>::setTexture(string texturePath)
 {
 	Texture* loadHelper = new Texture();
 	loadHelper->loadFromFile(texturePath);
@@ -345,7 +345,7 @@ inline void DrawableShape<Sprite>::setTexture(String texturePath)
 }
 
 template<class DrawableType>
-inline void DrawableShape<DrawableType>::setTexture(String texturePath)
+inline void DrawableShape<DrawableType>::setTexture(string texturePath)
 {}
 
 template<>

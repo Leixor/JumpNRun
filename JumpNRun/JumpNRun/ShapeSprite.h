@@ -1,4 +1,6 @@
 #pragma once
+#include "DrawableShape.h"
+
 class ShapeSprite : public DrawableShape<Sprite>
 {
 public:

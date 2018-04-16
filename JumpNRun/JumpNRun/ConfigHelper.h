@@ -1,6 +1,7 @@
 #pragma once
-#include <fstream>
+#include "StandardInclude.h"
 #include "UnorderdMap.h"
+
 class ConfigHelper
 {
 public:
@@ -22,7 +23,7 @@ private:
 	UnorderdMap<string, UnorderdMap<string, string>*> cfgTable;
 
 	// Helferfunkion zu rausfiltern der Chars
-	std::string RemoveChars(const std::string& source, const std::string& chars);
+	string RemoveChars(const string& source, const string& chars);
 
 	// Chars zum abgrenzen der Sektionen
 	char sectionBegin;

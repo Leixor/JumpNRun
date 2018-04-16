@@ -1,4 +1,6 @@
 #pragma once
+#include "DrawableShape.h"
+
 class ShapeRectangle : public DrawableShape<RectangleShape>
 {
 public:

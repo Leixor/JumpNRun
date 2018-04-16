@@ -1,5 +1,6 @@
 #pragma once
-#include "standardInclude.h"
+#include "StandardInclude.h"
+
 
 template<typename Iterator, typename Content>
 struct MapContent

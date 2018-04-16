@@ -1,4 +1,4 @@
-#include "standardInclude.h"
+#include "GlobalVariables.h"
 
 windowDef& windowDef::get() 
 {

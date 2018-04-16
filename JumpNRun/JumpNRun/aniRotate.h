@@ -1,4 +1,5 @@
 #pragma once
+#include "SubAnimation.h"
 
 class AniRotate : public SubAnimation
 {

@@ -1,4 +1,4 @@
-#include "standardInclude.h"
+#include "Scene.h"
 
 Scene::Scene(string Name, SceneHandler& sceneHandler, RenderWindow* window, View& view)
 	: sceneName(Name), sceneHandler(sceneHandler), window(window),  view(view)

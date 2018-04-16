@@ -62,12 +62,17 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Animation\AnimationBase</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationHandler.cpp" />
     <ClCompile Include="SubAnimation.cpp">
       <Filter>Animation\AnimationBase</Filter>
     </ClCompile>
     <ClCompile Include="AniRotate.cpp">
       <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AniMove.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationHandler.cpp">
+      <Filter>Animation\AnimationBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +106,6 @@
     <ClInclude Include="CheckBox.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectBase.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="UnorderdMap.h">
       <Filter>ExtraClasses</Filter>
     </ClInclude>
@@ -117,9 +119,6 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="GlobalVariables.h">
-      <Filter>ExtraClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="StandardInclude.h">
       <Filter>ExtraClasses</Filter>
     </ClInclude>
     <ClInclude Include="SceneGameSelection.h">
@@ -158,6 +157,15 @@
     <ClInclude Include="AniRotate.h">
       <Filter>Animation</Filter>
     </ClInclude>
+    <ClInclude Include="AniMove.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectBase.h">
+      <Filter>Objects\ObjectBase</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardInclude.h">
+      <Filter>ExtraClasses</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">
@@ -186,6 +194,9 @@
     </Filter>
     <Filter Include="Animation\AnimationBase">
       <UniqueIdentifier>{940e1151-f911-47a6-8efc-f5572ee8b9f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\ObjectBase">
+      <UniqueIdentifier>{60407d9d-b265-4359-be12-a82eb8908f0f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

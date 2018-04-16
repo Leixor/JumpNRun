@@ -1,4 +1,4 @@
-#include "standardInclude.h"
+#include "SceneStartMenu.h"
 
 SceneStartMenu::SceneStartMenu(string name, SceneHandler& sceneHandler, RenderWindow* window)
 	: Scene(name, sceneHandler, window)

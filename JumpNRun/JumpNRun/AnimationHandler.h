@@ -1,4 +1,6 @@
 #pragma once
+#include "Animation.h"
+#include "UnorderdMap.h"
 
 class AnimationHandler
 {

@@ -1,4 +1,4 @@
-#include "StandardInclude.h"
+#include "Slider.h"
 
 Slider::Slider(function<void(float)> sliderAction, DrawableObject* sliderShape)
 	: sliderAction(sliderAction), Button([&] { active = true;}, sliderShape)

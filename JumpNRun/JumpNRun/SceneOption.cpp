@@ -1,4 +1,4 @@
-#include "standardInclude.h"
+#include "SceneOption.h"
 
 SceneOption::SceneOption(string name, SceneHandler& sceneHandler)
 	:Scene(name, sceneHandler)

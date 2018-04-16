@@ -1,6 +1,11 @@
 #pragma once
-class SceneHandler;
+#include "GlobalVariables.h"
+#include "ObjectBase.h"
+#include "UnorderdMap.h"
+#include "ConfigHelper.h"
+#include "SceneHandler.h"
 
+class SceneHandler;
 class Scene
 {
 public:
