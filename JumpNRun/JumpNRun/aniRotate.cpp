@@ -1,16 +1,16 @@
 #include "StandardInclude.h"
 
-aniRotate::aniRotate(unsigned int duration, float angle, Vector2f origin, BezierHandles handles) 
+AniRotate::AniRotate(unsigned int duration, float angle, Vector2f origin, BezierHandles handles)
 	: SubAnimation(duration, handles), origin(origin)
 {
 	this->subAngle = (angle / this->updateCount) / this->median;
 }
 
-aniRotate::~aniRotate()
+AniRotate::~AniRotate()
 {
 }
 
-void aniRotate::update(ObjectBase* object)
+void AniRotate::update(ObjectBase* object)
 {
 	if (this->getTime() < this->duration)
 	{

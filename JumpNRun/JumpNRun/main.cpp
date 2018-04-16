@@ -5,7 +5,7 @@ Int64 getCurrentTime()
 {
 	chrono::milliseconds ms = chrono::duration_cast<chrono::milliseconds>(
 		chrono::system_clock::now().time_since_epoch()
-	);
+		);
 	return ms.count();
 }
 
@@ -62,8 +62,8 @@ int main()
 
 
 	/*
-	Das Renderwindow ist für das zeichnen der verschiedenen Formen benutzt. 
-	Es können noch weitere Parameter übergeben werden, die dafür verantwortlich sind, 
+	Das Renderwindow ist für das zeichnen der verschiedenen Formen benutzt.
+	Es können noch weitere Parameter übergeben werden, die dafür verantwortlich sind,
 	ob das Fenster keinen CloseKnopf hat, nicht größenveränderbar ist...
 	*/
 	RenderWindow window(VideoMode(int(windowDef::get().windowSizeX), int(windowDef::get().windowSizeY)), "Engine", windowDef::get().windowStyle);// , Style::Fullscreen);
@@ -72,21 +72,21 @@ int main()
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
 	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler, &window);
 	sceneHandler.addScene(startMenu);
-	
+
 	AnimationHandler handler;
 	Animation animation;
 	ObjectBase block(new ShapeRectangle(FloatRect(100.0f, 100.0f, 200.0f, 100.0f), Color::White));
 
-	animation.addSubAnimation("rotate1", new aniRotate(2000, 360, Vector2f(100, 50)));
-	animation.addSubAnimation("rotate2", new aniRotate(500, -360, Vector2f(100, 50)), 500);
-	animation.addSubAnimation("rotate3", new aniRotate(1000, 720, Vector2f(100, 50)), 2000);
+	animation.addSubAnimation("rotate1", new AniRotate(2000, 360, Vector2f(100, 50)));
+	animation.addSubAnimation("rotate2", new AniRotate(500, -360, Vector2f(100, 50)), 500);
+	animation.addSubAnimation("rotate3", new AniRotate(1000, 720, Vector2f(100, 50)), 2000);
 	animation.addKeyFrame("rotate3", ANIPAUSE, 5000);
 	animation.addObject(&block);
 
 	handler.addAnimation("rotate", &animation);
 
 	handler.run("rotate", true);
-	
+
 
 	//Parameter die für die verbesserte Spielschleife notwendig sind.
 	// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
@@ -105,7 +105,7 @@ int main()
 	FPS->setFont(*font);
 	FPS->setString(to_string(frameCount));
 	FPS->setCharacterSize(20);
-	FPS->setFillColor(Color::Cyan);	
+	FPS->setFillColor(Color::Cyan);
 
 	while (window.isOpen())
 	{
@@ -129,14 +129,14 @@ int main()
 			}
 			sceneHandler.handleEvents(window, windowEvent);
 		}
-		
+
 		sceneHandler.handleInputs(window);
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)
 		{
 			//Ruft die Aktualisierungsmethode auf
-			sceneHandler.update(); 
+			sceneHandler.update();
 			//world.Step(timeStep, velocityIterations, positionIterations);
 			//float positionY = 450.0f - body->GetPosition().y * 10.0f - 10.0f;
 			//box.setPosition(Vector2f(780.0f, positionY));
@@ -152,7 +152,7 @@ int main()
 
 			lag -= MS_PER_UPDATE;
 		}
-	
+
 		//Zeichnen der Objekte
 		window.clear();
 		//sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
@@ -162,7 +162,7 @@ int main()
 		block.draw(window, RenderStates());
 		window.draw(*FPS);
 		frameCount++;
-		window.display();	
+		window.display();
 	}
 
 	return 0;

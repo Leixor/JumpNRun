@@ -59,14 +59,16 @@
     <ClCompile Include="Box2DWorld.cpp">
       <Filter>Box2D</Filter>
     </ClCompile>
-    <ClCompile Include="aniRotate.cpp">
-      <Filter>Animation</Filter>
-    </ClCompile>
     <ClCompile Include="Animation.cpp">
       <Filter>Animation\AnimationBase</Filter>
     </ClCompile>
     <ClCompile Include="AnimationHandler.cpp" />
-    <ClCompile Include="SubAnimation.cpp" />
+    <ClCompile Include="SubAnimation.cpp">
+      <Filter>Animation\AnimationBase</Filter>
+    </ClCompile>
+    <ClCompile Include="AniRotate.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -141,9 +143,6 @@
     <ClInclude Include="Box2DWorld.h">
       <Filter>Box2D</Filter>
     </ClInclude>
-    <ClInclude Include="aniRotate.h">
-      <Filter>Animation</Filter>
-    </ClInclude>
     <ClInclude Include="AnimationHandler.h">
       <Filter>Animation\AnimationBase</Filter>
     </ClInclude>
@@ -153,7 +152,12 @@
     <ClInclude Include="KeyFrame.h">
       <Filter>Animation\AnimationBase</Filter>
     </ClInclude>
-    <ClInclude Include="SubAnimation.h" />
+    <ClInclude Include="SubAnimation.h">
+      <Filter>Animation\AnimationBase</Filter>
+    </ClInclude>
+    <ClInclude Include="AniRotate.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">

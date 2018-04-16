@@ -1,10 +1,10 @@
 #pragma once
 
-class aniRotate : public SubAnimation
+class AniRotate : public SubAnimation
 {
 public:
-	aniRotate(unsigned int duration, float angle, Vector2f origin, BezierHandles handles = BezierHandles(0.1f,0.1f,0.9f,0.9f));
-	~aniRotate();
+	AniRotate(unsigned int duration, float angle, Vector2f origin, BezierHandles handles = BezierHandles(0.1f, 0.1f, 0.9f, 0.9f));
+	~AniRotate();
 
 	void update(ObjectBase* object);
 
