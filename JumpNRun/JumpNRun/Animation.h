@@ -27,7 +27,13 @@ public:
 	{
 		this->update();
 	}
-	
+	template <typename returnType>
+	returnType addSubAnimation(string name, returnType animation, unsigned int time = 0)
+	{
+		this->subAnimations.push(name, animation);
+		this->addKeyFrame(name, ANISTART, time);
+		return animation;
+	}
 	void addSubAnimation(string name, SubAnimation* animation, unsigned int time = 0);
 	void addKeyFrame(string name, eKeyFrameAction action, unsigned int time);
 	void removeKeyFrame(unsigned int time);

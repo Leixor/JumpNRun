@@ -23,6 +23,7 @@ public:
 	
 	virtual void setFillColor(Color color) = 0;
 	virtual void setTexture(string texturePath) = 0;
+	virtual void setTexture(Texture& texture) = 0;
 	virtual void setTextureRect(IntRect textureRect) = 0;
 	virtual void setOutlineColor(Color color) = 0;
 	virtual void setOutlineThickness(float thickness) = 0; 

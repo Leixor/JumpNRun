@@ -33,6 +33,7 @@ public:
 	void setOutlineColor(Color color);
 	void setOutlineThickness(float thickness);
 	void setTexture(string texturePath);
+	void setTexture(Texture& texture);
 	void setTextureRect(IntRect textureRect);
 
 	IntRect getTextureRect();
@@ -348,6 +349,16 @@ template<class DrawableType>
 inline void DrawableShape<DrawableType>::setTexture(string texturePath)
 {}
 
+template<class DrawableType>
+inline void DrawableShape<DrawableType>::setTexture(Texture & texture)
+{}
+
+template<>
+inline void DrawableShape<Sprite>::setTexture(Texture & texture)
+{
+	this->shape->setTexture(texture);
+}
+
 template<>
 inline void DrawableShape<Sprite>::setTextureRect(IntRect textureRect)
 {
@@ -356,7 +367,9 @@ inline void DrawableShape<Sprite>::setTextureRect(IntRect textureRect)
 
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::setTextureRect(IntRect textureRect)
-{}
+{
+	this->shape->setTextureRect(textureRect);
+}
 
 template<>
 inline void DrawableShape<RectangleShape>::setOutlineColor(Color color)

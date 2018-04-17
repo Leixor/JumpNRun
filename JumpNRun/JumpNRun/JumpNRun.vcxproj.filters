@@ -74,6 +74,7 @@
     <ClCompile Include="AnimationHandler.cpp">
       <Filter>Animation\AnimationBase</Filter>
     </ClCompile>
+    <ClCompile Include="AniSpriteSheet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -166,6 +167,7 @@
     <ClInclude Include="StandardInclude.h">
       <Filter>ExtraClasses</Filter>
     </ClInclude>
+    <ClInclude Include="AniSpriteSheet.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">

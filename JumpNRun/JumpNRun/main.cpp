@@ -3,6 +3,7 @@
 #include "GlobalVariables.h"
 #include "AnimationHandler.h"
 #include "AniRotate.h"
+#include "AniSpriteSheet.h"
 #include "AniMove.h"
 #include "SceneHandler.h"
 #include "SceneStartMenu.h"
@@ -100,7 +101,81 @@ int main()
 
 	handler.run("rotate", true);
 
+	ObjectBase player(new ShapeSprite("Textures/player.png", 1.f, Vector2f(200.f, 200.f)));
+	player.shape->setTextureRect(IntRect(32, 0, 32, 32));
+	ObjectBase wizard(new ShapeSprite("Textures/test.png", 1.f, Vector2f(200.f, 200.f)));
+	wizard.shape->setTextureRect(IntRect(0, 0, 512, 512));
+	wizard.shape->scale(Vector2f(.5f, .5f), Vector2f(0,0));
 
+	// Eine Walkanimation
+	Texture playerTexture;
+	playerTexture.loadFromFile("Textures/player.png");
+	Texture otherPlayer;
+	otherPlayer.loadFromFile("Textures/test.png");
+
+	Animation walkdown;
+	AniSpriteSheet* walkdownSprite;
+
+	walkdownSprite = walkdown.addSubAnimation("walkdown", new AniSpriteSheet(200, 4, playerTexture));
+	walkdownSprite->addFrame(new IntRect(32, 0, 32, 32));
+	walkdownSprite->addFrame(new IntRect(64, 0, 32, 32));
+	walkdownSprite->addFrame(new IntRect(32, 0, 32, 32));
+	walkdownSprite->addFrame(new IntRect(0, 0, 32, 32));
+	walkdown.addObject(&player);
+	handler.addAnimation("walkdown", &walkdown);
+
+	Animation walkup;
+	AniSpriteSheet* walkupSprite;
+	walkupSprite = walkup.addSubAnimation("walkup", new AniSpriteSheet(200, 4, playerTexture));
+	walkupSprite->addFrame(new IntRect(32, 96, 32, 32));
+	walkupSprite->addFrame(new IntRect(64, 96, 32, 32));
+	walkupSprite->addFrame(new IntRect(32, 96, 32, 32));
+	walkupSprite->addFrame(new IntRect(0, 96, 32, 32));
+	walkup.addObject(&player);
+	handler.addAnimation("walkup", &walkup);
+
+
+	Animation walkwizard;
+	AniSpriteSheet* walkwSprite;
+
+	walkwSprite = walkwizard.addSubAnimation("walkw", new AniSpriteSheet(400, 10, otherPlayer));
+	walkwSprite->addFrame(new IntRect(0, 0, 512, 512));
+	walkwSprite->addFrame(new IntRect(512, 0, 512, 512));
+	walkwSprite->addFrame(new IntRect(512*2, 0, 512, 512));
+	walkwSprite->addFrame(new IntRect(512*3, 0, 512, 512));
+
+	walkwSprite->addFrame(new IntRect(0, 512, 512, 512));
+	walkwSprite->addFrame(new IntRect(512, 512, 512, 512));
+	walkwSprite->addFrame(new IntRect(512 * 2, 512, 512, 512));
+	walkwSprite->addFrame(new IntRect(512 * 3, 512, 512, 512));
+
+	walkwSprite->addFrame(new IntRect(0, 512*2, 512, 512));
+	walkwSprite->addFrame(new IntRect(512, 512*2, 512, 512));
+	walkwizard.addObject(&wizard);
+	handler.addAnimation("walkw", &walkwizard);
+
+
+	Texture dieText;
+	dieText.loadFromFile("Textures/die.png");
+
+	Animation dieAni;
+	AniSpriteSheet* dieSprite;
+
+	dieSprite = dieAni.addSubAnimation("die", new AniSpriteSheet(500, 10, dieText));
+	dieSprite->addFrame(new IntRect(0, 0, 512, 512));
+	dieSprite->addFrame(new IntRect(512, 0, 512, 512));
+	dieSprite->addFrame(new IntRect(512 * 2, 0, 512, 512));
+	dieSprite->addFrame(new IntRect(512 * 3, 0, 512, 512));
+
+	dieSprite->addFrame(new IntRect(0, 512, 512, 512));
+	dieSprite->addFrame(new IntRect(512, 512, 512, 512));
+	dieSprite->addFrame(new IntRect(512 * 2, 512, 512, 512));
+	dieSprite->addFrame(new IntRect(512 * 3, 512, 512, 512));
+
+	dieSprite->addFrame(new IntRect(0, 512 * 2, 512, 512));
+	dieSprite->addFrame(new IntRect(512, 512 * 2, 512, 512));
+	dieAni.addObject(&wizard);
+	handler.addAnimation("die", &dieAni);
 	//Parameter die für die verbesserte Spielschleife notwendig sind.
 	// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
 	// render(lag / MS_PER_UPDATE);
@@ -142,7 +217,35 @@ int main()
 			}
 			sceneHandler.handleEvents(window, windowEvent);
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			handler.run("walkdown");
+			player.shape->move(Vector2f(0, .1f));
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			handler.run("walkup");
+			player.shape->move(Vector2f(0, -.1f));
+		}
 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			wizard.shape->setScale(Vector2f(.5f, .5f), Vector2f(256, 256));
+			handler.run("walkw");
+			wizard.shape->move(Vector2f(.1f,0.f));
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			wizard.shape->setScale(Vector2f(-.5f, .5f), Vector2f(256,256));
+			handler.run("walkw");
+			wizard.shape->move(Vector2f(-.1f, 0.f));
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+		{
+			
+			handler.run("die");
+
+		}
 		sceneHandler.handleInputs(window);
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
@@ -172,10 +275,8 @@ int main()
 		//FPSCOUNTER
 		//window.draw(*ground.shape);
 		//window.draw(*box.shape);
-		block1.draw(window, RenderStates());
-		block2.draw(window, RenderStates());
-		block3.draw(window, RenderStates());
-		block4.draw(window, RenderStates());
+		player.draw(window, RenderStates());
+		wizard.draw(window, RenderStates());
 		window.draw(*FPS);
 		frameCount++;
 		window.display();
