@@ -129,7 +129,7 @@ bool SceneSnakeGame::setupFood()
 
 		for (unsigned int i = 0; i < this->snakeBody.size(); i++)
 		{
-			Vector2f snakePos = this->snakeBody.at(i)->shape->getPosition();
+			Vector2f snakePos = this->snakeBody.at(i)->getObjectShape()->getPosition();
 
 			if (snakePos.x == float(randomX * partSizeX + POSX + THICKNESS)
 			 && snakePos.y == float(randomY * partSizeY + POSY + THICKNESS))
@@ -137,7 +137,7 @@ bool SceneSnakeGame::setupFood()
 		}
 	}
 
-	this->snakeFood->shape->setPosition(Vector2f(float(randomX * partSizeX + POSX + THICKNESS)
+	this->snakeFood->getObjectShape()->setPosition(Vector2f(float(randomX * partSizeX + POSX + THICKNESS)
 											   , float(randomY * partSizeY + POSY + THICKNESS)));
 
 	return true;
@@ -153,27 +153,27 @@ void SceneSnakeGame::createScene()
 	for (int i = 0; i < this->partCount; i++)
 	{
 		this->snakeBody.push_back(addObject("Snake" + to_string(i), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Color(stoul(configHelper->get("Snake", "BodyColor"), nullptr, 16)), THICKNESS, Color::Color(stoul(configHelper->get("Snake", "BodyOColor"), nullptr, 16)))));
-		this->objects.get("Snake" + to_string(i))->shape->setPosition(Vector2f((POSX + THICKNESS) + (cellCount.x / 2) * partSizeX + partSizeX * i, ((POSY + THICKNESS) + partSizeY * (cellCount.x / 2))));
+		this->objects.get("Snake" + to_string(i))->getObjectShape()->setPosition(Vector2f((POSX + THICKNESS) + (cellCount.x / 2) * partSizeX + partSizeX * i, ((POSY + THICKNESS) + partSizeY * (cellCount.x / 2))));
 	}
 
-	this->objects.get("Snake0")->shape->setFillColor(Color::Color(stoul(configHelper->get("Snake", "HeadColor"), nullptr, 16)));
-	this->objects.get("Snake0")->shape->setOutlineColor(Color::Color(stoul(configHelper->get("Snake", "HeadOColor"), nullptr, 16)));
+	this->objects.get("Snake0")->getObjectShape()->setFillColor(Color::Color(stoul(configHelper->get("Snake", "HeadColor"), nullptr, 16)));
+	this->objects.get("Snake0")->getObjectShape()->setOutlineColor(Color::Color(stoul(configHelper->get("Snake", "HeadOColor"), nullptr, 16)));
 
 	this->snakeFood = addObject("Food", new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Color(stoul(configHelper->get("Snake", "FoodColor"), nullptr, 16)), THICKNESS, Color::Color(stoul(configHelper->get("Snake", "FoodOColor"), nullptr, 16))));
 
 	// Scorecounter Setup
 	score = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
 	score->shapeVisible = NONE;
-	score->addText("Score: " + to_string(scoreCount), *font);
-	score->setTextSize(40);
-	score->objectText->setFillColor(Color::White);
+	score->addText(new ObjectText("Score: " + to_string(scoreCount), *font));
+	score->getObjectText()->setCharacterSize(40);
+	score->getObjectText()->setFillColor(Color::White);
 
-	alignNextTo(*score->objectText, *objects.get("Background")->shape, RIGHT, 100);
+	alignNextTo(*score->getObjectText(), *objects.get("Background")->getObjectShape(), RIGHT, 100);
 
 	// Nachricht wenn du gestorben bist
 	addObject("Finished", new ShapeRectangle(FloatRect(POSX + PITCH / 2 - 40, POSY + PITCH / 2 - 40, 40, 40)));
-	this->objects.get("Finished")->addText("Press R to Restart", *font);
-	alignTo(*objects.get("Finished")->objectText, *objects.get("Background")->shape);
+	this->objects.get("Finished")->addText(new ObjectText("Press R to Restart", *font));
+	alignTo(*objects.get("Finished")->getObjectText(), *objects.get("Background")->getObjectShape());
 	this->objects.get("Finished")->textVisible = NONE;
 
 	this->setupFood();
@@ -203,31 +203,31 @@ void SceneSnakeGame::running()
 	{
 		snakeDirection = LEFT;
 
-		nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x - partSizeX, this->snakeBody.at(0)->shape->getPosition().y);
+		nextPos = Vector2f(this->snakeBody.at(0)->getObjectShape()->getPosition().x - partSizeX, this->snakeBody.at(0)->getObjectShape()->getPosition().y);
 	}
 	else if (snakeDirectionNew == RIGHT)
 	{
 		snakeDirection = RIGHT;
 
-		nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x + partSizeX, this->snakeBody.at(0)->shape->getPosition().y);
+		nextPos = Vector2f(this->snakeBody.at(0)->getObjectShape()->getPosition().x + partSizeX, this->snakeBody.at(0)->getObjectShape()->getPosition().y);
 	}
 	else if (snakeDirectionNew == TOP)
 	{
 		snakeDirection = TOP;
 
-		nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x, this->snakeBody.at(0)->shape->getPosition().y - partSizeY);
+		nextPos = Vector2f(this->snakeBody.at(0)->getObjectShape()->getPosition().x, this->snakeBody.at(0)->getObjectShape()->getPosition().y - partSizeY);
 	}
 	else if (snakeDirectionNew == BOTTOM)
 	{
 		snakeDirection = BOTTOM;
 
-		nextPos = Vector2f(this->snakeBody.at(0)->shape->getPosition().x, this->snakeBody.at(0)->shape->getPosition().y + partSizeY);
+		nextPos = Vector2f(this->snakeBody.at(0)->getObjectShape()->getPosition().x, this->snakeBody.at(0)->getObjectShape()->getPosition().y + partSizeY);
 	}
 
 	//Collisionsabfragen
 	for (int i = this->snakeBody.size() - 2; i > 0; i--)
 	{
-		if (this->snakeBody.at(i)->shape->getPosition() == nextPos)
+		if (this->snakeBody.at(i)->getObjectShape()->getPosition() == nextPos)
 		{
 			this->gameState = SNAKEFINISHED;
 			return;
@@ -243,22 +243,22 @@ void SceneSnakeGame::running()
 	//Bewegung der Snake
 	for (int i = this->snakeBody.size() - 1; i > 0; i--)
 	{
-		this->snakeBody.at(i)->shape->setPosition(this->snakeBody.at(i - 1)->shape->getPosition());
+		this->snakeBody.at(i)->getObjectShape()->setPosition(this->snakeBody.at(i - 1)->getObjectShape()->getPosition());
 	}
-	this->snakeBody.at(0)->shape->setPosition(nextPos);
+	this->snakeBody.at(0)->getObjectShape()->setPosition(nextPos);
 
 	//Snakewachstum und Essensspawning
-	Vector2f lastSnakePartPos = this->snakeBody.at(this->snakeBody.size() - 1)->shape->getPosition();
-	Vector2f foodPos = this->snakeFood->shape->getPosition();
+	Vector2f lastSnakePartPos = this->snakeBody.at(this->snakeBody.size() - 1)->getObjectShape()->getPosition();
+	Vector2f foodPos = this->snakeFood->getObjectShape()->getPosition();
 	if (foodPos.x == nextPos.x && foodPos.y == nextPos.y)
 	{
 		this->setupFood();
 		this->snakeBody.push_back(addObject("Snake" + to_string(this->snakeBody.size()), new ShapeRectangle(Vector2f((partSizeX - THICKNESS * 2), (partSizeY - THICKNESS * 2)), Color::Color(stoul(configHelper->get("Snake", "BodyColor"), nullptr, 16)), THICKNESS, Color::Color(stoul(configHelper->get("Snake", "BodyOColor"), nullptr, 16))), 1));
-		this->objects.get("Snake" + to_string(this->snakeBody.size() - 1))->shape->setPosition(lastSnakePartPos);
+		this->objects.get("Snake" + to_string(this->snakeBody.size() - 1))->getObjectShape()->setPosition(lastSnakePartPos);
 
 		// Erhöhe Scorecount
 		scoreCount++;
-		score->setText("Score: " + to_string(scoreCount));
+		score->getObjectText()->setString("Score: " + to_string(scoreCount));
 		updateRate -= 2;
 	}
 }

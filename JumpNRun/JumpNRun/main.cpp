@@ -168,14 +168,14 @@ int main()
 
 		//Zeichnen der Objekte
 		window.clear();
-		//sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
+		sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 		//FPSCOUNTER
 		//window.draw(*ground.shape);
 		//window.draw(*box.shape);
-		block1.draw(window, RenderStates());
-		block2.draw(window, RenderStates());
-		block3.draw(window, RenderStates());
-		block4.draw(window, RenderStates());
+		//block1.draw(window, RenderStates());
+		//block2.draw(window, RenderStates());
+		//block3.draw(window, RenderStates());
+		//block4.draw(window, RenderStates());
 		window.draw(*FPS);
 		frameCount++;
 		window.display();

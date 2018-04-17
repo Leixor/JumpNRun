@@ -172,6 +172,7 @@
     <ClCompile Include="main.cpp">
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
+    <ClCompile Include="ObjectText.cpp" />
     <ClCompile Include="SavefileHelper.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneGameSelection.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="GlobalVariables.h" />
     <ClInclude Include="KeyFrame.h" />
     <ClInclude Include="ObjectBase.h" />
+    <ClInclude Include="ObjectText.h" />
     <ClInclude Include="SavefileHelper.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneGameSelection.h" />

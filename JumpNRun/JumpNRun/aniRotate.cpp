@@ -14,7 +14,7 @@ void AniRotate::update(ObjectBase* object)
 {
 	if (this->getTime() < this->duration)
 	{
-		object->shape->rotate(this->subAngle * this->factors.at(this->timeCount), this->origin);
+		object->getObjectShape()->rotate(this->subAngle * this->factors.at(this->timeCount), this->origin);
 	}
 	else if (loop)
 		this->timeCount = 0;

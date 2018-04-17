@@ -1,5 +1,6 @@
 #pragma once
 #include "DrawableObject.h"
+#include "ObjectText.h"
 #include "AlignHelper.h"
 
 using namespace AlignHelper;
@@ -18,7 +19,7 @@ public:
 	
 	ObjectBase(DrawableObject* buttonShape) :shapeVisible(ALL), textVisible(NONE)
 	{
-		shape = buttonShape;
+		objectShape = buttonShape;
 	}
 	~ObjectBase()
 	{}
@@ -34,32 +35,32 @@ public:
 	virtual void draw(RenderWindow& window, RenderStates& shades)
 	{
 		if(shapeVisible & VISIBLE)
-			shape->draw(window, shades);
+			objectShape->draw(window, shades);
 		if(textVisible & VISIBLE)
 			window.draw(*objectText, shades);
 	}
 	
-		
-	// NEW FUNCTIONS
-	virtual void addText(string text, Font& font) {
-		objectText = new Text();
-		this->objectText->setFont(font);
-		this->objectText->setString(text);
+	virtual void addText(ObjectText* objectText) {
+		this->objectText = objectText;
 		textVisible = VISIBLE;
-		alignTo(*this->objectText, *this->shape);
-	}
-	virtual void setText(string text) {
-		this->objectText->setString(text);
-	}
-	virtual void setTextSize(int size) {
-		this->objectText->setCharacterSize(size);
+		alignTo(*this->objectText, *this->objectShape);
 	}
 
-	DrawableObject* shape;
+	DrawableObject* getObjectShape()
+	{
+		return this->objectShape;
+	}
+	ObjectText* getObjectText()
+	{
+		return this->objectText;
+	}
 
 	// NEW VARIABLES
 	int shapeVisible;
 	int textVisible;
-	Text* objectText;
+
+protected:
+	DrawableObject* objectShape;
+	ObjectText* objectText;
 };
 
