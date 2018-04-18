@@ -1,8 +1,8 @@
 #include "AniSpriteSheet.h"
 
-AniSpriteSheet::AniSpriteSheet(unsigned int duration, unsigned int frames, Texture& texture) : SubAnimation(duration), spriteTexture(&texture)
+AniSpriteSheet::AniSpriteSheet(unsigned int duration, unsigned int frames, Texture& texture) : SubAnimation(duration), spriteTexture(&texture), frames(frames)
 {
-	this->frameDuration = this->updateCount / frames;
+
 }
 
 AniSpriteSheet::~AniSpriteSheet()
@@ -34,4 +34,9 @@ void AniSpriteSheet::update(ObjectBase* object, eAniUpdateState updateState)
 		this->running = false;
 	}
 		
+}
+
+void AniSpriteSheet::setupStepSize()
+{
+	this->frameDuration = this->updateCount / frames;
 }

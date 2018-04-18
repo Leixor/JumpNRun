@@ -8,9 +8,11 @@ public:
 	~AniRotate();
 
 	void update(ObjectBase* object, eAniUpdateState updateState);
+	void setupStepSize();
 
 private:
 	Vector2f origin;
 	float subAngle;
+	float angle;
 };
 

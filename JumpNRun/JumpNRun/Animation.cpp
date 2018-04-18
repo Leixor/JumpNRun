@@ -1,45 +1,66 @@
 #include "Animation.h"
 
+Animation::Animation(unsigned int updateRate)
+{
+	this->updateRateCount = 1;
+	this->updateRate = updateRate;
+}
+
 void Animation::update()
 {
-	bool behindLastKeyFrame = true;
-
-	for (unsigned int i = 0; i < this->keyFrames.size(); i++)
+	if (updateRateCount >= updateRate / MS_PER_UPDATE)
 	{
-		if (this->keyFrames.at(i)->getTimeStamp() == this->getTime())
-		{
-			this->keyFrames.at(i)->activateKeyFrame();
-		}
-		if (this->keyFrames.at(i)->getTimeStamp() >= this->getTime())
-			behindLastKeyFrame = false;
-	}
+		bool behindLastKeyFrame = true;
 
-	bool noAnimationRunning = true;
-	for (unsigned int i = 0; i < this->subAnimations.size(); i++)
-	{
-		if (this->subAnimations.get(i)->isRunning())
+		for (unsigned int i = 0; i < this->keyFrames.size(); i++)
 		{
-			for (unsigned int j = 0; j < this->objects.size(); j++)
+			if (this->keyFrames.at(i)->getTimeStamp() == this->getTime())
 			{
-				this->subAnimations.get(i)->update(this->objects.get(j), this->objects.getIterator(j));
+				this->keyFrames.at(i)->activateKeyFrame();
 			}
-
-			this->subAnimations.get(i)->increaseTimeAnimation();
-			noAnimationRunning = false;
+			if (this->keyFrames.at(i)->getTimeStamp() >= this->getTime())
+				behindLastKeyFrame = false;
 		}
+
+		bool noAnimationRunning = true;
+		for (unsigned int i = 0; i < this->subAnimations.size(); i++)
+		{
+			if (this->subAnimations.get(i)->isRunning())
+			{
+				for (unsigned int j = 0; j < this->objects.size(); j++)
+				{
+					this->subAnimations.get(i)->update(this->objects.get(j), this->objects.getIterator(j));
+				}
+
+				this->subAnimations.get(i)->increaseTimeAnimation();
+				noAnimationRunning = false;
+			}
+		}
+
+		if (behindLastKeyFrame && noAnimationRunning)
+			if (this->loop)
+				this->timeCount = -1;
+			else
+				this->running = false;
+
+		
+		this->timeCount++;
+		updateRateCount = 1;
+	}
+	else
+	{
+		updateRateCount++;
 	}
 
-	if (behindLastKeyFrame && noAnimationRunning)
-		if (this->loop)
-			this->timeCount = -1;
-		else
-			this->running = false;
+	
 
-	this->timeCount++;
+
+	
 }
 
 void Animation::addSubAnimation(string name, SubAnimation* animation, unsigned int time)
 {
+	animation->setUpdateRate(this->updateRate);
 	this->subAnimations.push(name, animation);
 	this->addKeyFrame(name, ANISTART, time);
 }

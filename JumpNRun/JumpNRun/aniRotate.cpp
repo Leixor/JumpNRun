@@ -1,9 +1,9 @@
 #include "AniRotate.h"
 
 AniRotate::AniRotate(unsigned int duration, float angle, Vector2f origin, BezierHandles handles)
-	: SubAnimation(duration, handles), origin(origin)
+	: SubAnimation(duration, handles), origin(origin), angle(angle)
 {
-	this->subAngle = (angle / this->updateCount) / this->median;
+	
 }
 
 AniRotate::~AniRotate()
@@ -31,4 +31,9 @@ void AniRotate::update(ObjectBase* object, eAniUpdateState updateState)
 			break;
 		}
 	}
+}
+
+void AniRotate::setupStepSize()
+{
+	this->subAngle = (angle / this->updateCount) / this->median;
 }

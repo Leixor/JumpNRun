@@ -19,7 +19,7 @@ enum eKeyFrameAction
 class Animation : public SubAnimation
 {
 public:
-	Animation() {}
+	Animation(unsigned int updateRate = 20);
 	~Animation() {}
 
 	void update();
@@ -31,6 +31,7 @@ public:
 	template <typename returnType>
 	returnType addSubAnimation(string name, returnType animation, unsigned int time = 0)
 	{
+		animation->setUpdateRate(this->updateRate);
 		this->subAnimations.push(name, animation);
 		this->addKeyFrame(name, ANISTART, time);
 		return animation;
@@ -44,4 +45,5 @@ private:
 	vector<KeyFrame*> keyFrames;
 	UnorderdMap<eAniUpdateState, ObjectBase*> objects;
 	UnorderdMap<string, SubAnimation*> subAnimations;
+	unsigned int updateRateCount;
 };

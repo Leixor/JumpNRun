@@ -5,12 +5,9 @@ SubAnimation::SubAnimation()
 	this->timeCount = 0;
 }
 
-SubAnimation::SubAnimation(unsigned int duration, BezierHandles handles) 
-	: duration(duration)
+SubAnimation::SubAnimation(unsigned int duration, BezierHandles handles)
+	: duration(duration), handles(handles)
 {
-	this->updateCount = float(duration) / MS_PER_UPDATE;
-	this->factors = getBezierFactors(handles.handleOne, handles.handleTwo, unsigned int(updateCount));
-	this->median = getMedian(factors);
 	this->timeCount = 0;
 }
 
@@ -58,5 +55,23 @@ bool SubAnimation::isRunning()
 
 unsigned int SubAnimation::getTime()
 {
-	return timeCount * MS_PER_UPDATE;
+	return timeCount * updateRate;
+}
+
+void SubAnimation::setUpdateRate(unsigned int updateRate)
+{
+	this->updateRate = updateRate;
+	this->setupAnimation();
+}
+
+void SubAnimation::setupAnimation()
+{
+	this->updateCount = float(duration) / this->updateRate;
+	this->factors = getBezierFactors(handles.handleOne, handles.handleTwo, unsigned int(updateCount));
+	this->median = getMedian(factors);
+	this->setupStepSize();
+}
+
+void SubAnimation::setupStepSize()
+{
 }

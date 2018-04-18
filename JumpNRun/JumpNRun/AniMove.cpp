@@ -1,9 +1,9 @@
 #include "AniMove.h"
 
 AniMove::AniMove(unsigned int duration, Vector2f direction, BezierHandles handles)
-	:SubAnimation(duration, handles)
+	:SubAnimation(duration, handles), direction(direction)
 {
-	this->subDirection = Vector2f(((direction.x / this->updateCount) / this->median), ((direction.y / this->updateCount) / this->median));
+	
 }
 
 AniMove::~AniMove()
@@ -28,4 +28,9 @@ void AniMove::update(ObjectBase* object, eAniUpdateState updateState)
 			break;
 		}
 	}
+}
+
+void AniMove::setupStepSize()
+{
+	this->subDirection = Vector2f(((direction.x / this->updateCount) / this->median), ((direction.y / this->updateCount) / this->median));
 }

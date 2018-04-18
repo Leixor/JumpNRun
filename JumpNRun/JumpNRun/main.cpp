@@ -76,6 +76,12 @@ int main()
 	Es können noch weitere Parameter übergeben werden, die dafür verantwortlich sind,
 	ob das Fenster keinen CloseKnopf hat, nicht größenveränderbar ist...
 	*/
+
+
+
+
+
+
 	RenderWindow window(VideoMode(int(windowDef::get().windowSizeX), int(windowDef::get().windowSizeY)), "Engine", windowDef::get().windowStyle);// , Style::Fullscreen);
 	SceneHandler &sceneHandler = SceneHandler();
 
@@ -84,7 +90,7 @@ int main()
 	sceneHandler.addScene(startMenu);
 
 	AnimationHandler handler;
-	Animation animation;
+	Animation animation(10);
 	ObjectBase block1(new ShapeRectangle(FloatRect(100.0f, 500.0f, 200.0f, 100.0f), Color::Blue));
 
 	block1.getShape()->scale(Vector2f(2, 2), Vector2f(100, 50));
@@ -93,13 +99,13 @@ int main()
 	f->loadFromFile("Textures/cool.ttf");
 	block1.addText(new ObjectText("BasisText", *f));
 
-	//animation.addSubAnimation("rotate", new AniRotate(7000, -720, Vector2f(150, 50)));
-	animation.addSubAnimation("move", new AniMove(7000, Vector2f(1500, -500)));
+	animation.addSubAnimation("rotate", new AniRotate(7000, -720, Vector2f(100, 50)));
+	animation.addSubAnimation("move", new AniMove(2000, Vector2f(500, -500)));
 	//animation.addSubAnimation("scale", new AniScale(7000, Vector2f(2, 2), Vector2f(100, 50)));
 	animation.addObject(&block1);
 
 	handler.addAnimation("rotate", &animation);
-	handler.run("rotate", true);
+	handler.run("rotate");
 
 	ObjectBase player(new ShapeSprite("Textures/player.png", 1.f, Vector2f(200.f, 200.f)));
 	player.getShape()->setTextureRect(IntRect(32, 0, 32, 32));
@@ -124,7 +130,7 @@ int main()
 	walkdown.addObject(&player);
 	handler.addAnimation("walkdown", &walkdown);
 
-	Animation walkup;
+	Animation walkup(50);
 	AniSpriteSheet* walkupSprite;
 	walkupSprite = walkup.addSubAnimation("walkup", new AniSpriteSheet(200, 4, playerTexture));
 	walkupSprite->addFrame(new IntRect(32, 96, 32, 32));
@@ -135,7 +141,7 @@ int main()
 	handler.addAnimation("walkup", &walkup);
 
 
-	Animation walkwizard;
+	Animation walkwizard(20);
 	AniSpriteSheet* walkwSprite;
 
 	walkwSprite = walkwizard.addSubAnimation("walkw", new AniSpriteSheet(400, 10, otherPlayer));
@@ -158,7 +164,7 @@ int main()
 	Texture dieText;
 	dieText.loadFromFile("Textures/die.png");
 
-	Animation dieAni;
+	Animation dieAni(50);
 	AniSpriteSheet* dieSprite;
 
 	dieSprite = dieAni.addSubAnimation("die", new AniSpriteSheet(500, 10, dieText));
@@ -244,7 +250,6 @@ int main()
 		{
 			
 			handler.run("die");
-
 		}
 		sceneHandler.handleInputs(window);
 
@@ -275,7 +280,7 @@ int main()
 		//FPSCOUNTER
 		//window.draw(*ground.shape);
 		//window.draw(*box.shape);
-		/*block1.draw(window, RenderStates());*/
+		block1.draw(window, RenderStates());
 		player.draw(window, RenderStates());
 		wizard.draw(window, RenderStates());
 		window.draw(*FPS);
