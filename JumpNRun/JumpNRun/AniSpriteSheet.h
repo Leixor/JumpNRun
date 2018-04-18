@@ -6,7 +6,7 @@ public:
 	AniSpriteSheet(unsigned int duration, unsigned int frames, Texture& texture);
 	~AniSpriteSheet();
 	void addFrame(IntRect* frame);
-	void update(ObjectBase* object);
+	void update(ObjectBase* object, eAniUpdateState updateState);
 
 private:
 	vector<IntRect*> spriteFrames;

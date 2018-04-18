@@ -163,6 +163,7 @@
     <ClCompile Include="AnimationHandler.cpp" />
     <ClCompile Include="AniMove.cpp" />
     <ClCompile Include="AniRotate.cpp" />
+    <ClCompile Include="AniScale.cpp" />
     <ClCompile Include="AniSpriteSheet.cpp" />
     <ClCompile Include="Box2DWorld.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="AnimationHandler.h" />
     <ClInclude Include="AniMove.h" />
     <ClInclude Include="AniRotate.h" />
+    <ClInclude Include="AniScale.h" />
     <ClInclude Include="AniSpriteSheet.h" />
     <ClInclude Include="Box2DWorld.h" />
     <ClInclude Include="Button.h" />

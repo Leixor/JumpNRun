@@ -77,7 +77,12 @@
     <ClCompile Include="ObjectText.cpp">
       <Filter>Objects\TextBase</Filter>
     </ClCompile>
-    <ClCompile Include="AniSpriteSheet.cpp" />
+    <ClCompile Include="AniSpriteSheet.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AniScale.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -173,7 +178,12 @@
     <ClInclude Include="ObjectText.h">
       <Filter>Objects\TextBase</Filter>
     </ClInclude>
-    <ClInclude Include="AniSpriteSheet.h" />
+    <ClInclude Include="AniSpriteSheet.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AniScale.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">

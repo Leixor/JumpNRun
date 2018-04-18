@@ -10,14 +10,25 @@ AniRotate::~AniRotate()
 {
 }
 
-void AniRotate::update(ObjectBase* object)
+void AniRotate::update(ObjectBase* object, eAniUpdateState updateState)
 {
+	//not working
+
+
 	if (this->getTime() < this->duration)
 	{
-		object->getShape()->rotate(this->subAngle * this->factors.at(this->timeCount), this->origin);
+		switch (updateState)
+		{
+		case ObjectOnly:
+			object->getShape()->rotate(this->subAngle * this->factors.at(this->timeCount), this->origin);
+			break;
+		case TextOnly:
+			object->getText()->rotate(this->subAngle * this->factors.at(this->timeCount), this->origin);
+			break;
+		case ObjectAndText:
+			object->getShape()->rotate(this->subAngle * this->factors.at(this->timeCount), this->origin);
+			object->getText()->rotate(this->subAngle * this->factors.at(this->timeCount), this->origin);
+			break;
+		}
 	}
-	else if (loop)
-		this->timeCount = 0;
-	else
-		this->running = false;
 }
