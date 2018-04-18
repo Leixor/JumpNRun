@@ -2,7 +2,7 @@
 
 AniSpriteSheet::AniSpriteSheet(unsigned int duration, unsigned int frames, Texture& texture) : SubAnimation(duration), spriteTexture(&texture)
 {
-	this->frameDuration = this->updateCount / frames;
+	this->frameDuration = float(this->updateCount) / float(frames);
 }
 
 AniSpriteSheet::~AniSpriteSheet()
@@ -30,8 +30,6 @@ void AniSpriteSheet::update(ObjectBase* object, eAniUpdateState updateState)
 	else if (loop)
 		this->timeCount = 0;
 	else
-	{
 		this->running = false;
-	}
 		
 }

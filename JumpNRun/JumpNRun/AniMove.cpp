@@ -28,4 +28,8 @@ void AniMove::update(ObjectBase* object, eAniUpdateState updateState)
 			break;
 		}
 	}
+	else if (loop)
+		this->timeCount = 0;
+	else
+		this->running = false;
 }
