@@ -5,6 +5,7 @@
 #include "AniRotate.h"
 #include "AniSpriteSheet.h"
 #include "AniMove.h"
+#include "AniScale.h"
 #include "SceneHandler.h"
 #include "SceneStartMenu.h"
 #include "ShapeRectangle.h"
@@ -86,15 +87,18 @@ int main()
 	Animation animation;
 	ObjectBase block1(new ShapeRectangle(FloatRect(100.0f, 500.0f, 200.0f, 100.0f), Color::Blue));
 
+	block1.getShape()->scale(Vector2f(2, 2), Vector2f(100, 50));
+
 	Font* f = new Font();
 	f->loadFromFile("Textures/cool.ttf");
 	block1.addText(new ObjectText("BasisText", *f));
 
-	animation.addSubAnimation("rotate1", new AniRotate(7000, -720, Vector2f(150, 50)));
+	//animation.addSubAnimation("rotate", new AniRotate(7000, -720, Vector2f(150, 50)));
+	animation.addSubAnimation("move", new AniMove(7000, Vector2f(1500, -500)));
+	//animation.addSubAnimation("scale", new AniScale(7000, Vector2f(2, 2), Vector2f(100, 50)));
 	animation.addObject(&block1);
 
 	handler.addAnimation("rotate", &animation);
-
 	handler.run("rotate", true);
 
 	ObjectBase player(new ShapeSprite("Textures/player.png", 1.f, Vector2f(200.f, 200.f)));

@@ -61,7 +61,7 @@ public:
 
 	void remove(int index)
 	{
-		this->objects.erase(this->objects.begin() + i);
+		this->objects.erase(this->objects.begin() + index);
 	}
 
 	int getIndex(Iterator iterator)

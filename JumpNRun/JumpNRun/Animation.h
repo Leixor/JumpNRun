@@ -23,10 +23,11 @@ public:
 	~Animation() {}
 
 	void update();
-	void update(ObjectBase* object)
+	void update(ObjectBase* object, eAniUpdateState updateState)
 	{
 		this->update();
 	}
+
 	template <typename returnType>
 	returnType addSubAnimation(string name, returnType animation, unsigned int time = 0)
 	{
@@ -37,10 +38,10 @@ public:
 	void addSubAnimation(string name, SubAnimation* animation, unsigned int time = 0);
 	void addKeyFrame(string name, eKeyFrameAction action, unsigned int time);
 	void removeKeyFrame(unsigned int time);
-	void addObject(ObjectBase* object);
+	void addObject(ObjectBase* object, eAniUpdateState updateState = ObjectAndText);
 	void removeObject(ObjectBase* object);
 private:
 	vector<KeyFrame*> keyFrames;
-	vector<ObjectBase*> objects;
+	UnorderdMap<eAniUpdateState, ObjectBase*> objects;
 	UnorderdMap<string, SubAnimation*> subAnimations;
 };

@@ -21,7 +21,7 @@ void Animation::update()
 		{
 			for (unsigned int j = 0; j < this->objects.size(); j++)
 			{
-				this->subAnimations.get(i)->update(this->objects.at(j));
+				this->subAnimations.get(i)->update(this->objects.get(j), this->objects.getIterator(j));
 			}
 
 			this->subAnimations.get(i)->increaseTimeAnimation();
@@ -89,18 +89,18 @@ void Animation::removeKeyFrame(unsigned int time)
 	}
 }
 
-void Animation::addObject(ObjectBase* object)
+void Animation::addObject(ObjectBase* object, eAniUpdateState updateState)
 {
-	this->objects.push_back(object);
+	this->objects.push(updateState, object);
 }
 
 void Animation::removeObject(ObjectBase* object)
 {
 	for (unsigned int i = 0; i < this->objects.size(); i++)
 	{
-		if (this->objects.at(i) == object)
+		if (this->objects.get(i) == object)
 		{
-			this->objects.erase(this->objects.begin() + i);
+			this->objects.remove(i);
 			return;
 		}
 	}

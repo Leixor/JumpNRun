@@ -3,6 +3,12 @@
 #include "ObjectBase.h"
 #include "GlobalVariables.h"
 
+enum eAniUpdateState
+{
+	ObjectOnly,
+	TextOnly,
+	ObjectAndText
+};
 
 struct BezierHandles
 {
@@ -19,7 +25,7 @@ public:
 	SubAnimation(unsigned int duration, BezierHandles handles = BezierHandles(0.1f, 0.1f, 0.9f, 0.9f));
 	~SubAnimation();
 
-	virtual void update(ObjectBase* object) = 0;
+	virtual void update(ObjectBase* object, eAniUpdateState updateState) = 0;
 
 	void start(bool loop = false);
 	void restart();
