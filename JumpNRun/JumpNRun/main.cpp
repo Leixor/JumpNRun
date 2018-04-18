@@ -271,7 +271,7 @@ int main()
 		//FPSCOUNTER
 		//window.draw(*ground.shape);
 		//window.draw(*box.shape);
-		block1.draw(window, RenderStates());
+		/*block1.draw(window, RenderStates());*/
 		player.draw(window, RenderStates());
 		wizard.draw(window, RenderStates());
 		window.draw(*FPS);
