@@ -12,13 +12,13 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ShapeRectangle.cpp">
-      <Filter>Objects\DrawableShapes</Filter>
+      <Filter>Objects\DrawableBase</Filter>
     </ClCompile>
     <ClCompile Include="ShapeSprite.cpp">
-      <Filter>Objects\DrawableShapes</Filter>
+      <Filter>Objects\DrawableBase</Filter>
     </ClCompile>
     <ClCompile Include="ShapeCircle.cpp">
-      <Filter>Objects\DrawableShapes</Filter>
+      <Filter>Objects\DrawableBase</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>Objects</Filter>
@@ -27,10 +27,10 @@
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Scenes\SceneStuff</Filter>
+      <Filter>Scenes\SceneBase</Filter>
     </ClCompile>
     <ClCompile Include="SceneHandler.cpp">
-      <Filter>Scenes\SceneStuff</Filter>
+      <Filter>Scenes\SceneBase</Filter>
     </ClCompile>
     <ClCompile Include="SceneGOL.cpp">
       <Filter>Scenes</Filter>
@@ -74,6 +74,9 @@
     <ClCompile Include="AnimationHandler.cpp">
       <Filter>Animation\AnimationBase</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectText.cpp">
+      <Filter>Objects\TextBase</Filter>
+    </ClCompile>
     <ClCompile Include="AniSpriteSheet.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -87,19 +90,19 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ShapeCircle.h">
-      <Filter>Objects\DrawableShapes</Filter>
+      <Filter>Objects\DrawableBase</Filter>
     </ClInclude>
     <ClInclude Include="ShapeRectangle.h">
-      <Filter>Objects\DrawableShapes</Filter>
+      <Filter>Objects\DrawableBase</Filter>
     </ClInclude>
     <ClInclude Include="ShapeSprite.h">
-      <Filter>Objects\DrawableShapes</Filter>
+      <Filter>Objects\DrawableBase</Filter>
     </ClInclude>
     <ClInclude Include="DrawableShape.h">
-      <Filter>Objects\DrawableShapes</Filter>
+      <Filter>Objects\DrawableBase</Filter>
     </ClInclude>
     <ClInclude Include="DrawableObject.h">
-      <Filter>Objects\DrawableShapes</Filter>
+      <Filter>Objects\DrawableBase</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Objects</Filter>
@@ -111,10 +114,10 @@
       <Filter>ExtraClasses</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Scenes\SceneStuff</Filter>
+      <Filter>Scenes\SceneBase</Filter>
     </ClInclude>
     <ClInclude Include="SceneHandler.h">
-      <Filter>Scenes\SceneStuff</Filter>
+      <Filter>Scenes\SceneBase</Filter>
     </ClInclude>
     <ClInclude Include="SceneGOL.h">
       <Filter>Scenes</Filter>
@@ -167,6 +170,9 @@
     <ClInclude Include="StandardInclude.h">
       <Filter>ExtraClasses</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectText.h">
+      <Filter>Objects\TextBase</Filter>
+    </ClInclude>
     <ClInclude Include="AniSpriteSheet.h" />
   </ItemGroup>
   <ItemGroup>
@@ -178,12 +184,6 @@
     </Filter>
     <Filter Include="ExtraClasses">
       <UniqueIdentifier>{922f778e-bbc3-4c1e-80a4-29cc780dab98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Objects\DrawableShapes">
-      <UniqueIdentifier>{608dd723-48d7-4260-b258-0ba364c44c20}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scenes\SceneStuff">
-      <UniqueIdentifier>{aabd034f-4d77-433d-8c10-9957bcdd317c}</UniqueIdentifier>
     </Filter>
     <Filter Include="HelperClasses">
       <UniqueIdentifier>{67c69018-8878-4b9e-bd27-35b3e6d05dc3}</UniqueIdentifier>
@@ -199,6 +199,15 @@
     </Filter>
     <Filter Include="Objects\ObjectBase">
       <UniqueIdentifier>{60407d9d-b265-4359-be12-a82eb8908f0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\TextBase">
+      <UniqueIdentifier>{a2bfdd27-ddf7-40a2-8d38-84b57b3d88ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\DrawableBase">
+      <UniqueIdentifier>{608dd723-48d7-4260-b258-0ba364c44c20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes\SceneBase">
+      <UniqueIdentifier>{aabd034f-4d77-433d-8c10-9957bcdd317c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

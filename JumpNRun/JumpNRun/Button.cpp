@@ -23,7 +23,7 @@ bool Button::handleEvents(RenderWindow & window, Event& windowEvent)
 bool Button::checkMouseButtonCollision(RenderWindow & window)
 {
 	auto mouse = Mouse::getPosition(window);
-	if (this->shape->getGlobalBounds().contains(float(mouse.x), float(mouse.y)))
+	if (this->objectShape->getGlobalBounds().contains(float(mouse.x), float(mouse.y)))
 	{
 		this->buttonAction();
 		return true;

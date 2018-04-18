@@ -84,18 +84,14 @@ int main()
 
 	AnimationHandler handler;
 	Animation animation;
-	ObjectBase block1(new ShapeRectangle(FloatRect(100.0f, 500.0f, 200.0f, 100.0f), Color::White));
-	ObjectBase block2(new ShapeRectangle(FloatRect(300.0f, 500.0f, 200.0f, 100.0f), Color::White));
-	ObjectBase block3(new ShapeRectangle(FloatRect(500.0f, 500.0f, 200.0f, 100.0f), Color::White));
-	ObjectBase block4(new ShapeRectangle(FloatRect(700.0f, 500.0f, 200.0f, 100.0f), Color::White));
+	ObjectBase block1(new ShapeRectangle(FloatRect(100.0f, 500.0f, 200.0f, 100.0f), Color::Blue));
+
+	Font* f = new Font();
+	f->loadFromFile("Textures/cool.ttf");
+	block1.addText(new ObjectText("BasisText", *f));
 
 	animation.addSubAnimation("rotate1", new AniRotate(7000, -720, Vector2f(150, 50)));
-	animation.addSubAnimation("rotate2", new AniRotate(500, -360, Vector2f(130, 50)), 500);
-	animation.addSubAnimation("rotate3", new AniRotate(1000, 720, Vector2f(200, 90)), 1000);
 	animation.addObject(&block1);
-	animation.addObject(&block2);
-	animation.addObject(&block3);
-	animation.addObject(&block4);
 
 	handler.addAnimation("rotate", &animation);
 
@@ -271,10 +267,11 @@ int main()
 
 		//Zeichnen der Objekte
 		window.clear();
-		//sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
+		sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 		//FPSCOUNTER
 		//window.draw(*ground.shape);
 		//window.draw(*box.shape);
+		block1.draw(window, RenderStates());
 		player.draw(window, RenderStates());
 		wizard.draw(window, RenderStates());
 		window.draw(*FPS);

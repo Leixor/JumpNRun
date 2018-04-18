@@ -23,7 +23,7 @@ void Slider::handleInputs(RenderWindow & window)
 	if (this->active)
 	{
 		auto mouse = Mouse::getPosition(window);
-		float tmp = (mouse.x - this->shape->getPosition().x) / this->shape->getSize().x;
+		float tmp = (mouse.x - this->objectShape->getPosition().x) / this->objectShape->getSize().x;
 		if (tmp > 1.0f)
 			tmp = 1.0f;
 		else if (tmp < 0.0f)

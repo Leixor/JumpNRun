@@ -26,7 +26,7 @@ bool CheckBox::getState()
 bool CheckBox::checkMouseButtonCollision(RenderWindow & window)
 {
 	auto mouse = Mouse::getPosition(window);
-	if (this->shape->getGlobalBounds().contains(float(mouse.x), float(mouse.y)))
+	if (this->objectShape->getGlobalBounds().contains(float(mouse.x), float(mouse.y)))
 	{
 		this->checked = !this->checked;
 		this->buttonAction(this->checked, this);

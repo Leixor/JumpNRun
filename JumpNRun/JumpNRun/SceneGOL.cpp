@@ -36,28 +36,28 @@ bool SceneGOL::setupResources()
 	addResource("-size", new Button([&] {minusGridSize(); }, new ShapeSprite("Textures/minus.png", .1f)));
 	gridSizeText = addObject("GridSizeText", new ShapeRectangle(Vector2f(200, 100)));
 	gridSizeText->shapeVisible = NONE;
-	gridSizeText->addText(sizeText, *font);
-	gridSizeText->setTextSize(40);
-	gridSizeText->objectText->setFillColor(Color::Black);
-	alignTo(*objects.get("-size")->shape, *background, BOTTOM | LEFT);
-	objects.get("-size")->shape->move(Vector2f(20, -20));
-	alignNextTo(*gridSizeText->objectText, *objects.get("-size")->shape, RIGHT);
-	alignNextTo(*objects.get("+size")->shape, *gridSizeText->objectText, RIGHT);
+	gridSizeText->addText(new ObjectText(sizeText, *font));
+	gridSizeText->getObjectText()->setCharacterSize(40);
+	gridSizeText->getObjectText()->setFillColor(Color::Black);
+	alignTo(*objects.get("-size")->getObjectShape(), *background, BOTTOM | LEFT);
+	objects.get("-size")->getObjectShape()->move(Vector2f(20, -20));
+	alignNextTo(*gridSizeText->getObjectText(), *objects.get("-size")->getObjectShape(), RIGHT);
+	alignNextTo(*objects.get("+size")->getObjectShape(), *gridSizeText->getObjectText(), RIGHT);
 
 	generationText = addObject("generationText", new ShapeRectangle(Vector2f(200, 100)));
 	generationText->shapeVisible = NONE;
-	generationText->addText("Generation: " + to_string(generation), *font);
-	generationText->setTextSize(40);
-	generationText->objectText->setFillColor(Color::Black);
+	generationText->addText(new ObjectText("Generation: " + to_string(generation), *font));
+	generationText->getObjectText()->setCharacterSize(40);
+	generationText->getObjectText()->setFillColor(Color::Black);
 
 	gpsText = addObject("generationText", new ShapeRectangle(Vector2f(200, 100)));
 	gpsText->shapeVisible = NONE;
-	gpsText->addText("Generation/Sekunde: " + to_string(1000/updateRate), *font);
-	gpsText->setTextSize(40);
-	gpsText->objectText->setFillColor(Color::Black);
+	gpsText->addText(new ObjectText("Generation/Sekunde: " + to_string(1000/updateRate), *font));
+	gpsText->getObjectText()->setCharacterSize(40);
+	gpsText->getObjectText()->setFillColor(Color::Black);
 
-	alignNextTo(*generationText->objectText, *objects.get("+size")->shape, RIGHT, 100);
-	alignNextTo(*gpsText->objectText, *generationText->objectText, RIGHT, 50);
+	alignNextTo(*generationText->getObjectText(), *objects.get("+size")->getObjectShape(), RIGHT, 100);
+	alignNextTo(*gpsText->getObjectText(), *generationText->getObjectText(), RIGHT, 50);
 
 	rect = new ShapeRectangle(Vector2f(cellSize, cellSize), Color::Color(stoul(configHelper->get("GOL", "CellColor"), nullptr, 16)));
 	sprit = new ShapeSprite("Textures/plus.png", Vector2f(cellSize, cellSize));
@@ -84,8 +84,8 @@ void SceneGOL::update()
 		case eGOLStates::GOLPAUSED:
 			break;
 		}
-		generationText->setText("Generation: " + to_string(generation));
-		alignNextTo(*gpsText->objectText, *generationText->objectText, RIGHT, 50);
+		generationText->getObjectText()->setString("Generation: " + to_string(generation));
+		alignNextTo(*gpsText->getObjectText(), *generationText->getObjectText(), RIGHT, 50);
 	}
 }
 
@@ -176,13 +176,13 @@ void SceneGOL::handleEvents(RenderWindow & window, Event& windowEvent)
 		{
 			if(updateRate > 10)
 				updateRate -= 10;
-			gpsText->setText("Generation/Sekunde: " + to_string(1000 / updateRate));
+			gpsText->getObjectText()->setString("Generation/Sekunde: " + to_string(1000 / updateRate));
 		}
 			
 		if (Keyboard::isKeyPressed(Keyboard::Key::Down)) 
 		{
 			updateRate += 10;
-			gpsText->setText("Generation/Sekunde: " + to_string(1000 / updateRate));
+			gpsText->getObjectText()->setString("Generation/Sekunde: " + to_string(1000 / updateRate));
 		}
 	}
 }
@@ -218,7 +218,7 @@ void SceneGOL::plusGridSize()
 			gridSize += 10;
 
 		sizeText = to_string(gridSize) + " x " + to_string(gridSize);
-		gridSizeText->setText(sizeText);
+		gridSizeText->getObjectText()->setString(sizeText);
 		cellSize = (float)window->getSize().x / (float)gridSize;
 
 		proto->setSize(Vector2f(cellSize, cellSize));
@@ -235,7 +235,7 @@ void SceneGOL::minusGridSize()
 			gridSize -= 10;
 
 		sizeText = to_string(gridSize) + " x " + to_string(gridSize);
-		gridSizeText->setText(sizeText);
+		gridSizeText->getObjectText()->setString(sizeText);
 
 		cellSize = (float)window->getSize().x / (float)gridSize;
 
