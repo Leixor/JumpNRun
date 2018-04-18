@@ -34,3 +34,8 @@ void AniMove::setupStepSize()
 {
 	this->subDirection = Vector2f(((direction.x / this->updateCount) / this->median), ((direction.y / this->updateCount) / this->median));
 }
+	else if (loop)
+		this->timeCount = 0;
+	else
+		this->running = false;
+}

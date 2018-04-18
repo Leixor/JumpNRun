@@ -30,9 +30,7 @@ void AniSpriteSheet::update(ObjectBase* object, eAniUpdateState updateState)
 	else if (loop)
 		this->timeCount = 0;
 	else
-	{
 		this->running = false;
-	}
 		
 }
 
