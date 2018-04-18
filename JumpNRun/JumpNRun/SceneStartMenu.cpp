@@ -31,30 +31,30 @@ bool SceneStartMenu::setupResources()
 
 	startButton = addResource<Button*>("Button_Start", new Button([&] {buttonStartAction();}, new ShapeSprite("Textures/blueButton.png", 1.5f)));
 	this->objects.get("Button_Start")->addText(new ObjectText("Start", *this->font));
-	this->objects.get("Button_Start")->getObjectText()->setCharacterSize(50);
+	this->objects.get("Button_Start")->getText()->setCharacterSize(50);
 	
 	optionButton = addResource<Button*>("Button_Option", new Button([&] {buttonOptionAction(); }, new ShapeSprite("Textures/blueButton.png", 1.5f)));
 	this->objects.get("Button_Option")->addText(new ObjectText("Optionen", *this->font));
-	this->objects.get("Button_Option")->getObjectText()->setCharacterSize(50);
+	this->objects.get("Button_Option")->getText()->setCharacterSize(50);
 
 	endButton = addResource<Button*>("Button_End", new Button([&] {buttonEndAction(); }, new ShapeSprite("Textures/blueButton.png", 1.5f)));
 	this->objects.get("Button_End")->addText(new ObjectText("Beenden", *this->font));
-	this->objects.get("Button_End")->getObjectText()->setCharacterSize(50);
+	this->objects.get("Button_End")->getText()->setCharacterSize(50);
 	
-	alignTo(*optionButton->getObjectShape(), *this->objects.get("Background")->getObjectShape());
-	optionButton->getObjectShape()->move(Vector2f(0, 100));
-	alignNextTo(*startButton->getObjectShape(), *optionButton->getObjectShape(), LEFT, 50);
-	alignNextTo(*endButton->getObjectShape(), *optionButton->getObjectShape(), RIGHT, 50);
-	alignTo(*this->objects.get("Button_Start")->getObjectText(), *this->objects.get("Button_Start")->getObjectShape());
-	alignTo(*this->objects.get("Button_Option")->getObjectText(), *this->objects.get("Button_Option")->getObjectShape());
-	alignTo(*this->objects.get("Button_End")->getObjectText(), *this->objects.get("Button_End")->getObjectShape());
+	alignTo(*optionButton->getShape(), *this->objects.get("Background")->getShape());
+	optionButton->getShape()->move(Vector2f(0, 100));
+	alignNextTo(*startButton->getShape(), *optionButton->getShape(), LEFT, 50);
+	alignNextTo(*endButton->getShape(), *optionButton->getShape(), RIGHT, 50);
+	alignTo(*this->objects.get("Button_Start")->getText(), *this->objects.get("Button_Start")->getShape());
+	alignTo(*this->objects.get("Button_Option")->getText(), *this->objects.get("Button_Option")->getShape());
+	alignTo(*this->objects.get("Button_End")->getText(), *this->objects.get("Button_End")->getShape());
 
 	addResource("SnakeCover", new ObjectBase(new DrawableShape<Sprite>()));
-	this->objects.get("SnakeCover")->getObjectShape()->setTexture("Textures/Cover_Snake.png");
-	this->objects.get("SnakeCover")->getObjectShape()->setPosition(Vector2f(300, 100));
-	this->objects.get("SnakeCover")->getObjectShape()->setSize(Vector2f(1000, 600));
+	this->objects.get("SnakeCover")->getShape()->setTexture("Textures/Cover_Snake.png");
+	this->objects.get("SnakeCover")->getShape()->setPosition(Vector2f(300, 100));
+	this->objects.get("SnakeCover")->getShape()->setSize(Vector2f(1000, 600));
 
-	alignTo(*this->objects.get("SnakeCover")->getObjectShape(), *this->objects.get("Background")->getObjectShape(), TOP, -50);
+	alignTo(*this->objects.get("SnakeCover")->getShape(), *this->objects.get("Background")->getShape(), TOP, -50);
 
 	return true;
 }

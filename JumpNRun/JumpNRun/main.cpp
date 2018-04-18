@@ -98,10 +98,10 @@ int main()
 	handler.run("rotate", true);
 
 	ObjectBase player(new ShapeSprite("Textures/player.png", 1.f, Vector2f(200.f, 200.f)));
-	player.shape->setTextureRect(IntRect(32, 0, 32, 32));
+	player.getShape()->setTextureRect(IntRect(32, 0, 32, 32));
 	ObjectBase wizard(new ShapeSprite("Textures/test.png", 1.f, Vector2f(200.f, 200.f)));
-	wizard.shape->setTextureRect(IntRect(0, 0, 512, 512));
-	wizard.shape->scale(Vector2f(.5f, .5f), Vector2f(0,0));
+	wizard.getShape()->setTextureRect(IntRect(0, 0, 512, 512));
+	wizard.getShape()->scale(Vector2f(.5f, .5f), Vector2f(0,0));
 
 	// Eine Walkanimation
 	Texture playerTexture;
@@ -216,25 +216,25 @@ int main()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
 			handler.run("walkdown");
-			player.shape->move(Vector2f(0, .1f));
+			player.getShape()->move(Vector2f(0, .1f));
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
 			handler.run("walkup");
-			player.shape->move(Vector2f(0, -.1f));
+			player.getShape()->move(Vector2f(0, -.1f));
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			wizard.shape->setScale(Vector2f(.5f, .5f), Vector2f(256, 256));
+			wizard.getShape()->setScale(Vector2f(.5f, .5f), Vector2f(256, 256));
 			handler.run("walkw");
-			wizard.shape->move(Vector2f(.1f,0.f));
+			wizard.getShape()->move(Vector2f(.1f,0.f));
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			wizard.shape->setScale(Vector2f(-.5f, .5f), Vector2f(256,256));
+			wizard.getShape()->setScale(Vector2f(-.5f, .5f), Vector2f(256,256));
 			handler.run("walkw");
-			wizard.shape->move(Vector2f(-.1f, 0.f));
+			wizard.getShape()->move(Vector2f(-.1f, 0.f));
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
 		{

@@ -46,11 +46,11 @@ public:
 		alignTo(*this->objectText, *this->objectShape);
 	}
 
-	DrawableObject* getObjectShape()
+	DrawableObject* getShape()
 	{
 		return this->objectShape;
 	}
-	ObjectText* getObjectText()
+	ObjectText* getText()
 	{
 		return this->objectText;
 	}

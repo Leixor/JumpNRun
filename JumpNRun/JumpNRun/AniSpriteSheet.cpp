@@ -21,14 +21,14 @@ void AniSpriteSheet::update(ObjectBase * object)
 {
 	if (timeCount == 0  || timeCount == 1)
 	{
-		object->shape->setTexture(*spriteTexture);
+		object->getShape()->setTexture(*spriteTexture);
 	}
 	int currentFrame = timeCount / frameDuration;
 	if (currentFrame == spriteFrames.size())
 		currentFrame = spriteFrames.size()-1;
 	if (this->getTime() < this->duration)
 	{
-		object->shape->setTextureRect(*spriteFrames.at(currentFrame));
+		object->getShape()->setTextureRect(*spriteFrames.at(currentFrame));
 	}
 	else if (loop)
 		this->timeCount = 0;
