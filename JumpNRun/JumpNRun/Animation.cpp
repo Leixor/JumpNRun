@@ -39,12 +39,14 @@ void Animation::update()
 
 		if (behindLastKeyFrame && noAnimationRunning)
 			if (this->loop)
-				this->timeCount = -1;
+			{
+				this->timeCount = 0;
+				this->update();
+			}	
 			else
 				this->running = false;
-
-		
-		this->timeCount++;
+		else
+			this->timeCount++;
 		updateRateCount = 1;
 	}
 	else

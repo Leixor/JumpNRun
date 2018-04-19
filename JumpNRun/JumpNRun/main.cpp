@@ -80,7 +80,8 @@ int main()
 
 
 
-
+	CircleShape punkt = CircleShape(4);
+	punkt.setFillColor(Color::Red);
 
 	RenderWindow window(VideoMode(int(windowDef::get().windowSizeX), int(windowDef::get().windowSizeY)), "Engine", windowDef::get().windowStyle);// , Style::Fullscreen);
 	SceneHandler &sceneHandler = SceneHandler();
@@ -90,97 +91,28 @@ int main()
 	sceneHandler.addScene(startMenu);
 
 	AnimationHandler handler;
-	Animation animation(10);
+	Animation animation(1000);
 	ObjectBase block1(new ShapeRectangle(FloatRect(100.0f, 500.0f, 200.0f, 100.0f), Color::Blue));
 
 	Font* f = new Font();
 	f->loadFromFile("Textures/cool.ttf");
 	block1.addText(new ObjectText("BasisText", *f));
+	FloatRect m = block1.getText()->getLocalBounds();
+	Vector2f p = block1.getText()->getPosition() - block1.getShape()->getPosition();
+	Vector2f oldPos = block1.getText()->getPosition();
+	Vector2f punktPos = block1.getText()->getPosition() + Vector2f(- 37.5f,- 30.f);
+	punkt.setPosition(punktPos);
+	Vector2f u;
 
 	//animation.addSubAnimation("rotate", new AniRotate(7000, -200, Vector2f(block1.getText()->getLocalBounds().width / 2.0f - block1.getText()->getLocalBounds().left, block1.getText()->getLocalBounds().height / 2.0f - block1.getText()->getLocalBounds().width / 2.0f - block1.getText()->getLocalBounds().top)));
 	//animation.addSubAnimation("move", new AniMove(7000, Vector2f(1500, -500)));
-	animation.addSubAnimation("scale", new AniScale(2000, Vector2f(2, 2), Vector2f(100, 50)));
-	animation.addSubAnimation("scale2", new AniScale(2000, Vector2f(-2, -2), Vector2f(100, 50)), 2000);
+	//animation.addSubAnimation("scale", new AniScale(2000, Vector2f(2, 2), Vector2f(100, 50)));
+	//animation.addSubAnimation("scale2", new AniScale(2000, Vector2f(-2, -2), Vector2f(100, 50)), 2000);
 	animation.addObject(&block1);
 
 	handler.addAnimation("rotate", &animation);
-	handler.run("rotate");
+	handler.run("rotate", true);
 
-	ObjectBase player(new ShapeSprite("Textures/player.png", 1.f, Vector2f(200.f, 200.f)));
-	player.getShape()->setTextureRect(IntRect(32, 0, 32, 32));
-	ObjectBase wizard(new ShapeSprite("Textures/test.png", 1.f, Vector2f(200.f, 200.f)));
-	wizard.getShape()->setTextureRect(IntRect(0, 0, 512, 512));
-	wizard.getShape()->scale(Vector2f(.5f, .5f), Vector2f(0,0));
-
-	// Eine Walkanimation
-	Texture playerTexture;
-	playerTexture.loadFromFile("Textures/player.png");
-	Texture otherPlayer;
-	otherPlayer.loadFromFile("Textures/test.png");
-
-	Animation walkdown;
-	AniSpriteSheet* walkdownSprite;
-
-	walkdownSprite = walkdown.addSubAnimation("walkdown", new AniSpriteSheet(200, 4, playerTexture));
-	walkdownSprite->addFrame(new IntRect(32, 0, 32, 32));
-	walkdownSprite->addFrame(new IntRect(64, 0, 32, 32));
-	walkdownSprite->addFrame(new IntRect(32, 0, 32, 32));
-	walkdownSprite->addFrame(new IntRect(0, 0, 32, 32));
-	walkdown.addObject(&player);
-	handler.addAnimation("walkdown", &walkdown);
-
-	Animation walkup(50);
-	AniSpriteSheet* walkupSprite;
-	walkupSprite = walkup.addSubAnimation("walkup", new AniSpriteSheet(200, 4, playerTexture));
-	walkupSprite->addFrame(new IntRect(32, 96, 32, 32));
-	walkupSprite->addFrame(new IntRect(64, 96, 32, 32));
-	walkupSprite->addFrame(new IntRect(32, 96, 32, 32));
-	walkupSprite->addFrame(new IntRect(0, 96, 32, 32));
-	walkup.addObject(&player);
-	handler.addAnimation("walkup", &walkup);
-
-
-	Animation walkwizard(20);
-	AniSpriteSheet* walkwSprite;
-
-	walkwSprite = walkwizard.addSubAnimation("walkw", new AniSpriteSheet(400, 10, otherPlayer));
-	walkwSprite->addFrame(new IntRect(0, 0, 512, 512));
-	walkwSprite->addFrame(new IntRect(512, 0, 512, 512));
-	walkwSprite->addFrame(new IntRect(512*2, 0, 512, 512));
-	walkwSprite->addFrame(new IntRect(512*3, 0, 512, 512));
-
-	walkwSprite->addFrame(new IntRect(0, 512, 512, 512));
-	walkwSprite->addFrame(new IntRect(512, 512, 512, 512));
-	walkwSprite->addFrame(new IntRect(512 * 2, 512, 512, 512));
-	walkwSprite->addFrame(new IntRect(512 * 3, 512, 512, 512));
-
-	walkwSprite->addFrame(new IntRect(0, 512*2, 512, 512));
-	walkwSprite->addFrame(new IntRect(512, 512*2, 512, 512));
-	walkwizard.addObject(&wizard);
-	handler.addAnimation("walkw", &walkwizard);
-
-
-	Texture dieText;
-	dieText.loadFromFile("Textures/die.png");
-
-	Animation dieAni(50);
-	AniSpriteSheet* dieSprite;
-
-	dieSprite = dieAni.addSubAnimation("die", new AniSpriteSheet(500, 10, dieText));
-	dieSprite->addFrame(new IntRect(0, 0, 512, 512));
-	dieSprite->addFrame(new IntRect(512, 0, 512, 512));
-	dieSprite->addFrame(new IntRect(512 * 2, 0, 512, 512));
-	dieSprite->addFrame(new IntRect(512 * 3, 0, 512, 512));
-
-	dieSprite->addFrame(new IntRect(0, 512, 512, 512));
-	dieSprite->addFrame(new IntRect(512, 512, 512, 512));
-	dieSprite->addFrame(new IntRect(512 * 2, 512, 512, 512));
-	dieSprite->addFrame(new IntRect(512 * 3, 512, 512, 512));
-
-	dieSprite->addFrame(new IntRect(0, 512 * 2, 512, 512));
-	dieSprite->addFrame(new IntRect(512, 512 * 2, 512, 512));
-	dieAni.addObject(&wizard);
-	handler.addAnimation("die", &dieAni);
 	//Parameter die für die verbesserte Spielschleife notwendig sind.
 	// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
 	// render(lag / MS_PER_UPDATE);
@@ -199,6 +131,8 @@ int main()
 	FPS->setString(to_string(frameCount));
 	FPS->setCharacterSize(20);
 	FPS->setFillColor(Color::Cyan);
+
+	Vector2f k;
 
 	while (window.isOpen())
 	{
@@ -222,34 +156,7 @@ int main()
 			}
 			sceneHandler.handleEvents(window, windowEvent);
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			handler.run("walkdown");
-			player.getShape()->move(Vector2f(0, .1f));
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
-			handler.run("walkup");
-			player.getShape()->move(Vector2f(0, -.1f));
-		}
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
-			wizard.getShape()->setScale(Vector2f(.5f, .5f), Vector2f(256, 256));
-			handler.run("walkw");
-			wizard.getShape()->move(Vector2f(.1f,0.f));
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
-			wizard.getShape()->setScale(Vector2f(-.5f, .5f), Vector2f(256,256));
-			handler.run("walkw");
-			wizard.getShape()->move(Vector2f(-.1f, 0.f));
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
-		{
-			
-			handler.run("die");
-		}
+		
 		sceneHandler.handleInputs(window);
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
@@ -260,7 +167,7 @@ int main()
 			//world.Step(timeStep, velocityIterations, positionIterations);
 			//float positionY = 450.0f - body->GetPosition().y * 10.0f - 10.0f;
 			//box.setPosition(Vector2f(780.0f, positionY));
-			handler.update();
+			//handler.update();
 
 			//FPSCOUNTER
 			loop++;
@@ -271,6 +178,28 @@ int main()
 			}
 
 			lag -= MS_PER_UPDATE;
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+			{
+
+				p = block1.getText()->getPosition() - block1.getShape()->getPosition();
+				Transform t;
+				t.rotate(-block1.getText()->getRotation());
+				k = t.transformPoint(p);
+				punkt.setPosition(block1.getText()->getPosition() + Vector2f(-k.x + 100.f, -k.y + 50.f));
+				block1.getText()->rotate(1.f, Vector2f(-k.x+100.f, -k.y+50.f));
+				block1.getShape()->rotate(1.f, Vector2f(100, 50));
+
+				cout << k.x << k.y << "\n";
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+			{
+				block1.getText()->rotate(1.f, Vector2f(-37.5f , -30.f));
+				block1.getShape()->rotate(1.f, Vector2f(0, 0));
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+			{
+				block1.getText()->scale(Vector2f(1.1f, 1.1f), Vector2f(0,0));
+			}
 		}
 
 		//Zeichnen der Objekte
@@ -280,9 +209,8 @@ int main()
 		//window.draw(*ground.shape);
 		//window.draw(*box.shape);
 		block1.draw(window, RenderStates());
-		player.draw(window, RenderStates());
-		wizard.draw(window, RenderStates());
 		window.draw(*FPS);
+		window.draw(punkt);
 		frameCount++;
 		window.display();
 	}

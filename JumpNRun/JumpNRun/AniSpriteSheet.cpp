@@ -16,21 +16,27 @@ void AniSpriteSheet::addFrame(IntRect* frame)
 
 void AniSpriteSheet::update(ObjectBase* object, eAniUpdateState updateState)
 {
-	if (timeCount == 0  || timeCount == 1)
+	if (timeCount == 0)
 	{
 		object->getShape()->setTexture(*spriteTexture);
 	}
+
 	int currentFrame = timeCount / frameDuration;
+
 	if (currentFrame == spriteFrames.size())
 		currentFrame = spriteFrames.size()-1;
-	if (this->getTime() < this->duration)
+	
+
+
+	object->getShape()->setTextureRect(*spriteFrames.at(currentFrame));
+	
+	if (this->getTime() >= (this->duration - this->updateRate))
 	{
-		object->getShape()->setTextureRect(*spriteFrames.at(currentFrame));
+		if (loop)
+			this->timeCount = 0;
+		else
+			this->running = false;
 	}
-	else if (loop)
-		this->timeCount = 0;
-	else
-		this->running = false;
 		
 }
 
