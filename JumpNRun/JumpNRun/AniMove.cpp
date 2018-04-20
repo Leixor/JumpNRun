@@ -12,7 +12,6 @@ AniMove::~AniMove()
 
 void AniMove::update(ObjectBase* object, eAniUpdateState updateState)
 {
-	
 	switch (updateState)
 	{
 	case ObjectOnly:

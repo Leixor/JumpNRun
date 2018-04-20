@@ -7,12 +7,12 @@ public:
 	~AniSpriteSheet();
 	void addFrame(IntRect* frame);
 	void update(ObjectBase* object, eAniUpdateState updateState);
-	void setupStepSize();
-
 private:
 	vector<IntRect*> spriteFrames;
 	unsigned int frameDuration;
 	Texture* spriteTexture;
 	unsigned int frames;
+
+	void setupStepSize();
 };
 

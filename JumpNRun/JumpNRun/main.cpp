@@ -1,11 +1,7 @@
 #pragma once
+#include "AnimationInclude.h"
 #include "ConfigHelper.h"
 #include "GlobalVariables.h"
-#include "AnimationHandler.h"
-#include "AniRotate.h"
-#include "AniSpriteSheet.h"
-#include "AniMove.h"
-#include "AniScale.h"
 #include "SceneHandler.h"
 #include "SceneStartMenu.h"
 #include "ShapeRectangle.h"
@@ -91,8 +87,9 @@ int main()
 	sceneHandler.addScene(startMenu);
 
 	AnimationHandler handler;
-	Animation animation(1000);
+	Animation animation(20);
 	ObjectBase block1(new ShapeRectangle(FloatRect(100.0f, 500.0f, 200.0f, 100.0f), Color::Blue));
+	ObjectBase block2(new ShapeRectangle(FloatRect(700.0f, 700.0f, 200.0f, 100.0f), Color::Red));
 
 	Font* f = new Font();
 	f->loadFromFile("Textures/cool.ttf");
@@ -104,11 +101,16 @@ int main()
 	punkt.setPosition(punktPos);
 	Vector2f u;
 
-	//animation.addSubAnimation("rotate", new AniRotate(7000, -200, Vector2f(block1.getText()->getLocalBounds().width / 2.0f - block1.getText()->getLocalBounds().left, block1.getText()->getLocalBounds().height / 2.0f - block1.getText()->getLocalBounds().width / 2.0f - block1.getText()->getLocalBounds().top)));
-	//animation.addSubAnimation("move", new AniMove(7000, Vector2f(1500, -500)));
-	//animation.addSubAnimation("scale", new AniScale(2000, Vector2f(2, 2), Vector2f(100, 50)));
-	//animation.addSubAnimation("scale2", new AniScale(2000, Vector2f(-2, -2), Vector2f(100, 50)), 2000);
+	//animation.addSubAnimation("rotate", new AniSetRotation(5000, -200, Vector2f(block1.getText()->getLocalBounds().width / 2.0f - block1.getText()->getLocalBounds().left, block1.getText()->getLocalBounds().height / 2.0f - block1.getText()->getLocalBounds().width / 2.0f - block1.getText()->getLocalBounds().top)));
+	animation.addSubAnimation("move", new AniSetPosition(5000, Vector2f(1400, 400), BezierHandles(0.1f, 0.9f, 0.1f,0.9f)));
+	animation.addSubAnimation("rotate", new AniRotate(2000, 150, Vector2f(100, 50)));
+	animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(2, 2), Vector2f(100, 50)));
+	animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(3, 3), Vector2f(100, 50)),2000);
+	animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(1, 1), Vector2f(100, 50)),4000);
+	animation.addSubAnimation("scale2", new AniScale(2000, Vector2f(-2, -2), Vector2f(100, 50)), 2000);
+
 	animation.addObject(&block1);
+	animation.addObject(&block2, ObjectOnly);
 
 	handler.addAnimation("rotate", &animation);
 	handler.run("rotate", true);
@@ -167,7 +169,7 @@ int main()
 			//world.Step(timeStep, velocityIterations, positionIterations);
 			//float positionY = 450.0f - body->GetPosition().y * 10.0f - 10.0f;
 			//box.setPosition(Vector2f(780.0f, positionY));
-			//handler.update();
+			handler.update();
 
 			//FPSCOUNTER
 			loop++;
@@ -209,6 +211,7 @@ int main()
 		//window.draw(*ground.shape);
 		//window.draw(*box.shape);
 		block1.draw(window, RenderStates());
+		block2.draw(window, RenderStates());
 		window.draw(*FPS);
 		window.draw(punkt);
 		frameCount++;

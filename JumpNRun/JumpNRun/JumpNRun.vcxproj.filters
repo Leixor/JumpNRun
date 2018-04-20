@@ -83,6 +83,15 @@
     <ClCompile Include="AniScale.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
+    <ClCompile Include="AniSetRotation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AniSetPosition.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AniSetScale.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -182,6 +191,18 @@
       <Filter>Animation</Filter>
     </ClInclude>
     <ClInclude Include="AniScale.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AniSetRotation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AniSetPosition.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationInclude.h">
+      <Filter>Animation\AnimationBase</Filter>
+    </ClInclude>
+    <ClInclude Include="AniSetScale.h">
       <Filter>Animation</Filter>
     </ClInclude>
   </ItemGroup>

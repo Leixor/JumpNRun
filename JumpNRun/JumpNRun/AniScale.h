@@ -8,10 +8,11 @@ public:
 	~AniScale();
 
 	void update(ObjectBase* object, eAniUpdateState updateState);
-	void setupStepSize();
 private:
 	Vector2f subScale;
 	Vector2f scale;
 	Vector2f origin;
+
+	void setupStepSize();
 };
 

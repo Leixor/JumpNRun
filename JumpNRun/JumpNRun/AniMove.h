@@ -8,10 +8,10 @@ public:
 	~AniMove();
 
 	void update(ObjectBase* object, eAniUpdateState updateState);
-	void setupStepSize();
-
 private: 
 	Vector2f subDirection;
 	Vector2f direction;
+
+	void setupStepSize();
 };
 
