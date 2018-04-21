@@ -58,7 +58,6 @@ public:
 	// NEW VARIABLES
 	int shapeVisible;
 	int textVisible;
-
 protected:
 	DrawableObject* objectShape;
 	ObjectText* objectText;

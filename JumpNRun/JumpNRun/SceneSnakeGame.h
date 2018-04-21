@@ -14,7 +14,7 @@ enum eSnakeState
 class SceneSnakeGame : public Scene
 {
 public:
-	SceneSnakeGame(string name, SceneHandler& sceneHandler, Vector2u size, int partCount);
+	SceneSnakeGame(SceneHandler& sceneHandler, Vector2u size, int partCount);
 	~SceneSnakeGame();
 
 	void handleEvents(RenderWindow & window, Event& windowEvent);

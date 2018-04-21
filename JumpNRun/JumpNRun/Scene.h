@@ -4,12 +4,20 @@
 #include "UnorderdMap.h"
 #include "ConfigHelper.h"
 #include "SceneHandler.h"
+#include "Box2DWorld.h"
+
+enum box2DBody
+{
+	NOBODY = 0,
+	STATICBODY = 1,
+	DYNAMICBODY = 2
+};
 
 class SceneHandler;
 class Scene
 {
 public:
-	Scene(string name, SceneHandler& sceneHandler, RenderWindow* window = nullptr, View& view = View(FloatRect(0,0, float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY))));
+	Scene(SceneHandler& sceneHandler, RenderWindow* window = nullptr, View& view = View(FloatRect(0,0, float(windowDef::get().windowSizeX), float(windowDef::get().windowSizeY))));
 	~Scene();
 
 	// Mainfunktionaltität der Gameloop -> Möglichkeit keine handleInput Methode zu definieren (z. B. statische Overlays zum Anzeigen von Stats)
@@ -33,7 +41,7 @@ public:
 	void setSceneViewPort(FloatRect& viewPort);
 	void setScenePosition(Vector2f& position);
 
-	string getSceneName();
+	//string getSceneName();
 	SceneHandler& getSceneHandler() const;
 	int getVisibility()
 	{
@@ -48,16 +56,19 @@ public:
 	returnType addResource(string name, returnType toAdd, int priority = -1)
 	{
 		this->objects.push(name, toAdd);
+
 		if(priority != -1)
 			this->setObjectPriority(name,priority);
+
 		return toAdd;
 	}
 	ObjectBase* addObject(string name, DrawableObject* toAdd, int priority = -1);
 protected:
 	//Alle Objekte die eine Szene beinhaltet, werden hier gespeichert
 	UnorderdMap<string, ObjectBase*> objects;
+	// Hier werden alle Objekte der Szene reingepackt, damit sie Kollision / Gravitation erfahren
+	Box2DWorld* sceneWorld;
 	RenderWindow* window;
-	string sceneName;
 	ConfigHelper* configHelper;
 	unsigned int updateRate;
 
@@ -71,13 +82,13 @@ protected:
 private:
 	// Jede Szene bekommt den Scenehandler damit er es als Interface benutzen kann um die anderen Szenen anzusprechen
 	SceneHandler&  sceneHandler;
+	// Gibt den sichtbaren Teil der Szene an
+	View view;
 	// Die Frequenz in Millisec wie oft die Szene aktualisieren soll
 	unsigned int updateCount;
 	// Gibt an ob die Szene in diesem Updatecall aktualisieren soll
 	bool updateSync;
 	// Gibt die Sichtbarkeit und Updatebarkeit der Scene an
 	int visible;
-	// Gibt den sichtbaren Teil der Szene an
-	View view;
 };
 

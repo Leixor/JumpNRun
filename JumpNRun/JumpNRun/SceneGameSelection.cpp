@@ -1,7 +1,7 @@
 #include "SceneGameSelection.h"
 
-SceneGameSelection::SceneGameSelection(string name, SceneHandler& sceneHandler, RenderWindow* window)
-	:Scene(name, sceneHandler, window)
+SceneGameSelection::SceneGameSelection(SceneHandler& sceneHandler, RenderWindow* window)
+	:Scene(sceneHandler, window)
 {
 	this->setupResources();
 }
@@ -37,14 +37,14 @@ bool SceneGameSelection::setupResources()
 	addResource("GOLButton", new Button([&] {golStart(); }, new ShapeRectangle(FloatRect(0.0f, 0.0f, windowDef::get().windowSizeX / 2.0f, windowDef::get().windowSizeY), Color::Transparent, -10.0f, Color::White)));
 	alignTo(*this->objects.get("GOLButton")->getShape(), *this->objects.get("BackGround")->getShape(), RIGHT);
 
-	this->getSceneHandler().addScene(new SceneSnakeGame("SnakeGame", this->getSceneHandler(), Vector2u(15, 15), 6));
+	this->getSceneHandler().addScene("SnakeGame", new SceneSnakeGame(this->getSceneHandler(), Vector2u(15, 15), 6));
 	this->getSceneHandler().setTopScene("SnakeGame");
 	this->getSceneHandler().getSceneByName("SnakeGame")->setVisibility(VISIBLE);
 	this->getSceneHandler().getSceneByName("SnakeGame")->setView(View(FloatRect(50, 50, 600, 600)));
 	this->getSceneHandler().getSceneByName("SnakeGame")->setScenePosition(Vector2f(0.0f,0.0f));
 	this->getSceneHandler().getSceneByName("SnakeGame")->setSceneScaling(Vector2f(0.5f, 1.0f));
 
-	this->getSceneHandler().addScene(new SceneGOL("GOL", this->getSceneHandler(), window));
+	this->getSceneHandler().addScene("GOL", new SceneGOL(this->getSceneHandler(), window));
 	this->getSceneHandler().setTopScene("GOL");
 	this->getSceneHandler().getSceneByName("GOL")->setVisibility(VISIBLE);
 	this->getSceneHandler().getSceneByName("GOL")->setView(View(FloatRect(0, 0, windowDef::get().windowSizeX / 2, windowDef::get().windowSizeY)));

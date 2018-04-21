@@ -1,7 +1,7 @@
 #include "SceneOption.h"
 
-SceneOption::SceneOption(string name, SceneHandler& sceneHandler)
-	:Scene(name, sceneHandler)
+SceneOption::SceneOption(SceneHandler& sceneHandler)
+	:Scene(sceneHandler)
 {
 	fonts = new Font();
 	setupResources();

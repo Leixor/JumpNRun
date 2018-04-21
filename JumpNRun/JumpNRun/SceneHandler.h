@@ -15,8 +15,8 @@ public:
 	void render(RenderWindow& window, RenderStates& shades, float timeTillUpdate);
 
 	// Verschiedene Helper um Interaktion zwischen Scenes zu erleichtern
-	void addScene(Scene * createScene, int visible = ALL);
-	void addScene(Scene * createScene, bool onTop, int visible = ALL);
+	void addScene(string name, Scene * createScene, int visible = ALL);
+	void addScene(string name, Scene * createScene, bool onTop, int visible = ALL);
 	void deleteScene(string sceneName);
 	void setTopScene(string sceneName);
 	void setSceneVisibility(string sceneName, int visibility);
@@ -28,6 +28,6 @@ public:
 	Scene* getSceneByName(string sceneName);
 
 private:
-	vector<Scene*> vScenes;
+	UnorderdMap<string, Scene*> vScenes;
 };
 

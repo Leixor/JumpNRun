@@ -5,8 +5,8 @@
 #define POSY 50
 #define THICKNESS float(PITCH) / float(300)
 
-SceneSnakeGame::SceneSnakeGame(string name, SceneHandler& sceneHandler, Vector2u size, int partCount)
-	:Scene(name, sceneHandler), cellCount(size), partCount(partCount)
+SceneSnakeGame::SceneSnakeGame(SceneHandler& sceneHandler, Vector2u size, int partCount)
+	:Scene(sceneHandler), cellCount(size), partCount(partCount)
 {
 	font = new Font();
 	this->font->loadFromFile("Textures/cool.ttf");

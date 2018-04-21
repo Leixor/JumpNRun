@@ -5,6 +5,7 @@
 #include "SceneHandler.h"
 #include "SceneStartMenu.h"
 #include "ShapeRectangle.h"
+#include "ShapeCircle.h"
 
 
 Int64 getCurrentTime()
@@ -21,7 +22,6 @@ int main()
 	windowDef::get().windowSizeX = float(stoi(conf.get("Window", "WindowSizeX")));
 	windowDef::get().windowSizeY = float(stoi(conf.get("Window", "WindowSizeY")));
 	windowDef::get().windowStyle = stoi(conf.get("Window", "WindowStyle"));
-
 
 	/*//Test Box2D
 	b2Vec2 gravity(0, -10.0f);
@@ -72,7 +72,12 @@ int main()
 	Es können noch weitere Parameter übergeben werden, die dafür verantwortlich sind,
 	ob das Fenster keinen CloseKnopf hat, nicht größenveränderbar ist...
 	*/
-
+	CircleShape sprite;
+	CircleShape circle;
+	RectangleShape rect;
+	sprite.getGlobalBounds(); 
+	rect.getScale();
+	circle.getScale();
 
 
 
@@ -83,12 +88,12 @@ int main()
 	SceneHandler &sceneHandler = SceneHandler();
 
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
-	Scene *startMenu = new SceneStartMenu("Menu", sceneHandler, &window);
-	sceneHandler.addScene(startMenu);
+	Scene *startMenu = new SceneStartMenu(sceneHandler, &window);
+	sceneHandler.addScene("Menu", startMenu);
 
 	AnimationHandler handler;
 	Animation animation(20);
-	ObjectBase block1(new ShapeRectangle(FloatRect(100.0f, 500.0f, 200.0f, 100.0f), Color::Blue));
+	ObjectBase block1(new ShapeCircle(100.0f, Color::Blue));
 	ObjectBase block2(new ShapeRectangle(FloatRect(700.0f, 700.0f, 200.0f, 100.0f), Color::Red));
 
 	Font* f = new Font();

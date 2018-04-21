@@ -1,7 +1,7 @@
 #include "Scene.h"
 
-Scene::Scene(string Name, SceneHandler& sceneHandler, RenderWindow* window, View& view)
-	: sceneName(Name), sceneHandler(sceneHandler), window(window),  view(view)
+Scene::Scene(SceneHandler& sceneHandler, RenderWindow* window, View& view)
+	: sceneHandler(sceneHandler), window(window), view(view)
 {
 	this->updateSync = false; 
 	this->updateCount = 1;
@@ -87,11 +87,6 @@ void Scene::setScenePosition(Vector2f & position)
 	view.setViewport(current);
 }
 
-string Scene::getSceneName()
-{
-	return this->sceneName;
-}
-
 SceneHandler& Scene::getSceneHandler() const
 {
 	return this->sceneHandler;
@@ -100,9 +95,11 @@ SceneHandler& Scene::getSceneHandler() const
 ObjectBase* Scene::addObject(string name, DrawableObject * toAdd, int priority)
 {
 	ObjectBase* tmp = new ObjectBase(toAdd);
+
 	this->objects.push(name, tmp);
 	if (priority != -1)
 		this->setObjectPriority(name, priority);
+
 	return tmp;
 }
 

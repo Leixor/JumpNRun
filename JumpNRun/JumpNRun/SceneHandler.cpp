@@ -12,8 +12,8 @@ SceneHandler::~SceneHandler()
 void SceneHandler::handleEvents(RenderWindow& window, Event& windowEvent)
 {
 	for(unsigned int i = 0; i < vScenes.size(); i++) {
-		if (vScenes[i]->getVisibility() & INPUTABLE) {
-			vScenes[i]->handleEvents(window, windowEvent);
+		if (vScenes.get(i)->getVisibility() & INPUTABLE) {
+			vScenes.get(i)->handleEvents(window, windowEvent);
 		}
 	}
 }
@@ -21,8 +21,8 @@ void SceneHandler::handleEvents(RenderWindow& window, Event& windowEvent)
 void SceneHandler::handleInputs(RenderWindow & window)
 {
 	for (unsigned int i = 0; i < vScenes.size(); i++) {
-		if (vScenes[i]->getVisibility() & INPUTABLE) {
-			vScenes[i]->handleInputs(window);
+		if (vScenes.get(i)->getVisibility() & INPUTABLE) {
+			vScenes.get(i)->handleInputs(window);
 		}
 	}
 }
@@ -31,9 +31,9 @@ void SceneHandler::update()
 {
 	for (unsigned int i = 0; i < vScenes.size(); i++) 
 	{
-		if (vScenes[i]->getVisibility() & UPDATABLE) 
+		if (vScenes.get(i)->getVisibility() & UPDATABLE)
 		{
-			vScenes[i]->update();
+			vScenes.get(i)->update();
 		}
 	}
 }
@@ -43,56 +43,52 @@ void SceneHandler::render(RenderWindow& window, RenderStates& shades, float time
 {
 	for (int i = vScenes.size() - 1; i >= 0; i--) 
 	{
-		if (vScenes[i]->getVisibility() & VISIBLE) 
+		if (vScenes.get(i)->getVisibility() & VISIBLE)
 		{
-			vScenes[i]->render(window, shades, timeTillUpdate);
+			vScenes.get(i)->render(window, shades, timeTillUpdate);
 		}
 	}
 	window.setView(View(FloatRect(0, 0, windowDef::get().windowSizeX, windowDef::get().windowSizeY)));
 }
 
-void SceneHandler::addScene(Scene * createScene, int visible)
+void SceneHandler::addScene(string sceneName, Scene * createScene, int visible)
 {
-	if (!sceneExists(createScene->getSceneName())) 
+	if (!sceneExists(sceneName)) 
 	{
-		vScenes.push_back(createScene);
-		vScenes.back()->setVisibility(visible);
+		vScenes.push(sceneName, createScene);
+		vScenes.get(sceneName)->setVisibility(visible);
 	}
 }
 
 // Addet nur eine Szene falls sie nicht genauso mit gleichem Namen vorhanden ist
-void SceneHandler::addScene(Scene * createScene, bool onTop, int visible)
+void SceneHandler::addScene(string sceneName, Scene * createScene, bool onTop, int visible)
 {
-	if (!sceneExists(createScene->getSceneName())) {
-		vScenes.push_back(createScene);
-		vScenes.back()->setVisibility(visible);
+	if (!sceneExists(sceneName))
+	{
+		vScenes.push(sceneName, createScene);
+		vScenes.get(sceneName)->setVisibility(visible);
 		// Falls onTop als True mitgegeben worden ist soll die neue Szene direkt ganz oben in der Pipeline stehen
-		if (onTop) {
-			string name = vScenes.back()->getSceneName();
-			setTopScene(name);
-		}
+		if (onTop) 
+			setTopScene(sceneName);
 	}
 }
 
 // Löscht die Szene falls sie vorhanden ist
 void SceneHandler::deleteScene(string sceneName)
 {
-	if (sceneExists(sceneName)) {
-		int index = getSceneIndexByName(sceneName);
-		vScenes.erase(vScenes.begin() + index);
-	}
+	this->vScenes.remove(sceneName);
 }
 
 // Setzt die Szene ganz nach oben in der Pipeline (also [0])
 void SceneHandler::setTopScene(string sceneName)
 {
 	if (sceneExists(sceneName)) {
-		if (vScenes[0] != vScenes[getSceneIndexByName(sceneName)]) 
+		if (vScenes.get(0) != vScenes.get(sceneName))
 		{
 			int index = getSceneIndexByName(sceneName);
 			for (unsigned int i = 0; i < vScenes.size() - index; i++) 
 			{
-				iter_swap(vScenes.begin() + i, vScenes.end() - index);
+				this->vScenes.iterswap(i, this->vScenes.size() - index);
 			}
 		}
 		
@@ -103,9 +99,9 @@ void SceneHandler::setTopScene(string sceneName)
 // Jede Scene kann die visibility anderer Scenes setzen
 void SceneHandler::setSceneVisibility(string sceneName, int visibility)
 {
-	int index = getSceneIndexByName(sceneName);
+	int index = this->vScenes.getIndex(sceneName);
 
-	vScenes[index]->setVisibility(visibility);
+	this->vScenes.get(index)->setVisibility(visibility);
 }
 
 void SceneHandler::setScenePriority(string name, int priority)
@@ -113,37 +109,28 @@ void SceneHandler::setScenePriority(string name, int priority)
 	if (priority >= int(this->vScenes.size() - 1))
 		throw;
 
-	int index = getSceneIndexByName(name);
+	int index = this->vScenes.getIndex(name);
 	if (index > priority)
 		for (int i = priority; i < index; i++)
-		{
-			iter_swap(vScenes.begin() + i, vScenes.begin() + index);
-		}
+			this->vScenes.iterswap(i, index);
 	else if (index < priority)
 		for (int i = priority; i > index; i--)
-		{
-			iter_swap(vScenes.begin() + i, vScenes.begin() + index);
-		}
+			this->vScenes.iterswap(i, index);
 }
 
 // Returnt den Index der jeweiligen Szene nach Namen, vorher sollte überprüft werden ob die Scene überhaupt exestiert von dem man den Index haben will mithilfe der unteren Funktion
 int SceneHandler::getSceneIndexByName(string sceneName)
 {
-	int counter = 0;
-	for (auto& scene : vScenes) {
-		if (scene->getSceneName() == sceneName) {
-			break;
-		}
-		counter++;
-	}
-	return counter;
+	return vScenes.getIndex(sceneName);
 }
 
 // Gibt zurück ob die gesuchte Szene exestiert
 bool SceneHandler::sceneExists(string sceneName)
 {
-	for (auto& scene : vScenes) {
-		if (scene->getSceneName() == sceneName) {
+	for (unsigned int i = 0; i < this->vScenes.size(); i++) 
+	{
+		if (vScenes.getIterator(i) == sceneName) 
+		{
 			return true;
 		}
 	}
@@ -153,14 +140,7 @@ bool SceneHandler::sceneExists(string sceneName)
 // Vielleicht Redudant
 Scene * SceneHandler::getSceneByName(string sceneName)
 {
-	for (auto& scene : vScenes) {
-		if (scene->getSceneName() == sceneName) {
-			return scene;
-			break;
-		}
-	}
-
-	return nullptr;
+	return vScenes.get(sceneName);
 }
 
 

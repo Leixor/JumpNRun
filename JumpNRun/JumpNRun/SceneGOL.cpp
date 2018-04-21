@@ -1,6 +1,7 @@
 #include "SceneGOL.h"
 
-SceneGOL::SceneGOL(string name, SceneHandler& sceneHandler, RenderWindow* window) : Scene(name, sceneHandler, window)
+SceneGOL::SceneGOL(SceneHandler& sceneHandler, RenderWindow* window)
+	: Scene(sceneHandler, window)
 {
 	this->setupResources();
 }

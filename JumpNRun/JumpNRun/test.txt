@@ -14,7 +14,7 @@ GridSize: 85
 #
 [Snake
 HeadColor:ff
-HeadOColor:8493f0ff
+HeadOColor:ff93f0ff
 FoodColor:ff
 FoodOColor:ffffafff
 BodyColor:ff
