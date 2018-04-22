@@ -23,19 +23,19 @@ int main()
 	windowDef::get().windowSizeY = float(stoi(conf.get("Window", "WindowSizeY")));
 	windowDef::get().windowStyle = stoi(conf.get("Window", "WindowStyle"));
 
-	/*//Test Box2D
+	//Test Box2D
 	b2Vec2 gravity(0, -10.0f);
 	b2World world(gravity);
 
 	//Setup Static Body
 	//SetPos
 	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0.0f, -10.0f);
+	groundBodyDef.position.Set(0.0f, -100.0f);
 	//Create BodyObject with world
 	b2Body* groundBody = world.CreateBody(&groundBodyDef);
 	//Define Size and Shape
 	b2PolygonShape groundBox;
-	groundBox.SetAsBox(50.0f, 10.0f);
+	groundBox.SetAsBox(500.0f, 100.0f);
 	//create fixture of Body			Weight of Box
 	groundBody->CreateFixture(&groundBox,	0.0f);
 
@@ -43,12 +43,12 @@ int main()
 	//set Pos and cast dynamic
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(0.0f, 4.0f);
+	bodyDef.position.Set(0.0f, 40.0f);
 	//create bodyObject with world
 	b2Body* body = world.CreateBody(&bodyDef);
 	//Define Size and shape
 	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(1.0f, 1.0f);
+	dynamicBox.SetAsBox(10.0f, 10.0f);
 	//set Friction and density
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &dynamicBox;
@@ -56,6 +56,9 @@ int main()
 	fixtureDef.friction = 0.3f;
 	//cast fixture to body
 	body->CreateFixture(&fixtureDef);
+	body->SetLinearVelocity(b2Vec2(14.0f, 3.0f));
+
+
 
 	float32 timeStep = 1.0f / 100.0f;
 	int32 velocityIterations = 6;
@@ -72,14 +75,6 @@ int main()
 	Es können noch weitere Parameter übergeben werden, die dafür verantwortlich sind,
 	ob das Fenster keinen CloseKnopf hat, nicht größenveränderbar ist...
 	*/
-	CircleShape sprite;
-	CircleShape circle;
-	RectangleShape rect;
-	sprite.getGlobalBounds(); 
-	rect.getScale();
-	circle.getScale();
-
-
 
 	CircleShape punkt = CircleShape(4);
 	punkt.setFillColor(Color::Red);
@@ -95,7 +90,6 @@ int main()
 	Animation animation(20);
 	ObjectBase block1(new ShapeCircle(100.0f, Color::Blue));
 	ObjectBase block2(new ShapeRectangle(FloatRect(700.0f, 700.0f, 200.0f, 100.0f), Color::Red));
-
 	Font* f = new Font();
 	f->loadFromFile("Textures/cool.ttf");
 	block1.addText(new ObjectText("BasisText", *f));
@@ -108,11 +102,12 @@ int main()
 
 	//animation.addSubAnimation("rotate", new AniSetRotation(5000, -200, Vector2f(block1.getText()->getLocalBounds().width / 2.0f - block1.getText()->getLocalBounds().left, block1.getText()->getLocalBounds().height / 2.0f - block1.getText()->getLocalBounds().width / 2.0f - block1.getText()->getLocalBounds().top)));
 	animation.addSubAnimation("move", new AniSetPosition(5000, Vector2f(1400, 400), BezierHandles(0.1f, 0.9f, 0.1f,0.9f)));
-	animation.addSubAnimation("rotate", new AniRotate(2000, 150, Vector2f(100, 50)));
-	animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(2, 2), Vector2f(100, 50)));
-	animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(3, 3), Vector2f(100, 50)),2000);
-	animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(1, 1), Vector2f(100, 50)),4000);
-	animation.addSubAnimation("scale2", new AniScale(2000, Vector2f(-2, -2), Vector2f(100, 50)), 2000);
+	animation.addSubAnimation("Scale4", new AniSetScale(10000, Vector2f(0.1f, 0.1f), Vector2f(100,100)), 5000);
+	//animation.addSubAnimation("rotate", new AniRotate(2000, 150, Vector2f(100, 50)));
+	//animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(2, 2), Vector2f(100, 50)));
+	//animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(3, 3), Vector2f(100, 50)),2000);
+	//animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(1, 1), Vector2f(100, 50)),4000);
+	//animation.addSubAnimation("scale2", new AniScale(2000, Vector2f(-2, -2), Vector2f(100, 50)), 2000);
 
 	animation.addObject(&block1);
 	animation.addObject(&block2, ObjectOnly);
@@ -171,9 +166,10 @@ int main()
 		{
 			//Ruft die Aktualisierungsmethode auf
 			sceneHandler.update();
-			//world.Step(timeStep, velocityIterations, positionIterations);
-			//float positionY = 450.0f - body->GetPosition().y * 10.0f - 10.0f;
-			//box.setPosition(Vector2f(780.0f, positionY));
+			world.Step(timeStep, velocityIterations, positionIterations);
+			float positionY = 450.0f - body->GetPosition().y - 10.0f;
+			float positionX = 780.0f + body->GetPosition().x - 10.0f;
+			box.setPosition(Vector2f(positionX, positionY));
 			handler.update();
 
 			//FPSCOUNTER
@@ -187,7 +183,7 @@ int main()
 			lag -= MS_PER_UPDATE;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
 			{
-
+				body->SetActive(false);
 				p = block1.getText()->getPosition() - block1.getShape()->getPosition();
 				Transform t;
 				t.rotate(-block1.getText()->getRotation());
@@ -200,6 +196,7 @@ int main()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			{
+				body->SetActive(true);
 				block1.getText()->rotate(1.f, Vector2f(-37.5f , -30.f));
 				block1.getShape()->rotate(1.f, Vector2f(0, 0));
 			}
@@ -213,8 +210,8 @@ int main()
 		window.clear();
 		sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 		//FPSCOUNTER
-		//window.draw(*ground.shape);
-		//window.draw(*box.shape);
+		ground.draw(window, RenderStates());
+		box.draw(window, RenderStates());
 		block1.draw(window, RenderStates());
 		block2.draw(window, RenderStates());
 		window.draw(*FPS);

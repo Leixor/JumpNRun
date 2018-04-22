@@ -18,5 +18,8 @@ public:
 	Color getFillColor();
 	float getOutlineThickness();
 	Vector2f getSize();
+
+	void updatePhysicalBody();
+	void updateShape();
 };
 

@@ -16,7 +16,7 @@ void SceneStartMenu::handleEvents(RenderWindow & window, Event& windowEvent)
 	if (windowEvent.type == Event::MouseButtonReleased && this->getSceneHandler().sceneExists("GameSelection"))
 	{
 		this->setVisibility(UPDATABLE);
-		this->getSceneHandler().getSceneByName("GameSelection")->setVisibility(ALL);
+		this->getSceneHandler().setSceneVisibility("GameSelection", ALL);
 	}
 }
 

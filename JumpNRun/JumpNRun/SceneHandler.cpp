@@ -85,7 +85,7 @@ void SceneHandler::setTopScene(string sceneName)
 	if (sceneExists(sceneName)) {
 		if (vScenes.get(0) != vScenes.get(sceneName))
 		{
-			int index = getSceneIndexByName(sceneName);
+			int index = this->vScenes.getIndex(sceneName);
 			for (unsigned int i = 0; i < vScenes.size() - index; i++) 
 			{
 				this->vScenes.iterswap(i, this->vScenes.size() - index);
@@ -99,9 +99,7 @@ void SceneHandler::setTopScene(string sceneName)
 // Jede Scene kann die visibility anderer Scenes setzen
 void SceneHandler::setSceneVisibility(string sceneName, int visibility)
 {
-	int index = this->vScenes.getIndex(sceneName);
-
-	this->vScenes.get(index)->setVisibility(visibility);
+	this->vScenes.get(sceneName)->setVisibility(visibility);
 }
 
 void SceneHandler::setScenePriority(string name, int priority)
@@ -118,10 +116,9 @@ void SceneHandler::setScenePriority(string name, int priority)
 			this->vScenes.iterswap(i, index);
 }
 
-// Returnt den Index der jeweiligen Szene nach Namen, vorher sollte überprüft werden ob die Scene überhaupt exestiert von dem man den Index haben will mithilfe der unteren Funktion
-int SceneHandler::getSceneIndexByName(string sceneName)
+Scene* const SceneHandler::getSceneByName(string name)
 {
-	return vScenes.getIndex(sceneName);
+	return this->vScenes.get(name);
 }
 
 // Gibt zurück ob die gesuchte Szene exestiert
@@ -135,12 +132,6 @@ bool SceneHandler::sceneExists(string sceneName)
 		}
 	}
 	return false;
-}
-
-// Vielleicht Redudant
-Scene * SceneHandler::getSceneByName(string sceneName)
-{
-	return vScenes.get(sceneName);
 }
 
 

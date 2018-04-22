@@ -12,19 +12,13 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ShapeRectangle.cpp">
-      <Filter>Objects\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\DrawableBase</Filter>
     </ClCompile>
     <ClCompile Include="ShapeSprite.cpp">
-      <Filter>Objects\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\DrawableBase</Filter>
     </ClCompile>
     <ClCompile Include="ShapeCircle.cpp">
-      <Filter>Objects\DrawableBase</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="CheckBox.cpp">
-      <Filter>Objects</Filter>
+      <Filter>Objects\ObjectBase\DrawableBase</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Scenes\SceneBase</Filter>
@@ -50,12 +44,6 @@
     <ClCompile Include="AlignHelper.cpp">
       <Filter>HelperClasses</Filter>
     </ClCompile>
-    <ClCompile Include="Slider.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="DropdownList.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="Box2DWorld.cpp">
       <Filter>Box2D</Filter>
     </ClCompile>
@@ -75,7 +63,7 @@
       <Filter>Animation\AnimationBase</Filter>
     </ClCompile>
     <ClCompile Include="ObjectText.cpp">
-      <Filter>Objects\TextBase</Filter>
+      <Filter>Objects\ObjectBase\TextBase</Filter>
     </ClCompile>
     <ClCompile Include="AniSpriteSheet.cpp">
       <Filter>Animation</Filter>
@@ -92,6 +80,21 @@
     <ClCompile Include="AniSetScale.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Objects\NonePhysicalObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckBox.cpp">
+      <Filter>Objects\NonePhysicalObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="DropdownList.cpp">
+      <Filter>Objects\NonePhysicalObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider.cpp">
+      <Filter>Objects\NonePhysicalObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalObjectBase.cpp">
+      <Filter>Objects\ObjectBase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -104,25 +107,19 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ShapeCircle.h">
-      <Filter>Objects\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\DrawableBase</Filter>
     </ClInclude>
     <ClInclude Include="ShapeRectangle.h">
-      <Filter>Objects\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\DrawableBase</Filter>
     </ClInclude>
     <ClInclude Include="ShapeSprite.h">
-      <Filter>Objects\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\DrawableBase</Filter>
     </ClInclude>
     <ClInclude Include="DrawableShape.h">
-      <Filter>Objects\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\DrawableBase</Filter>
     </ClInclude>
     <ClInclude Include="DrawableObject.h">
-      <Filter>Objects\DrawableBase</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="CheckBox.h">
-      <Filter>Objects</Filter>
+      <Filter>Objects\ObjectBase\DrawableBase</Filter>
     </ClInclude>
     <ClInclude Include="UnorderdMap.h">
       <Filter>ExtraClasses</Filter>
@@ -150,12 +147,6 @@
     </ClInclude>
     <ClInclude Include="AlignHelper.h">
       <Filter>HelperClasses</Filter>
-    </ClInclude>
-    <ClInclude Include="Slider.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="DropdownList.h">
-      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Box2DWorld.h">
       <Filter>Box2D</Filter>
@@ -185,7 +176,7 @@
       <Filter>ExtraClasses</Filter>
     </ClInclude>
     <ClInclude Include="ObjectText.h">
-      <Filter>Objects\TextBase</Filter>
+      <Filter>Objects\ObjectBase\TextBase</Filter>
     </ClInclude>
     <ClInclude Include="AniSpriteSheet.h">
       <Filter>Animation</Filter>
@@ -204,6 +195,21 @@
     </ClInclude>
     <ClInclude Include="AniSetScale.h">
       <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Objects\NonePhysicalObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckBox.h">
+      <Filter>Objects\NonePhysicalObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="DropdownList.h">
+      <Filter>Objects\NonePhysicalObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Slider.h">
+      <Filter>Objects\NonePhysicalObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalObjectBase.h">
+      <Filter>Objects\ObjectBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -231,14 +237,20 @@
     <Filter Include="Objects\ObjectBase">
       <UniqueIdentifier>{60407d9d-b265-4359-be12-a82eb8908f0f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\TextBase">
-      <UniqueIdentifier>{a2bfdd27-ddf7-40a2-8d38-84b57b3d88ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Objects\DrawableBase">
-      <UniqueIdentifier>{608dd723-48d7-4260-b258-0ba364c44c20}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes\SceneBase">
       <UniqueIdentifier>{aabd034f-4d77-433d-8c10-9957bcdd317c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\NonePhysicalObjects">
+      <UniqueIdentifier>{31b2d3d7-33b2-4bfb-a545-fe0d2411e09b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\ObjectBase\DrawableBase">
+      <UniqueIdentifier>{608dd723-48d7-4260-b258-0ba364c44c20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\PhysicalObjects">
+      <UniqueIdentifier>{d2bf6ea5-7cb1-46cf-bbb3-8c6f63263c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\ObjectBase\TextBase">
+      <UniqueIdentifier>{a2bfdd27-ddf7-40a2-8d38-84b57b3d88ca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

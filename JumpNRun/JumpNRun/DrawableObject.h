@@ -6,6 +6,8 @@ class DrawableObject
 public:
 	DrawableObject()
 	{
+		this->changedPosition = true;
+		this->changedSize = true;
 	}
 	~DrawableObject()
 	{
@@ -90,5 +92,12 @@ public:
 	{
 		throw;
 	}
+
+	virtual void updatePhysicalBody() = 0;
+	virtual void updateShape() = 0;
+protected:
+	b2Body* b2body;
+	bool changedPosition;
+	bool changedSize;
 };
 

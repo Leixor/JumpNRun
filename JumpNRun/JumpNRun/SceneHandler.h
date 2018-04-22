@@ -22,12 +22,11 @@ public:
 	void setSceneVisibility(string sceneName, int visibility);
 	void setScenePriority(string name, int priority);
 
-	// Helper Scenes mit anderen Scenes interagieren zu lassen
-	int getSceneIndexByName(string sceneName);
-	bool sceneExists(string sceneName);
-	Scene* getSceneByName(string sceneName);
+	Scene* const getSceneByName(string name);
 
-private:
+	// Helper Scenes mit anderen Scenes interagieren zu lassen
+	bool sceneExists(string sceneName);
+protected:
 	UnorderdMap<string, Scene*> vScenes;
 };
 

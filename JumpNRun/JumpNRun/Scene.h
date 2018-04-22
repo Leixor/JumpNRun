@@ -6,13 +6,6 @@
 #include "SceneHandler.h"
 #include "Box2DWorld.h"
 
-enum box2DBody
-{
-	NOBODY = 0,
-	STATICBODY = 1,
-	DYNAMICBODY = 2
-};
-
 class SceneHandler;
 class Scene
 {

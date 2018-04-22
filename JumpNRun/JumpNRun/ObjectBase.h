@@ -17,9 +17,11 @@ class ObjectBase
 {
 public:
 	
-	ObjectBase(DrawableObject* buttonShape) :shapeVisible(ALL), textVisible(NONE)
+	ObjectBase() :shapeVisible(NONE), textVisible(NONE)
+	{}
+	ObjectBase(DrawableObject* shape) :shapeVisible(ALL), textVisible(NONE)
 	{
-		objectShape = buttonShape;
+		objectShape = shape;
 	}
 	~ObjectBase()
 	{}
@@ -46,11 +48,11 @@ public:
 		alignTo(*this->objectText, *this->objectShape);
 	}
 
-	DrawableObject* getShape()
+	DrawableObject* const getShape()
 	{
 		return this->objectShape;
 	}
-	ObjectText* getText()
+	ObjectText* const getText()
 	{
 		return this->objectText;
 	}

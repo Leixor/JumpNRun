@@ -12,17 +12,17 @@ SceneGameSelection::~SceneGameSelection()
 
 void SceneGameSelection::snakeStart()
 {
-	this->getSceneHandler().getSceneByName("GOL")->setVisibility(NONE);
-	this->getSceneHandler().getSceneByName("SnakeGame")->setVisibility(ALL);
-	this->getSceneHandler().getSceneByName("GameSelection")->setVisibility(NONE);
+	this->getSceneHandler().setSceneVisibility("GOL", NONE);
+	this->getSceneHandler().setSceneVisibility("SnakeGame", ALL);
+	this->getSceneHandler().setSceneVisibility("GameSelection", NONE);
 	this->getSceneHandler().getSceneByName("SnakeGame")->setView(View(FloatRect(0, 0, windowDef::get().windowSizeX, windowDef::get().windowSizeY)));
 }
 
 void SceneGameSelection::golStart()
 {
-	this->getSceneHandler().getSceneByName("GOL")->setVisibility(ALL);
-	this->getSceneHandler().getSceneByName("SnakeGame")->setVisibility(NONE);
-	this->getSceneHandler().getSceneByName("GameSelection")->setVisibility(NONE);
+	this->getSceneHandler().setSceneVisibility("GOL", ALL);
+	this->getSceneHandler().setSceneVisibility("SnakeGame", NONE);
+	this->getSceneHandler().setSceneVisibility("GameSelection", NONE);
 	this->getSceneHandler().getSceneByName("GOL")->setView(View(FloatRect(0, 0, windowDef::get().windowSizeX, windowDef::get().windowSizeY)));
 }
 
@@ -39,14 +39,14 @@ bool SceneGameSelection::setupResources()
 
 	this->getSceneHandler().addScene("SnakeGame", new SceneSnakeGame(this->getSceneHandler(), Vector2u(15, 15), 6));
 	this->getSceneHandler().setTopScene("SnakeGame");
-	this->getSceneHandler().getSceneByName("SnakeGame")->setVisibility(VISIBLE);
+	this->getSceneHandler().setSceneVisibility("SnakeGame", VISIBLE);
 	this->getSceneHandler().getSceneByName("SnakeGame")->setView(View(FloatRect(50, 50, 600, 600)));
 	this->getSceneHandler().getSceneByName("SnakeGame")->setScenePosition(Vector2f(0.0f,0.0f));
 	this->getSceneHandler().getSceneByName("SnakeGame")->setSceneScaling(Vector2f(0.5f, 1.0f));
 
 	this->getSceneHandler().addScene("GOL", new SceneGOL(this->getSceneHandler(), window));
 	this->getSceneHandler().setTopScene("GOL");
-	this->getSceneHandler().getSceneByName("GOL")->setVisibility(VISIBLE);
+	this->getSceneHandler().setSceneVisibility("GOL", VISIBLE);
 	this->getSceneHandler().getSceneByName("GOL")->setView(View(FloatRect(0, 0, windowDef::get().windowSizeX / 2, windowDef::get().windowSizeY)));
 	this->getSceneHandler().getSceneByName("GOL")->setScenePosition(Vector2f(0.5f, 0.0f));
 	this->getSceneHandler().getSceneByName("GOL")->setSceneScaling(Vector2f(0.5f, 1.0f));

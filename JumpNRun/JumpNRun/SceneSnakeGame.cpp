@@ -55,7 +55,7 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 	{
 		this->setVisibility(NONE);
 		this->getSceneHandler().setTopScene("GOL");
-		this->getSceneHandler().getSceneByName("GOL")->setVisibility(ALL);
+		this->getSceneHandler().setSceneVisibility("GOL", ALL);
 	}
 }
 
