@@ -16,8 +16,67 @@ Int64 getCurrentTime()
 	return ms.count();
 }
 
+struct queueFunctions 
+{
+	function<void(void)> render;
+	function<void(void)> update;
+	function<void(void)> handleInput;
+	queueFunctions(function<void(void)> render, function<void(void)> update, function<void(void)> handleInput) : render(render), update(update), handleInput(handleInput)
+	{
+
+	}
+};
+
+struct queueObjects 
+{
+	vector<queueFunctions> functions;
+	vector<ShapeRectangle> Rectangles;
+	map<string, unsigned int> namesInt;
+	map<unsigned int, unsigned int> indexInt;
+	vector<string> names;
+
+	void setPriority(string name, long long priority)
+	{
+		indexInt.at(name) = priority;
+	}
+
+	long long getQueObject(string name)
+	{
+		return namesInt.at(name);
+	}
+};
+
+
+
+void machwas()
+{
+	int i = 0;
+	i++;
+}
+void machwas2()
+{
+	int j = 0;
+	j++;
+}
+
+
+
 int main()
 {
+	/*queueObjects myObjects;
+	for (long long i = 0; i < 100001; i++)
+	{
+		myObjects.Rectangles.push_back(ShapeRectangle(FloatRect(0 + i*10, 0, 10, 10), Color::Blue));
+		myObjects.functions.push_back(queueFunctions(machwas, machwas, machwas));
+		myObjects.names.push_back(to_string(i));
+		myObjects.namesInt.emplace(to_string(i), i);
+	}*/
+
+
+
+
+
+
 	ConfigHelper conf("Test.txt");
 	windowDef::get().windowSizeX = float(stoi(conf.get("Window", "WindowSizeX")));
 	windowDef::get().windowSizeY = float(stoi(conf.get("Window", "WindowSizeY")));
@@ -147,7 +206,7 @@ int main()
 		Event windowEvent;
 		while (window.pollEvent(windowEvent))
 		{
-			switch (windowEvent.type)
+			/*switch (windowEvent.type)
 			{
 			case Event::Closed:
 				window.close();
@@ -155,22 +214,25 @@ int main()
 			case Event::KeyPressed:
 				if (windowEvent.key.code == Keyboard::Escape)
 					window.close();
-			}
-			sceneHandler.handleEvents(window, windowEvent);
+			}*/
+			//sceneHandler.handleEvents(window, windowEvent);
 		}
+
+
 		
-		sceneHandler.handleInputs(window);
+		
+		//sceneHandler.handleInputs(window);
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)
 		{
 			//Ruft die Aktualisierungsmethode auf
-			sceneHandler.update();
-			world.Step(timeStep, velocityIterations, positionIterations);
+			//sceneHandler.update();
+			/*world.Step(timeStep, velocityIterations, positionIterations);
 			float positionY = 450.0f - body->GetPosition().y - 10.0f;
 			float positionX = 780.0f + body->GetPosition().x - 10.0f;
 			box.setPosition(Vector2f(positionX, positionY));
-			handler.update();
+			handler.update();*/
 
 			//FPSCOUNTER
 			loop++;
@@ -183,7 +245,7 @@ int main()
 			lag -= MS_PER_UPDATE;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
 			{
-				body->SetActive(false);
+				/*body->SetActive(false);
 				p = block1.getText()->getPosition() - block1.getShape()->getPosition();
 				Transform t;
 				t.scale(Vector2f(1.f / scaleText.x, 1.f / scaleText.y));
@@ -198,7 +260,7 @@ int main()
 				block1.getShape()->rotate(1.f, Vector2f(100, 50));
 
 				
-				cout << textOrigin.x <<  " " << textOrigin.y << "\n";
+				cout << textOrigin.x <<  " " << textOrigin.y << "\n";*/
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			{
@@ -222,18 +284,37 @@ int main()
 				block1.getText()->scale(Vector2f(1.1f, 1.1f), Vector2f(-k.x / scaleText.x + 200.f, -k.y / scaleText.y + 100.f));
 				block1.getShape()->scale(Vector2f(1.1f, 1.1f), Vector2f(200, 100));
 			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+			{
+				/*long long i = myObjects.getQueObject("99998");
+				i = myObjects.getQueObject("99998");
+				i = myObjects.getQueObject("99998");
+				i = myObjects.getQueObject("99998");
+				i = myObjects.getQueObject("99998");
+				i = myObjects.getQueObject("99998");
+				i = myObjects.getQueObject("99998");
+				i = myObjects.getQueObject("99998");
+				i = myObjects.getQueObject("99998");
+				i = myObjects.getQueObject("99998");
+				myObjects.functions.at(i).render = machwas2;*/
+			}
 		}
 
 		//Zeichnen der Objekte
 		window.clear();
-		sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
+		//sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 		//FPSCOUNTER
-		ground.draw(window, RenderStates());
+		/*ground.draw(window, RenderStates());
 		box.draw(window, RenderStates());
 		block1.draw(window, RenderStates());
 		block2.draw(window, RenderStates());
+		
+		window.draw(punkt);*/
+		for(int i = 0; i < 10000; i++)
+		{
+		
+		}
 		window.draw(*FPS);
-		window.draw(punkt);
 		frameCount++;
 		window.display();
 	}

@@ -261,7 +261,7 @@ void SceneGOL::setupField()
 void SceneGOL::runGameSimulation()
 {
 	vector<vector<char>> oldGen;
-	oldGen = gameField;
+	oldGen = gameField; 
 
 	for (int a = 0; a < gridSize - 1; a++)
 	{
