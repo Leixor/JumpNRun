@@ -15,7 +15,7 @@ void SceneStartMenu::handleEvents(RenderWindow & window, Event& windowEvent)
 	Scene::handleEvents(window, windowEvent);
 	if (windowEvent.type == Event::MouseButtonReleased && this->getSceneHandler().sceneExists("GameSelection"))
 	{
-		this->setVisibility(UPDATABLE);
+		this->setSceneVisibility(UPDATABLE);
 		this->getSceneHandler().setSceneVisibility("GameSelection", ALL);
 	}
 }
@@ -60,14 +60,14 @@ bool SceneStartMenu::setupResources()
 
 void SceneStartMenu::buttonStartAction()
 {
-	this->setVisibility(INPUTABLE);
+	this->setSceneVisibility(INPUTABLE);
 	this->getSceneHandler().addScene("GameSelection", new SceneGameSelection(this->getSceneHandler(), window), VISIBLE);
 }
 
 void SceneStartMenu::buttonOptionAction()
 {
 	this->getSceneHandler().addScene("Option", new SceneOption(this->getSceneHandler()), ALL);
-	this->setVisibility(UPDATABLE);
+	this->setSceneVisibility(UPDATABLE);
 }
 
 void SceneStartMenu::buttonEndAction()

@@ -17,7 +17,6 @@ public:
 	SceneSnakeGame(SceneHandler& sceneHandler, Vector2u size, int partCount);
 	~SceneSnakeGame();
 
-	void handleEvents(RenderWindow & window, Event& windowEvent);
 	void handleInputs(RenderWindow & window);
 	void render(RenderWindow& window, RenderStates& shades, float timeTillUpdate);
 	void confVarUpdate();

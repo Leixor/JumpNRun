@@ -28,9 +28,8 @@ public:
 
 	virtual void handleInputs(RenderWindow& window)
 	{}
-	virtual bool handleEvents(RenderWindow& window, Event& windowEvent)
+	virtual void handleEvents(RenderWindow& window, Event& windowEvent)
 	{
-		return false;
 	}
 	virtual void update()
 	{}

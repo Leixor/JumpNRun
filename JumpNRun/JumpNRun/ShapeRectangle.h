@@ -20,6 +20,5 @@ public:
 	Vector2f getSize();
 
 	void updatePhysicalBody();
-	void updateShape();
 };
 

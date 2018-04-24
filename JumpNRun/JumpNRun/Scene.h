@@ -22,10 +22,11 @@ public:
 	virtual void confVarUpdate();
 
 	// Scenespezifische Funktionen
-	void setVisibility(int visible)
+	void setSceneVisibility(int visible)
 	{
 		this->visible = visible;
 	}
+	void setObjectVisibility(string objectName, int Visibility);
 	void setView(View& view)
 	{
 		this->view = view;
@@ -36,7 +37,7 @@ public:
 
 	//string getSceneName();
 	SceneHandler& getSceneHandler() const;
-	int getVisibility()
+	int getSceneVisibility()
 	{
 		return this->visible;
 	}
@@ -52,6 +53,8 @@ public:
 
 		if(priority != -1)
 			this->setObjectPriority(name,priority);
+
+		this->setObjectVisibility(name, toAdd->shapeVisible);
 
 		return toAdd;
 	}
@@ -72,6 +75,11 @@ protected:
 		return updateSync;
 	}
 	/*AnimationHandler aniHandler;*/
+
+	
+	UnorderdMap<string, ObjectBase*> drawArray;
+	UnorderdMap<string, ObjectBase*> updateArray;
+	UnorderdMap<string, ObjectBase*> eventArray;
 private:
 	// Jede Szene bekommt den Scenehandler damit er es als Interface benutzen kann um die anderen Szenen anzusprechen
 	SceneHandler&  sceneHandler;

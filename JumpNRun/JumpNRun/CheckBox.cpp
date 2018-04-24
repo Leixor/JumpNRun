@@ -9,14 +9,14 @@ CheckBox::~CheckBox()
 {
 }
 
-bool CheckBox::handleEvents(RenderWindow & window, Event& windowEvent)
+void CheckBox::handleEvents(RenderWindow & window, Event& windowEvent)
 {
 	switch (windowEvent.type)
 	{
 	case Event::MouseButtonPressed:
 		this->checkMouseButtonCollision(window);
+		break;
 	}
-	return false;
 }
 bool CheckBox::getState()
 {

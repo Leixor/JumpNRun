@@ -93,8 +93,14 @@ public:
 		throw;
 	}
 
-	virtual void updatePhysicalBody() = 0;
-	virtual void updateShape() = 0;
+	virtual void updatePhysicalBody()
+	{
+		throw;
+	}
+	virtual void updateShape()
+	{
+		throw;
+	}
 protected:
 	b2Body* b2body;
 	bool changedPosition;

@@ -163,8 +163,8 @@ void SceneGOL::handleInputs(RenderWindow & window)
 	if (Keyboard::isKeyPressed(Keyboard::Key::O))
 	{
 		this->getSceneHandler().setTopScene("SnakeGame");
-		this->getSceneHandler().getSceneByName("SnakeGame")->setVisibility(ALL);
-		this->setVisibility(NONE);
+		this->getSceneHandler().getSceneByName("SnakeGame")->setSceneVisibility(ALL);
+		this->setSceneVisibility(NONE);
 	}
 }
 

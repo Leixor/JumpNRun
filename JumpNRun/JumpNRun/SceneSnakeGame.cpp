@@ -18,15 +18,6 @@ SceneSnakeGame::~SceneSnakeGame()
 {
 }
 
-void SceneSnakeGame::handleEvents(RenderWindow & window, Event& windowEvent)
-{
-	for (int i = this->objects.size() - 1; i >= 0; i--)
-	{
-		if (objects.get(i)->handleEvents(window, windowEvent))
-			break;
-	}
-}
-
 void SceneSnakeGame::handleInputs(RenderWindow & window)
 {
 	if (Keyboard::isKeyPressed(moveLeft) && this->snakeDirection != RIGHT)
@@ -53,7 +44,7 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 
 	if (Keyboard::isKeyPressed(Keyboard::I))
 	{
-		this->setVisibility(NONE);
+		this->setSceneVisibility(NONE);
 		this->getSceneHandler().setTopScene("GOL");
 		this->getSceneHandler().setSceneVisibility("GOL", ALL);
 	}

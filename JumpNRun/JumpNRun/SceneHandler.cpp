@@ -12,7 +12,7 @@ SceneHandler::~SceneHandler()
 void SceneHandler::handleEvents(RenderWindow& window, Event& windowEvent)
 {
 	for(unsigned int i = 0; i < vScenes.size(); i++) {
-		if (vScenes.get(i)->getVisibility() & INPUTABLE) {
+		if (vScenes.get(i)->getSceneVisibility() & INPUTABLE) {
 			vScenes.get(i)->handleEvents(window, windowEvent);
 		}
 	}
@@ -21,7 +21,7 @@ void SceneHandler::handleEvents(RenderWindow& window, Event& windowEvent)
 void SceneHandler::handleInputs(RenderWindow & window)
 {
 	for (unsigned int i = 0; i < vScenes.size(); i++) {
-		if (vScenes.get(i)->getVisibility() & INPUTABLE) {
+		if (vScenes.get(i)->getSceneVisibility() & INPUTABLE) {
 			vScenes.get(i)->handleInputs(window);
 		}
 	}
@@ -31,7 +31,7 @@ void SceneHandler::update()
 {
 	for (unsigned int i = 0; i < vScenes.size(); i++) 
 	{
-		if (vScenes.get(i)->getVisibility() & UPDATABLE)
+		if (vScenes.get(i)->getSceneVisibility() & UPDATABLE)
 		{
 			vScenes.get(i)->update();
 		}
@@ -43,7 +43,7 @@ void SceneHandler::render(RenderWindow& window, RenderStates& shades, float time
 {
 	for (int i = vScenes.size() - 1; i >= 0; i--) 
 	{
-		if (vScenes.get(i)->getVisibility() & VISIBLE)
+		if (vScenes.get(i)->getSceneVisibility() & VISIBLE)
 		{
 			vScenes.get(i)->render(window, shades, timeTillUpdate);
 		}
@@ -56,7 +56,7 @@ void SceneHandler::addScene(string sceneName, Scene * createScene, int visible)
 	if (!sceneExists(sceneName)) 
 	{
 		vScenes.push(sceneName, createScene);
-		vScenes.get(sceneName)->setVisibility(visible);
+		vScenes.get(sceneName)->setSceneVisibility(visible);
 	}
 }
 
@@ -66,7 +66,7 @@ void SceneHandler::addScene(string sceneName, Scene * createScene, bool onTop, i
 	if (!sceneExists(sceneName))
 	{
 		vScenes.push(sceneName, createScene);
-		vScenes.get(sceneName)->setVisibility(visible);
+		vScenes.get(sceneName)->setSceneVisibility(visible);
 		// Falls onTop als True mitgegeben worden ist soll die neue Szene direkt ganz oben in der Pipeline stehen
 		if (onTop) 
 			setTopScene(sceneName);
@@ -99,7 +99,7 @@ void SceneHandler::setTopScene(string sceneName)
 // Jede Scene kann die visibility anderer Scenes setzen
 void SceneHandler::setSceneVisibility(string sceneName, int visibility)
 {
-	this->vScenes.get(sceneName)->setVisibility(visibility);
+	this->vScenes.get(sceneName)->setSceneVisibility(visibility);
 }
 
 void SceneHandler::setScenePriority(string name, int priority)
