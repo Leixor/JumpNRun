@@ -92,7 +92,7 @@ int main()
 
 	AnimationHandler handler;
 	Animation animation(1000);
-	ObjectBase block1(new ShapeRectangle(FloatRect(100.0f, 500.0f, 200.0f, 100.0f), Color::Blue));
+	ObjectBase block1(new ShapeRectangle(FloatRect(700.0f, 500.0f, 200.0f, 100.0f), Color::Blue));
 
 	Font* f = new Font();
 	f->loadFromFile("Textures/cool.ttf");
@@ -180,25 +180,44 @@ int main()
 			lag -= MS_PER_UPDATE;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
 			{
-
+				Vector2f scaleText = block1.getText()->getScale();
+				Vector2f scaleShape = block1.getShape()->getScale();
 				p = block1.getText()->getPosition() - block1.getShape()->getPosition();
 				Transform t;
+				t.scale(Vector2f(1.f / scaleText.x, 1.f / scaleText.y));
 				t.rotate(-block1.getText()->getRotation());
 				k = t.transformPoint(p);
-				punkt.setPosition(block1.getText()->getPosition() + Vector2f(-k.x + 100.f, -k.y + 50.f));
-				block1.getText()->rotate(1.f, Vector2f(-k.x+100.f, -k.y+50.f));
+
+				
+				scaleText = block1.getText()->getScale();
+				Vector2f textOrigin = Vector2f((-k.x + 100.f) / (scaleText.x/scaleShape.x), (-k.y + 50.f) / (scaleText.y/scaleShape.y));
+				punkt.setPosition(textOrigin + block1.getText()->getPosition());
+				block1.getText()->rotate(1.f, textOrigin);
 				block1.getShape()->rotate(1.f, Vector2f(100, 50));
 
-				cout << k.x << k.y << "\n";
+				
+				cout << textOrigin.x <<  " " << textOrigin.y << "\n";
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			{
 				block1.getText()->rotate(1.f, Vector2f(-37.5f , -30.f));
 				block1.getShape()->rotate(1.f, Vector2f(0, 0));
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 			{
 				block1.getText()->scale(Vector2f(1.1f, 1.1f), Vector2f(0,0));
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+			{
+				p = block1.getText()->getPosition() - block1.getShape()->getPosition();
+				Transform t;
+				t.rotate(-block1.getText()->getRotation());
+				k = t.transformPoint(p);
+
+
+				Vector2f scaleText = block1.getText()->getScale();
+				block1.getText()->scale(Vector2f(1.1f, 1.1f), Vector2f(-k.x / scaleText.x + 200.f, -k.y / scaleText.y + 100.f));
+				block1.getShape()->scale(Vector2f(1.1f, 1.1f), Vector2f(200, 100));
 			}
 		}
 
