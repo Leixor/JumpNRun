@@ -132,6 +132,18 @@ public:
 		}
 		throw;
 	}
+
+	bool itemExists(Iterator iterator)
+	{
+		for (unsigned int i = 0; i < objects.size(); i++)
+		{
+			if (objects.at(i).iterator == iterator)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 };
 
 template<typename Iterator, typename Content, typename Spec>

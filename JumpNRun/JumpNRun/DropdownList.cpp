@@ -10,7 +10,7 @@ DropdownList::~DropdownList()
 {
 }
 
-bool DropdownList::handleEvents(RenderWindow & window, Event & windowEvent)
+void DropdownList::handleEvents(RenderWindow & window, Event & windowEvent)
 {
 	Button::handleEvents(window, windowEvent);
 	if (this->active)
@@ -21,7 +21,6 @@ bool DropdownList::handleEvents(RenderWindow & window, Event & windowEvent)
 			this->listContent.getSpec(i)->handleEvents(window, windowEvent);
 		}
 	}
-	return false;
 }
 
 void DropdownList::draw(RenderWindow & window, RenderStates & shades)

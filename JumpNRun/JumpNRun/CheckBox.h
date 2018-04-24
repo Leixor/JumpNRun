@@ -7,7 +7,7 @@ public:
 	CheckBox(function<void(bool checked, ObjectBase* type)> buttonAction, DrawableObject* buttonShape, bool checked = false);
 	~CheckBox();
 
-	bool handleEvents(RenderWindow& window, Event& windowEvent);
+	void handleEvents(RenderWindow& window, Event& windowEvent);
 
 	// Test zum veranschaulichen
 	bool getState();

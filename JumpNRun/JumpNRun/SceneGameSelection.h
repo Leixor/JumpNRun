@@ -8,7 +8,7 @@
 class SceneGameSelection : public Scene
 {
 public:
-	SceneGameSelection(string name, SceneHandler& sceneHandler, RenderWindow* window);
+	SceneGameSelection(SceneHandler& sceneHandler, RenderWindow* window);
 	~SceneGameSelection();
 
 	void snakeStart();

@@ -9,5 +9,13 @@ public:
 	ShapeSprite(string textureName);
 	ShapeSprite(string textureName, FloatRect rect);
 	~ShapeSprite();
+
+	void setTexture(string texturePath, bool resetRect = false);
+	void setTexture(const Texture* texture, bool resetRect = false);
+	void setTextureRect(IntRect rect);
+	void setSize(Vector2f size);
+	
+	IntRect getTextureRect();
+	Vector2f getSize();
 };
 

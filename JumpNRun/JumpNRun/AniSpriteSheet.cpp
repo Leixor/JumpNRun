@@ -18,7 +18,7 @@ void AniSpriteSheet::update(ObjectBase* object, eAniUpdateState updateState)
 {
 	if (timeCount == 0)
 	{
-		object->getShape()->setTexture(*spriteTexture);
+		object->getShape()->setTexture(spriteTexture);
 	}
 
 	int currentFrame = timeCount / frameDuration;
@@ -26,8 +26,6 @@ void AniSpriteSheet::update(ObjectBase* object, eAniUpdateState updateState)
 	if (currentFrame == spriteFrames.size())
 		currentFrame = spriteFrames.size()-1;
 	
-
-
 	object->getShape()->setTextureRect(*spriteFrames.at(currentFrame));
 	
 	if (this->getTime() >= (this->duration - this->updateRate))
@@ -37,7 +35,6 @@ void AniSpriteSheet::update(ObjectBase* object, eAniUpdateState updateState)
 		else
 			this->running = false;
 	}
-		
 }
 
 void AniSpriteSheet::setupStepSize()

@@ -15,19 +15,18 @@ public:
 	void render(RenderWindow& window, RenderStates& shades, float timeTillUpdate);
 
 	// Verschiedene Helper um Interaktion zwischen Scenes zu erleichtern
-	void addScene(Scene * createScene, int visible = ALL);
-	void addScene(Scene * createScene, bool onTop, int visible = ALL);
+	void addScene(string name, Scene * createScene, int visible = ALL);
+	void addScene(string name, Scene * createScene, bool onTop, int visible = ALL);
 	void deleteScene(string sceneName);
 	void setTopScene(string sceneName);
 	void setSceneVisibility(string sceneName, int visibility);
 	void setScenePriority(string name, int priority);
 
-	// Helper Scenes mit anderen Scenes interagieren zu lassen
-	int getSceneIndexByName(string sceneName);
-	bool sceneExists(string sceneName);
-	Scene* getSceneByName(string sceneName);
+	Scene* const getSceneByName(string name);
 
-private:
-	vector<Scene*> vScenes;
+	// Helper Scenes mit anderen Scenes interagieren zu lassen
+	bool sceneExists(string sceneName);
+protected:
+	UnorderdMap<string, Scene*> vScenes;
 };
 

@@ -10,12 +10,11 @@ Slider::~Slider()
 {
 }
 
-bool Slider::handleEvents(RenderWindow & window, Event & windowEvent)
+void Slider::handleEvents(RenderWindow & window, Event & windowEvent)
 {
 	Button::handleEvents(window, windowEvent);
 	if (windowEvent.type == Event::MouseButtonReleased)
 		this->active = false;
-	return false;
 }
 
 void Slider::handleInputs(RenderWindow & window)
