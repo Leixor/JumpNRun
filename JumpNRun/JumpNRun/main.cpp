@@ -31,18 +31,68 @@ struct queueObjects
 {
 	vector<queueFunctions> functions;
 	vector<ShapeRectangle> Rectangles;
-	map<string, unsigned int> namesInt;
-	map<unsigned int, unsigned int> indexInt;
-	vector<string> names;
+	map<string, unsigned int> namesIndex;
+	map<unsigned int, unsigned int> priorityIndex;
 
-	void setPriority(string name, long long priority)
+	void setPriority(string name, unsigned int priority)
 	{
-		indexInt.at(name) = priority;
+		if (priority >= int(this->namesIndex.size() - 1))
+			throw;
+
+		unsigned int indexInVector = namesIndex.at(name);
+
+		unsigned int currentPriorityIndex = 0;
+		for (unsigned int i = 0; i < priorityIndex.size(); i++)
+		{
+			if (priorityIndex.at(i) == indexInVector)
+				currentPriorityIndex = i;
+		}
+
+		map<unsigned int, unsigned int> newPriorityList;
+
+		if (currentPriorityIndex > priority)
+		{
+			for (unsigned int i = 0; i < priority; i++)
+			{
+				newPriorityList.emplace(i ,priorityIndex.at(i));
+			}
+
+			newPriorityList.emplace(priority, priorityIndex.at(currentPriorityIndex));
+			for (int i = priority; i < currentPriorityIndex; i++)
+			{
+				newPriorityList.emplace(i + 1, priorityIndex.at(i));
+			}
+
+			for (unsigned int i = currentPriorityIndex + 1; i < priorityIndex.size(); i++)
+			{
+				newPriorityList.emplace(i, priorityIndex.at(i));
+			}
+		}
+		else if (currentPriorityIndex < priority)
+		{
+			for (unsigned int i = 0; i < currentPriorityIndex; i++)
+			{
+				newPriorityList.emplace(i, priorityIndex.at(i));
+			}
+
+			for (int i = currentPriorityIndex; i < priority; i++)
+			{
+				newPriorityList.emplace(i, priorityIndex.at(i + 1));
+			}
+			newPriorityList.emplace(priority, priorityIndex.at(currentPriorityIndex));
+
+			for (unsigned int i = priority + 1; i < priorityIndex.size(); i++)
+			{
+				newPriorityList.emplace(i, priorityIndex.at(i));
+			}
+		}
+
+		priorityIndex = newPriorityList;
 	}
 
-	long long getQueObject(string name)
+	unsigned int getQueueObjectIndex(string name)
 	{
-		return namesInt.at(name);
+		return namesIndex.at(name);
 	}
 };
 
@@ -71,10 +121,22 @@ int main()
 		myObjects.names.push_back(to_string(i));
 		myObjects.namesInt.emplace(to_string(i), i);
 	}*/
+	queueObjects myObjects;
 
+	for (unsigned int i = 0; i < 10; i++)
+	{
+		myObjects.namesIndex.emplace(to_string(i), i);
+		myObjects.priorityIndex.emplace(i,i);
+	}
 
+	myObjects.setPriority("5", 2);
+	myObjects.setPriority("9", 0);
+	myObjects.setPriority("5", 5);
 
-
+	for (unsigned int i = 0; i < 10; i++)
+	{
+		printf("%d, %d \n", myObjects.namesIndex.at(to_string(i)), myObjects.priorityIndex.at(i));
+	}
 
 
 	ConfigHelper conf("Test.txt");
