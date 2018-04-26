@@ -14,14 +14,16 @@ public:
 	void removeContent(string name);
 	ObjectBase* getFirstObject(string name)
 	{
-		return this->listContent.getContent(name);
+		//return this->listContent.getContent(name);
+		return new ObjectBase();
 	}
 	ObjectBase* getSecondObject(string name)
 	{
-		return this->listContent.getSpec(name);
+		//return this->listContent.getSpec(name);
+		return new ObjectBase();
 	}
 private:
-	UnorderdMap3V<string, ObjectBase*, ObjectBase*> listContent;
+	//UnorderdMap3V<string, ObjectBase*, ObjectBase*> listContent;
 	float partSize;
 	bool active;
 };

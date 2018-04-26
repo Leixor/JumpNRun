@@ -29,65 +29,29 @@ struct queueFunctions
 
 struct queueObjects 
 {
-	vector<queueFunctions> functions;
+	//vector<queueFunctions> functions;
 	vector<ShapeRectangle> Rectangles;
-	map<string, unsigned int> namesIndex;
-	map<unsigned int, unsigned int> priorityIndex;
+	map<string, int> namesIndex;
+	vector<int> priorityIndex;
 
-	void setPriority(string name, unsigned int priority)
+	void setPriority(string name, int priority)
 	{
-		if (priority >= int(this->namesIndex.size() - 1))
-			throw;
+		int indexInVector = namesIndex.at(name);
 
-		unsigned int indexInVector = namesIndex.at(name);
-
-		unsigned int currentPriorityIndex = 0;
+		int currentPriorityIndex = 0;
 		for (unsigned int i = 0; i < priorityIndex.size(); i++)
 		{
 			if (priorityIndex.at(i) == indexInVector)
+			{
 				currentPriorityIndex = i;
-		}
-
-		map<unsigned int, unsigned int> newPriorityList;
-
-		if (currentPriorityIndex > priority)
-		{
-			for (unsigned int i = 0; i < priority; i++)
-			{
-				newPriorityList.emplace(i ,priorityIndex.at(i));
-			}
-
-			newPriorityList.emplace(priority, priorityIndex.at(currentPriorityIndex));
-			for (int i = priority; i < currentPriorityIndex; i++)
-			{
-				newPriorityList.emplace(i + 1, priorityIndex.at(i));
-			}
-
-			for (unsigned int i = currentPriorityIndex + 1; i < priorityIndex.size(); i++)
-			{
-				newPriorityList.emplace(i, priorityIndex.at(i));
-			}
-		}
-		else if (currentPriorityIndex < priority)
-		{
-			for (unsigned int i = 0; i < currentPriorityIndex; i++)
-			{
-				newPriorityList.emplace(i, priorityIndex.at(i));
-			}
-
-			for (int i = currentPriorityIndex; i < priority; i++)
-			{
-				newPriorityList.emplace(i, priorityIndex.at(i + 1));
-			}
-			newPriorityList.emplace(priority, priorityIndex.at(currentPriorityIndex));
-
-			for (unsigned int i = priority + 1; i < priorityIndex.size(); i++)
-			{
-				newPriorityList.emplace(i, priorityIndex.at(i));
+				break;
 			}
 		}
 
-		priorityIndex = newPriorityList;
+		//
+		priorityIndex.erase(priorityIndex.begin() + currentPriorityIndex);
+		// Priorität neu einsetzen
+		priorityIndex.insert(priorityIndex.begin() + priority, indexInVector);
 	}
 
 	unsigned int getQueueObjectIndex(string name)
@@ -95,20 +59,6 @@ struct queueObjects
 		return namesIndex.at(name);
 	}
 };
-
-
-
-void machwas()
-{
-	int i = 0;
-	i++;
-}
-void machwas2()
-{
-	int j = 0;
-	j++;
-}
-
 
 
 int main()
@@ -122,21 +72,27 @@ int main()
 		myObjects.namesInt.emplace(to_string(i), i);
 	}*/
 	queueObjects myObjects;
+	UnorderdMap<string, ShapeRectangle> myObjects2;
 
 	for (unsigned int i = 0; i < 10; i++)
 	{
 		myObjects.namesIndex.emplace(to_string(i), i);
-		myObjects.priorityIndex.emplace(i,i);
+		myObjects.priorityIndex.push_back(i);
+		if (i < 9)
+		{
+			myObjects.Rectangles.push_back(ShapeRectangle(FloatRect(100, 100, 100, 100), Color::Green));
+			myObjects2.push(to_string(i), ShapeRectangle(FloatRect(100, 100, 100, 100), Color::Green));
+		}
+		else
+		{
+			myObjects.Rectangles.push_back(ShapeRectangle(FloatRect(100, 100, 100, 100), Color::Blue));
+			myObjects2.push(to_string(i), ShapeRectangle(FloatRect(100, 100, 100, 100), Color::Red));
+		}
 	}
 
-	myObjects.setPriority("5", 2);
-	myObjects.setPriority("9", 0);
-	myObjects.setPriority("5", 5);
+	myObjects2.remove("5");
 
-	for (unsigned int i = 0; i < 10; i++)
-	{
-		printf("%d, %d \n", myObjects.namesIndex.at(to_string(i)), myObjects.priorityIndex.at(i));
-	}
+	myObjects2.setPriority("9", 0);
 
 
 	ConfigHelper conf("Test.txt");
@@ -268,7 +224,7 @@ int main()
 		Event windowEvent;
 		while (window.pollEvent(windowEvent))
 		{
-			/*switch (windowEvent.type)
+			switch (windowEvent.type)
 			{
 			case Event::Closed:
 				window.close();
@@ -276,20 +232,20 @@ int main()
 			case Event::KeyPressed:
 				if (windowEvent.key.code == Keyboard::Escape)
 					window.close();
-			}*/
-			//sceneHandler.handleEvents(window, windowEvent);
+			}
+			sceneHandler.handleEvents(window, windowEvent);
 		}
 
 
 		
 		
-		//sceneHandler.handleInputs(window);
+		sceneHandler.handleInputs(window);
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
 		while (lag >= MS_PER_UPDATE)
 		{
 			//Ruft die Aktualisierungsmethode auf
-			//sceneHandler.update();
+			sceneHandler.update();
 			/*world.Step(timeStep, velocityIterations, positionIterations);
 			float positionY = 450.0f - body->GetPosition().y - 10.0f;
 			float positionX = 780.0f + body->GetPosition().x - 10.0f;
@@ -364,7 +320,7 @@ int main()
 
 		//Zeichnen der Objekte
 		window.clear();
-		//sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
+		sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 		//FPSCOUNTER
 		/*ground.draw(window, RenderStates());
 		box.draw(window, RenderStates());
@@ -372,10 +328,6 @@ int main()
 		block2.draw(window, RenderStates());
 		
 		window.draw(punkt);*/
-		for(int i = 0; i < 10000; i++)
-		{
-		
-		}
 		window.draw(*FPS);
 		frameCount++;
 		window.display();

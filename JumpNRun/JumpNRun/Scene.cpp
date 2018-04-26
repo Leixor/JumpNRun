@@ -14,17 +14,17 @@ Scene::~Scene()
 
 void Scene::handleInputs(RenderWindow & window)
 {
-	for (int i = this->eventArray.size() - 1; i >= 0; i--)
+	for (int i = this->objects.size() - 1; i >= 0; i--)
 	{
-		this->eventArray.get(i)->handleInputs(window);
+		this->objects.get(i)->handleInputs(window);
 	}
 }
 
 void Scene::handleEvents(RenderWindow & window, Event& windowEvent)
 {
-	for (int i = this->eventArray.size() - 1; i >= 0; i--)
+	for (int i = this->objects.size() - 1; i >= 0; i--)
 	{
-		this->eventArray.get(i)->handleEvents(window, windowEvent);
+		this->objects.get(i)->handleEvents(window, windowEvent);
 	}
 }
 
@@ -32,9 +32,9 @@ void Scene::update()
 {
 	if (updateCount >= updateRate / MS_PER_UPDATE)
 	{
-		for (unsigned int i = 0; i < this->updateArray.size(); i++)
+		for (unsigned int i = 0; i < this->objects.size(); i++)
 		{
-			updateArray.get(i)->update();
+			objects.get(i)->update();
 		}
 		updateCount = 1;
 		updateSync = true;
@@ -50,9 +50,9 @@ void Scene::update()
 void Scene::render(RenderWindow & window, RenderStates& shades, float timeTillUpdate)
 {
 	window.setView(view);
-	for (unsigned int i = 0; i < this->drawArray.size(); i++)
+	for (unsigned int i = 0; i < this->objects.size(); i++)
 	{
-		drawArray.get(i)->draw(window, shades);
+		objects.get(i)->draw(window, shades);
 	}
 }
 
@@ -64,7 +64,7 @@ void Scene::setObjectVisibility(string objectName, int Visibility)
 {
 	ObjectBase* object = this->objects.get(objectName);
 
-	if ((Visibility & UPDATABLE) == UPDATABLE && !this->updateArray.itemExists(objectName))
+	/*if ((Visibility & UPDATABLE) == UPDATABLE && !this->updateArray.itemExists(objectName))
 		this->updateArray.push(objectName, object);
 	else if ((Visibility & UPDATABLE) != UPDATABLE && this->updateArray.itemExists(objectName))
 		this->updateArray.remove(objectName);
@@ -77,7 +77,7 @@ void Scene::setObjectVisibility(string objectName, int Visibility)
 	if ((Visibility & INPUTABLE) == INPUTABLE && !this->eventArray.itemExists(objectName))
 		this->eventArray.push(objectName, object);
 	else if ((Visibility & INPUTABLE) != INPUTABLE && this->eventArray.itemExists(objectName))
-		this->eventArray.remove(objectName);
+		this->eventArray.remove(objectName);*/
 }
 
 void Scene::setSceneScaling(Vector2f & scaling)
@@ -133,12 +133,12 @@ void Scene::setObjectPriority(string name, int priority)
 	if(index > priority)
 		for (int i = priority; i < index; i++)
 		{
-			this->objects.iterswap(i, index);
+			//this->objects.iterswap(i, index);
 		}
 	else if(index < priority)
 		for (int i = priority; i > index; i--)
 		{
-			this->objects.iterswap(i, index);
+			//this->objects.iterswap(i, index);
 		}
 }
 

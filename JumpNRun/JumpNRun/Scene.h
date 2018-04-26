@@ -75,11 +75,6 @@ protected:
 		return updateSync;
 	}
 	/*AnimationHandler aniHandler;*/
-
-	
-	UnorderdMap<string, ObjectBase*> drawArray;
-	UnorderdMap<string, ObjectBase*> updateArray;
-	UnorderdMap<string, ObjectBase*> eventArray;
 private:
 	// Jede Szene bekommt den Scenehandler damit er es als Interface benutzen kann um die anderen Szenen anzusprechen
 	SceneHandler&  sceneHandler;

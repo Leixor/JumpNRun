@@ -1,7 +1,6 @@
 #pragma once
 #include "StandardInclude.h"
 
-
 template<typename Iterator, typename Content>
 struct MapContent
 {
@@ -13,121 +12,115 @@ struct MapContent
 	{}
 };
 
-template<typename Iterator, typename Content, typename Spec>
-struct MapContent3V
-{
-	Iterator iterator;
-	Content content;
-	Spec spec;
-
-	MapContent3V(Iterator iterator, Content content, Spec spec)
-		:iterator(iterator), content(content), spec(spec)
-	{}
-};
-
 template<typename Iterator, typename Content> 
 struct UnorderdMap 
 {
 private:
-	vector<MapContent<Iterator, Content>> objects;
+	vector<Content> objects;
+	map<Iterator, int> iteratorIndex;
+	vector<int> priorityIndex;
 
 public:
 	void push(Iterator iterator, Content content)
 	{
-		objects.push_back(MapContent<Iterator, Content>(iterator, content));
+		this->objects.push_back(content);
+		this->iteratorIndex.emplace(iterator, objects.size() - 1);
+		this->priorityIndex.push_back(objects.size() - 1);
 	}
 
 	unsigned int size()
 	{
-		return objects.size();
+		return this->objects.size();
 	}
 
 	void clear()
 	{
-		objects.clear();
+		this->objects.clear();
+		this->iteratorIndex.clear();
+		this->priorityIndex.clear();
 	}
 
 	void remove(Iterator iterator)
 	{
-		for (unsigned int i = 0; i < objects.size(); i++)
+		int index = this->iteratorIndex.at(iterator);
+		this->objects.erase(this->objects.begin() + index);
+		this->iteratorIndex.erase(iterator);
+
+		for (unsigned int i = 0; i < this->priorityIndex.size(); i++)
 		{
-			if (objects.at(i).iterator == iterator)
+			if (this->priorityIndex.at(i) == index)
 			{
-				this->objects.erase(this->objects.begin() + i);
+				this->priorityIndex.erase(this->priorityIndex.begin() + i);
+				break;
 			}
 		}
-		throw;
 	}
 
 	void remove(int index)
 	{
 		this->objects.erase(this->objects.begin() + index);
+
+		map<Iterator, int>::iterator it;
+		it = this->iteratorIndex.begin();
+		for (int i = 0; i < index; i++)
+			it++;
+		this->iteratorIndex.erase(it->first);
+		
+		for (unsigned int i = 0; i < this->priorityIndex.size(); i++)
+		{
+			if (this->priorityIndex.at(i) == index)
+			{
+				this->priorityIndex.erase(this->priorityIndex.begin() + i);
+				break;
+			}
+		}
 	}
 
 	int getIndex(Iterator iterator)
 	{
-		for (unsigned int i = 0; i < objects.size(); i++)
-		{
-			if (objects.at(i).iterator == iterator)
-			{
-				return i;
-			}
-		}
-
-		throw;
-	}
-
-	void iterswap(int begin, int end)
-	{
-		iter_swap(objects.begin() + begin, objects.begin() + end);
+		return this->iteratorIndex.at(iterator);
 	}
 
 	void set(int index, Content content)
 	{
-		objects.at(index).content = content;
+		this->objects.at(index) = content;
 	}
 
 	void set(Iterator iterator, Content content)
 	{
-		for (unsigned int i = 0; i < objects.size(); i++)
-		{
-			if (objects.at(i).iterator == iterator)
-			{
-				objects.at(i).content = content;
-			}
-		}
-		throw;
+		this->objects.at(this->iteratorIndex.at(iterator)) = content;
 	}
 	
 	Content get(Iterator iterator)
 	{
-		for (unsigned int i = 0; i < objects.size(); i++)
-		{
-			if (objects.at(i).iterator == iterator)
-			{
-				return objects.at(i).content;
-			}
-		}
-		throw;
+		return this->objects.at(this->iteratorIndex.at(iterator));
 	}
 
 	Content get(int index)
 	{
-		return objects.at(index).content;
+		return this->objects.at(index);
 	}
 
 	Iterator getIterator(int index)
 	{
-		return objects.at(index).iterator;
+		map<Iterator, int>::iterator it;
+		it = this->iteratorIndex.begin();
+		for (int i = 0; i < index; i++)
+			it++;
+		return it->first;
 	}
 
 	Iterator getIterator(Content content)
 	{
 		for (unsigned int i = 0; i < objects.size(); i++)
 		{
-			if (objects.at(i).content == content)
+			if (objects.at(i) == content)
 			{
-				return objects.at(i).iterator;
+				map<Iterator, int>::iterator it;
+				it = this->iteratorIndex.begin();
+				for (int j = 0; j < i; j++)
+					it++;
+				return this->iteratorIndex.at(it->first);
 			}
 		}
 		throw;
@@ -135,139 +128,79 @@ public:
 
 	bool itemExists(Iterator iterator)
 	{
-		for (unsigned int i = 0; i < objects.size(); i++)
+		try
 		{
-			if (objects.at(i).iterator == iterator)
+			this->iteratorIndex.at(iterator);
+			return true;
+		}
+		catch (...)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	int getPriority(Iterator iterator)
+	{
+		int index = this->iteratorIndex.at(iterator);
+
+		for (unsigned int i = 0; i < this->priorityIndex.size(); i++)
+		{
+			if (this->priorityIndex.at(i) == index)
 			{
-				return true;
+				return (int)i;
 			}
 		}
-		return false;
-	}
-};
-
-template<typename Iterator, typename Content, typename Spec>
-struct UnorderdMap3V
-{
-private:
-	vector<MapContent3V<Iterator, Content, Spec>> objects;
-
-public:
-	void push(Iterator iterator, Content content, Spec spec)
-	{
-		objects.push_back(MapContent3V<Iterator, Content, Spec>(iterator, content, spec));
 	}
 
-	unsigned int size()
+	int getPriority(int index)
 	{
-		return objects.size();
-	}
-
-	void clear()
-	{
-		objects.clear();
-	}
-
-	void remove(Iterator iterator)
-	{
-		for (unsigned int i = 0; i < objects.size(); i++)
+		for (unsigned int i = 0; i < this->priorityIndex.size(); i++)
 		{
-			if (objects.at(i).iterator == iterator)
-			{
-				this->objects.erase(this->objects.begin() + i);
-			}
-		}
-		throw;
-	}
-
-	void remove(int index)
-	{
-		this->objects.erase(this->objects.begin() + i);
-	}
-
-	unsigned int getIndex(Iterator iterator)
-	{
-		for (unsigned int i = 0; i < objects.size(); i++)
-		{
-			if (objects.at(i).iterator == iterator)
+			if (this->priorityIndex.at(i) == index)
 			{
 				return i;
 			}
 		}
-
 		throw;
 	}
 
-	Iterator getIterator(int index)
+	void setPriority(Iterator iterator, int priority)
 	{
-		return objects.at(index).iterator;
-	}
+		int indexInVector = this->iteratorIndex.at(iterator);
 
-	void setContent(int iterator, Content content)
-	{
-		objects.at(iterator).content = content;
-	}
-
-	void setContent(Iterator iterator, Content content)
-	{
-		for (unsigned int i = 0; i < objects.size(); i++)
+		int currentPriorityIndex = 0;
+		for (unsigned int i = 0; i < this->priorityIndex.size(); i++)
 		{
-			if (objects.at(i).iterator == iterator)
+			if (this->priorityIndex.at(i) == indexInVector)
 			{
-				objects.at(i).content = content;
+				currentPriorityIndex = i;
+				break;
 			}
 		}
-		throw;
+
+		this->priorityIndex.erase(this->priorityIndex.begin() + currentPriorityIndex);
+		this->priorityIndex.insert(this->priorityIndex.begin() + priority, indexInVector);
 	}
 
-	void setSpec(int index, Spec content)
+	void setPriority(int index, int priority)
 	{
-		objects.at(index).spec = spec;
-	}
-
-	void setSpec(Iterator iterator, Spec spec)
-	{
-		for (unsigned int i = 0; i < objects.size(); i++)
+		int currentPriorityIndex = 0;
+		for (unsigned int i = 0; i < this->priorityIndex.size(); i++)
 		{
-			if (objects.at(i).iterator == iterator)
+			if (this->priorityIndex.at(i) == index)
 			{
-				objects.at(i).spec = spec;
+				currentPriorityIndex = i;
+				break;
 			}
 		}
-		throw;
+
+		this->priorityIndex.erase(this->priorityIndex.begin() + currentPriorityIndex);
+		this->priorityIndex.insert(this->priorityIndex.begin() + priority, index);
 	}
 
-	Content getContent(Iterator iterator)
+	Content getContentByPriority(int priority)
 	{
-		for (unsigned int i = 0; i < objects.size(); i++)
-		{
-			if (objects.at(i).iterator == iterator)
-			{
-				return objects.at(i).content;
-			}
-		}
-		throw;
-	}
-
-	Content getContent(int index)
-	{
-		return objects.at(index).content;
-	}
-
-	Spec getSpec(int index)
-	{
-		return objects.at(index).spec;
-	}
-
-	Spec getSpec(Iterator iterator)
-	{
-		for (unsigned int i = 0; i < objects.size(); i++)
-		{
-			if (objects.at(i).iterator == iterator)
-			{
-				return objects.at(i).spec;
-			}
-		}
-		throw;
+		return this->objects.at(this->priorityIndex.at(priority));
 	}
 };

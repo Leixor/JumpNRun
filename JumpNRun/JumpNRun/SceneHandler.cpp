@@ -88,7 +88,7 @@ void SceneHandler::setTopScene(string sceneName)
 			int index = this->vScenes.getIndex(sceneName);
 			for (unsigned int i = 0; i < vScenes.size() - index; i++) 
 			{
-				this->vScenes.iterswap(i, this->vScenes.size() - index);
+				//this->vScenes.iterswap(i, this->vScenes.size() - index);
 			}
 		}
 		
@@ -109,11 +109,11 @@ void SceneHandler::setScenePriority(string name, int priority)
 
 	int index = this->vScenes.getIndex(name);
 	if (index > priority)
-		for (int i = priority; i < index; i++)
-			this->vScenes.iterswap(i, index);
+		for (int i = priority; i < index; i++);
+			//this->vScenes.iterswap(i, index);
 	else if (index < priority)
-		for (int i = priority; i > index; i--)
-			this->vScenes.iterswap(i, index);
+			for (int i = priority; i > index; i--);
+			//this->vScenes.iterswap(i, index);
 }
 
 Scene* const SceneHandler::getSceneByName(string name)
