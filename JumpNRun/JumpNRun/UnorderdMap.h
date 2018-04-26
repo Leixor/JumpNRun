@@ -203,4 +203,9 @@ public:
 	{
 		return this->objects.at(this->priorityIndex.at(priority));
 	}
+
+	int getIndexByPriority(int priority)
+	{
+		return this->priorityIndex.at(priority);
+	}
 };

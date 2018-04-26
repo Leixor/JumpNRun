@@ -136,11 +136,6 @@ bool SceneSnakeGame::setupFood()
 
 void SceneSnakeGame::createScene()
 {
-	for (int i = 0; i < 10000; i++)
-	{
-		addObject(to_string(i), new ShapeRectangle(FloatRect(0 + i * 1, 0 + i * 1, 1, 1), Color::Magenta));
-	}
-
 	addObject("Background", new ShapeRectangle(FloatRect(POSX, POSY, PITCH, PITCH), Color::Black, float(PITCH) / float(50), Color::White));
 
 	float partSizeX = float(PITCH) / float(cellCount.x);
