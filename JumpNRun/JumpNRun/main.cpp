@@ -91,9 +91,13 @@ int main()
 	}
 
 	myObjects2.remove("5");
-
 	myObjects2.setPriority("9", 0);
 
+
+	for (unsigned int i = 0; i < myObjects2.size(); i++)
+	{
+		printf("%d, %d\n", i, myObjects2.getIndexByPriority(i));
+	}
 
 	ConfigHelper conf("Test.txt");
 	windowDef::get().windowSizeX = float(stoi(conf.get("Window", "WindowSizeX")));
