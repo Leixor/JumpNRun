@@ -157,6 +157,8 @@ int main()
 	punkt.setFillColor(Color::Red);
 
 	RenderWindow window(VideoMode(int(windowDef::get().windowSizeX), int(windowDef::get().windowSizeY)), "Engine", windowDef::get().windowStyle);// , Style::Fullscreen);
+	window.setVerticalSyncEnabled(false);
+	window.setFramerateLimit(0);
 	SceneHandler &sceneHandler = SceneHandler();
 
 	// Hier kann und soll eine Einstiegsszene definiert werden, kann auch erst bei einem Event unten stattfinden
@@ -261,61 +263,61 @@ int main()
 			}
 
 			lag -= MS_PER_UPDATE;
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
-			{
-				/*body->SetActive(false);
-				p = block1.getText()->getPosition() - block1.getShape()->getPosition();
-				Transform t;
-				t.scale(Vector2f(1.f / scaleText.x, 1.f / scaleText.y));
-				t.rotate(-block1.getText()->getRotation());
-				k = t.transformPoint(p);
+			//if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+			//{
+			//	/*body->SetActive(false);
+			//	p = block1.getText()->getPosition() - block1.getShape()->getPosition();
+			//	Transform t;
+			//	t.scale(Vector2f(1.f / scaleText.x, 1.f / scaleText.y));
+			//	t.rotate(-block1.getText()->getRotation());
+			//	k = t.transformPoint(p);
 
-				
-				scaleText = block1.getText()->getScale();
-				Vector2f textOrigin = Vector2f((-k.x + 100.f) / (scaleText.x/scaleShape.x), (-k.y + 50.f) / (scaleText.y/scaleShape.y));
-				punkt.setPosition(textOrigin + block1.getText()->getPosition());
-				block1.getText()->rotate(1.f, textOrigin);
-				block1.getShape()->rotate(1.f, Vector2f(100, 50));
+			//	
+			//	scaleText = block1.getText()->getScale();
+			//	Vector2f textOrigin = Vector2f((-k.x + 100.f) / (scaleText.x/scaleShape.x), (-k.y + 50.f) / (scaleText.y/scaleShape.y));
+			//	punkt.setPosition(textOrigin + block1.getText()->getPosition());
+			//	block1.getText()->rotate(1.f, textOrigin);
+			//	block1.getShape()->rotate(1.f, Vector2f(100, 50));
 
-				
-				cout << textOrigin.x <<  " " << textOrigin.y << "\n";*/
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-			{
-				body->SetActive(true);
-				block1.getText()->rotate(1.f, Vector2f(-37.5f , -30.f));
-				block1.getShape()->rotate(1.f, Vector2f(0, 0));
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			{
-				block1.getText()->scale(Vector2f(1.1f, 1.1f), Vector2f(0,0));
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-			{
-				p = block1.getText()->getPosition() - block1.getShape()->getPosition();
-				Transform t;
-				t.rotate(-block1.getText()->getRotation());
-				k = t.transformPoint(p);
+			//	
+			//	cout << textOrigin.x <<  " " << textOrigin.y << "\n";*/
+			//}
+			//if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+			//{
+			//	body->SetActive(true);
+			//	block1.getText()->rotate(1.f, Vector2f(-37.5f , -30.f));
+			//	block1.getShape()->rotate(1.f, Vector2f(0, 0));
+			//}
+			//if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+			//{
+			//	block1.getText()->scale(Vector2f(1.1f, 1.1f), Vector2f(0,0));
+			//}
+			//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+			//{
+			//	p = block1.getText()->getPosition() - block1.getShape()->getPosition();
+			//	Transform t;
+			//	t.rotate(-block1.getText()->getRotation());
+			//	k = t.transformPoint(p);
 
 
-				Vector2f scaleText = block1.getText()->getScale();
-				block1.getText()->scale(Vector2f(1.1f, 1.1f), Vector2f(-k.x / scaleText.x + 200.f, -k.y / scaleText.y + 100.f));
-				block1.getShape()->scale(Vector2f(1.1f, 1.1f), Vector2f(200, 100));
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
-			{
-				/*long long i = myObjects.getQueObject("99998");
-				i = myObjects.getQueObject("99998");
-				i = myObjects.getQueObject("99998");
-				i = myObjects.getQueObject("99998");
-				i = myObjects.getQueObject("99998");
-				i = myObjects.getQueObject("99998");
-				i = myObjects.getQueObject("99998");
-				i = myObjects.getQueObject("99998");
-				i = myObjects.getQueObject("99998");
-				i = myObjects.getQueObject("99998");
-				myObjects.functions.at(i).render = machwas2;*/
-			}
+			//	Vector2f scaleText = block1.getText()->getScale();
+			//	block1.getText()->scale(Vector2f(1.1f, 1.1f), Vector2f(-k.x / scaleText.x + 200.f, -k.y / scaleText.y + 100.f));
+			//	block1.getShape()->scale(Vector2f(1.1f, 1.1f), Vector2f(200, 100));
+			//}
+			//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+			//{
+			//	/*long long i = myObjects.getQueObject("99998");
+			//	i = myObjects.getQueObject("99998");
+			//	i = myObjects.getQueObject("99998");
+			//	i = myObjects.getQueObject("99998");
+			//	i = myObjects.getQueObject("99998");
+			//	i = myObjects.getQueObject("99998");
+			//	i = myObjects.getQueObject("99998");
+			//	i = myObjects.getQueObject("99998");
+			//	i = myObjects.getQueObject("99998");
+			//	i = myObjects.getQueObject("99998");
+			//	myObjects.functions.at(i).render = machwas2;*/
+			//}
 		}
 
 		//Zeichnen der Objekte

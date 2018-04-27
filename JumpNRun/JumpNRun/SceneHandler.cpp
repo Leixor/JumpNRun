@@ -43,6 +43,7 @@ void SceneHandler::render(RenderWindow& window, RenderStates& shades, float time
 {
 	for (int i = vScenes.size() - 1; i >= 0; i--) 
 	{
+		
 		if (vScenes.get(i)->getSceneVisibility() & VISIBLE)
 		{
 			vScenes.get(i)->render(window, shades, timeTillUpdate);

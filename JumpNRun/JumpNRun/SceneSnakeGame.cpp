@@ -136,9 +136,12 @@ bool SceneSnakeGame::setupFood()
 
 void SceneSnakeGame::createScene()
 {
+	//this->texture->loadFromFile("Textures/plus.png");
+	texture = new Texture();
+	texture->loadFromFile("Textures/plus.png");
 	for (int i = 0; i < 10000; i++)
 	{
-		addObject(to_string(i), new ShapeRectangle(FloatRect(0 + i * 1, 0 + i * 1, 1, 1), Color::Magenta));
+		addObject(to_string(i), new ShapeSprite(texture, .1f));
 	}
 
 	addObject("Background", new ShapeRectangle(FloatRect(POSX, POSY, PITCH, PITCH), Color::Black, float(PITCH) / float(50), Color::White));

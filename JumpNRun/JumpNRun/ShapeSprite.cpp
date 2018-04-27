@@ -7,6 +7,13 @@ ShapeSprite::ShapeSprite(string textureName, float scale, Vector2f pos)
 	this->setPosition(pos);
 }
 
+ShapeSprite::ShapeSprite(Texture* texture, float scale, Vector2f pos)
+{
+	this->setTexture(texture);
+	this->setScale(Vector2f(scale, scale));
+	this->setPosition(pos);
+}
+
 ShapeSprite::ShapeSprite(string textureName, Vector2f size, Vector2f pos)
 {
 	this->setTexture(textureName);

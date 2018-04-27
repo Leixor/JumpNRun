@@ -1,6 +1,7 @@
 #pragma once
 #include "Scene.h"
 #include "ShapeRectangle.h"
+#include "ShapeSprite.h"
 #include "StandardInclude.h"
 
 enum eSnakeState
@@ -42,6 +43,8 @@ private:
 	Keyboard::Key moveLeft;
 	int partCount;
 	int scoreCount;
+
+	Texture* texture;
 
 	bool setupFood();
 	void createScene();

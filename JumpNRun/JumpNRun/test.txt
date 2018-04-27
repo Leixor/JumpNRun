@@ -1,7 +1,7 @@
 [Window
 WindowSizeX: 1600
 WindowSizeY: 900
-WindowStyle: 7
+WindowStyle: 8
 #
 [Menu
 BackgroundColor: 8bb0adff
