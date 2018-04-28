@@ -33,9 +33,9 @@ bool SceneGameSelection::setupResources()
 	addObject("BackGround", new ShapeRectangle(FloatRect(0.0f, 0.0f, windowDef::get().windowSizeX, windowDef::get().windowSizeY), Color(200,200,200,255)));
 
 	addResource("SnakeButton", new Button([&] {snakeStart(); }, new ShapeRectangle(FloatRect(0.0f, 0.0f, windowDef::get().windowSizeX / 2.0f, windowDef::get().windowSizeY), Color::Transparent, -10.0f, Color::White)));
-	alignTo(*this->objects.get("SnakeButton")->getShape(), *this->objects.get("BackGround")->getShape(), LEFT);
+	alignTo(*this->objects.get("SnakeButton")->objectShape, *this->objects.get("BackGround")->objectShape, LEFT);
 	addResource("GOLButton", new Button([&] {golStart(); }, new ShapeRectangle(FloatRect(0.0f, 0.0f, windowDef::get().windowSizeX / 2.0f, windowDef::get().windowSizeY), Color::Transparent, -10.0f, Color::White)));
-	alignTo(*this->objects.get("GOLButton")->getShape(), *this->objects.get("BackGround")->getShape(), RIGHT);
+	alignTo(*this->objects.get("GOLButton")->objectShape, *this->objects.get("BackGround")->objectShape, RIGHT);
 
 	this->getSceneHandler().addScene("SnakeGame", new SceneSnakeGame(this->getSceneHandler(), Vector2u(15, 15), 6));
 	this->getSceneHandler().setTopScene("SnakeGame");

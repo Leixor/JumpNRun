@@ -214,9 +214,10 @@
     <ClInclude Include="DropdownList.h" />
     <ClInclude Include="GlobalVariables.h" />
     <ClInclude Include="KeyFrame.h" />
-    <ClInclude Include="ObjectBase.h" />
+    <ClInclude Include="BaseObject.h" />
     <ClInclude Include="ObjectText.h" />
     <ClInclude Include="PhysicalObjectBase.h" />
+    <ClInclude Include="BaseResource.h" />
     <ClInclude Include="SavefileHelper.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneGameSelection.h" />

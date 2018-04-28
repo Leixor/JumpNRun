@@ -1,7 +1,7 @@
 #pragma once
-#include "ObjectBase.h"
+#include "BaseResource.h"
 
- class Button : public ObjectBase
+ class Button : public BaseResource
 {
 public:
 	Button(function<void(void)> buttonAction, DrawableObject* buttonShape);

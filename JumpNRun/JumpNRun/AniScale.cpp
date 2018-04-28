@@ -10,18 +10,18 @@ AniScale::~AniScale()
 {
 }
 
-void AniScale::update(ObjectBase * object, eAniUpdateState updateState)
+void AniScale::update(BaseResource * object, eAniUpdateState updateState)
 {
 	
 	switch (updateState)
 	{
 	case ObjectOnly:
-		object->getShape()->setScale(object->getShape()->getScale() + this->subScale * this->factors.at(this->timeCount), this->origin);
+		object->objectShape->setScale(object->objectShape->getScale() + this->subScale * this->factors.at(this->timeCount), this->origin);
 		break;
 	case TextOnly:
 		break;
 	case ObjectAndText:
-		object->getShape()->setScale(object->getShape()->getScale() + this->subScale * this->factors.at(this->timeCount), this->origin);
+		object->objectShape->setScale(object->objectShape->getScale() + this->subScale * this->factors.at(this->timeCount), this->origin);
 		break;
 	}
 

@@ -23,7 +23,7 @@ public:
 	~Animation() {}
 
 	void update();
-	void update(ObjectBase* object, eAniUpdateState updateState)
+	void update(BaseResource* object, eAniUpdateState updateState)
 	{
 		this->update();
 	}
@@ -39,11 +39,11 @@ public:
 	void addSubAnimation(string name, SubAnimation* animation, unsigned int time = 0);
 	void addKeyFrame(string name, eKeyFrameAction action, unsigned int time);
 	void removeKeyFrame(unsigned int time);
-	void addObject(ObjectBase* object, eAniUpdateState updateState = ObjectAndText);
-	void removeObject(ObjectBase* object);
+	void addObject(BaseResource* object, eAniUpdateState updateState = ObjectAndText);
+	void removeObject(BaseResource* object);
 private:
 	vector<KeyFrame*> keyFrames;
-	UnorderdMap<eAniUpdateState, ObjectBase*> objects;
+	UnorderdMap<eAniUpdateState, BaseResource*> objects;
 	UnorderdMap<string, SubAnimation*> subAnimations;
 	unsigned int updateRateCount;
 };

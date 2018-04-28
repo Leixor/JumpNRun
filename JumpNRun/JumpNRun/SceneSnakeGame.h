@@ -32,10 +32,10 @@ private:
 	//Die neue Richtung wird bei Update der Snake gegeben
 	eOrientation snakeDirectionNew;
 	eSnakeState gameState;
-	vector<ObjectBase*> snakeBody;
-	ObjectBase* snakeFood;
+	vector<BaseResource*> snakeBody;
+	BaseResource* snakeFood;
 	Font* font;
-	ObjectBase* score;
+	BaseResource* score;
 	//Die Keys werden aus der Config geladen
 	Keyboard::Key moveDown;
 	Keyboard::Key moveUp;

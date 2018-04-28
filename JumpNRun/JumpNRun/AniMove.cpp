@@ -10,19 +10,19 @@ AniMove::~AniMove()
 {
 }
 
-void AniMove::update(ObjectBase* object, eAniUpdateState updateState)
+void AniMove::update(BaseResource* object, eAniUpdateState updateState)
 {
 	switch (updateState)
 	{
 	case ObjectOnly:
-		object->getShape()->move(this->subDirection * this->factors.at(this->timeCount));
+		object->objectShape->move(this->subDirection * this->factors.at(this->timeCount));
 		break;
 	case TextOnly:
-		object->getText()->move(this->subDirection * this->factors.at(this->timeCount));
+		object->objectText->move(this->subDirection * this->factors.at(this->timeCount));
 		break;
 	case ObjectAndText:
-		object->getShape()->move(this->subDirection * this->factors.at(this->timeCount));
-		object->getText()->move(this->subDirection * this->factors.at(this->timeCount));
+		object->objectShape->move(this->subDirection * this->factors.at(this->timeCount));
+		object->objectText->move(this->subDirection * this->factors.at(this->timeCount));
 		break;
 	}
 

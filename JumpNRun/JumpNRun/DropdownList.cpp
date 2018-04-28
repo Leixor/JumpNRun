@@ -25,7 +25,7 @@ void DropdownList::handleEvents(RenderWindow & window, Event & windowEvent)
 
 void DropdownList::draw(RenderWindow & window, RenderStates & shades)
 {
-	ObjectBase::draw(window, shades);
+	BaseResource::draw(window, shades);
 	if (this->active)
 	{
 		/*for (unsigned int i = 0; i < this->listContent.size(); i++)
@@ -36,15 +36,15 @@ void DropdownList::draw(RenderWindow & window, RenderStates & shades)
 	}
 }
 
-void DropdownList::addContent(string name, ObjectBase * contentOne, ObjectBase * contentTwo)
+void DropdownList::addContent(string name, BaseResource * contentOne, BaseResource * contentTwo)
 {
-	contentOne->getShape()->setSize(Vector2f(partSize, this->getShape()->getSize().y));
-	contentTwo->getShape()->setSize(Vector2f(this->getShape()->getSize().x - partSize, this->getShape()->getSize().y));
+	contentOne->objectShape->setSize(Vector2f(partSize, this->objectShape->getSize().y));
+	contentTwo->objectShape->setSize(Vector2f(this->objectShape->getSize().x - partSize, this->objectShape->getSize().y));
 	/*this->listContent.push(name, contentOne, contentTwo);
 	for (unsigned int i = 0; i < this->listContent.size(); i++)
 	{
-		this->listContent.getContent(i)->getShape()->setPosition(Vector2f(this->getShape()->getPosition().x, this->getShape()->getPosition().y + (1 + i) * this->getShape()->getSize().y));
-		this->listContent.getSpec(i)->getShape()->setPosition(Vector2f(this->getShape()->getPosition().x + this->partSize, this->getShape()->getPosition().y + (1 + i) * this->getShape()->getSize().y));
+		this->listContent.getContent(i)->objectShape->setPosition(Vector2f(this->objectShape->getPosition().x, this->objectShape->getPosition().y + (1 + i) * this->objectShape->getSize().y));
+		this->listContent.getSpec(i)->objectShape->setPosition(Vector2f(this->objectShape->getPosition().x + this->partSize, this->objectShape->getPosition().y + (1 + i) * this->objectShape->getSize().y));
 	}*/
 }
 
@@ -53,8 +53,8 @@ void DropdownList::removeContent(string name)
 	/*this->listContent.remove(name);
 	for (unsigned int i = 0; i < this->listContent.size(); i++)
 	{
-		this->listContent.getContent(i)->getShape()->setPosition(Vector2f(this->getShape()->getPosition().x, this->getShape()->getPosition().y + (1 + i) * this->getShape()->getSize().y));
-		this->listContent.getSpec(i)->getShape()->setPosition(Vector2f(this->getShape()->getPosition().x + this->partSize, this->getShape()->getPosition().y + (1 + i) * this->getShape()->getSize().y));
+		this->listContent.getContent(i)->objectShape->setPosition(Vector2f(this->objectShape->getPosition().x, this->objectShape->getPosition().y + (1 + i) * this->objectShape->getSize().y));
+		this->listContent.getSpec(i)->objectShape->setPosition(Vector2f(this->objectShape->getPosition().x + this->partSize, this->objectShape->getPosition().y + (1 + i) * this->objectShape->getSize().y));
 	}*/
 }
 

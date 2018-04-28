@@ -7,7 +7,7 @@ public:
 	DrawableShape();
 	~DrawableShape();
 
-	void draw(RenderWindow& window, RenderStates shader);
+	void draw(RenderWindow& window, RenderStates& shader);
 
 	void setPosition(Vector2f pos);
 	void setOrigin(Vector2f origin);
@@ -38,7 +38,7 @@ inline DrawableShape<DrawableType>::~DrawableShape()
 }
 
 template<class DrawableType>
-inline void DrawableShape<DrawableType>::draw(RenderWindow & window, RenderStates shader)
+inline void DrawableShape<DrawableType>::draw(RenderWindow & window, RenderStates& shader)
 {
 		window.draw(*shape, shader);
 }

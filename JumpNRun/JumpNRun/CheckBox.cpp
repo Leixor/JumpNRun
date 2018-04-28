@@ -1,7 +1,7 @@
 #include "CheckBox.h"
 
-CheckBox::CheckBox(function<void(bool checked, ObjectBase* type)> buttonAction, DrawableObject* buttonShape, bool checked)
-	:ObjectBase(buttonShape), buttonAction(buttonAction)
+CheckBox::CheckBox(function<void(bool checked, BaseResource* type)> buttonAction, DrawableObject* buttonShape, bool checked)
+	:BaseResource(buttonShape), buttonAction(buttonAction)
 {
 }
 

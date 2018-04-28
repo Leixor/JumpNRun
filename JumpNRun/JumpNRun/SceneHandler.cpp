@@ -33,7 +33,7 @@ void SceneHandler::update()
 	{
 		if (vScenes.get(i)->getSceneVisibility() & UPDATABLE)
 		{
-			vScenes.get(i)->update();
+			vScenes.get(i)->updateSync();
 		}
 	}
 }

@@ -14,7 +14,7 @@ public:
 
 	}
 
-	virtual void draw(RenderWindow& window, RenderStates shader) = 0;
+	virtual void draw(RenderWindow& window, RenderStates& shader) = 0;
 
 	virtual void setPosition(Vector2f position) = 0;
 	virtual void setRotation(float angle, Vector2f origin) = 0;

@@ -1,6 +1,6 @@
 #pragma once
 #include "StandardInclude.h"
-#include "ObjectBase.h"
+#include "BaseResource.h"
 #include "GlobalVariables.h"
 
 enum eAniUpdateState
@@ -26,7 +26,7 @@ public:
 	SubAnimation(unsigned int duration, BezierHandles handles = BezierHandles(0.1f, 0.1f, 0.9f, 0.9f));
 	~SubAnimation();
 
-	virtual void update(ObjectBase* object, eAniUpdateState updateState) = 0;
+	virtual void update(BaseResource* object, eAniUpdateState updateState) = 0;
 
 	void start(bool loop = false);
 	void restart();

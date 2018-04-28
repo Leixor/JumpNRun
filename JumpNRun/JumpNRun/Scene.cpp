@@ -3,7 +3,6 @@
 Scene::Scene(SceneHandler& sceneHandler, RenderWindow* window, View& view)
 	: sceneHandler(sceneHandler), window(window), view(view)
 {
-	this->updateSync = false; 
 	this->updateCount = 1;
 	this->updateRate = 10;
 }
@@ -30,21 +29,10 @@ void Scene::handleEvents(RenderWindow & window, Event& windowEvent)
 
 void Scene::update()
 {
-	if (updateCount >= updateRate / MS_PER_UPDATE)
+	for (unsigned int i = 0; i < this->objects.size(); i++)
 	{
-		for (unsigned int i = 0; i < this->objects.size(); i++)
-		{
-			objects.get(i)->update();
-		}
-		updateCount = 1;
-		updateSync = true;
+		objects.get(i)->update();
 	}
-	else
-	{
-		updateCount++;
-		updateSync = false;
-	}
-	/*aniHandler.update();*/
 }
 
 void Scene::render(RenderWindow & window, RenderStates& shades, float timeTillUpdate)
@@ -62,7 +50,7 @@ void Scene::confVarUpdate()
 
 void Scene::setObjectVisibility(string objectName, int Visibility)
 {
-	ObjectBase* object = this->objects.get(objectName);
+	BaseResource* object = this->objects.get(objectName);
 
 	/*if ((Visibility & UPDATABLE) == UPDATABLE && !this->updateArray.itemExists(objectName))
 		this->updateArray.push(objectName, object);
@@ -106,14 +94,27 @@ void Scene::setScenePosition(Vector2f & position)
 	view.setViewport(current);
 }
 
+void Scene::updateSync()
+{
+	if (updateCount >= updateRate / MS_PER_UPDATE)
+	{
+		this->update();
+		updateCount = 1;
+	}
+	else
+	{
+		updateCount++;
+	}
+}
+
 SceneHandler& Scene::getSceneHandler() const
 {
 	return this->sceneHandler;
 }
 
-ObjectBase* Scene::addObject(string name, DrawableObject * toAdd, int priority)
+BaseResource* Scene::addObject(string name, DrawableObject * toAdd, int priority)
 {
-	ObjectBase* tmp = new ObjectBase(toAdd);
+	BaseResource* tmp = new BaseResource(toAdd);
 
 	this->objects.push(name, tmp);
 	if (priority != -1)

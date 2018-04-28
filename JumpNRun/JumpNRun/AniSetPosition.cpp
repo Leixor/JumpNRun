@@ -9,7 +9,7 @@ AniSetPosition::~AniSetPosition()
 {
 }
 
-void AniSetPosition::update(ObjectBase * object, eAniUpdateState updateState)
+void AniSetPosition::update(BaseResource * object, eAniUpdateState updateState)
 {
 	float total = 0.0f;
 	float actualTotal = 0.0f;
@@ -29,27 +29,27 @@ void AniSetPosition::update(ObjectBase * object, eAniUpdateState updateState)
 	switch (updateState)
 	{
 	case ObjectOnly:
-		distance = this->point - object->getShape()->getPosition();
+		distance = this->point - object->objectShape->getPosition();
 		holeDistance = distance / (1.0f - (actualTotal / total));
 		distanceStep = Vector2f(((holeDistance.x / this->updateCount) / this->median), ((holeDistance.y / this->updateCount) / this->median));
-		object->getShape()->move(distanceStep * this->factors.at(this->timeCount));
+		object->objectShape->move(distanceStep * this->factors.at(this->timeCount));
 		break;
 	case TextOnly:
-		distance = this->point - object->getText()->getPosition();
+		distance = this->point - object->objectText->getPosition();
 		holeDistance = distance / (1.0f - (actualTotal / total));
 		distanceStep = Vector2f(((holeDistance.x / this->updateCount) / this->median), ((holeDistance.y / this->updateCount) / this->median));
-		object->getText()->move(distanceStep * this->factors.at(this->timeCount));
+		object->objectText->move(distanceStep * this->factors.at(this->timeCount));
 		break;
 	case ObjectAndText:
-		distance = this->point - object->getShape()->getPosition();
+		distance = this->point - object->objectShape->getPosition();
 		holeDistance = distance / (1.0f - (actualTotal / total));
 		distanceStep = Vector2f(((holeDistance.x / this->updateCount) / this->median), ((holeDistance.y / this->updateCount) / this->median));
-		object->getShape()->move(distanceStep * this->factors.at(this->timeCount));
+		object->objectShape->move(distanceStep * this->factors.at(this->timeCount));
 
-		distance = this->point - object->getText()->getPosition();
+		distance = this->point - object->objectText->getPosition();
 		holeDistance = distance / (1.0f - (actualTotal / total));
 		distanceStep = Vector2f(((holeDistance.x / this->updateCount) / this->median), ((holeDistance.y / this->updateCount) / this->median));
-		object->getText()->move(distanceStep * this->factors.at(this->timeCount));
+		object->objectText->move(distanceStep * this->factors.at(this->timeCount));
 		break;
 	}
 

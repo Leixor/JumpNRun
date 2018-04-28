@@ -10,17 +10,17 @@ public:
 
 	void handleEvents(RenderWindow& window, Event& windowEvent);
 	void draw(RenderWindow& window, RenderStates& shades);
-	void addContent(string name, ObjectBase* contentOne, ObjectBase* contentTwo);
+	void addContent(string name, BaseResource* contentOne, BaseResource* contentTwo);
 	void removeContent(string name);
-	ObjectBase* getFirstObject(string name)
+	BaseResource* getFirstObject(string name)
 	{
 		//return this->listContent.getContent(name);
-		return new ObjectBase();
+		return new BaseResource();
 	}
-	ObjectBase* getSecondObject(string name)
+	BaseResource* getSecondObject(string name)
 	{
 		//return this->listContent.getSpec(name);
-		return new ObjectBase();
+		return new BaseResource();
 	}
 private:
 	//UnorderdMap3V<string, ObjectBase*, ObjectBase*> listContent;

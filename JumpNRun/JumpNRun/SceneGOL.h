@@ -30,9 +30,9 @@ private:
 	vector<vector<char>> gameField;
 
 	string sizeText;
-	ObjectBase* generationText;
-	ObjectBase* gridSizeText;
-	ObjectBase* gpsText;
+	BaseResource* generationText;
+	BaseResource* gridSizeText;
+	BaseResource* gpsText;
 	DrawableObject* background;
 	DrawableObject* proto;
 	ShapeRectangle* rect;

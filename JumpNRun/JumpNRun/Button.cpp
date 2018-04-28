@@ -1,7 +1,7 @@
 #include "Button.h"
 
 Button::Button(function<void(void)> buttonAction, DrawableObject* buttonShape)
-	:ObjectBase(buttonShape), buttonAction(buttonAction)
+	:BaseResource(buttonShape), buttonAction(buttonAction)
 {
 }
 

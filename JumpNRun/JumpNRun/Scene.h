@@ -1,6 +1,6 @@
 #pragma once
 #include "GlobalVariables.h"
-#include "ObjectBase.h"
+#include "BaseResource.h"
 #include "UnorderdMap.h"
 #include "ConfigHelper.h"
 #include "SceneHandler.h"
@@ -34,6 +34,7 @@ public:
 	void setSceneScaling(Vector2f& scaling);
 	void setSceneViewPort(FloatRect& viewPort);
 	void setScenePosition(Vector2f& position);
+	void updateSync();
 
 	//string getSceneName();
 	SceneHandler& getSceneHandler() const;
@@ -58,10 +59,10 @@ public:
 
 		return toAdd;
 	}
-	ObjectBase* addObject(string name, DrawableObject* toAdd, int priority = -1);
+	BaseResource* addObject(string name, DrawableObject* toAdd, int priority = -1);
 protected:
 	//Alle Objekte die eine Szene beinhaltet, werden hier gespeichert
-	UnorderdMap<string, ObjectBase*> objects;
+	UnorderdMap<string, BaseResource*> objects;
 	// Hier werden alle Objekte der Szene reingepackt, damit sie Kollision / Gravitation erfahren
 	Box2DWorld* sceneWorld;
 	RenderWindow* window;
@@ -70,11 +71,6 @@ protected:
 
 	void setObjectPriority(string name, int priority);
 	int getObjectPriority(string name);	
-	bool getUpdateSync()
-	{
-		return updateSync;
-	}
-	/*AnimationHandler aniHandler;*/
 private:
 	// Jede Szene bekommt den Scenehandler damit er es als Interface benutzen kann um die anderen Szenen anzusprechen
 	SceneHandler&  sceneHandler;
@@ -82,8 +78,6 @@ private:
 	View view;
 	// Die Frequenz in Millisec wie oft die Szene aktualisieren soll
 	unsigned int updateCount;
-	// Gibt an ob die Szene in diesem Updatecall aktualisieren soll
-	bool updateSync;
 	// Gibt die Sichtbarkeit und Updatebarkeit der Scene an
 	int visible;
 };

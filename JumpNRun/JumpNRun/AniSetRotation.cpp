@@ -9,7 +9,7 @@ AniSetRotation::~AniSetRotation()
 {
 }
 
-void AniSetRotation::update(ObjectBase * object, eAniUpdateState updateState)
+void AniSetRotation::update(BaseResource * object, eAniUpdateState updateState)
 {
 	float total = 0.0f;
 	float actualTotal = 0.0f;
@@ -29,27 +29,27 @@ void AniSetRotation::update(ObjectBase * object, eAniUpdateState updateState)
 	switch (updateState)
 	{
 	case ObjectOnly:
-		distanceAngle = this->angle - object->getShape()->getRotation();
+		distanceAngle = this->angle - object->objectShape->getRotation();
 		holeAngle = distanceAngle / (1.0f - (actualTotal / total));
 		distanceStep = (holeAngle / this->updateCount) / this->median;
-		object->getShape()->rotate(distanceStep * this->factors.at(this->timeCount), this->origin);
+		object->objectShape->rotate(distanceStep * this->factors.at(this->timeCount), this->origin);
 		break;
 	case TextOnly:
-		distanceAngle = this->angle - object->getText()->getRotation();
+		distanceAngle = this->angle - object->objectText->getRotation();
 		holeAngle = distanceAngle / (1.0f - (actualTotal / total));
 		distanceStep = (holeAngle / this->updateCount) / this->median;
-		object->getText()->rotate(distanceStep * this->factors.at(this->timeCount), origin);
+		object->objectText->rotate(distanceStep * this->factors.at(this->timeCount), origin);
 		break;
 	case ObjectAndText:
-		distanceAngle = this->angle - object->getShape()->getRotation();
+		distanceAngle = this->angle - object->objectShape->getRotation();
 		holeAngle = distanceAngle / (1.0f - (actualTotal / total));
 		distanceStep = (holeAngle / this->updateCount) / this->median;
-		object->getShape()->rotate(distanceStep * this->factors.at(this->timeCount), this->origin);
+		object->objectShape->rotate(distanceStep * this->factors.at(this->timeCount), this->origin);
 
-		distanceAngle = this->angle - object->getText()->getRotation();
+		distanceAngle = this->angle - object->objectText->getRotation();
 		holeAngle = distanceAngle / (1.0f - (actualTotal / total));
 		distanceStep = (holeAngle / this->updateCount) / this->median;
-		object->getText()->rotate(distanceStep * this->factors.at(this->timeCount), origin);
+		object->objectText->rotate(distanceStep * this->factors.at(this->timeCount), origin);
 		break;
 	}
 

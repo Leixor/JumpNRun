@@ -53,11 +53,6 @@ void Animation::update()
 	{
 		updateRateCount++;
 	}
-
-	
-
-
-	
 }
 
 void Animation::addSubAnimation(string name, SubAnimation* animation, unsigned int time)
@@ -112,12 +107,12 @@ void Animation::removeKeyFrame(unsigned int time)
 	}
 }
 
-void Animation::addObject(ObjectBase* object, eAniUpdateState updateState)
+void Animation::addObject(BaseResource* object, eAniUpdateState updateState)
 {
 	this->objects.push(updateState, object);
 }
 
-void Animation::removeObject(ObjectBase* object)
+void Animation::removeObject(BaseResource* object)
 {
 	for (unsigned int i = 0; i < this->objects.size(); i++)
 	{

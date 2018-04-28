@@ -9,7 +9,7 @@ AniSetScale::~AniSetScale()
 {
 }
 
-void AniSetScale::update(ObjectBase * object, eAniUpdateState updateState)
+void AniSetScale::update(BaseResource * object, eAniUpdateState updateState)
 {
 	float total = 0.0f;
 	float actualTotal = 0.0f;
@@ -29,27 +29,27 @@ void AniSetScale::update(ObjectBase * object, eAniUpdateState updateState)
 	switch (updateState)
 	{
 	case ObjectOnly:
-		distanceScale = this->scale - object->getShape()->getScale();
+		distanceScale = this->scale - object->objectShape->getScale();
 		holeScale = distanceScale / (1.0f - (actualTotal / total));
 		scaleStep = Vector2f(((holeScale.x / this->updateCount) / this->median), ((holeScale.y / this->updateCount) / this->median));
-		object->getShape()->setScale(object->getShape()->getScale() + scaleStep * this->factors.at(this->timeCount), this->origin);
+		object->objectShape->setScale(object->objectShape->getScale() + scaleStep * this->factors.at(this->timeCount), this->origin);
 		break;
 	case TextOnly:
-		distanceScale = this->scale - object->getText()->getScale();
+		distanceScale = this->scale - object->objectText->getScale();
 		holeScale = distanceScale / (1.0f - (actualTotal / total));
 		scaleStep = Vector2f(((holeScale.x / this->updateCount) / this->median), ((holeScale.y / this->updateCount) / this->median));
-		object->getText()->setScale(object->getText()->getScale() + scaleStep * this->factors.at(this->timeCount), this->origin);
+		object->objectText->setScale(object->objectText->getScale() + scaleStep * this->factors.at(this->timeCount), this->origin);
 		break;
 	case ObjectAndText:
-		distanceScale = this->scale - object->getShape()->getScale();
+		distanceScale = this->scale - object->objectShape->getScale();
 		holeScale = distanceScale / (1.0f - (actualTotal / total));
 		scaleStep = Vector2f(((holeScale.x / this->updateCount) / this->median), ((holeScale.y / this->updateCount) / this->median));
-		object->getShape()->setScale(object->getShape()->getScale() + scaleStep * this->factors.at(this->timeCount), this->origin);
+		object->objectShape->setScale(object->objectShape->getScale() + scaleStep * this->factors.at(this->timeCount), this->origin);
 
-		distanceScale = this->scale - object->getText()->getScale();
+		distanceScale = this->scale - object->objectText->getScale();
 		holeScale = distanceScale / (1.0f - (actualTotal / total));
 		scaleStep = Vector2f(((holeScale.x / this->updateCount) / this->median), ((holeScale.y / this->updateCount) / this->median));
-		object->getText()->setScale(object->getText()->getScale() + scaleStep * this->factors.at(this->timeCount), this->origin);
+		object->objectText->setScale(object->objectText->getScale() + scaleStep * this->factors.at(this->timeCount), this->origin);
 		break;
 	}
 

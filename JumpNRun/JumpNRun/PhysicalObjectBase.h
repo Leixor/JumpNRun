@@ -1,7 +1,7 @@
 #pragma once
-#include "ObjectBase.h"
+#include "BaseResource.h"
 
-class PhysicalObjectBase : public ObjectBase
+class PhysicalObjectBase : public BaseResource
 {
 public:
 	PhysicalObjectBase();
