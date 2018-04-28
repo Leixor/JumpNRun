@@ -44,9 +44,9 @@ void SceneSnakeGame::handleInputs(RenderWindow & window)
 
 	if (Keyboard::isKeyPressed(Keyboard::I))
 	{
-		this->setSceneVisibility(NONE);
+		this->visible = NONE;
 		this->getSceneHandler().setTopScene("GOL");
-		this->getSceneHandler().setSceneVisibility("GOL", ALL);
+		this->getSceneHandler().getSceneByName("GOL")->visible =  ALL;
 	}
 }
 

@@ -15,8 +15,8 @@ void SceneStartMenu::handleEvents(RenderWindow & window, Event& windowEvent)
 	Scene::handleEvents(window, windowEvent);
 	if (windowEvent.type == Event::MouseButtonReleased && this->getSceneHandler().sceneExists("GameSelection"))
 	{
-		this->setSceneVisibility(UPDATABLE);
-		this->getSceneHandler().setSceneVisibility("GameSelection", ALL);
+		this->visible = UPDATABLE;
+		this->getSceneHandler().getSceneByName("GameSelection")->visible =  ALL;
 	}
 }
 
@@ -60,18 +60,17 @@ bool SceneStartMenu::setupResources()
 
 void SceneStartMenu::buttonStartAction()
 {
-	this->setSceneVisibility(INPUTABLE);
+	this->visible = INPUTABLE;
 	this->getSceneHandler().addScene("GameSelection", new SceneGameSelection(this->getSceneHandler(), window), VISIBLE);
 }
 
 void SceneStartMenu::buttonOptionAction()
 {
 	this->getSceneHandler().addScene("Option", new SceneOption(this->getSceneHandler()), ALL);
-	this->setSceneVisibility(UPDATABLE);
+	this->visible = UPDATABLE;
 }
 
 void SceneStartMenu::buttonEndAction()
 {
-	/*this->window->close();*/
-	/*myAni->run();*/
+	this->window->close();
 }

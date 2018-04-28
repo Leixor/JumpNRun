@@ -16,53 +16,24 @@ Int64 getCurrentTime()
 	return ms.count();
 }
 
-struct queueFunctions 
-{
-	function<void(void)> render;
-	function<void(void)> update;
-	function<void(void)> handleInput;
-	queueFunctions(function<void(void)> render, function<void(void)> update, function<void(void)> handleInput) : render(render), update(update), handleInput(handleInput)
-	{
-
-	}
-};
-
-struct queueObjects 
-{
-	//vector<queueFunctions> functions;
-	vector<ShapeRectangle> Rectangles;
-	map<string, int> namesIndex;
-	vector<int> priorityIndex;
-
-	void setPriority(string name, int priority)
-	{
-		int indexInVector = namesIndex.at(name);
-
-		int currentPriorityIndex = 0;
-		for (unsigned int i = 0; i < priorityIndex.size(); i++)
-		{
-			if (priorityIndex.at(i) == indexInVector)
-			{
-				currentPriorityIndex = i;
-				break;
-			}
-		}
-
-		//
-		priorityIndex.erase(priorityIndex.begin() + currentPriorityIndex);
-		// Priorität neu einsetzen
-		priorityIndex.insert(priorityIndex.begin() + priority, indexInVector);
-	}
-
-	unsigned int getQueueObjectIndex(string name)
-	{
-		return namesIndex.at(name);
-	}
-};
 
 
 int main()
 {
+	
+
+	vector<function<void(void)>> func;
+
+	for (unsigned int i = 0; i < 10; i++)
+	{
+		func.push_back([i]() {printf("%d\n", i); });
+	}
+
+	for (unsigned int i = 0; i < 10; i++)
+	{
+		func.at(i)();
+	}
+
 	vector<Vertex> vert;
 
 	for (unsigned int i = 0; i < 100000; i++)
@@ -75,9 +46,6 @@ int main()
 
 
 
-
-
-	queueObjects myObjects;
 	UnorderdMap<string, ShapeRectangle> myObjects2;
 
 	for (unsigned int i = 0; i < 10; i++)
@@ -94,7 +62,7 @@ int main()
 
 	//Test Box2D
 	b2Vec2 gravity(0, -10.0f);
-	b2World world(gravity);
+	Box2DWorld world(gravity);
 
 	//Setup Static Body
 	//SetPos
@@ -225,9 +193,6 @@ int main()
 			sceneHandler.handleEvents(window, windowEvent);
 		}
 
-
-		
-		
 		sceneHandler.handleInputs(window);
 
 		//Verarbeitung der Bewegungen und Positionsaktuallisierungen
@@ -235,10 +200,10 @@ int main()
 		{
 			//Ruft die Aktualisierungsmethode auf
 			sceneHandler.update();
-			/*world.Step(timeStep, velocityIterations, positionIterations);
+			world.update(timeStep);
 			float positionY = 450.0f - body->GetPosition().y - 10.0f;
 			float positionX = 780.0f + body->GetPosition().x - 10.0f;
-			box.setPosition(Vector2f(positionX, positionY));*/
+			box.setPosition(Vector2f(positionX, positionY));
 			//handler.update();
 
 			//FPSCOUNTER
@@ -311,14 +276,13 @@ int main()
 		window.clear();
 		sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 		//FPSCOUNTER
-		/*ground.draw(window, RenderStates());
+		ground.draw(window, RenderStates());
 		box.draw(window, RenderStates());
-		window.draw(punkt);*/
 
 		/*block1.draw(window, RenderStates());
 		block2.draw(window, RenderStates());*/
 
-		window.draw(&vert[0], vert.size(), sf::Quads);
+		//window.draw(&vert[0], vert.size(), sf::Quads);
 
 		window.draw(*FPS);
 		frameCount++;

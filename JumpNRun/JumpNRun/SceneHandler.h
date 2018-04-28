@@ -15,12 +15,12 @@ public:
 	void render(RenderWindow& window, RenderStates& shades, float timeTillUpdate);
 
 	// Verschiedene Helper um Interaktion zwischen Scenes zu erleichtern
-	void addScene(string name, Scene * createScene, int visible = ALL);
-	void addScene(string name, Scene * createScene, bool onTop, int visible = ALL);
+	void addScene(string name, Scene * createScene, eVisibilityFlags visible = ALL);
+	void addScene(string name, Scene * createScene, bool onTop, eVisibilityFlags visible = ALL);
 	void deleteScene(string sceneName);
 	void setTopScene(string sceneName);
-	void setSceneVisibility(string sceneName, int visibility);
 	void setScenePriority(string name, int priority);
+	void setSceneVisibility(string name, eVisibilityFlags visible);
 
 	Scene* const getSceneByName(string name);
 

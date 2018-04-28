@@ -22,11 +22,6 @@ public:
 	virtual void confVarUpdate();
 
 	// Scenespezifische Funktionen
-	void setSceneVisibility(int visible)
-	{
-		this->visible = visible;
-	}
-	void setObjectVisibility(string objectName, int Visibility);
 	void setView(View& view)
 	{
 		this->view = view;
@@ -38,10 +33,6 @@ public:
 
 	//string getSceneName();
 	SceneHandler& getSceneHandler() const;
-	int getSceneVisibility()
-	{
-		return this->visible;
-	}
 	View& getView()
 	{
 		return this->view;
@@ -55,11 +46,12 @@ public:
 		if(priority != -1)
 			this->setObjectPriority(name,priority);
 
-		this->setObjectVisibility(name, toAdd->shapeVisible);
-
 		return toAdd;
 	}
 	BaseResource* addObject(string name, DrawableObject* toAdd, int priority = -1);
+
+	// Gibt die Sichtbarkeit und Updatebarkeit der Scene an
+	eVisibilityFlags visible;
 protected:
 	//Alle Objekte die eine Szene beinhaltet, werden hier gespeichert
 	UnorderdMap<string, BaseResource*> objects;
@@ -78,7 +70,5 @@ private:
 	View view;
 	// Die Frequenz in Millisec wie oft die Szene aktualisieren soll
 	unsigned int updateCount;
-	// Gibt die Sichtbarkeit und Updatebarkeit der Scene an
-	int visible;
 };
 

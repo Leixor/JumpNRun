@@ -48,26 +48,6 @@ void Scene::confVarUpdate()
 {
 }
 
-void Scene::setObjectVisibility(string objectName, int Visibility)
-{
-	BaseResource* object = this->objects.get(objectName);
-
-	/*if ((Visibility & UPDATABLE) == UPDATABLE && !this->updateArray.itemExists(objectName))
-		this->updateArray.push(objectName, object);
-	else if ((Visibility & UPDATABLE) != UPDATABLE && this->updateArray.itemExists(objectName))
-		this->updateArray.remove(objectName);
-
-	if ((Visibility & VISIBLE) == VISIBLE && !this->drawArray.itemExists(objectName))
-		this->drawArray.push(objectName, object);
-	else if ((Visibility & VISIBLE) != VISIBLE && this->drawArray.itemExists(objectName))
-		this->drawArray.remove(objectName);
-
-	if ((Visibility & INPUTABLE) == INPUTABLE && !this->eventArray.itemExists(objectName))
-		this->eventArray.push(objectName, object);
-	else if ((Visibility & INPUTABLE) != INPUTABLE && this->eventArray.itemExists(objectName))
-		this->eventArray.remove(objectName);*/
-}
-
 void Scene::setSceneScaling(Vector2f & scaling)
 {
 	FloatRect current = view.getViewport();
@@ -120,30 +100,15 @@ BaseResource* Scene::addObject(string name, DrawableObject * toAdd, int priority
 	if (priority != -1)
 		this->setObjectPriority(name, priority);
 
-	this->setObjectVisibility(name, tmp->shapeVisible);
-
 	return tmp;
 }
 
 void Scene::setObjectPriority(string name, int priority)
 {
-	if (priority >= int(this->objects.size() - 1))
-		throw;
-	
-	int index = this->getObjectPriority(name);
-	if(index > priority)
-		for (int i = priority; i < index; i++)
-		{
-			//this->objects.iterswap(i, index);
-		}
-	else if(index < priority)
-		for (int i = priority; i > index; i--)
-		{
-			//this->objects.iterswap(i, index);
-		}
+	this->objects.setPriority(name, priority);
 }
 
 int Scene::getObjectPriority(string name)
 {
-	return objects.getIndex(name);
+	return objects.getPriority(name);
 }
