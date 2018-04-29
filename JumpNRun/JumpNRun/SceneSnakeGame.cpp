@@ -133,6 +133,26 @@ bool SceneSnakeGame::setupFood()
 
 void SceneSnakeGame::createScene()
 {
+	this->sceneWorld = new Box2DWorld(b2Vec2(5, 10.0f));
+
+	b2PolygonShape ground;
+	ground.SetAsBox(500.0f, 50.0f);
+
+	addResource("Ground", new PhysicalObjectBase(new ShapeRectangle(FloatRect(200, 600, 1000, 100), Color::Green), ground, this->sceneWorld));
+	PhysicalObjectBase* tmp = addResource("Box", new PhysicalObjectBase(new ShapeRectangle(FloatRect(700, 100, 20, 20), Color::Blue)));
+	
+	b2PolygonShape dynamicBox;
+	dynamicBox.SetAsBox(10.0f, 10.0f);
+	//set Friction and density
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = 1.0f;
+	fixtureDef.friction = 0.3f;
+	//cast fixture to body
+	tmp->setDynamicBody(fixtureDef, this->sceneWorld);
+
+
+
 	//this->texture->loadFromFile("Textures/plus.png");
 	texture = new Texture();
 	texture->loadFromFile("Textures/plus.png");

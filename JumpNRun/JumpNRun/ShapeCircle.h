@@ -19,5 +19,6 @@ public:
 	float getOutlineThickness();
 	float getRadius();
 	size_t getPointCount();
+	Vector2f getSize();
 };
 

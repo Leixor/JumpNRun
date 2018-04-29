@@ -1,7 +1,7 @@
 #include "Scene.h"
 
 Scene::Scene(SceneHandler& sceneHandler, RenderWindow* window, View& view)
-	: sceneHandler(sceneHandler), window(window), view(view)
+	: sceneHandler(sceneHandler), window(window), view(view), sceneWorld(nullptr)
 {
 	this->updateCount = 1;
 	this->updateRate = 10;
@@ -76,6 +76,8 @@ void Scene::setScenePosition(Vector2f & position)
 
 void Scene::updateSync()
 {
+	if (this->sceneWorld != nullptr)
+		this->sceneWorld->update(0.01f);
 	if (updateCount >= updateRate / MS_PER_UPDATE)
 	{
 		this->update();

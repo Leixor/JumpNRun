@@ -41,6 +41,13 @@ size_t ShapeCircle::getPointCount()
 	return this->shape->getPointCount();
 }
 
+Vector2f ShapeCircle::getSize()
+{
+	float radius = this->shape->getRadius();
+
+	return Vector2f(radius, radius);
+}
+
 void ShapeCircle::setOutlineColor(Color  color)
 {
 	this->shape->setOutlineColor(color);

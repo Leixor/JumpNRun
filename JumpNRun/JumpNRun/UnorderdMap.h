@@ -151,6 +151,7 @@ public:
 				return (int)i;
 			}
 		}
+		throw;
 	}
 
 	int getPriority(int index)

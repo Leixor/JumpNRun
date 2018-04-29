@@ -1,15 +1,23 @@
 #pragma once
 #include "BaseResource.h"
+#include "Box2DWorld.h"
 
 class PhysicalObjectBase : public BaseResource
 {
 public:
 	PhysicalObjectBase();
+	PhysicalObjectBase(DrawableObject* shape);
+	PhysicalObjectBase(FloatRect shape, b2Shape& bodyShape, Box2DWorld* sceneWorld, Vector2f velocity = Vector2f(0, 0));
+	PhysicalObjectBase(DrawableObject* shape, b2Shape& bodyShape, Box2DWorld* sceneWorld, Vector2f velocity = Vector2f(0, 0));
 	~PhysicalObjectBase();
 
-	virtual void setBox2DBody(b2Shape& shape, b2FixtureDef& fixture, b2World& sceneWorld)
-	{}
-protected:
-	b2Body* b2body;
+	virtual void update();
+
+	void setStaticBody(b2Shape& bodyShape, Box2DWorld* sceneWorld);
+	void setDynamicBody(b2FixtureDef& bodyFixture, Box2DWorld* sceneWorld);
+	void setKinematicBody(b2Shape& shape, Box2DWorld* sceneWorld, Vector2f velocity = Vector2f(0,0));
+
+	eVisibilityFlags bodyVisible;
+	b2Body* objectBody;
 };
 

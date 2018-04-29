@@ -3,6 +3,7 @@
 #include "ShapeRectangle.h"
 #include "ShapeSprite.h"
 #include "StandardInclude.h"
+#include "PhysicalObjectBase.h"
 
 enum eSnakeState
 {

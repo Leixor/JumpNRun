@@ -11,15 +11,14 @@ public:
 	}
 	~KeyFrame();
 
-	void addAction(string name, function<void(string)> action)
+	void addAction(function<void(void)> action)
 	{
 		this->actions.push_back(action);
-		this->names.push_back(name);
 	}
 	void activateKeyFrame()
 	{
 		for (unsigned int i = 0; i < this->actions.size(); i++)
-			this->actions.at(i)(this->names.at(i));
+			this->actions.at(i)();
 	}
 	unsigned int getTimeStamp()
 	{
@@ -27,8 +26,7 @@ public:
 	}
 
 private:
-	vector<function<void(string)>> actions;
-	vector<string> names;
+	vector<function<void(void)>> actions;
 	unsigned int timeStamp;
 };
 

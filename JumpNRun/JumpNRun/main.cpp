@@ -7,7 +7,6 @@
 #include "ShapeRectangle.h"
 #include "ShapeCircle.h"
 
-
 Int64 getCurrentTime()
 {
 	chrono::milliseconds ms = chrono::duration_cast<chrono::milliseconds>(
@@ -16,12 +15,8 @@ Int64 getCurrentTime()
 	return ms.count();
 }
 
-
-
 int main()
 {
-	
-
 	vector<function<void(void)>> func;
 
 	for (unsigned int i = 0; i < 10; i++)
@@ -76,11 +71,23 @@ int main()
 	//create fixture of Body			Weight of Box
 	groundBody->CreateFixture(&groundBox,	0.0f);
 
+	b2BodyDef kDef;
+	kDef.type = b2_kinematicBody;
+	kDef.position.Set(-130.0f, 10.0f);
+	//Create BodyObject with world
+	b2Body* kBody = world.CreateBody(&kDef);
+	//Define Size and Shape
+	b2PolygonShape kBox;
+	kBox.SetAsBox(10.0f, 10.0f);
+	//create fixture of Body			Weight of Box
+	kBody->CreateFixture(&kBox, 0.0f);
+	//kBody->SetLinearVelocity(b2Vec2(50.0f,0.0f));
+
 	//Setup Dynamic Body
 	//set Pos and cast dynamic
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(0.0f, 40.0f);
+	bodyDef.position.Set(0.0f, 440.0f);
 	//create bodyObject with world
 	b2Body* body = world.CreateBody(&bodyDef);
 	//Define Size and shape
@@ -93,9 +100,6 @@ int main()
 	fixtureDef.friction = 0.3f;
 	//cast fixture to body
 	body->CreateFixture(&fixtureDef);
-	body->SetLinearVelocity(b2Vec2(14.0f, 3.0f));
-
-
 
 	float32 timeStep = 1.0f / 100.0f;
 	int32 velocityIterations = 6;
@@ -103,8 +107,8 @@ int main()
 
 
 	ShapeRectangle ground(FloatRect(300.0f, 450.0f, 1000.0f, 200.0f), Color::White);
-	ShapeRectangle box(FloatRect(780.0f, 450.0f - 40.0f - 10.0f, 20.0f, 20.0f), Color::White);
-
+	ShapeRectangle box(FloatRect(0.0f, 0.0f, 20.0f, 20.0f), Color::White);
+	ShapeRectangle enemy(FloatRect(0.0f, 0.0f, 20.0f, 20.0f), Color::White);
 
 
 	/*
@@ -135,7 +139,7 @@ int main()
 
 	//animation.addSubAnimation("rotate", new AniSetRotation(5000, -200, Vector2f(block1.objectText->getLocalBounds().width / 2.0f - block1.objectText->getLocalBounds().left, block1.objectText->getLocalBounds().height / 2.0f - block1.objectText->getLocalBounds().width / 2.0f - block1.objectText->getLocalBounds().top)));
 	//animation.addSubAnimation("move", new AniSetPosition(5000, Vector2f(1400, 400), BezierHandles(0.1f, 0.9f, 0.1f,0.9f)));
-	animation.addSubAnimation("Scale4", new AniScale(10000, Vector2f(1.0f, 4.0f), Vector2f(100,100)));
+	animation.addSubAnimation("Scale4", new AniScale(10000, Vector2f(1.0f, 2.0f), Vector2f(100,100)));
 	//animation.addSubAnimation("rotate2", new AniMove(10000, Vector2f(1.0f, 4.0f)));
 	//animation.addSubAnimation("rotate", new AniRotate(2000, 150, Vector2f(100, 50)));
 	//animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(2, 2), Vector2f(100, 50)));
@@ -145,6 +149,8 @@ int main()
 
 	animation.addObject(&block1);
 	animation.addObject(&block2, ObjectOnly);
+	animation.addKeyFrame("Scale4", eKeyFrameAction::ANIPAUSE, 1000);
+	animation.addKeyFrame("Scale4", eKeyFrameAction::ANIRESUME, 2000);
 
 	handler.addAnimation("rotate", &animation);
 	handler.run("rotate");
@@ -201,10 +207,14 @@ int main()
 			//Ruft die Aktualisierungsmethode auf
 			sceneHandler.update();
 			world.update(timeStep);
-			float positionY = 450.0f - body->GetPosition().y - 10.0f;
-			float positionX = 780.0f + body->GetPosition().x - 10.0f;
+			float positionY = windowDef::get().windowSizeY / 2 - body->GetPosition().y - 10.0f;
+			float positionX = windowDef::get().windowSizeX / 2 + body->GetPosition().x - 10.0f;
 			box.setPosition(Vector2f(positionX, positionY));
-			//handler.update();
+
+			positionY = windowDef::get().windowSizeY / 2 - kBody->GetPosition().y - 10.0f;
+			positionX = windowDef::get().windowSizeX / 2 + kBody->GetPosition().x - 10.0f;
+			enemy.setPosition(Vector2f(positionX, positionY));
+			handler.update();
 
 			//FPSCOUNTER
 			loop++;
@@ -276,14 +286,14 @@ int main()
 		window.clear();
 		sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 		//FPSCOUNTER
-		ground.draw(window, RenderStates());
-		box.draw(window, RenderStates());
+		//ground.draw(window, RenderStates());
+		//box.draw(window, RenderStates());
+		//enemy.draw(window, RenderStates());
 
-		/*block1.draw(window, RenderStates());
-		block2.draw(window, RenderStates());*/
+		//block1.draw(window, RenderStates());
+		//block2.draw(window, RenderStates());
 
 		//window.draw(&vert[0], vert.size(), sf::Quads);
-
 		window.draw(*FPS);
 		frameCount++;
 		window.display();
