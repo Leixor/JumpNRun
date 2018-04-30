@@ -78,4 +78,5 @@ void ShapeSprite::setSize(Vector2f size)
 	float currentSizeY = float(this->shape->getTexture()->getSize().y);
 
 	this->shape->setScale(size.x / currentSizeX, size.y / currentSizeY);
+	this->sizeUpdate = true;
 }

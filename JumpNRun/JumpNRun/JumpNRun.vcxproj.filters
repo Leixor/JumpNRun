@@ -95,6 +95,9 @@
     <ClCompile Include="PhysicalObjectBase.cpp">
       <Filter>Objects\ObjectBase</Filter>
     </ClCompile>
+    <ClCompile Include="BodyRectangle.cpp">
+      <Filter>Objects\ObjectBase\BodyBase</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SceneOption.h">
@@ -214,6 +217,12 @@
     <ClInclude Include="ShapeBase.h">
       <Filter>Objects\ObjectBase\ShapeBase</Filter>
     </ClInclude>
+    <ClInclude Include="BodyShapeBase.h">
+      <Filter>Objects\ObjectBase\BodyBase</Filter>
+    </ClInclude>
+    <ClInclude Include="BodyRectangle.h">
+      <Filter>Objects\ObjectBase\BodyBase</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">
@@ -255,7 +264,7 @@
     <Filter Include="Objects\ObjectBase\TextBase">
       <UniqueIdentifier>{a2bfdd27-ddf7-40a2-8d38-84b57b3d88ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\ObjectBase\PhysicalBase">
+    <Filter Include="Objects\ObjectBase\BodyBase">
       <UniqueIdentifier>{24abf328-4ff1-45ab-81dd-48b2ec143d5d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

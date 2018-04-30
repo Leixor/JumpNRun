@@ -66,10 +66,12 @@ void ShapeCircle::setFillColor(Color color)
 void ShapeCircle::setPointCount(size_t count)
 {
 	this->shape->setPointCount(count);
+	this->sizeUpdate = true;
 }
 
 void ShapeCircle::setRadius(float radius)
 {
 	this->shape->setRadius(radius);
+	this->sizeUpdate = true;
 }
 

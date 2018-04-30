@@ -45,46 +45,6 @@ Vector2f  ShapeRectangle::getSize()
 	return this->shape->getSize();
 }
 
-void ShapeRectangle::updatePhysicalBody()
-{
-	if (this->changedPosition)
-	{
-		Vector2f pos = this->shape->getPosition();
-		this->b2body->SetTransform(b2Vec2(pos.x,pos.y), this->shape->getRotation());
-	}
-	if (this->changedSize)
-	{
-		//Position
-		Vector2f pos = this->shape->getPosition();
-		Vector2f size = this->shape->getSize();
-		Vector2f scale = this->shape->getScale();
-		Vector2f sizeWithScale = Vector2f(scale.x * size.x, scale.y * size.y);
-		Vector2f newPos = Vector2f(pos.x + (sizeWithScale.x / 2), pos.y + (sizeWithScale.y / 2));
-		this->b2body->SetTransform(b2Vec2(newPos.x, newPos.y), this->shape->getRotation());
-
-		//Größe
-		b2PolygonShape box;
-		box.SetAsBox(sizeWithScale.x, sizeWithScale.y);
-
-		//Aktuallisierung der Fixture
-		b2Fixture* oldFixture = this->b2body->GetFixtureList();
-
-		b2FixtureDef fixtureDef;
-		fixtureDef.shape = &box;
-		fixtureDef.density = oldFixture->GetDensity();
-		fixtureDef.friction = oldFixture->GetFriction();
-		fixtureDef.restitution = oldFixture->GetRestitution();
-		fixtureDef.isSensor = oldFixture->IsSensor();
-		fixtureDef.filter = oldFixture->GetFilterData();
-
-		//cast fixture to body
-		this->b2body->CreateFixture(&fixtureDef);
-	}
-
-	this->changedPosition = false;
-	this->changedSize = false;
-}
-
 void ShapeRectangle::setOutlineColor(Color  color)
 {
 	this->shape->setOutlineColor(color);
@@ -103,7 +63,7 @@ void ShapeRectangle::setFillColor(Color color)
 void ShapeRectangle::setSize(Vector2f size)
 {
 	this->shape->setSize(size);
-	this->changedSize = true;
+	this->sizeUpdate = true;
 }
 
 

@@ -23,7 +23,7 @@ public:
 	virtual void handleEvents(RenderWindow& window, Event& windowEvent)
 	{
 	}
-	virtual void update()
+	virtual void update(b2World* sceneWorld)
 	{}
 	virtual void draw(RenderWindow& window, RenderStates& shades)
 	{

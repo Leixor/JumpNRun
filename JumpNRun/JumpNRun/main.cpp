@@ -56,59 +56,59 @@ int main()
 	windowDef::get().windowStyle = stoi(conf.get("Window", "WindowStyle"));
 
 	//Test Box2D
-	b2Vec2 gravity(0, -10.0f);
+	b2Vec2 gravity(0, 10.0f);
 	Box2DWorld world(gravity);
 
-	//Setup Static Body
-	//SetPos
-	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0.0f, -100.0f);
-	//Create BodyObject with world
-	b2Body* groundBody = world.CreateBody(&groundBodyDef);
-	//Define Size and Shape
-	b2PolygonShape groundBox;
-	groundBox.SetAsBox(500.0f, 100.0f);
-	//create fixture of Body			Weight of Box
-	groundBody->CreateFixture(&groundBox,	0.0f);
+	////Setup Static Body
+	////SetPos
+	//b2BodyDef groundBodyDef;
+	//groundBodyDef.position.Set(0.0f, -100.0f);
+	////Create BodyObject with world
+	//b2Body* groundBody = world.CreateBody(&groundBodyDef);
+	////Define Size and Shape
+	//b2PolygonShape groundBox;
+	//groundBox.SetAsBox(500.0f, 100.0f);
+	////create fixture of Body			Weight of Box
+	//groundBody->CreateFixture(&groundBox,	0.0f);
 
-	b2BodyDef kDef;
-	kDef.type = b2_kinematicBody;
-	kDef.position.Set(-130.0f, 10.0f);
-	//Create BodyObject with world
-	b2Body* kBody = world.CreateBody(&kDef);
-	//Define Size and Shape
-	b2PolygonShape kBox;
-	kBox.SetAsBox(10.0f, 10.0f);
-	//create fixture of Body			Weight of Box
-	kBody->CreateFixture(&kBox, 0.0f);
-	//kBody->SetLinearVelocity(b2Vec2(50.0f,0.0f));
+	//b2BodyDef kDef;
+	//kDef.type = b2_kinematicBody;
+	//kDef.position.Set(-130.0f, 10.0f);
+	////Create BodyObject with world
+	//b2Body* kBody = world.CreateBody(&kDef);
+	////Define Size and Shape
+	//b2PolygonShape kBox;
+	//kBox.SetAsBox(10.0f, 10.0f);
+	////create fixture of Body			Weight of Box
+	//kBody->CreateFixture(&kBox, 0.0f);
+	////kBody->SetLinearVelocity(b2Vec2(50.0f,0.0f));
 
-	//Setup Dynamic Body
-	//set Pos and cast dynamic
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(0.0f, 440.0f);
-	//create bodyObject with world
-	b2Body* body = world.CreateBody(&bodyDef);
-	//Define Size and shape
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(10.0f, 10.0f);
-	//set Friction and density
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.3f;
-	//cast fixture to body
-	body->CreateFixture(&fixtureDef);
+	////Setup Dynamic Body
+	////set Pos and cast dynamic
+	//b2BodyDef bodyDef;
+	//bodyDef.type = b2_dynamicBody;
+	//bodyDef.position.Set(0.0f, 440.0f);
+	////create bodyObject with world
+	//b2Body* body = world.CreateBody(&bodyDef);
+	////Define Size and shape
+	//b2PolygonShape dynamicBox;
+	//dynamicBox.SetAsBox(10.0f, 10.0f);
+	////set Friction and density
+	//b2FixtureDef fixtureDef;
+	//fixtureDef.shape = &dynamicBox;
+	//fixtureDef.density = 1.0f;
+	//fixtureDef.friction = 0.3f;
+	////cast fixture to body
+	//body->CreateFixture(&fixtureDef);
 
-	float32 timeStep = 1.0f / 100.0f;
-	int32 velocityIterations = 6;
-	int32 positionIterations = 2;
+	//float32 timeStep = 1.0f / 100.0f;
+	//int32 velocityIterations = 6;
+	//int32 positionIterations = 2;
 
 
-	ShapeRectangle ground(FloatRect(300.0f, 450.0f, 1000.0f, 200.0f), Color::White);
-	ShapeRectangle box(FloatRect(0.0f, 0.0f, 20.0f, 20.0f), Color::White);
-	ShapeRectangle enemy(FloatRect(0.0f, 0.0f, 20.0f, 20.0f), Color::White);
+	//ShapeRectangle ground(FloatRect(300.0f, 450.0f, 1000.0f, 200.0f), Color::White);
+	//ShapeRectangle box(FloatRect(0.0f, 0.0f, 20.0f, 20.0f), Color::White);
+	//ShapeRectangle enemy(FloatRect(0.0f, 0.0f, 20.0f, 20.0f), Color::White);
 
 
 	/*
@@ -131,8 +131,14 @@ int main()
 
 	AnimationHandler handler;
 	Animation animation(20);
-	BaseResource block1(new ShapeCircle(100.0f, Color::Blue));
-	BaseResource block2(new ShapeRectangle(FloatRect(700.0f, 700.0f, 200.0f, 100.0f), Color::Red));
+	PhysicalObjectBase block1(new ShapeRectangle(FloatRect(700.0f, 100.0f, 20.0f, 20.0f), Color::Blue));
+	//set Friction and density
+	b2FixtureDef fix;
+	fix.density = 1.0f;
+	fix.friction = 0.3f;
+	//cast fixture to body
+	block1.setDynamicBody(new BodyRectangle(), fix, &world);
+	PhysicalObjectBase block2(new ShapeRectangle(FloatRect(700.0f, 700.0f, 200.0f, 100.0f), Color::Red), new BodyRectangle(), &world);
 	Font* f = new Font();
 	f->loadFromFile("Textures/cool.ttf");
 	block1.addText(new ObjectText("BasisText", *f));
@@ -206,15 +212,18 @@ int main()
 		{
 			//Ruft die Aktualisierungsmethode auf
 			sceneHandler.update();
-			world.update(timeStep);
-			float positionY = windowDef::get().windowSizeY / 2 - body->GetPosition().y - 10.0f;
+			world.update(1/ 100);
+			/*float positionY = windowDef::get().windowSizeY / 2 - body->GetPosition().y - 10.0f;
 			float positionX = windowDef::get().windowSizeX / 2 + body->GetPosition().x - 10.0f;
 			box.setPosition(Vector2f(positionX, positionY));
 
 			positionY = windowDef::get().windowSizeY / 2 - kBody->GetPosition().y - 10.0f;
 			positionX = windowDef::get().windowSizeX / 2 + kBody->GetPosition().x - 10.0f;
-			enemy.setPosition(Vector2f(positionX, positionY));
+			enemy.setPosition(Vector2f(positionX, positionY));*/
 			handler.update();
+
+			/*block1.update(&world);
+			block1.update(&world);*/
 
 			//FPSCOUNTER
 			loop++;
@@ -286,12 +295,12 @@ int main()
 		window.clear();
 		sceneHandler.render(window, RenderStates(), float(lag) / float(MS_PER_UPDATE));
 		//FPSCOUNTER
-		//ground.draw(window, RenderStates());
-		//box.draw(window, RenderStates());
-		//enemy.draw(window, RenderStates());
+		/*ground.draw(window, RenderStates());
+		box.draw(window, RenderStates());
+		enemy.draw(window, RenderStates());*/
 
-		//block1.draw(window, RenderStates());
-		//block2.draw(window, RenderStates());
+		/*block1.draw(window, RenderStates());
+		block2.draw(window, RenderStates());*/
 
 		//window.draw(&vert[0], vert.size(), sf::Quads);
 		window.draw(*FPS);

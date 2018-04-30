@@ -31,7 +31,7 @@ void Scene::update()
 {
 	for (unsigned int i = 0; i < this->objects.size(); i++)
 	{
-		objects.get(i)->update();
+		objects.get(i)->update(this->sceneWorld);
 	}
 }
 

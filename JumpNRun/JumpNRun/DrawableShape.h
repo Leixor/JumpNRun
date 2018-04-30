@@ -47,7 +47,7 @@ template<class DrawableType>
 inline void DrawableShape<DrawableType>::setPosition(Vector2f pos)
 {
 	this->shape->setPosition(pos);
-	this->changedPosition = true;
+	this->posUpdate = true;
 }
 
 template<class DrawableType>
@@ -107,7 +107,7 @@ inline void DrawableShape<DrawableType>::setScale(Vector2f scale, Vector2f origi
 		this->shape->setPosition(newPos);
 	}
 
-	this->changedSize = true;
+	this->sizeUpdate = true;
 }
 
 template<class DrawableType>
@@ -158,7 +158,7 @@ inline void DrawableShape<DrawableType>::setRotation(float angle, Vector2f origi
 		this->shape->setPosition(newPos);
 	}
 
-	this->changedPosition = true;
+	this->posUpdate = true;
 }
 
 template<class DrawableType>
@@ -239,14 +239,14 @@ inline void DrawableShape<DrawableType>::rotate(float offsetAngle, Vector2f orig
 		this->shape->setPosition(newPos);
 	}
 
-	this->changedPosition = true;
+	this->posUpdate = true;
 }
 	
 template<class DrawableType>
 inline void DrawableShape<DrawableType>::move(Vector2f offset)
 {
 	this->shape->move(offset);
-	this->changedPosition = true;
+	this->posUpdate = true;
 }
 
 template<class DrawableType>
@@ -300,5 +300,5 @@ inline void DrawableShape<DrawableType>::scale(Vector2f offset, Vector2f origin)
 		this->shape->setPosition(newPos);
 	}
 
-	this->changedSize = true;
+	this->sizeUpdate = true;
 }

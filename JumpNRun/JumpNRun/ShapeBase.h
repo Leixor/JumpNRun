@@ -6,8 +6,8 @@ class ShapeBase
 public:
 	ShapeBase()
 	{
-		this->changedPosition = true;
-		this->changedSize = true;
+		this->posUpdate = false;
+		this->sizeUpdate = false;
 	}
 	~ShapeBase()
 	{
@@ -93,17 +93,22 @@ public:
 		throw;
 	}
 
-	virtual void updatePhysicalBody()
+
+	bool hasPosUpdated()
 	{
-		throw;
+		bool tmp = this->posUpdate;
+		this->posUpdate = false;
+		return tmp;
 	}
-	virtual void updateShape()
+
+	bool hasSizeUpdated()
 	{
-		throw;
+		bool tmp = this->sizeUpdate;
+		this->sizeUpdate = false;
+		return tmp;
 	}
 protected:
-	b2Body* b2body;
-	bool changedPosition;
-	bool changedSize;
+	bool posUpdate;
+	bool sizeUpdate;
 };
 

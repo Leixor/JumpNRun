@@ -168,6 +168,7 @@
     <ClCompile Include="AniSetRotation.cpp" />
     <ClCompile Include="AniSetScale.cpp" />
     <ClCompile Include="AniSpriteSheet.cpp" />
+    <ClCompile Include="BodyRectangle.cpp" />
     <ClCompile Include="Box2DWorld.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CheckBox.cpp" />
@@ -205,6 +206,8 @@
     <ClInclude Include="AniSetRotation.h" />
     <ClInclude Include="AniSetScale.h" />
     <ClInclude Include="AniSpriteSheet.h" />
+    <ClInclude Include="BodyRectangle.h" />
+    <ClInclude Include="BodyShapeBase.h" />
     <ClInclude Include="Box2DWorld.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CheckBox.h" />

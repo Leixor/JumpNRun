@@ -4,6 +4,7 @@
 #include "ShapeSprite.h"
 #include "StandardInclude.h"
 #include "PhysicalObjectBase.h"
+#include "BodyRectangle.h"
 
 enum eSnakeState
 {
