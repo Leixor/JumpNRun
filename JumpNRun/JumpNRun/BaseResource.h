@@ -31,8 +31,8 @@ public:
 		alignTo(*this->objectText, *this->objectShape);
 	}
 
-	int shapeVisible;
-	int textVisible;
+	eVisibilityFlags shapeVisible;
+	eVisibilityFlags textVisible;
 
 	DrawableObject* objectShape;
 	ObjectText* objectText;

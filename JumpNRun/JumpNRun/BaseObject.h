@@ -29,6 +29,6 @@ public:
 	{
 	}
 	
-	eVisibilityFlags visibility;
+	eVisibilityFlags objectVisibility;
 };
 
