@@ -33,8 +33,8 @@ private:
 	BaseResource* generationText;
 	BaseResource* gridSizeText;
 	BaseResource* gpsText;
-	DrawableObject* background;
-	DrawableObject* proto;
+	ShapeBase* background;
+	ShapeBase* proto;
 	ShapeRectangle* rect;
 	ShapeSprite* sprit;
 

@@ -4,7 +4,7 @@
 class CheckBox: public BaseResource
 {
 public:
-	CheckBox(function<void(bool checked, BaseResource* type)> buttonAction, DrawableObject* buttonShape, bool checked = false);
+	CheckBox(function<void(bool checked, BaseResource* type)> buttonAction, ShapeBase* buttonShape, bool checked = false);
 	~CheckBox();
 
 	void handleEvents(RenderWindow& window, Event& windowEvent);

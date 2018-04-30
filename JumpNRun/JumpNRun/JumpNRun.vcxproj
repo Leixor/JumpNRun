@@ -209,7 +209,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="ConfigHelper.h" />
-    <ClInclude Include="DrawableObject.h" />
+    <ClInclude Include="ShapeBase.h" />
     <ClInclude Include="DrawableShape.h" />
     <ClInclude Include="DropdownList.h" />
     <ClInclude Include="GlobalVariables.h" />

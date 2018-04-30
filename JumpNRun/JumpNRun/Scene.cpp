@@ -94,7 +94,7 @@ SceneHandler& Scene::getSceneHandler() const
 	return this->sceneHandler;
 }
 
-BaseResource* Scene::addObject(string name, DrawableObject * toAdd, int priority)
+BaseResource* Scene::addObject(string name, ShapeBase * toAdd, int priority)
 {
 	BaseResource* tmp = new BaseResource(toAdd);
 

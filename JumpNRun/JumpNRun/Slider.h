@@ -4,7 +4,7 @@
 class Slider : public Button
 {
 public:
-	Slider(function<void(float)> sliderAction, DrawableObject* sliderShape);
+	Slider(function<void(float)> sliderAction, ShapeBase* sliderShape);
 	~Slider();
 
 	void handleEvents(RenderWindow& window, Event& windowEvent);

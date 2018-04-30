@@ -5,7 +5,7 @@
 class DropdownList : public Button
 {
 public:
-	DropdownList(DrawableObject* dropdownShape, float partSize = -1.0f);
+	DropdownList(ShapeBase* dropdownShape, float partSize = -1.0f);
 	~DropdownList();
 
 	void handleEvents(RenderWindow& window, Event& windowEvent);

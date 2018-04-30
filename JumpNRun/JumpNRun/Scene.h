@@ -48,7 +48,7 @@ public:
 
 		return toAdd;
 	}
-	BaseResource* addObject(string name, DrawableObject* toAdd, int priority = -1);
+	BaseResource* addObject(string name, ShapeBase* toAdd, int priority = -1);
 
 	// Gibt die Sichtbarkeit und Updatebarkeit der Scene an
 	eVisibilityFlags visible;

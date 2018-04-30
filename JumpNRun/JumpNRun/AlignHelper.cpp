@@ -5,7 +5,7 @@ namespace AlignHelper
 {
 
 	// Align das Objekt innerhalb von dem Anchorobjekt an der gegeben Stelle
-	void alignTo(DrawableObject& toAlign, DrawableObject& anchor, int orientation, int margin) 
+	void alignTo(ShapeBase& toAlign, ShapeBase& anchor, int orientation, int margin)
 	{
 		FloatRect anchorBounds = anchor.getGlobalBounds();
 		FloatRect toAlignBounds = toAlign.getGlobalBounds();
@@ -33,7 +33,7 @@ namespace AlignHelper
 		toAlign.setPosition(middleanchor - middletoAlign);
 	}
 
-	void alignTo(Text & toAlign, DrawableObject & anchor, int orientation, int margin)
+	void alignTo(Text & toAlign, ShapeBase & anchor, int orientation, int margin)
 	{
 		FloatRect anchorBounds = anchor.getGlobalBounds();
 		FloatRect toAlignBounds = toAlign.getGlobalBounds();
@@ -64,7 +64,7 @@ namespace AlignHelper
 	}
 
 	// Align das Objekt ausserhalb des Anchorobjekts an der gegeben Stelle
-	void alignNextTo(DrawableObject & toAlign, DrawableObject & anchor, int orientation, int margin)
+	void alignNextTo(ShapeBase & toAlign, ShapeBase & anchor, int orientation, int margin)
 	{
 		FloatRect anchorBounds = anchor.getGlobalBounds();
 		FloatRect toAlignBounds = toAlign.getGlobalBounds();
@@ -97,7 +97,7 @@ namespace AlignHelper
 		toAlign.move(Vector2f(toAlign.getOutlineThickness(), toAlign.getOutlineThickness()));
 	}
 
-	void alignNextTo(Text & toAlign, DrawableObject & anchor, int orientation, int margin)
+	void alignNextTo(Text & toAlign, ShapeBase & anchor, int orientation, int margin)
 	{
 		FloatRect anchorBounds = anchor.getGlobalBounds();
 		FloatRect toAlignBounds = toAlign.getGlobalBounds();
@@ -130,7 +130,7 @@ namespace AlignHelper
 		float difftoAlign = toAlign.getLocalBounds().top - (toAlign.getCharacterSize() - toAlign.getLocalBounds().height);
 		toAlign.move(Vector2f(0, -(toAlign.getLocalBounds().top - difftoAlign / 2)));
 	}
-	void alignNextTo(DrawableObject & toAlign, Text & anchor, int orientation, int margin)
+	void alignNextTo(ShapeBase & toAlign, Text & anchor, int orientation, int margin)
 	{
 		FloatRect anchorBounds = anchor.getGlobalBounds();
 		FloatRect toAlignBounds = toAlign.getGlobalBounds();

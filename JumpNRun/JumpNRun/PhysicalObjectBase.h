@@ -6,9 +6,9 @@ class PhysicalObjectBase : public BaseResource
 {
 public:
 	PhysicalObjectBase();
-	PhysicalObjectBase(DrawableObject* shape);
+	PhysicalObjectBase(ShapeBase* shape);
 	PhysicalObjectBase(FloatRect shape, b2Shape& bodyShape, Box2DWorld* sceneWorld, Vector2f velocity = Vector2f(0, 0));
-	PhysicalObjectBase(DrawableObject* shape, b2Shape& bodyShape, Box2DWorld* sceneWorld, Vector2f velocity = Vector2f(0, 0));
+	PhysicalObjectBase(ShapeBase* shape, b2Shape& bodyShape, Box2DWorld* sceneWorld, Vector2f velocity = Vector2f(0, 0));
 	~PhysicalObjectBase();
 
 	virtual void update();

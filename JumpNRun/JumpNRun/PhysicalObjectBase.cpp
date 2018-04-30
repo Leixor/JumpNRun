@@ -5,7 +5,7 @@ PhysicalObjectBase::PhysicalObjectBase()
 {
 }
 
-PhysicalObjectBase::PhysicalObjectBase(DrawableObject * shape)
+PhysicalObjectBase::PhysicalObjectBase(ShapeBase * shape)
 	:BaseResource(shape), bodyVisible(NONE)
 {
 }
@@ -25,7 +25,7 @@ PhysicalObjectBase::PhysicalObjectBase(FloatRect shape, b2Shape & bodyShape, Box
 	this->objectBody->SetLinearVelocity(b2Vec2(velocity.x, velocity.y));
 }
 
-PhysicalObjectBase::PhysicalObjectBase(DrawableObject * shape, b2Shape & bodyShape, Box2DWorld* sceneWorld, Vector2f velocity)
+PhysicalObjectBase::PhysicalObjectBase(ShapeBase * shape, b2Shape & bodyShape, Box2DWorld* sceneWorld, Vector2f velocity)
 	: BaseResource(shape), bodyVisible(UPDATABLE)
 {
 	Vector2f pos = this->objectShape->getPosition();

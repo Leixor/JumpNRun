@@ -33,10 +33,10 @@ int main()
 
 	for (unsigned int i = 0; i < 100000; i++)
 	{
-		vert.push_back(Vertex(Vector2f(i * 10 - (i / 100) * 1000		, (i / 100) * 10)));
+		/*vert.push_back(Vertex(Vector2f(i * 10 - (i / 100) * 1000		, (i / 100) * 10)));
 		vert.push_back(Vertex(Vector2f(i * 10 - (i / 100) * 1000 + 10	, (i / 100) * 10)));
 		vert.push_back(Vertex(Vector2f(i * 10 - (i / 100) * 1000 + 10	, (i / 100) * 10 + 10)));
-		vert.push_back(Vertex(Vector2f(i * 10 - (i / 100) * 1000		, (i / 100) * 10 + 10)));
+		vert.push_back(Vertex(Vector2f(i * 10 - (i / 100) * 1000		, (i / 100) * 10 + 10)));*/
 	}
 
 

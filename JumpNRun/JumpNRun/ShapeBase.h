@@ -1,15 +1,15 @@
 #pragma once
 #include "StandardInclude.h"
 
-class DrawableObject
+class ShapeBase
 {
 public:
-	DrawableObject()
+	ShapeBase()
 	{
 		this->changedPosition = true;
 		this->changedSize = true;
 	}
-	~DrawableObject()
+	~ShapeBase()
 	{
 
 	}

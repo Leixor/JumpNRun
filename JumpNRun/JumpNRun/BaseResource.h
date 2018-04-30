@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseObject.h"
-#include "DrawableObject.h"
+#include "ShapeBase.h"
 #include "ObjectText.h"
 #include "AlignHelper.h"
 
@@ -11,7 +11,7 @@ class BaseResource : public BaseObject
 public:
 	BaseResource() :shapeVisible(NONE), textVisible(NONE)
 	{}
-	BaseResource(DrawableObject* shape) :shapeVisible(ALL), textVisible(NONE)
+	BaseResource(ShapeBase* shape) :shapeVisible(ALL), textVisible(NONE)
 	{
 		objectShape = shape;
 	}
@@ -34,7 +34,7 @@ public:
 	eVisibilityFlags shapeVisible;
 	eVisibilityFlags textVisible;
 
-	DrawableObject* objectShape;
+	ShapeBase* objectShape;
 	ObjectText* objectText;
 };
 

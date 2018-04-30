@@ -4,7 +4,7 @@
  class Button : public BaseResource
 {
 public:
-	Button(function<void(void)> buttonAction, DrawableObject* buttonShape);
+	Button(function<void(void)> buttonAction, ShapeBase* buttonShape);
 	~Button();
 
 	virtual void handleEvents(RenderWindow& window, Event& windowEvent);

@@ -12,13 +12,13 @@
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ShapeRectangle.cpp">
-      <Filter>Objects\BaseResource\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\ShapeBase</Filter>
     </ClCompile>
     <ClCompile Include="ShapeSprite.cpp">
-      <Filter>Objects\BaseResource\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\ShapeBase</Filter>
     </ClCompile>
     <ClCompile Include="ShapeCircle.cpp">
-      <Filter>Objects\BaseResource\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\ShapeBase</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Scenes\SceneBase</Filter>
@@ -63,7 +63,7 @@
       <Filter>Animation\AnimationBase</Filter>
     </ClCompile>
     <ClCompile Include="ObjectText.cpp">
-      <Filter>Objects\BaseResource\TextBase</Filter>
+      <Filter>Objects\ObjectBase\TextBase</Filter>
     </ClCompile>
     <ClCompile Include="AniSpriteSheet.cpp">
       <Filter>Animation</Filter>
@@ -93,7 +93,7 @@
       <Filter>Objects\NonePhysicalObjects</Filter>
     </ClCompile>
     <ClCompile Include="PhysicalObjectBase.cpp">
-      <Filter>Objects\BaseResource\BasePhysicalObject</Filter>
+      <Filter>Objects\ObjectBase</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,19 +107,16 @@
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ShapeCircle.h">
-      <Filter>Objects\BaseResource\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\ShapeBase</Filter>
     </ClInclude>
     <ClInclude Include="ShapeRectangle.h">
-      <Filter>Objects\BaseResource\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\ShapeBase</Filter>
     </ClInclude>
     <ClInclude Include="ShapeSprite.h">
-      <Filter>Objects\BaseResource\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\ShapeBase</Filter>
     </ClInclude>
     <ClInclude Include="DrawableShape.h">
-      <Filter>Objects\BaseResource\DrawableBase</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawableObject.h">
-      <Filter>Objects\BaseResource\DrawableBase</Filter>
+      <Filter>Objects\ObjectBase\ShapeBase</Filter>
     </ClInclude>
     <ClInclude Include="UnorderdMap.h">
       <Filter>ExtraClasses</Filter>
@@ -173,7 +170,7 @@
       <Filter>ExtraClasses</Filter>
     </ClInclude>
     <ClInclude Include="ObjectText.h">
-      <Filter>Objects\BaseResource\TextBase</Filter>
+      <Filter>Objects\ObjectBase\TextBase</Filter>
     </ClInclude>
     <ClInclude Include="AniSpriteSheet.h">
       <Filter>Animation</Filter>
@@ -206,13 +203,16 @@
       <Filter>Objects\NonePhysicalObjects</Filter>
     </ClInclude>
     <ClInclude Include="BaseResource.h">
-      <Filter>Objects\BaseResource</Filter>
+      <Filter>Objects\ObjectBase</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalObjectBase.h">
+      <Filter>Objects\ObjectBase</Filter>
     </ClInclude>
     <ClInclude Include="BaseObject.h">
       <Filter>Objects\ObjectBase</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicalObjectBase.h">
-      <Filter>Objects\BaseResource\BasePhysicalObject</Filter>
+    <ClInclude Include="ShapeBase.h">
+      <Filter>Objects\ObjectBase\ShapeBase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -237,9 +237,6 @@
     <Filter Include="Animation\AnimationBase">
       <UniqueIdentifier>{940e1151-f911-47a6-8efc-f5572ee8b9f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\ObjectBase">
-      <UniqueIdentifier>{60407d9d-b265-4359-be12-a82eb8908f0f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes\SceneBase">
       <UniqueIdentifier>{aabd034f-4d77-433d-8c10-9957bcdd317c}</UniqueIdentifier>
     </Filter>
@@ -249,17 +246,17 @@
     <Filter Include="Objects\PhysicalObjects">
       <UniqueIdentifier>{d2bf6ea5-7cb1-46cf-bbb3-8c6f63263c58}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\BaseResource">
+    <Filter Include="Objects\ObjectBase">
       <UniqueIdentifier>{3ed874e3-da39-4e0d-9b64-530f7cc74f59}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\BaseResource\DrawableBase">
+    <Filter Include="Objects\ObjectBase\ShapeBase">
       <UniqueIdentifier>{608dd723-48d7-4260-b258-0ba364c44c20}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\BaseResource\TextBase">
+    <Filter Include="Objects\ObjectBase\TextBase">
       <UniqueIdentifier>{a2bfdd27-ddf7-40a2-8d38-84b57b3d88ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\BaseResource\BasePhysicalObject">
-      <UniqueIdentifier>{4d31d082-09b1-4481-b6b9-4a5c0c3b68ee}</UniqueIdentifier>
+    <Filter Include="Objects\ObjectBase\PhysicalBase">
+      <UniqueIdentifier>{24abf328-4ff1-45ab-81dd-48b2ec143d5d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

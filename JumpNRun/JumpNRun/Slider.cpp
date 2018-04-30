@@ -1,6 +1,6 @@
 #include "Slider.h"
 
-Slider::Slider(function<void(float)> sliderAction, DrawableObject* sliderShape)
+Slider::Slider(function<void(float)> sliderAction, ShapeBase* sliderShape)
 	: sliderAction(sliderAction), Button([&] { active = true;}, sliderShape)
 {
 	this->active = false;

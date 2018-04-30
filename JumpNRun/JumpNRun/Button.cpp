@@ -1,6 +1,6 @@
 #include "Button.h"
 
-Button::Button(function<void(void)> buttonAction, DrawableObject* buttonShape)
+Button::Button(function<void(void)> buttonAction, ShapeBase* buttonShape)
 	:BaseResource(buttonShape), buttonAction(buttonAction)
 {
 }

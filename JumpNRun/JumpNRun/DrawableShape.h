@@ -1,7 +1,7 @@
 #pragma once
-#include "DrawableObject.h"
+#include "ShapeBase.h"
 
-template <class DrawableType> class DrawableShape : public DrawableObject
+template <class DrawableType> class DrawableShape : public ShapeBase
 {
 public:
 	DrawableShape();
