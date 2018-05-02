@@ -56,7 +56,7 @@ int main()
 	windowDef::get().windowStyle = stoi(conf.get("Window", "WindowStyle"));
 
 	//Test Box2D
-	b2Vec2 gravity(0, 10.0f);
+	b2Vec2 gravity(5.0f, 10.0f);
 	Box2DWorld world(gravity);
 
 	////Setup Static Body
@@ -129,8 +129,8 @@ int main()
 	Scene *startMenu = new SceneStartMenu(sceneHandler, &window);
 	sceneHandler.addScene("Menu", startMenu);
 
-	AnimationHandler handler;
-	Animation animation(20);
+	/*AnimationHandler handler;
+	Animation animation(20);*/
 	PhysicalObjectBase block1(new ShapeRectangle(FloatRect(700.0f, 100.0f, 20.0f, 20.0f), Color::Blue));
 	//set Friction and density
 	b2FixtureDef fix;
@@ -138,28 +138,28 @@ int main()
 	fix.friction = 0.3f;
 	//cast fixture to body
 	block1.setDynamicBody(new BodyRectangle(), fix, &world);
-	PhysicalObjectBase block2(new ShapeRectangle(FloatRect(700.0f, 700.0f, 200.0f, 100.0f), Color::Red), new BodyRectangle(), &world);
-	Font* f = new Font();
+	PhysicalObjectBase block2(new ShapeRectangle(FloatRect(100.0f, 700.0f, 1200.0f, 100.0f), Color::Red), new BodyRectangle(), &world);
+	/*Font* f = new Font();
 	f->loadFromFile("Textures/cool.ttf");
-	block1.addText(new ObjectText("BasisText", *f));
+	block1.addText(new ObjectText("BasisText", *f));*/
 
 	//animation.addSubAnimation("rotate", new AniSetRotation(5000, -200, Vector2f(block1.objectText->getLocalBounds().width / 2.0f - block1.objectText->getLocalBounds().left, block1.objectText->getLocalBounds().height / 2.0f - block1.objectText->getLocalBounds().width / 2.0f - block1.objectText->getLocalBounds().top)));
 	//animation.addSubAnimation("move", new AniSetPosition(5000, Vector2f(1400, 400), BezierHandles(0.1f, 0.9f, 0.1f,0.9f)));
-	animation.addSubAnimation("Scale4", new AniScale(10000, Vector2f(1.0f, 2.0f), Vector2f(100,100)));
-	//animation.addSubAnimation("rotate2", new AniMove(10000, Vector2f(1.0f, 4.0f)));
+	/*animation.addSubAnimation("Scale4", new AniScale(10000, Vector2f(1.0f, 2.0f), Vector2f(100,100)));
+	*///animation.addSubAnimation("rotate2", new AniMove(10000, Vector2f(1.0f, 4.0f)));
 	//animation.addSubAnimation("rotate", new AniRotate(2000, 150, Vector2f(100, 50)));
 	//animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(2, 2), Vector2f(100, 50)));
 	//animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(3, 3), Vector2f(100, 50)),2000);
 	//animation.addSubAnimation("scale", new AniSetScale(2000, Vector2f(1, 1), Vector2f(100, 50)),4000);
 	//animation.addSubAnimation("scale2", new AniScale(2000, Vector2f(-2, -2), Vector2f(100, 50)), 2000);
 
-	animation.addObject(&block1);
+	/*animation.addObject(&block1);
 	animation.addObject(&block2, ObjectOnly);
 	animation.addKeyFrame("Scale4", eKeyFrameAction::ANIPAUSE, 1000);
 	animation.addKeyFrame("Scale4", eKeyFrameAction::ANIRESUME, 2000);
 
 	handler.addAnimation("rotate", &animation);
-	handler.run("rotate");
+	handler.run("rotate");*/
 
 	//Parameter die für die verbesserte Spielschleife notwendig sind.
 	// Die Loop soll im Update die wahre Position und Geschwindigkeit von Objekten abspeichern, der Renderer tut dann mithilfe der 2 Werte eine extrapolierte Position rendern
@@ -212,7 +212,7 @@ int main()
 		{
 			//Ruft die Aktualisierungsmethode auf
 			sceneHandler.update();
-			world.update(1/ 100);
+			world.update(1.0f / 100.0f);
 			/*float positionY = windowDef::get().windowSizeY / 2 - body->GetPosition().y - 10.0f;
 			float positionX = windowDef::get().windowSizeX / 2 + body->GetPosition().x - 10.0f;
 			box.setPosition(Vector2f(positionX, positionY));
@@ -220,10 +220,10 @@ int main()
 			positionY = windowDef::get().windowSizeY / 2 - kBody->GetPosition().y - 10.0f;
 			positionX = windowDef::get().windowSizeX / 2 + kBody->GetPosition().x - 10.0f;
 			enemy.setPosition(Vector2f(positionX, positionY));*/
-			handler.update();
+			//handler.update();
 
-			/*block1.update(&world);
-			block1.update(&world);*/
+			block1.update(&world);
+			block2.update(&world);
 
 			//FPSCOUNTER
 			loop++;
@@ -299,8 +299,8 @@ int main()
 		box.draw(window, RenderStates());
 		enemy.draw(window, RenderStates());*/
 
-		/*block1.draw(window, RenderStates());
-		block2.draw(window, RenderStates());*/
+		block1.draw(window, RenderStates());
+		block2.draw(window, RenderStates());
 
 		//window.draw(&vert[0], vert.size(), sf::Quads);
 		window.draw(*FPS);

@@ -252,9 +252,6 @@
     <Filter Include="Objects\NonePhysicalObjects">
       <UniqueIdentifier>{31b2d3d7-33b2-4bfb-a545-fe0d2411e09b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\PhysicalObjects">
-      <UniqueIdentifier>{d2bf6ea5-7cb1-46cf-bbb3-8c6f63263c58}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Objects\ObjectBase">
       <UniqueIdentifier>{3ed874e3-da39-4e0d-9b64-530f7cc74f59}</UniqueIdentifier>
     </Filter>
@@ -266,6 +263,9 @@
     </Filter>
     <Filter Include="Objects\ObjectBase\BodyBase">
       <UniqueIdentifier>{24abf328-4ff1-45ab-81dd-48b2ec143d5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\ObjectBase\PhysicalObjects">
+      <UniqueIdentifier>{d2bf6ea5-7cb1-46cf-bbb3-8c6f63263c58}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
